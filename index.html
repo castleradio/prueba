@@ -170,31 +170,38 @@
             justify-content: space-between;
         }
 
-        /* Song Info - DENTRO DEL CASSETTE EN LA PARTE SUPERIOR */
+        /* Song Info - DENTRO DEL CASSETTE EN LA PARTE SUPERIOR - MÁS GRANDE */
         .song-info {
             width: 100%;
             text-align: center;
-            margin-bottom: 10px; /* Espacio hacia los carretes */
+            margin-bottom: 10px;
             color: #00ff41;
             font-family: 'Orbitron', sans-serif;
             font-weight: 900;
-            font-size: 1.15rem; /* Tamaño perfecto para caber arriba */
-            text-shadow: 0 0 8px rgba(0, 255, 65, 0.7), 0 0 15px rgba(189, 0, 255, 0.6);
-            min-height: 25px;
+            font-size: 1.5rem; /* Aumentado significativamente */
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.8), 0 0 20px rgba(189, 0, 255, 0.7);
+            min-height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0 5px; /* Pequeño padding lateral */
+            padding: 0 5px;
+            letter-spacing: 1.5px; /* Más espaciado para mejor legibilidad */
         }
 
         #sonic_title {
             font-family: 'Orbitron', sans-serif;
             font-weight: 900;
             word-break: break-word;
-            font-size: 1.05rem;
+            font-size: 1.4rem; /* Aumentado */
             text-align: center;
-            text-shadow: 0 0 6px rgba(189, 0, 255, 0.8);
-            letter-spacing: 1px;
+            text-shadow: 0 0 8px rgba(189, 0, 255, 0.9), 0 0 15px rgba(0, 255, 65, 0.7);
+            letter-spacing: 1.5px;
+            animation: title-glow 2.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes title-glow {
+            from { text-shadow: 0 0 8px rgba(189, 0, 255, 0.9), 0 0 15px rgba(0, 255, 65, 0.7); }
+            to { text-shadow: 0 0 12px rgba(189, 0, 255, 1), 0 0 25px rgba(0, 255, 65, 0.9), 0 0 35px rgba(189, 0, 255, 0.8); }
         }
 
         .cassette-tapes {
@@ -203,7 +210,7 @@
             align-items: center;
             flex-shrink: 0;
             position: relative;
-            height: 150px; /* Reducido ligeramente para dar espacio al título */
+            height: 150px;
             margin-top: 5px;
         }
 
@@ -234,7 +241,7 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Detalles del carrete */
+        /* Detalles del carrete - BASE */
         .tape-reel::before {
             content: '';
             position: absolute;
@@ -279,6 +286,102 @@
         .tape-reel span:nth-child(3) { transform: rotate(225deg) translate(25px, -5px); }
         .tape-reel span:nth-child(4) { transform: rotate(315deg) translate(25px, -5px); }
 
+        /* CARRETE IZQUIERDO - MORADO CYBERPUNK */
+        #tape-left {
+            border-color: #bd00ff;
+            box-shadow: 
+                inset 0 0 12px rgba(0, 0, 0, 0.9),
+                0 0 8px rgba(139, 139, 139, 0.5),
+                0 0 15px rgba(189, 0, 255, 0.4);
+        }
+
+        #tape-left::before {
+            border-color: #bd00ff;
+            background: radial-gradient(circle at center,
+                #4a3366 0%,
+                #3a2a55 40%,
+                #2a1a44 100%);
+            box-shadow: 
+                inset 0 0 10px rgba(0, 0, 0, 0.8),
+                0 0 5px rgba(189, 0, 255, 0.5);
+        }
+
+        #tape-left::after {
+            border-color: #bd00ff;
+            background: #664488;
+            box-shadow: 
+                inset 0 0 6px rgba(0, 0, 0, 0.9),
+                0 0 6px rgba(189, 0, 255, 0.6);
+        }
+
+        #tape-left span {
+            background: #bd00ff;
+            box-shadow: 0 0 5px rgba(189, 0, 255, 0.8);
+        }
+
+        /* Efecto de iluminación pulsante para carrete izquierdo cuando reproduce */
+        #tape-left.animated {
+            box-shadow: 
+                inset 0 0 12px rgba(0, 0, 0, 0.9),
+                0 0 10px rgba(139, 139, 139, 0.6),
+                0 0 20px rgba(189, 0, 255, 0.7),
+                0 0 35px rgba(189, 0, 255, 0.5);
+            animation: fastSpin 4s linear infinite, purple-pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes purple-pulse {
+            0%, 100% { box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 20px rgba(189,0,255,0.7), 0 0 35px rgba(189,0,255,0.5); }
+            50% { box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 25px rgba(189,0,255,0.9), 0 0 45px rgba(189,0,255,0.7); }
+        }
+
+        /* CARRETE DERECHO - VERDE CYBERPUNK */
+        #tape-right {
+            border-color: #00ff41;
+            box-shadow: 
+                inset 0 0 12px rgba(0, 0, 0, 0.9),
+                0 0 8px rgba(139, 139, 139, 0.5),
+                0 0 15px rgba(0, 255, 65, 0.4);
+        }
+
+        #tape-right::before {
+            border-color: #00ff41;
+            background: radial-gradient(circle at center,
+                #224433 0%,
+                #1a3a2a 40%,
+                #112a1a 100%);
+            box-shadow: 
+                inset 0 0 10px rgba(0, 0, 0, 0.8),
+                0 0 5px rgba(0, 255, 65, 0.5);
+        }
+
+        #tape-right::after {
+            border-color: #00ff41;
+            background: #336644;
+            box-shadow: 
+                inset 0 0 6px rgba(0, 0, 0, 0.9),
+                0 0 6px rgba(0, 255, 65, 0.6);
+        }
+
+        #tape-right span {
+            background: #00ff41;
+            box-shadow: 0 0 5px rgba(0, 255, 65, 0.8);
+        }
+
+        /* Efecto de iluminación pulsante para carrete derecho cuando reproduce */
+        #tape-right.animated {
+            box-shadow: 
+                inset 0 0 12px rgba(0, 0, 0, 0.9),
+                0 0 10px rgba(139, 139, 139, 0.6),
+                0 0 20px rgba(0, 255, 65, 0.7),
+                0 0 35px rgba(0, 255, 65, 0.5);
+            animation: fastSpin 4s linear infinite, green-pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes green-pulse {
+            0%, 100% { box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 20px rgba(0,255,65,0.7), 0 0 35px rgba(0,255,65,0.5); }
+            50% { box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 25px rgba(0,255,65,0.9), 0 0 45px rgba(0,255,65,0.7); }
+        }
+
         .tape-reel.animated {
             animation: fastSpin 4s linear infinite;
         }
@@ -296,8 +399,8 @@
             border-radius: 8px;
             position: relative;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: space-between;
             margin: 0 auto;
             flex-shrink: 0;
             z-index: 3;
@@ -307,41 +410,149 @@
             overflow: hidden;
         }
 
-        /* Ranura de la cinta */
+        /* Ranura de la cinta - ahora entre los dos compartimentos */
         .cassette-center::before {
             content: '';
             position: absolute;
-            width: 70%;
-            height: 8px;
-            background: #0a0a0a;
+            width: 85%;
+            height: 3px;
+            background: linear-gradient(to right, #333, #555, #333);
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            border-radius: 4px;
+            border-radius: 2px;
             box-shadow: 
-                inset 0 2px 4px rgba(255, 255, 255, 0.1),
-                inset 0 -2px 4px rgba(0, 0, 0, 0.5);
+                inset 0 1px 2px rgba(255, 255, 255, 0.2),
+                0 1px 3px rgba(0, 0, 0, 0.7);
             z-index: 5;
+        }
+
+        /* Compartimento superior - Botón de Play */
+        .button-compartment {
+            height: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 6;
+            padding: 5px 0;
+        }
+
+        /* Botón de Play estilo radio retro con toque cyberpunk */
+        .play-btn {
+            width: 90px;
+            height: 35px;
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            border: 3px solid #00ff41;
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.4rem;
+            color: #00ff41;
+            text-shadow: 0 0 8px rgba(0, 255, 65, 0.8);
+            box-shadow: 
+                0 0 12px rgba(0, 255, 65, 0.6),
+                inset 0 0 10px rgba(0, 0, 0, 0.5);
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        .play-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, 
+                rgba(0, 255, 65, 0.2) 0%, 
+                rgba(0, 255, 65, 0.4) 50%, 
+                rgba(0, 255, 65, 0.2) 100%);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .play-btn:hover::before {
+            opacity: 1;
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(45deg) translateX(-100%); }
+            100% { transform: rotate(45deg) translateX(100%); }
+        }
+
+        .play-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 0 20px rgba(0, 255, 65, 0.8),
+                inset 0 0 15px rgba(0, 0, 0, 0.6);
+            border-color: #00ff88;
+        }
+
+        .play-btn.playing {
+            border-color: #bd00ff;
+            color: #bd00ff;
+            text-shadow: 0 0 8px rgba(189, 0, 255, 0.8);
+            box-shadow: 
+                0 0 12px rgba(189, 0, 255, 0.6),
+                inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .play-btn.playing:hover {
+            box-shadow: 
+                0 0 20px rgba(189, 0, 255, 0.8),
+                inset 0 0 15px rgba(0, 0, 0, 0.6);
+            border-color: #d400ff;
+        }
+
+        .play-btn::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            right: 3px;
+            bottom: 3px;
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            border-radius: 3px;
+            z-index: -1;
+        }
+
+        /* Compartimento inferior - Ecualizador */
+        .equalizer-compartment {
+            height: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            position: relative;
+            z-index: 4;
+            padding-bottom: 8px;
         }
 
         /* Ecualizador REAL - SOLO VERDES Y MORADOS */
         .equalizer-container {
-            position: absolute;
-            bottom: 8px;
-            left: 0;
-            right: 0;
-            height: 35px;
+            width: 90%;
+            height: 30px;
             display: flex;
             justify-content: space-around;
             align-items: flex-end;
-            padding: 0 10px;
+            position: relative;
             z-index: 4;
         }
 
         .bar {
             width: 4px;
             height: 2px;
-            background: linear-gradient(to top, #00ff41, #bd00ff); /* Verde a morado por defecto */
+            background: linear-gradient(to top, #00ff41, #bd00ff);
             border-radius: 2px 2px 0 0;
             box-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
             transform-origin: bottom;
@@ -365,53 +576,6 @@
             pointer-events: none;
             z-index: 6;
             opacity: 0.7;
-        }
-
-        /* Botón de Play */
-        .play-btn {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 69px;
-            height: 69px;
-            background: linear-gradient(45deg, #00ff41, #00cc33);
-            color: #000;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            text-align: center;
-            line-height: 69px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 1.725rem;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            z-index: 10;
-            box-shadow: 
-                0 0 15px rgba(0, 255, 65, 0.5),
-                inset 0 0 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .play-btn:hover {
-            transform: translate(-50%, -50%) scale(1.1);
-            box-shadow: 
-                0 0 25px rgba(0, 255, 65, 0.7),
-                inset 0 0 15px rgba(0, 0, 0, 0.4);
-        }
-
-        .play-btn.playing {
-            background: linear-gradient(45deg, #bd00ff, #7a00cc);
-            color: white;
-            box-shadow: 
-                0 0 15px rgba(189, 0, 255, 0.5),
-                inset 0 0 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .play-btn.playing:hover {
-            box-shadow: 
-                0 0 25px rgba(189, 0, 255, 0.7),
-                inset 0 0 15px rgba(0, 0, 0, 0.4);
         }
 
         /* Volume Control */
@@ -571,13 +735,13 @@
             }
             
             .song-info {
-                font-size: 1.05rem;
+                font-size: 1.3rem; /* Ajustado para móvil */
                 margin-bottom: 8px;
-                min-height: 22px;
+                min-height: 28px;
             }
             
             #sonic_title {
-                font-size: 0.95rem;
+                font-size: 1.2rem; /* Ajustado para móvil */
             }
             
             .cassette-player {
@@ -606,20 +770,19 @@
                 height: 115px;
             }
             
-            .equalizer-container {
+            .play-btn {
+                width: 75px;
                 height: 30px;
-                bottom: 6px;
+                font-size: 1.2rem;
+                border-width: 2.5px;
+            }
+            
+            .equalizer-container {
+                height: 25px;
             }
             
             .bar {
                 width: 3px;
-            }
-            
-            .play-btn {
-                width: 57.5px;
-                height: 57.5px;
-                line-height: 57.5px;
-                font-size: 1.38rem;
             }
             
             #dj_profile img {
@@ -646,13 +809,13 @@
             }
             
             .song-info {
-                font-size: 0.95rem;
+                font-size: 1.15rem; /* Ajustado para móvil pequeño */
                 margin-bottom: 6px;
-                min-height: 20px;
+                min-height: 25px;
             }
             
             #sonic_title {
-                font-size: 0.85rem;
+                font-size: 1.05rem; /* Ajustado para móvil pequeño */
             }
             
             .cassette-player {
@@ -681,21 +844,19 @@
                 height: 99px;
             }
             
+            .play-btn {
+                width: 65px;
+                height: 26px;
+                font-size: 1.05rem;
+                border-width: 2px;
+            }
+            
             .equalizer-container {
-                height: 25px;
-                bottom: 5px;
-                padding: 0 8px;
+                height: 22px;
             }
             
             .bar {
                 width: 2.5px;
-            }
-            
-            .play-btn {
-                width: 51.75px;
-                height: 51.75px;
-                line-height: 51.75px;
-                font-size: 1.15rem;
             }
             
             .volume-label {
@@ -729,13 +890,13 @@
             }
             
             .song-info {
-                font-size: 0.85rem;
+                font-size: 1.05rem; /* Ajustado para móvil muy pequeño */
                 margin-bottom: 5px;
-                min-height: 18px;
+                min-height: 22px;
             }
             
             #sonic_title {
-                font-size: 0.75rem;
+                font-size: 0.95rem; /* Ajustado para móvil muy pequeño */
             }
             
             .cassette-player {
@@ -762,21 +923,19 @@
                 height: 86.25px;
             }
             
+            .play-btn {
+                width: 55px;
+                height: 22px;
+                font-size: 0.95rem;
+                border-width: 1.5px;
+            }
+            
             .equalizer-container {
-                height: 20px;
-                bottom: 4px;
-                padding: 0 6px;
+                height: 18px;
             }
             
             .bar {
                 width: 2px;
-            }
-            
-            .play-btn {
-                width: 46px;
-                height: 46px;
-                line-height: 46px;
-                font-size: 1.035rem;
             }
             
             #dj_profile img {
@@ -802,7 +961,7 @@
             <div class="cassette-player">
                 <div class="album-art-bg" id="album-art-bg"></div>
                 <div class="cassette-content">
-                    <!-- Título de canción DENTRO DEL CASSETTE, EN LA PARTE SUPERIOR -->
+                    <!-- Título de canción DENTRO DEL CASSETTE, EN LA PARTE SUPERIOR - MÁS GRANDE -->
                     <div class="song-info">
                         <div id='sonic_title'>Cargando canción...</div>
                     </div>
@@ -810,22 +969,27 @@
                         <div class="tape-reel" id="tape-left">
                             <span></span><span></span><span></span><span></span>
                         </div>
-                        <button class="play-btn" id="play-pause-btn">▶</button>
                         <div class="cassette-center">
-                            <!-- Ecualizador REAL -->
-                            <div class="equalizer-container" id="equalizer">
-                                <div class="bar"></div>
-                                <div class="bar"></div>
-                                <div class="bar"></div>
-                                <div class="bar"></div>
-                                <div class="bar"></div>
-                                <div class="bar"></div>
-                                <div class="bar"></div>
-                                <div class="bar"></div>
-                                <div class="bar"></div>
-                                <div class="bar"></div>
-                                <div class="bar"></div>
-                                <div class="bar"></div>
+                            <!-- Compartimento superior: Botón de Play estilo retro -->
+                            <div class="button-compartment">
+                                <button class="play-btn" id="play-pause-btn">▶</button>
+                            </div>
+                            <!-- Compartimento inferior: Ecualizador -->
+                            <div class="equalizer-compartment">
+                                <div class="equalizer-container" id="equalizer">
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="tape-reel" id="tape-right">
@@ -983,23 +1147,23 @@
                 const avg = count > 0 ? sum / count : 0;
                 
                 let height = Math.sqrt(avg) * 2.0;
-                height = Math.min(height, 32);
+                height = Math.min(height, 30); // Ajustado al nuevo tamaño del compartimento
                 height = Math.max(height, 2);
                 
                 bars[i].style.height = `${height}px`;
                 
                 // Efecto de brillo según intensidad
-                const glowFactor = Math.min(height / 32, 1);
+                const glowFactor = Math.min(height / 30, 1);
                 bars[i].style.boxShadow = `
                     0 0 ${8 * glowFactor}px rgba(0, 255, 65, ${0.4 + glowFactor * 0.6}),
                     0 0 ${12 * glowFactor}px rgba(189, 0, 255, ${0.4 * glowFactor})
                 `;
                 
                 // PALETA EXCLUSIVA DE VERDES Y MORADOS
-                if (height > 25) {
+                if (height > 22) {
                     // Alta intensidad: Verde brillante a morado eléctrico
                     bars[i].style.background = 'linear-gradient(to top, #00ff41, #bd00ff)';
-                } else if (height > 15) {
+                } else if (height > 12) {
                     // Media intensidad: Verde neón a morado profundo
                     bars[i].style.background = 'linear-gradient(to top, #00cc33, #9900ff)';
                 } else {
@@ -1046,7 +1210,7 @@
                 // 5. Reproducir audio
                 audio.play().then(() => {
                     isPlaying = true;
-                    playPauseBtn.innerHTML = '⏸';
+                    playPauseBtn.innerHTML = '❚❚'; // Cambiado a símbolo de pausa
                     playPauseBtn.classList.add('playing');
                     startTapeAnimation();
                     
