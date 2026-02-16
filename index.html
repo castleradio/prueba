@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Castle Radio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: #0f0f0f;
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Cabecera */
+        header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #00ff41, #bd00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+            margin: 0;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(0, 255, 65, 0.5); }
+            to { text-shadow: 0 0 20px rgba(0, 255, 65, 0.8), 0 0 30px rgba(189, 0, 255, 0.6); }
+        }
+
+        /* Tira LED debajo de la cabecera */
+        .led-strip-top {
+            height: 8px;
+            background: linear-gradient(90deg, 
+                #0000ff 0%, 
+                #00ff41 25%, 
+                #bd00ff 50%, 
+                #00ff41 75%, 
+                #0000ff 100%);
+            background-size: 200% 100%;
+            animation: led-animation 3s linear infinite;
+            position: relative;
+        }
+
+        @keyframes led-animation {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 200% 50%;
+            }
+        }
+
+        /* Contenido principal */
+        .main-container {
+            display: flex;
+            flex: 1;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        .player-section {
+            flex: 1;
+            background: transparent;
+            border-radius: 10px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dj-section {
+            flex: 1;
+            background: transparent;
+            border-radius: 10px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .player-title {
+            color: #bd00ff; /* Cambiado a morado */
+            padding-bottom: 0.5rem;
+        }
+
+        .dj-title {
+            color: #bd00ff;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Cassette Player - 15% más grande */
+        .cassette-player {
+            width: 95%;
+            max-width: 575px; /* 500px * 1.15 */
+            height: 403px; /* 350px * 1.15 */
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            border: 3px solid #8b8b8b;
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cassette-player::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #00ff41, #bd00ff, #00ff41);
+            opacity: 0.8;
+        }
+
+        /* Fondo difuminado de la portada */
+        .album-art-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            filter: blur(3px);
+            z-index: 1;
+        }
+
+        .cassette-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Distribuye el espacio */
+        }
+
+        .cassette-tapes {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-shrink: 0;
+            position: relative;
+            height: 160px; /* Reducido para dar más espacio al volumen */
+            margin-top: 10px;
+        }
+
+        .tape-reel {
+            width: 92px; /* 80px * 1.15 */
+            height: 92px; /* 80px * 1.15 */
+            border: 4px solid #8b8b8b;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, 
+                #333 0%, 
+                #2a2a2a 35%, 
+                #1a1a1a 60%, 
+                #444 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 3;
+            box-shadow: 
+                inset 0 0 10px rgba(0, 0, 0, 0.8),
+                0 0 5px rgba(139, 139, 139, 0.5);
+            /* Animación sutil continua */
+            animation: subtleSpin 15s linear infinite;
+        }
+
+        @keyframes subtleSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Detalles del carrete - múltiples círculos concéntricos */
+        .tape-reel::before {
+            content: '';
+            position: absolute;
+            width: 65px; /* 50px * 1.3 (proporcionalmente más grande) */
+            height: 65px;
+            border: 3px solid #8b8b8b;
+            border-radius: 50%;
+            background: radial-gradient(circle at center,
+                #444 0%,
+                #333 40%,
+                #222 100%);
+            box-shadow: 
+                inset 0 0 8px rgba(0, 0, 0, 0.7),
+                0 0 3px rgba(139, 139, 139, 0.6);
+        }
+
+        /* Eje central del carrete */
+        .tape-reel::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 2px solid #8b8b8b;
+            border-radius: 50%;
+            background: #555;
+            box-shadow: 
+                inset 0 0 5px rgba(0, 0, 0, 0.8),
+                0 0 4px rgba(0, 255, 65, 0.3);
+            z-index: 2;
+        }
+
+        /* Detalles de las pestañas del carrete */
+        .tape-reel span {
+            position: absolute;
+            width: 8px;
+            height: 25px;
+            background: #8b8b8b;
+            border-radius: 4px;
+            z-index: 1;
+        }
+
+        .tape-reel span:nth-child(1) { transform: rotate(45deg) translate(25px, -5px); }
+        .tape-reel span:nth-child(2) { transform: rotate(135deg) translate(25px, -5px); }
+        .tape-reel span:nth-child(3) { transform: rotate(225deg) translate(25px, -5px); }
+        .tape-reel span:nth-child(4) { transform: rotate(315deg) translate(25px, -5px); }
+
+        /* Animación más rápida cuando está reproduciendo */
+        .tape-reel.animated {
+            animation: fastSpin 4s linear infinite;
+        }
+
+        @keyframes fastSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(720deg); }
+        }
+
+        .cassette-center {
+            width: 184px; /* 160px * 1.15 */
+            height: 126.5px; /* 110px * 1.15 */
+            background: #1a1a1a;
+            border: 3px solid #8b8b8b;
+            border-radius: 8px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            flex-shrink: 0;
+            z-index: 3;
+            box-shadow: 
+                inset 0 0 15px rgba(0, 0, 0, 0.7),
+                0 0 8px rgba(139, 139, 139, 0.4);
+        }
+
+        /* Ranura de la cinta */
+        .cassette-center::before {
+            content: '';
+            position: absolute;
+            width: 70%;
+            height: 8px;
+            background: #0a0a0a;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 4px;
+            box-shadow: 
+                inset 0 2px 4px rgba(255, 255, 255, 0.1),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Botón de Play circular en el centro superior */
+        .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 69px; /* 60px * 1.15 */
+            height: 69px; /* 60px * 1.15 */
+            background: linear-gradient(45deg, #00ff41, #00cc33);
+            color: #000;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            text-align: center;
+            line-height: 69px; /* Centrado vertical */
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.725rem; /* 1.5rem * 1.15 */
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 
+                0 0 15px rgba(0, 255, 65, 0.5),
+                inset 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .play-btn:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 65, 0.7),
+                inset 0 0 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .play-btn.playing {
+            background: linear-gradient(45deg, #ff003c, #cc0030);
+            color: white;
+            box-shadow: 
+                0 0 15px rgba(255, 0, 60, 0.5),
+                inset 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .play-btn.playing:hover {
+            box-shadow: 
+                0 0 25px rgba(255, 0, 60, 0.7),
+                inset 0 0 15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Song Info */
+        .song-info {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #00ff41;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.265rem; /* 1.1rem * 1.15 */
+            text-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            min-height: 30px;
+        }
+
+        #sonic_title {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-weight: bold;
+            word-break: break-word;
+            font-size: 1.15rem; /* 1rem * 1.15 */
+            text-align: center;
+        }
+
+        /* Volume Control - Sin borde gris, solo sombra sutil */
+        .volume-control {
+            width: 100%;
+            max-width: 402.5px; /* 350px * 1.15 */
+            margin: 0 auto;
+            flex-shrink: 0;
+            z-index: 3;
+            background: rgba(20, 20, 20, 0.85);
+            padding: 12px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* Sombra sutil */
+        }
+
+        .volume-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #00ff41;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.15rem; /* 1rem * 1.15 */
+            text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+        }
+
+        .volume-slider {
+            width: 100%;
+            height: 13.8px; /* 12px * 1.15 */
+            -webkit-appearance: none;
+            background: linear-gradient(to right, #333 0%, #00ff41 100%);
+            border-radius: 6px;
+            outline: none;
+            box-shadow: 
+                inset 0 2px 4px rgba(0, 0, 0, 0.5),
+                0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 27.6px; /* 24px * 1.15 */
+            height: 27.6px; /* 24px * 1.15 */
+            background: #00ff41;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 
+                0 0 12px rgba(0, 255, 65, 0.8),
+                inset 0 0 5px rgba(0, 0, 0, 0.5);
+            border: 2px solid #000;
+        }
+
+        /* Widget del DJ */
+        #dj_profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        #dj_profile img {
+            width: 450px !important;
+            height: 450px !important;
+            border-radius: 50%;
+            border: 3px solid #8b8b8b;
+            object-fit: cover;
+            margin: 0 auto;
+            display: block;
+            box-shadow: 0 0 20px rgba(139, 139, 139, 0.4);
+        }
+
+        #dj_profile .dj_name {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: #bd00ff;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Pie de página */
+        footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Tira LED encima del pie de página */
+        .led-strip-bottom {
+            height: 8px;
+            background: linear-gradient(90deg, 
+                #0000ff 0%, 
+                #00ff41 25%, 
+                #bd00ff 50%, 
+                #00ff41 75%, 
+                #0000ff 100%);
+            background-size: 200% 100%;
+            animation: led-animation 3s linear infinite reverse;
+            position: relative;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00ff41, #bd00ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+        }
+
+        .social-link:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(0, 255, 65, 0.5);
+        }
+
+        .copyright {
+            color: #888;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive mejorado - Solo en dispositivos móviles */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .player-section, .dj-section {
+                padding: 1rem;
+                background: transparent;
+            }
+            
+            .cassette-player {
+                width: 95%;
+                height: 368px;
+                padding: 1.8rem;
+            }
+            
+            .cassette-tapes {
+                height: 140px;
+            }
+            
+            .tape-reel {
+                width: 80.5px;
+                height: 80.5px;
+            }
+            
+            .tape-reel::before {
+                width: 57.5px;
+                height: 57.5px;
+            }
+            
+            .cassette-center {
+                width: 161px;
+                height: 115px;
+            }
+            
+            .play-btn {
+                width: 57.5px;
+                height: 57.5px;
+                line-height: 57.5px;
+                font-size: 1.38rem;
+            }
+            
+            .song-info {
+                font-size: 1.15rem;
+            }
+            
+            #sonic_title {
+                font-size: 1.035rem;
+            }
+            
+            #dj_profile img {
+                width: 300px !important;
+                height: 300px !important;
+            }
+            
+            .social-links {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .player-section, .dj-section {
+                padding: 1rem;
+                background: transparent;
+            }
+            
+            .cassette-player {
+                width: 95%;
+                height: 322px;
+                padding: 1.5rem;
+            }
+            
+            .cassette-tapes {
+                height: 120px;
+            }
+            
+            .tape-reel {
+                width: 69px;
+                height: 69px;
+            }
+            
+            .tape-reel::before {
+                width: 49px;
+                height: 49px;
+            }
+            
+            .cassette-center {
+                width: 138px;
+                height: 99px;
+            }
+            
+            .play-btn {
+                width: 51.75px;
+                height: 51.75px;
+                line-height: 51.75px;
+                font-size: 1.15rem;
+            }
+            
+            .song-info {
+                font-size: 1.035rem;
+                margin-bottom: 10px;
+            }
+            
+            #sonic_title {
+                font-size: 0.92rem;
+            }
+            
+            .volume-label {
+                font-size: 1.035rem;
+            }
+            
+            .volume-control {
+                max-width: 100%;
+                padding: 10px;
+            }
+            
+            #dj_profile img {
+                width: 200px !important;
+                height: 200px !important;
+            }
+            
+            .social-links {
+                gap: 1rem;
+            }
+            
+            .social-link {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 320px) {
+            h1 {
+                font-size: 1.2rem;
+            }
+            
+            .cassette-player {
+                height: 287.5px;
+            }
+            
+            .cassette-tapes {
+                height: 100px;
+            }
+            
+            .tape-reel {
+                width: 57.5px;
+                height: 57.5px;
+            }
+            
+            .tape-reel::before {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .cassette-center {
+                width: 115px;
+                height: 86.25px;
+            }
+            
+            .play-btn {
+                width: 46px;
+                height: 46px;
+                line-height: 46px;
+                font-size: 1.035rem;
+            }
+            
+            #dj_profile img {
+                width: 150px !important;
+                height: 150px !important;
+            }
+            
+            #sonic_title {
+                font-size: 0.805rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Script del widget -->
+    <script id='sonic_js' data-port='8286' src='https://mars.streamerr.co/cp/widgets.js?r=34'></script>
+
+    <header>
+        <h1>Castle Radio</h1>
+    </header>
+
+    <div class="led-strip-top"></div>
+    
+    <div class="main-container">
+        <section class="player-section">
+            <h2 class="section-title player-title">REPRODUCTOR</h2>
+            <div class="cassette-player">
+                <div class="album-art-bg" id="album-art-bg"></div>
+                <div class="cassette-content">
+                    <div class="cassette-tapes">
+                        <div class="tape-reel" id="tape-left">
+                            <span></span><span></span><span></span><span></span>
+                        </div>
+                        <button class="play-btn" id="play-pause-btn">▶</button>
+                        <div class="cassette-center"></div>
+                        <div class="tape-reel" id="tape-right">
+                            <span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="song-info">
+                        <div id='sonic_title'></div>
+                    </div>
+                    
+                    <div class="volume-control">
+                        <div class="volume-label">
+                            <span>VOLUMEN:</span>
+                        </div>
+                        <input type="range" id="volume" class="volume-slider" min="0" max="1" step="0.1" value="1" oninput="changeVolume()">
+                    </div>
+                </div>
+            </div>
+            <!-- Widget de la portada que no se mostrará directamente -->
+            <div id='sonic_art_full' style="display:none;"></div>
+        </section>
+
+        <section class="dj-section">
+            <h2 class="section-title dj-title">
+                DJ ACTUAL <div id='sonic_dj' style="color: #00ff41; display: inline; margin-left: 10px; font-size: 1.5rem; font-weight: 900;"></div>
+            </h2>
+            <div id='dj_profile'></div>
+        </section>
+    </div>
+
+    <div class="led-strip-bottom"></div>
+    
+    <footer>
+        <div class="social-links">
+            <a href="#" class="social-link" style="background: linear-gradient(135deg, #00ff41, #bd00ff);">f</a>
+            <a href="#" class="social-link" style="background: linear-gradient(135deg, #00ff41, #bd00ff);">i</a>
+            <a href="#" class="social-link" style="background: linear-gradient(135deg, #00ff41, #bd00ff);">@</a>
+        </div>
+        <div class="copyright">
+            &copy; 2026 Castle Radio - Todos los derechos reservados
+        </div>
+    </footer>
+
+    <audio id="radio-player" preload="none"></audio>
+
+    <script>
+        const audio = document.getElementById('radio-player');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const tapeLeft = document.getElementById('tape-left');
+        const tapeRight = document.getElementById('tape-right');
+        const albumArtBg = document.getElementById('album-art-bg');
+        const volumeSlider = document.getElementById('volume');
+        const streamUrl = 'https://mars.streamerr.co/8286/stream';
+        
+        let isPlaying = false;
+
+        // Establecer volumen al 100% al cargar
+        audio.volume = 1.0;
+        volumeSlider.value = 1.0;
+
+        function updateAlbumArtBackground() {
+            setTimeout(() => {
+                const artContainer = document.getElementById('sonic_art_full');
+                if (artContainer && artContainer.querySelector('img')) {
+                    const img = artContainer.querySelector('img');
+                    const imgSrc = img.src;
+                    if (imgSrc && imgSrc !== '') {
+                        albumArtBg.style.backgroundImage = `url('${imgSrc}')`;
+                        albumArtBg.style.opacity = '0.4';
+                    }
+                }
+            }, 500);
+        }
+
+        function togglePlayPause() {
+            if (!isPlaying) {
+                if (audio.src !== streamUrl) {
+                    audio.src = streamUrl;
+                }
+                audio.volume = parseFloat(volumeSlider.value);
+                audio.play().then(() => {
+                    isPlaying = true;
+                    playPauseBtn.innerHTML = '⏸';
+                    playPauseBtn.classList.add('playing');
+                    startTapeAnimation();
+                }).catch(error => {
+                    console.log('Error al reproducir el stream:', error);
+                });
+            } else {
+                audio.pause();
+                isPlaying = false;
+                playPauseBtn.innerHTML = '▶';
+                playPauseBtn.classList.remove('playing');
+                stopTapeAnimation();
+            }
+        }
+
+        function changeVolume() {
+            audio.volume = parseFloat(volumeSlider.value);
+        }
+
+        function startTapeAnimation() {
+            tapeLeft.classList.add('animated');
+            tapeRight.classList.add('animated');
+        }
+
+        function stopTapeAnimation() {
+            tapeLeft.classList.remove('animated');
+            tapeRight.classList.remove('animated');
+        }
+
+        // Event listeners
+        playPauseBtn.addEventListener('click', togglePlayPause);
+        volumeSlider.addEventListener('input', changeVolume);
+
+        // Actualizar el widget cada 10 segundos
+        setInterval(function() {
+            const script = document.getElementById('sonic_js');
+            const newScript = document.createElement('script');
+            newScript.id = 'sonic_js';
+            newScript.setAttribute('data-port', '8286');
+            newScript.src = 'https://mars.streamerr.co/cp/widgets.js?r=34&t=' + new Date().getTime();
+            
+            script.parentNode.replaceChild(newScript, script);
+            updateAlbumArtBackground();
+        }, 10000);
+
+        // Inicializar la portada al cargar la página
+        window.addEventListener('load', function() {
+            updateAlbumArtBackground();
+        });
+
+        // Manejar eventos de audio
+        audio.addEventListener('ended', () => {
+            isPlaying = false;
+            playPauseBtn.innerHTML = '▶';
+            playPauseBtn.classList.remove('playing');
+            stopTapeAnimation();
+        });
+
+        audio.addEventListener('pause', () => {
+            isPlaying = false;
+            playPauseBtn.innerHTML = '▶';
+            playPauseBtn.classList.remove('playing');
+            stopTapeAnimation();
+        });
+    </script>
+</body>
+</html>
