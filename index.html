@@ -365,7 +365,7 @@ h1 {
 .volume-slider::-webkit-slider-thumb { -webkit-appearance:none; width:27.6px; height:27.6px; background:#00ff41; border-radius:50%; cursor:pointer; box-shadow:0 0 12px rgba(0,255,65,0.8), inset 0 0 5px rgba(0,0,0,0.5); border:2px solid #000; }
 
 /* ============================================ */
-/* DJ PROFILE - CORREGIDO: ANIMACIÓN EN CONTENDOR + SIN PARPADEO */
+/* DJ PROFILE - CORREGIDO: GLOW CIRCULAR + RESPIRACIÓN */
 /* ============================================ */
 #dj_profile {
   display: flex;
@@ -374,35 +374,37 @@ h1 {
   gap: 1rem;
   width: 100%;
   position: relative;
-  /* Animación de respiración MOVIDA AL CONTENDOR (no se reemplaza) */
+  /* Animación de respiración en el contenedor */
   animation: dj-breathing 4s ease-in-out infinite;
-  will-change: transform, box-shadow;
-  /* Borde y glow base */
-  border-radius: 50%;
-  box-shadow: 
-    0 0 20px rgba(189, 0, 255, 0.35),
-    0 0 40px rgba(0, 255, 65, 0.35);
 }
 
-/* Overlay de colores mitad morada/mitad verde - AHORA EN EL CONTENDOR */
-#dj_profile::after {
+/* Glow circular externo - Pseudo-elemento en el contenedor */
+#dj_profile::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 427.5px;
+  height: 427.5px;
   border-radius: 50%;
-  background: linear-gradient(90deg, 
-    rgba(189,0,255,0.25) 0%, 
-    rgba(189,0,255,0.25) 50%, 
-    rgba(0,255,65,0.25) 50%, 
-    rgba(0,255,65,0.25) 100%);
-  mix-blend-mode: overlay;
+  /* Glow circular limpio - mitad morado/mitad verde */
+  background: radial-gradient(circle, 
+    transparent 60%, 
+    rgba(189, 0, 255, 0.15) 80%, 
+    rgba(189, 0, 255, 0.08) 90%,
+    transparent 100%);
+  box-shadow: 
+    0 0 30px rgba(189, 0, 255, 0.4),
+    0 0 60px rgba(0, 255, 65, 0.3),
+    inset 0 0 40px rgba(189, 0, 255, 0.1);
+  z-index: 1;
   pointer-events: none;
-  z-index: 5;
-  /* El overlay también "respira" con el contenedor */
+  /* El glow también respira con el contenedor */
   animation: inherit;
 }
 
-/* Imagen del DJ - SIN ANIMACIÓN, solo transición suave */
+/* Imagen del DJ */
 #dj_profile img {
   width: 427.5px !important;
   height: 427.5px !important;
@@ -413,9 +415,27 @@ h1 {
   display: block;
   position: relative;
   z-index: 3;
-  /* Transición suave para evitar parpadeo al actualizar */
+  /* Transición suave para evitar parpadeo */
   transition: opacity 0.4s ease-in-out;
   opacity: 1;
+  /* Overlay de colores mitad morada/mitad verde en la imagen */
+  filter: drop-shadow(0 0 0 rgba(189, 0, 255, 0));
+}
+
+/* Overlay de colores en la imagen usando pseudo-elemento */
+#dj_profile img::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 50%;
+  background: linear-gradient(90deg, 
+    rgba(189, 0, 255, 0.30) 0%, 
+    rgba(189, 0, 255, 0.30) 50%, 
+    rgba(0, 255, 65, 0.30) 50%, 
+    rgba(0, 255, 65, 0.30) 100%);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 4;
 }
 
 /* Clase para suavizar carga de nueva imagen */
@@ -423,31 +443,29 @@ h1 {
   opacity: 0.85;
 }
 
-/* Animación de respiración - AHORA EN EL CONTENDOR */
+/* Animación de respiración - SOLO escala y glow */
 @keyframes dj-breathing {
   0%, 100% {
-    box-shadow: 
-      0 0 20px rgba(189, 0, 255, 0.35),
-      0 0 40px rgba(0, 255, 65, 0.35);
     transform: scale(1);
   }
-  25% {
+  50% {
+    transform: scale(1.015);
+  }
+}
+
+/* Glow pulsante separado para el contenedor */
+@keyframes dj-glow-pulse {
+  0%, 100% {
     box-shadow: 
-      0 0 28px rgba(189, 0, 255, 0.45),
-      0 0 50px rgba(0, 255, 65, 0.45);
-    transform: scale(1.012);
+      0 0 25px rgba(189, 0, 255, 0.35),
+      0 0 50px rgba(0, 255, 65, 0.30),
+      inset 0 0 30px rgba(189, 0, 255, 0.1);
   }
   50% {
     box-shadow: 
-      0 0 35px rgba(189, 0, 255, 0.50),
-      0 0 60px rgba(0, 255, 65, 0.50);
-    transform: scale(1.02);
-  }
-  75% {
-    box-shadow: 
-      0 0 28px rgba(189, 0, 255, 0.45),
-      0 0 50px rgba(0, 255, 65, 0.45);
-    transform: scale(1.012);
+      0 0 40px rgba(189, 0, 255, 0.50),
+      0 0 75px rgba(0, 255, 65, 0.45),
+      inset 0 0 45px rgba(189, 0, 255, 0.2);
   }
 }
 
@@ -540,7 +558,7 @@ h1 { font-size:2rem; }
 .equalizer-container { height:23px; }
 .bar { width:5px; }
 .volume-label { font-size:1rem; }
-#dj_profile { width: 362.25px !important; height: 362.25px !important; }
+#dj_profile::before { width: 362.25px; height: 362.25px; }
 #dj_profile img { width: 362.25px !important; height: 362.25px !important; }
 .social-links { gap:1.5rem; }
 #sonic_dj.cyber-glitch { font-size:1.3rem; }
@@ -567,7 +585,7 @@ h1 { font-size:1.5rem; }
 .bar { width:4.5px; }
 .volume-label { font-size:0.95rem; }
 .volume-control { max-width:100%; padding:10px; }
-#dj_profile { width: 241.5px !important; height: 241.5px !important; }
+#dj_profile::before { width: 241.5px; height: 241.5px; }
 #dj_profile img { width: 241.5px !important; height: 241.5px !important; }
 .social-links { gap:1rem; }
 .social-link { width:40px; height:40px; font-size:1.2rem; }
@@ -592,7 +610,7 @@ h1 { font-size:1.2rem; }
 .equalizer-container { height:17px; }
 .bar { width:4px; }
 .volume-label { font-size:0.9rem; }
-#dj_profile { width: 181.125px !important; height: 181.125px !important; }
+#dj_profile::before { width: 181.125px; height: 181.125px; }
 #dj_profile img { width: 181.125px !important; height: 181.125px !important; }
 #sonic_dj.cyber-glitch { font-size:0.95rem; }
 }
@@ -785,7 +803,7 @@ function setupGlitchObservers() {
 }
 
 // ============================================
-// NUEVO: OBSERVER PARA SUAVIZAR IMAGEN DJ
+// OBSERVER PARA SUAVIZAR IMAGEN DJ
 // ============================================
 function setupDjImageSmoothObserver() {
   if (!djProfile) return;
@@ -795,11 +813,8 @@ function setupDjImageSmoothObserver() {
       if (mutation.addedNodes.length > 0) {
         mutation.addedNodes.forEach((node) => {
           if (node.tagName === 'IMG') {
-            // Aplicar clase para transición suave
             node.classList.add('loading');
-            // Forzar reflow
             void node.offsetWidth;
-            // Remover clase después de la transición
             setTimeout(() => {
               node.classList.remove('loading');
             }, 400);
@@ -811,7 +826,6 @@ function setupDjImageSmoothObserver() {
   
   djObserver.observe(djProfile, { childList: true, subtree: true });
   
-  // Inicializar: si ya hay imagen, asegurar que no tenga clase loading
   const existingImg = djProfile.querySelector('img');
   if (existingImg) {
     existingImg.classList.remove('loading');
@@ -960,7 +974,7 @@ setInterval(function() {
 window.addEventListener('load', function() {
   updateAlbumArtBackground();
   setupGlitchObservers();
-  setupDjImageSmoothObserver(); // ← Nuevo: suavizar imagen DJ
+  setupDjImageSmoothObserver();
   console.log("🎧 Castle Radio cargado. Sistema glitch activado. Haz clic en PLAY para iniciar.");
 });
 
