@@ -692,17 +692,63 @@ flex-direction: column;
 align-items: center;
 gap: 1rem;
 width: 100%;
+position: relative;
 }
+
+/* ============================================ */
+/* EFECTO DE RESPIRACIÓN DJ - MITAD MORADA/MITAD VERDE */
+/* ============================================ */
 #dj_profile img {
-width: 427.5px !important; /* 450px - 5% */
+width: 427.5px !important;
 height: 427.5px !important;
 border-radius: 50%;
 border: 3px solid #8b8b8b;
 object-fit: cover;
 margin: 0 auto;
 display: block;
-box-shadow: 0 0 20px rgba(139, 139, 139, 0.4);
+position: relative;
+z-index: 1;
+/* Animación de respiración */
+animation: dj-breathing 3s ease-in-out infinite;
 }
+
+/* Overlay de colores mitad morada/mitad verde */
+#dj_profile img::after {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+border-radius: 50%;
+background: linear-gradient(90deg, 
+  rgba(189, 0, 255, 0.35) 0%, 
+  rgba(189, 0, 255, 0.35) 50%, 
+  rgba(0, 255, 65, 0.35) 50%, 
+  rgba(0, 255, 65, 0.35) 100%);
+mix-blend-mode: overlay;
+pointer-events: none;
+z-index: 2;
+}
+
+/* Animación de respiración */
+@keyframes dj-breathing {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(189, 0, 255, 0.4),
+      0 0 40px rgba(0, 255, 65, 0.4),
+      inset 0 0 20px rgba(189, 0, 255, 0.2);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 
+      0 0 35px rgba(189, 0, 255, 0.6),
+      0 0 60px rgba(0, 255, 65, 0.6),
+      inset 0 0 30px rgba(0, 255, 65, 0.3);
+    transform: scale(1.02);
+  }
+}
+
 #dj_profile .dj_name {
 font-family: 'Orbitron', sans-serif;
 font-weight: 900;
@@ -852,7 +898,7 @@ width: 5px;
 font-size: 1rem;
 }
 #dj_profile img {
-width: 362.25px !important; /* 345px + 5% */
+width: 362.25px !important;
 height: 362.25px !important;
 }
 .social-links {
@@ -940,7 +986,7 @@ max-width: 100%;
 padding: 10px;
 }
 #dj_profile img {
-width: 241.5px !important; /* 230px + 5% */
+width: 241.5px !important;
 height: 241.5px !important;
 }
 .social-links {
@@ -1021,7 +1067,7 @@ width: 4px;
 font-size: 0.9rem;
 }
 #dj_profile img {
-width: 181.125px !important; /* 172.5px + 5% */
+width: 181.125px !important;
 height: 181.125px !important;
 }
 #sonic_dj.cyber-glitch {
