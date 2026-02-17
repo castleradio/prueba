@@ -6,169 +6,203 @@
 <title>Castle Radio</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: 'Orbitron', sans-serif;
-  background-color: #0f0f0f;
-  color: #e0e0e0;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
 }
-
+body {
+font-family: 'Orbitron', sans-serif;
+background-color: #0f0f0f;
+color: #e0e0e0;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+}
 /* Cabecera */
 header {
-  background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-  padding: 1.5rem;
-  text-align: center;
-  position: relative;
-  z-index: 10;
+background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+padding: 1.5rem;
+text-align: center;
 }
 h1 {
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 900;
-  font-size: 3rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  background: linear-gradient(to right, #00ff41, #bd00ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
-  animation: glow 2s ease-in-out infinite alternate;
-  margin: 0;
+font-family: 'Orbitron', sans-serif;
+font-weight: 900;
+font-size: 3rem;
+letter-spacing: 3px;
+text-transform: uppercase;
+background: linear-gradient(to right, #00ff41, #bd00ff);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+animation: glow 2s ease-in-out infinite alternate;
+margin: 0;
 }
 @keyframes glow {
-  from { text-shadow: 0 0 10px rgba(0, 255, 65, 0.5); }
-  to { text-shadow: 0 0 20px rgba(0, 255, 65, 0.8), 0 0 30px rgba(189, 0, 255, 0.6); }
+from { text-shadow: 0 0 10px rgba(0, 255, 65, 0.5); }
+to { text-shadow: 0 0 20px rgba(0, 255, 65, 0.8), 0 0 30px rgba(189, 0, 255, 0.6); }
 }
-
-/* Tira LED */
+/* Tira LED debajo de la cabecera */
 .led-strip-top {
-  height: 8px;
-  background: linear-gradient(90deg, #0000ff 0%, #00ff41 25%, #bd00ff 50%, #00ff41 75%, #0000ff 100%);
-  background-size: 200% 100%;
-  animation: led-animation 3s linear infinite;
-  position: relative;
-  z-index: 10;
+height: 8px;
+background: linear-gradient(90deg,
+#0000ff 0%,
+#00ff41 25%,
+#bd00ff 50%,
+#00ff41 75%,
+#0000ff 100%);
+background-size: 200% 100%;
+animation: led-animation 3s linear infinite;
+position: relative;
 }
 @keyframes led-animation {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 200% 50%; }
+0% {
+background-position: 0% 50%;
 }
-
+100% {
+background-position: 200% 50%;
+}
+}
 /* Contenido principal */
 .main-container {
-  display: flex;
-  flex: 1;
-  padding: 2rem;
-  gap: 2rem;
-  position: relative;
-  z-index: 10;
+display: flex;
+flex: 1;
+padding: 2rem;
+gap: 2rem;
 }
-.player-section, .dj-section {
-  flex: 1;
-  background: transparent;
-  border-radius: 10px;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.player-section {
+flex: 1;
+background: transparent;
+border-radius: 10px;
+padding: 2rem;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+.dj-section {
+flex: 1;
+background: transparent;
+border-radius: 10px;
+padding: 2rem;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
 }
 .section-title {
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 900;
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+font-family: 'Orbitron', sans-serif;
+font-weight: 900;
+font-size: 1.5rem;
+margin-bottom: 1.5rem;
+text-align: center;
+text-transform: uppercase;
+letter-spacing: 2px;
 }
-.player-title, .dj-title { color: #bd00ff; padding-bottom: 0.5rem; }
-
-/* Cassette Player */
+.player-title {
+color: #bd00ff;
+padding-bottom: 0.5rem;
+}
+.dj-title {
+color: #bd00ff;
+padding-bottom: 0.5rem;
+}
+/* Cassette Player - Altura adaptable */
 .cassette-player {
-  width: 95%;
-  max-width: 575px;
-  height: auto;
-  min-height: 340px;
-  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-  border: 3px solid #8b8b8b;
-  border-radius: 20px;
-  padding: 1.5rem;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
+width: 95%;
+max-width: 575px;
+height: auto;
+min-height: 340px;
+background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+border: 3px solid #8b8b8b;
+border-radius: 20px;
+padding: 1.5rem;
+position: relative;
+overflow: hidden;
+display: flex;
+flex-direction: column;
 }
 .cassette-player::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 8px;
-  background: linear-gradient(90deg, #00ff41, #bd00ff, #00ff41);
-  opacity: 0.8;
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 8px;
+background: linear-gradient(90deg, #00ff41, #bd00ff, #00ff41);
+opacity: 0.8;
 }
+/* Fondo difuminado de la portada */
 .album-art-bg {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-size: cover;
-  background-position: center;
-  opacity: 0.4;
-  filter: blur(3px);
-  z-index: 1;
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-size: cover;
+background-position: center;
+opacity: 0.4;
+filter: blur(3px);
+z-index: 1;
 }
 .cassette-content {
-  position: relative;
-  z-index: 2;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 15px;
+position: relative;
+z-index: 2;
+height: 100%;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+gap: 15px;
 }
+/* Song Info - DENTRO DEL CASSETTE EN LA PARTE SUPERIOR - MÁS GRANDE */
 .song-info {
-  width: 100%;
-  text-align: center;
-  margin-bottom: 5px;
-  color: #00ff41;
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 900;
-  font-size: 1.5rem;
-  text-shadow: 0 0 10px rgba(0, 255, 65, 0.8), 0 0 20px rgba(189, 0, 255, 0.7);
-  min-height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 5px;
-  letter-spacing: 1.5px;
+width: 100%;
+text-align: center;
+margin-bottom: 5px;
+color: #00ff41;
+font-family: 'Orbitron', sans-serif;
+font-weight: 900;
+font-size: 1.5rem;
+text-shadow: 0 0 10px rgba(0, 255, 65, 0.8), 0 0 20px rgba(189, 0, 255, 0.7);
+min-height: 30px;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 0 5px;
+letter-spacing: 1.5px;
 }
 
 /* ============================================ */
-/* SISTEMA GLITCH CYBERPUNK */
+/* EFECTO GLITCH CYBERPUNK - ADAPTADO */
 /* ============================================ */
-:root { --pink-neon: #bd00ff; --green-neon: #00ff41; }
+:root {
+  --pink-neon: #bd00ff;
+  --green-neon: #00ff41;
+}
 
 .cyber-glitch {
   position: relative;
   display: inline-block;
   max-width: 100%;
   word-break: break-word;
+  /* Mantenemos el glow original como base */
   text-shadow: 0 0 8px rgba(189, 0, 255, 0.9), 0 0 15px rgba(0, 255, 65, 0.7);
   animation: title-glow 2.5s ease-in-out infinite alternate;
 }
+
 .cyber-glitch::before,
 .cyber-glitch::after {
   content: attr(data-text);
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   text-align: center;
   pointer-events: none;
-  white-space: normal;
-  overflow-wrap: break-word;
-  word-break: break-word;
 }
+
 .cyber-glitch::before {
   color: var(--pink-neon);
   clip-path: inset(2px 0 11px 0);
@@ -176,6 +210,7 @@ h1 {
   z-index: -1;
   opacity: 0.85;
 }
+
 .cyber-glitch::after {
   color: var(--green-neon);
   clip-path: inset(10px 0 3px 0);
@@ -183,34 +218,45 @@ h1 {
   z-index: -2;
   opacity: 0.85;
 }
-.cyber-glitch.flash { animation: glitch-flash 1s 1, title-glow 2.5s ease-in-out infinite alternate; }
-.cyber-glitch.pulse { animation: glitch-pulse 1s 1, title-glow 2.5s ease-in-out infinite alternate; }
-.cyber-glitch.chaos { animation: glitch-chaos 1s 1, title-glow 2.5s ease-in-out infinite alternate; }
+
+/* Clases para efectos intensos (se activan con JS) */
+.cyber-glitch.flash {
+  animation: glitch-flash 1s 1, title-glow 2.5s ease-in-out infinite alternate;
+}
+.cyber-glitch.pulse {
+  animation: glitch-pulse 1s 1, title-glow 2.5s ease-in-out infinite alternate;
+}
+.cyber-glitch.chaos {
+  animation: glitch-chaos 1s 1, title-glow 2.5s ease-in-out infinite alternate;
+}
 
 @keyframes glitch-shift-1 {
   0%, 100% { clip-path: inset(2px 0 11px 0); transform: translate(0, 0) rotate(0); }
-  6%  { clip-path: inset(0px 0 15px 0); transform: translate(-5px, 3px) rotate(1.5deg); }
-  12% { clip-path: inset(6px 0 6px 0); transform: translate(5px, -3px) rotate(-1.2deg) scaleX(1.03); }
-  18% { clip-path: inset(1px 0 13px 0); transform: translate(-4px, 4px) rotate(2deg); }
-  24% { clip-path: inset(4px 0 9px 0); transform: translate(4px, -2px) skewX(2deg); }
-  30% { clip-path: inset(3px 0 10px 0); transform: translate(-3px, 1px) scaleX(0.97); }
+  6%  { clip-path: inset(0px 0 15px 0); transform: translate(-3px, 2px) rotate(1deg); }
+  12% { clip-path: inset(6px 0 6px 0); transform: translate(3px, -2px) rotate(-1deg) scaleX(1.02); }
+  18% { clip-path: inset(1px 0 13px 0); transform: translate(-2px, 3px) rotate(1.5deg); }
+  24% { clip-path: inset(4px 0 9px 0); transform: translate(2px, -1px) skewX(1.5deg); }
+  30% { clip-path: inset(3px 0 10px 0); transform: translate(-2px, 1px) scaleX(0.98); }
 }
+
 @keyframes glitch-shift-2 {
   0%, 100% { clip-path: inset(10px 0 3px 0); transform: translate(0, 0) rotate(0); }
-  10% { clip-path: inset(6px 0 7px 0); transform: translate(5px, -4px) rotate(-2deg) scaleY(1.05); }
-  20% { clip-path: inset(14px 0 -1px 0); transform: translate(-5px, 3px) rotate(1.8deg); }
-  30% { clip-path: inset(4px 0 9px 0); transform: translate(-3px, -4px) skewY(3deg); }
-  40% { clip-path: inset(12px 0 1px 0); transform: translate(4px, 2px) scaleX(1.04); }
-  50% { clip-path: inset(8px 0 5px 0); transform: translate(0, -2px); }
+  10% { clip-path: inset(6px 0 7px 0); transform: translate(3px, -3px) rotate(-1.5deg) scaleY(1.03); }
+  20% { clip-path: inset(14px 0 -1px 0); transform: translate(-3px, 2px) rotate(1.2deg); }
+  30% { clip-path: inset(4px 0 9px 0); transform: translate(-2px, -3px) skewY(2deg); }
+  40% { clip-path: inset(12px 0 1px 0); transform: translate(2px, 1px) scaleX(1.03); }
+  50% { clip-path: inset(8px 0 5px 0); transform: translate(0, -1px); }
 }
+
 @keyframes glitch-flash {
   0%   { text-shadow: 0 0 8px var(--pink-neon), 0 0 15px var(--green-neon); opacity: 1; }
   15%  { text-shadow: 0 0 24px var(--green-neon), 0 0 38px var(--pink-neon); }
   30%  { text-shadow: 0 0 28px var(--pink-neon), 0 0 42px var(--green-neon); }
-  45%  { text-shadow: 0 0 0 transparent; opacity: 0.2; }
+  45%  { text-shadow: 0 0 0 transparent; opacity: 0.3; }
   60%  { text-shadow: 0 0 30px var(--green-neon), 0 0 46px var(--pink-neon); opacity: 1; }
   100% { text-shadow: 0 0 8px var(--pink-neon), 0 0 15px var(--green-neon); opacity: 1; }
 }
+
 @keyframes glitch-pulse {
   0%   { text-shadow: 0 0 8px var(--pink-neon), 0 0 15px var(--green-neon); }
   25%  { text-shadow: 0 0 26px var(--green-neon), 0 0 40px var(--pink-neon); }
@@ -218,406 +264,773 @@ h1 {
   75%  { text-shadow: 0 0 32px var(--pink-neon), 0 0 50px var(--green-neon); }
   100% { text-shadow: 0 0 8px var(--pink-neon), 0 0 15px var(--green-neon); opacity: 1; }
 }
+
 @keyframes glitch-chaos {
-  0%   { text-shadow: 0 0 8px var(--pink-neon), 0 0 15px var(--green-neon); transform: translate(0,0) rotate(0); opacity: 1; }
-  10%  { text-shadow: 0 0 28px var(--green-neon); transform: translate(-4px, 2px) rotate(2deg); }
-  20%  { text-shadow: 0 0 0 transparent; opacity: 0.05; transform: translate(0,0); }
-  30%  { text-shadow: 0 0 34px var(--pink-neon); transform: translate(5px, -3px) skewX(4deg); }
-  40%  { text-shadow: 0 0 0 transparent; opacity: 0.1; }
-  50%  { text-shadow: 0 0 40px var(--green-neon); transform: translate(-3px, 4px) scaleX(1.05); }
-  60%  { text-shadow: 0 0 0 transparent; opacity: 0.05; }
-  70%  { text-shadow: 0 0 36px var(--pink-neon); transform: translate(2px, -2px) rotate(-3deg); }
-  80%  { text-shadow: 0 0 0 transparent; opacity: 0.2; }
+  0%   { text-shadow: 0 0 8px var(--pink-neon), 0 0 15px var(--green-neon); transform: translate(0,0) rotate(0); }
+  10%  { text-shadow: 0 0 28px var(--green-neon); transform: translate(-3px, 1px) rotate(1.5deg); }
+  20%  { text-shadow: 0 0 0 transparent; opacity: 0.1; transform: translate(0,0); }
+  30%  { text-shadow: 0 0 34px var(--pink-neon); transform: translate(3px, -2px) skewX(3deg); }
+  40%  { text-shadow: 0 0 0 transparent; opacity: 0.15; }
+  50%  { text-shadow: 0 0 40px var(--green-neon); transform: translate(-2px, 3px) scaleX(1.04); }
+  60%  { text-shadow: 0 0 0 transparent; opacity: 0.1; }
+  70%  { text-shadow: 0 0 36px var(--pink-neon); transform: translate(1px, -1px) rotate(-2deg); }
+  80%  { text-shadow: 0 0 0 transparent; opacity: 0.25; }
   90%  { text-shadow: 0 0 30px var(--green-neon); }
   100% { text-shadow: 0 0 8px var(--pink-neon), 0 0 15px var(--green-neon); transform: translate(0,0) rotate(0); opacity: 1; }
 }
+
 @keyframes title-glow {
-  from { text-shadow: 0 0 8px rgba(189, 0, 255, 0.9), 0 0 15px rgba(0, 255, 65, 0.7); }
-  to { text-shadow: 0 0 12px rgba(189, 0, 255, 1), 0 0 25px rgba(0, 255, 65, 0.9), 0 0 35px rgba(189, 0, 255, 0.8); }
-}
-#sonic_title {
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 900;
-  word-break: break-word;
-  font-size: 1.4rem;
-  text-align: center;
-  letter-spacing: 1.5px;
+from { text-shadow: 0 0 8px rgba(189, 0, 255, 0.9), 0 0 15px rgba(0, 255, 65, 0.7); }
+to { text-shadow: 0 0 12px rgba(189, 0, 255, 1), 0 0 25px rgba(0, 255, 65, 0.9), 0 0 35px rgba(189, 0, 255, 0.8); }
 }
 
-/* Cassette tapes */
+#sonic_title {
+font-family: 'Orbitron', sans-serif;
+font-weight: 900;
+word-break: break-word;
+font-size: 1.4rem;
+text-align: center;
+letter-spacing: 1.5px;
+}
+
 .cassette-tapes {
-  display: flex; justify-content: center; align-items: center;
-  flex-shrink: 0; position: relative; height: 140px;
-  margin-top: 5px; width: 100%; padding: 0 10px; gap: 12px;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-shrink: 0;
+position: relative;
+height: 140px;
+margin-top: 5px;
+width: 100%;
+padding: 0 10px;
+gap: 12px;
 }
 .tape-reel {
-  width: 85px; height: 85px; border: 4px solid #8b8b8b; border-radius: 50%;
-  background: radial-gradient(circle at center, #333 0%, #2a2a2a 35%, #1a1a1a 60%, #444 100%);
-  display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden; z-index: 3;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.8), 0 0 5px rgba(139,139,139,0.5);
-  animation: subtleSpin 15s linear infinite; flex-shrink: 0; aspect-ratio: 1/1;
+width: 85px;
+height: 85px;
+border: 4px solid #8b8b8b;
+border-radius: 50%;
+background: radial-gradient(circle at center,
+#333 0%,
+#2a2a2a 35%,
+#1a1a1a 60%,
+#444 100%);
+display: flex;
+align-items: center;
+justify-content: center;
+position: relative;
+overflow: hidden;
+z-index: 3;
+box-shadow:
+inset 0 0 10px rgba(0, 0, 0, 0.8),
+0 0 5px rgba(139, 139, 139, 0.5);
+animation: subtleSpin 15s linear infinite;
+flex-shrink: 0;
+aspect-ratio: 1 / 1;
 }
-@keyframes subtleSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@keyframes subtleSpin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+/* Detalles del carrete - BASE */
 .tape-reel::before {
-  content:''; position:absolute; width:60px; height:60px; border:3px solid #8b8b8b; border-radius:50%;
-  background: radial-gradient(circle at center, #444 0%, #333 40%, #222 100%);
-  box-shadow: inset 0 0 8px rgba(0,0,0,0.7), 0 0 3px rgba(139,139,139,0.6);
+content: '';
+position: absolute;
+width: 60px;
+height: 60px;
+border: 3px solid #8b8b8b;
+border-radius: 50%;
+background: radial-gradient(circle at center,
+#444 0%,
+#333 40%,
+#222 100%);
+box-shadow:
+inset 0 0 8px rgba(0, 0, 0, 0.7),
+0 0 3px rgba(139, 139, 139, 0.6);
 }
 .tape-reel::after {
-  content:''; position:absolute; width:28px; height:28px; border:2px solid #8b8b8b; border-radius:50%;
-  background:#555; box-shadow: inset 0 0 5px rgba(0,0,0,0.8), 0 0 4px rgba(0,255,65,0.3); z-index:2;
+content: '';
+position: absolute;
+width: 28px;
+height: 28px;
+border: 2px solid #8b8b8b;
+border-radius: 50%;
+background: #555;
+box-shadow:
+inset 0 0 5px rgba(0, 0, 0, 0.8),
+0 0 4px rgba(0, 255, 65, 0.3);
+z-index: 2;
 }
 .tape-reel span {
-  position:absolute; width:8px; height:25px; background:#8b8b8b; border-radius:4px; z-index:1;
+position: absolute;
+width: 8px;
+height: 25px;
+background: #8b8b8b;
+border-radius: 4px;
+z-index: 1;
 }
 .tape-reel span:nth-child(1) { transform: rotate(45deg) translate(23px, -5px); }
 .tape-reel span:nth-child(2) { transform: rotate(135deg) translate(23px, -5px); }
 .tape-reel span:nth-child(3) { transform: rotate(225deg) translate(23px, -5px); }
 .tape-reel span:nth-child(4) { transform: rotate(315deg) translate(23px, -5px); }
-
+/* CARRETE IZQUIERDO - MORADO CYBERPUNK */
 #tape-left {
-  border-color:#bd00ff; box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 8px rgba(139,139,139,0.5), 0 0 15px rgba(189,0,255,0.4);
+border-color: #bd00ff;
+box-shadow:
+inset 0 0 12px rgba(0, 0, 0, 0.9),
+0 0 8px rgba(139, 139, 139, 0.5),
+0 0 15px rgba(189, 0, 255, 0.4);
 }
 #tape-left::before {
-  border-color:#bd00ff; background: radial-gradient(circle at center, #4a3366 0%, #3a2a55 40%, #2a1a44 100%);
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.8), 0 0 5px rgba(189,0,255,0.5);
+border-color: #bd00ff;
+background: radial-gradient(circle at center,
+#4a3366 0%,
+#3a2a55 40%,
+#2a1a44 100%);
+box-shadow:
+inset 0 0 10px rgba(0, 0, 0, 0.8),
+0 0 5px rgba(189, 0, 255, 0.5);
 }
 #tape-left::after {
-  border-color:#bd00ff; background:#664488; box-shadow: inset 0 0 6px rgba(0,0,0,0.9), 0 0 6px rgba(189,0,255,0.6);
+border-color: #bd00ff;
+background: #664488;
+box-shadow:
+inset 0 0 6px rgba(0, 0, 0, 0.9),
+0 0 6px rgba(189, 0, 255, 0.6);
 }
-#tape-left span { background:#bd00ff; box-shadow:0 0 5px rgba(189,0,255,0.8); }
+#tape-left span {
+background: #bd00ff;
+box-shadow: 0 0 5px rgba(189, 0, 255, 0.8);
+}
+/* Efecto de iluminación pulsante para carrete izquierdo cuando reproduce */
 #tape-left.animated {
-  box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 20px rgba(189,0,255,0.7), 0 0 35px rgba(189,0,255,0.5);
-  animation: fastSpin 4s linear infinite, purple-pulse 1.5s ease-in-out infinite;
+box-shadow:
+inset 0 0 12px rgba(0, 0, 0, 0.9),
+0 0 10px rgba(139, 139, 139, 0.6),
+0 0 20px rgba(189, 0, 255, 0.7),
+0 0 35px rgba(189, 0, 255, 0.5);
+animation: fastSpin 4s linear infinite, purple-pulse 1.5s ease-in-out infinite;
 }
 @keyframes purple-pulse {
-  0%,100% { box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 20px rgba(189,0,255,0.7), 0 0 35px rgba(189,0,255,0.5); }
-  50% { box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 25px rgba(189,0,255,0.9), 0 0 45px rgba(189,0,255,0.7); }
+0%, 100% { box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 20px rgba(189,0,255,0.7), 0 0 35px rgba(189,0,255,0.5); }
+50% { box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 25px rgba(189,0,255,0.9), 0 0 45px rgba(189,0,255,0.7); }
 }
-
+/* CARRETE DERECHO - VERDE CYBERPUNK */
 #tape-right {
-  border-color:#00ff41; box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 8px rgba(139,139,139,0.5), 0 0 15px rgba(0,255,65,0.4);
+border-color: #00ff41;
+box-shadow:
+inset 0 0 12px rgba(0, 0, 0, 0.9),
+0 0 8px rgba(139, 139, 139, 0.5),
+0 0 15px rgba(0, 255, 65, 0.4);
 }
 #tape-right::before {
-  border-color:#00ff41; background: radial-gradient(circle at center, #224433 0%, #1a3a2a 40%, #112a1a 100%);
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.8), 0 0 5px rgba(0,255,65,0.5);
+border-color: #00ff41;
+background: radial-gradient(circle at center,
+#224433 0%,
+#1a3a2a 40%,
+#112a1a 100%);
+box-shadow:
+inset 0 0 10px rgba(0, 0, 0, 0.8),
+0 0 5px rgba(0, 255, 65, 0.5);
 }
 #tape-right::after {
-  border-color:#00ff41; background:#336644; box-shadow: inset 0 0 6px rgba(0,0,0,0.9), 0 0 6px rgba(0,255,65,0.6);
+border-color: #00ff41;
+background: #336644;
+box-shadow:
+inset 0 0 6px rgba(0, 0, 0, 0.9),
+0 0 6px rgba(0, 255, 65, 0.6);
 }
-#tape-right span { background:#00ff41; box-shadow:0 0 5px rgba(0,255,65,0.8); }
+#tape-right span {
+background: #00ff41;
+box-shadow: 0 0 5px rgba(0, 255, 65, 0.8);
+}
+/* Efecto de iluminación pulsante para carrete derecho cuando reproduce */
 #tape-right.animated {
-  box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 20px rgba(0,255,65,0.7), 0 0 35px rgba(0,255,65,0.5);
-  animation: fastSpin 4s linear infinite, green-pulse 1.5s ease-in-out infinite;
+box-shadow:
+inset 0 0 12px rgba(0, 0, 0, 0.9),
+0 0 10px rgba(139, 139, 139, 0.6),
+0 0 20px rgba(0, 255, 65, 0.7),
+0 0 35px rgba(0, 255, 65, 0.5);
+animation: fastSpin 4s linear infinite, green-pulse 1.5s ease-in-out infinite;
 }
 @keyframes green-pulse {
-  0%,100% { box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 20px rgba(0,255,65,0.7), 0 0 35px rgba(0,255,65,0.5); }
-  50% { box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 25px rgba(0,255,65,0.9), 0 0 45px rgba(0,255,65,0.7); }
+0%, 100% { box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 20px rgba(0,255,65,0.7), 0 0 35px rgba(0,255,65,0.5); }
+50% { box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 25px rgba(0,255,65,0.9), 0 0 45px rgba(0,255,65,0.7); }
 }
-.tape-reel.animated { animation: fastSpin 4s linear infinite; }
-@keyframes fastSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(720deg); } }
-
+.tape-reel.animated {
+animation: fastSpin 4s linear infinite;
+}
+@keyframes fastSpin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(720deg); }
+}
 .cassette-center {
-  width:170px; height:118px; background:#1a1a1a; border:3px solid #8b8b8b; border-radius:8px;
-  position:relative; display:flex; flex-direction:column; justify-content:space-between;
-  margin:0 auto; flex-shrink:0; z-index:3;
-  box-shadow: inset 0 0 15px rgba(0,0,0,0.7), 0 0 8px rgba(139,139,139,0.4); overflow:hidden;
+width: 170px;
+height: 118px;
+background: #1a1a1a;
+border: 3px solid #8b8b8b;
+border-radius: 8px;
+position: relative;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+margin: 0 auto;
+flex-shrink: 0;
+z-index: 3;
+box-shadow:
+inset 0 0 15px rgba(0, 0, 0, 0.7),
+0 0 8px rgba(139, 139, 139, 0.4);
+overflow: hidden;
 }
+/* Ranura de la cinta - ahora entre los dos compartimentos */
 .cassette-center::before {
-  content:''; position:absolute; width:85%; height:3px; background:linear-gradient(to right,#333,#555,#333);
-  top:50%; left:50%; transform:translate(-50%,-50%); border-radius:2px;
-  box-shadow: inset 0 1px 2px rgba(255,255,255,0.2), 0 1px 3px rgba(0,0,0,0.7); z-index:5;
+content: '';
+position: absolute;
+width: 85%;
+height: 3px;
+background: linear-gradient(to right, #333, #555, #333);
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+border-radius: 2px;
+box-shadow:
+inset 0 1px 2px rgba(255, 255, 255, 0.2),
+0 1px 3px rgba(0, 0, 0, 0.7);
+z-index: 5;
 }
-.button-compartment { height:50%; width:100%; display:flex; justify-content:center; align-items:center; position:relative; z-index:6; padding:5px 0; }
-
+/* Compartimento superior - Botón de Play */
+.button-compartment {
+height: 50%;
+width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+position: relative;
+z-index: 6;
+padding: 5px 0;
+}
+/* Botón de Play estilo radio retro con toque cyberpunk */
 .play-btn {
-  width:85px; height:33px; background:linear-gradient(145deg,#2a2a2a,#1a1a1a); border:3px solid #00ff41; border-radius:6px;
-  cursor:pointer; position:relative; overflow:hidden; display:flex; justify-content:center; align-items:center;
-  font-family:'Orbitron',sans-serif; font-weight:900; font-size:1.3rem; color:#00ff41;
-  text-shadow:0 0 8px rgba(0,255,65,0.8); box-shadow:0 0 12px rgba(0,255,65,0.6), inset 0 0 10px rgba(0,0,0,0.5);
-  transition:all 0.2s ease; z-index:10;
+width: 85px;
+height: 33px;
+background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+border: 3px solid #00ff41;
+border-radius: 6px;
+cursor: pointer;
+position: relative;
+overflow: hidden;
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: 'Orbitron', sans-serif;
+font-weight: 900;
+font-size: 1.3rem;
+color: #00ff41;
+text-shadow: 0 0 8px rgba(0, 255, 65, 0.8);
+box-shadow:
+0 0 12px rgba(0, 255, 65, 0.6),
+inset 0 0 10px rgba(0, 0, 0, 0.5);
+transition: all 0.2s ease;
+z-index: 10;
 }
 .play-btn::before {
-  content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%;
-  background:linear-gradient(45deg, rgba(0,255,65,0.2) 0%, rgba(0,255,65,0.4) 50%, rgba(0,255,65,0.2) 100%);
-  transform:rotate(45deg); animation:shine 3s infinite; opacity:0; transition:opacity 0.3s;
+content: '';
+position: absolute;
+top: -50%;
+left: -50%;
+width: 200%;
+height: 200%;
+background: linear-gradient(45deg,
+rgba(0, 255, 65, 0.2) 0%,
+rgba(0, 255, 65, 0.4) 50%,
+rgba(0, 255, 65, 0.2) 100%);
+transform: rotate(45deg);
+animation: shine 3s infinite;
+opacity: 0;
+transition: opacity 0.3s;
 }
-.play-btn:hover::before { opacity:1; }
-@keyframes shine { 0% { transform:rotate(45deg) translateX(-100%); } 100% { transform:rotate(45deg) translateX(100%); } }
-.play-btn:hover { transform:translateY(-2px); box-shadow:0 0 20px rgba(0,255,65,0.8), inset 0 0 15px rgba(0,0,0,0.6); border-color:#00ff88; }
-.play-btn.playing { border-color:#bd00ff; color:#bd00ff; text-shadow:0 0 8px rgba(189,0,255,0.8); box-shadow:0 0 12px rgba(189,0,255,0.6), inset 0 0 10px rgba(0,0,0,0.5); }
-.play-btn.playing:hover { box-shadow:0 0 20px rgba(189,0,255,0.8), inset 0 0 15px rgba(0,0,0,0.6); border-color:#d400ff; }
-.play-btn::after { content:''; position:absolute; top:3px; left:3px; right:3px; bottom:3px; background:linear-gradient(145deg,#1a1a1a,#0f0f0f); border-radius:3px; z-index:-1; }
-
-.equalizer-compartment { height:50%; width:100%; display:flex; justify-content:center; align-items:flex-end; position:relative; z-index:4; padding-bottom:8px; }
-.equalizer-container { width:100%; height:28px; display:flex; justify-content:space-between; align-items:flex-end; position:relative; z-index:4; gap:4px; padding:0 5px; }
-.bar { width:6px; height:2px; background:linear-gradient(to top,#00ff41,#bd00ff); border-radius:2px 2px 0 0; box-shadow:0 0 5px rgba(0,255,65,0.5); transform-origin:bottom; position:relative; transition:height 0.03s ease-out; flex:1; }
+.play-btn:hover::before {
+opacity: 1;
+}
+@keyframes shine {
+0% { transform: rotate(45deg) translateX(-100%); }
+100% { transform: rotate(45deg) translateX(100%); }
+}
+.play-btn:hover {
+transform: translateY(-2px);
+box-shadow:
+0 0 20px rgba(0, 255, 65, 0.8),
+inset 0 0 15px rgba(0, 0, 0, 0.6);
+border-color: #00ff88;
+}
+.play-btn.playing {
+border-color: #bd00ff;
+color: #bd00ff;
+text-shadow: 0 0 8px rgba(189, 0, 255, 0.8);
+box-shadow:
+0 0 12px rgba(189, 0, 255, 0.6),
+inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.play-btn.playing:hover {
+box-shadow:
+0 0 20px rgba(189, 0, 255, 0.8),
+inset 0 0 15px rgba(0, 0, 0, 0.6);
+border-color: #d400ff;
+}
+.play-btn::after {
+content: '';
+position: absolute;
+top: 3px;
+left: 3px;
+right: 3px;
+bottom: 3px;
+background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+border-radius: 3px;
+z-index: -1;
+}
+/* Compartimento inferior - Ecualizador */
+.equalizer-compartment {
+height: 50%;
+width: 100%;
+display: flex;
+justify-content: center;
+align-items: flex-end;
+position: relative;
+z-index: 4;
+padding-bottom: 8px;
+}
+/* Ecualizador REAL - BARRAS MÁS ANCHAS CON MÁS ESPACIO */
+.equalizer-container {
+width: 100%;
+height: 28px;
+display: flex;
+justify-content: space-between;
+align-items: flex-end;
+position: relative;
+z-index: 4;
+gap: 4px;
+padding: 0 5px;
+}
+.bar {
+width: 6px;
+height: 2px;
+background: linear-gradient(to top, #00ff41, #bd00ff);
+border-radius: 2px 2px 0 0;
+box-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+transform-origin: bottom;
+position: relative;
+transition: height 0.03s ease-out;
+flex: 1;
+}
+/* Efecto de "scan line" */
 .equalizer-container::after {
-  content:''; position:absolute; top:0; left:0; right:0; bottom:0;
-  background:linear-gradient(rgba(0,0,0,0.2) 50%, rgba(0,255,65,0.05) 50%);
-  background-size:100% 4px; pointer-events:none; z-index:6; opacity:0.7;
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: linear-gradient(
+rgba(0, 0, 0, 0.2) 50%,
+rgba(0, 255, 65, 0.05) 50%
+);
+background-size: 100% 4px;
+pointer-events: none;
+z-index: 6;
+opacity: 0.7;
 }
-
-.volume-control { width:100%; max-width:402.5px; margin:0 auto; flex-shrink:0; z-index:3; background:rgba(20,20,20,0.85); padding:12px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.4); }
-.volume-label { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; color:#00ff41; font-family:'Orbitron',sans-serif; font-weight:900; font-size:1.1rem; text-shadow:0 0 5px rgba(0,255,65,0.5); }
-.volume-slider { width:100%; height:13.8px; -webkit-appearance:none; background:linear-gradient(to right,#333 0%,#00ff41 100%); border-radius:6px; outline:none; box-shadow:inset 0 2px 4px rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.3); }
-.volume-slider::-webkit-slider-thumb { -webkit-appearance:none; width:27.6px; height:27.6px; background:#00ff41; border-radius:50%; cursor:pointer; box-shadow:0 0 12px rgba(0,255,65,0.8), inset 0 0 5px rgba(0,0,0,0.5); border:2px solid #000; }
-
-/* ============================================ */
-/* DJ PROFILE - CORREGIDO: GLOW CIRCULAR + RESPIRACIÓN */
-/* ============================================ */
+/* Volume Control */
+.volume-control {
+width: 100%;
+max-width: 402.5px;
+margin: 0 auto;
+flex-shrink: 0;
+z-index: 3;
+background: rgba(20, 20, 20, 0.85);
+padding: 12px;
+border-radius: 10px;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+.volume-label {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 8px;
+color: #00ff41;
+font-family: 'Orbitron', sans-serif;
+font-weight: 900;
+font-size: 1.1rem; /* MÁS PEQUEÑO */
+text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+}
+.volume-slider {
+width: 100%;
+height: 13.8px;
+-webkit-appearance: none;
+background: linear-gradient(to right, #333 0%, #00ff41 100%);
+border-radius: 6px;
+outline: none;
+box-shadow:
+inset 0 2px 4px rgba(0, 0, 0, 0.5),
+0 2px 4px rgba(0, 0, 0, 0.3);
+}
+.volume-slider::-webkit-slider-thumb {
+-webkit-appearance: none;
+width: 27.6px;
+height: 27.6px;
+background: #00ff41;
+border-radius: 50%;
+cursor: pointer;
+box-shadow:
+0 0 12px rgba(0, 255, 65, 0.8),
+inset 0 0 5px rgba(0, 0, 0, 0.5);
+border: 2px solid #000;
+}
+/* Widget del DJ */
 #dj_profile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
-  position: relative;
-  /* Animación de respiración en el contenedor */
-  animation: dj-breathing 4s ease-in-out infinite;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 1rem;
+width: 100%;
 }
-
-/* Glow circular externo - Pseudo-elemento en el contenedor */
-#dj_profile::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 427.5px;
-  height: 427.5px;
-  border-radius: 50%;
-  /* Glow circular limpio - mitad morado/mitad verde */
-  background: radial-gradient(circle, 
-    transparent 60%, 
-    rgba(189, 0, 255, 0.15) 80%, 
-    rgba(189, 0, 255, 0.08) 90%,
-    transparent 100%);
-  box-shadow: 
-    0 0 30px rgba(189, 0, 255, 0.4),
-    0 0 60px rgba(0, 255, 65, 0.3),
-    inset 0 0 40px rgba(189, 0, 255, 0.1);
-  z-index: 1;
-  pointer-events: none;
-  /* El glow también respira con el contenedor */
-  animation: inherit;
-}
-
-/* Imagen del DJ */
 #dj_profile img {
-  width: 427.5px !important;
-  height: 427.5px !important;
-  border-radius: 50%;
-  border: 3px solid #8b8b8b;
-  object-fit: cover;
-  margin: 0 auto;
-  display: block;
-  position: relative;
-  z-index: 3;
-  /* Transición suave para evitar parpadeo */
-  transition: opacity 0.4s ease-in-out;
-  opacity: 1;
-  /* Overlay de colores mitad morada/mitad verde en la imagen */
-  filter: drop-shadow(0 0 0 rgba(189, 0, 255, 0));
+width: 427.5px !important; /* 450px - 5% */
+height: 427.5px !important;
+border-radius: 50%;
+border: 3px solid #8b8b8b;
+object-fit: cover;
+margin: 0 auto;
+display: block;
+box-shadow: 0 0 20px rgba(139, 139, 139, 0.4);
+}
+#dj_profile .dj_name {
+font-family: 'Orbitron', sans-serif;
+font-weight: 900;
+font-size: 1.5rem;
+color: #bd00ff;
+text-align: center;
+text-transform: uppercase;
+letter-spacing: 1px;
 }
 
-/* Overlay de colores en la imagen usando pseudo-elemento */
-#dj_profile img::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  border-radius: 50%;
-  background: linear-gradient(90deg, 
-    rgba(189, 0, 255, 0.30) 0%, 
-    rgba(189, 0, 255, 0.30) 50%, 
-    rgba(0, 255, 65, 0.30) 50%, 
-    rgba(0, 255, 65, 0.30) 100%);
-  mix-blend-mode: overlay;
-  pointer-events: none;
-  z-index: 4;
-}
-
-/* Clase para suavizar carga de nueva imagen */
-#dj_profile img.loading {
-  opacity: 0.85;
-}
-
-/* Animación de respiración - SOLO escala y glow */
-@keyframes dj-breathing {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.015);
-  }
-}
-
-/* Glow pulsante separado para el contenedor */
-@keyframes dj-glow-pulse {
-  0%, 100% {
-    box-shadow: 
-      0 0 25px rgba(189, 0, 255, 0.35),
-      0 0 50px rgba(0, 255, 65, 0.30),
-      inset 0 0 30px rgba(189, 0, 255, 0.1);
-  }
-  50% {
-    box-shadow: 
-      0 0 40px rgba(189, 0, 255, 0.50),
-      0 0 75px rgba(0, 255, 65, 0.45),
-      inset 0 0 45px rgba(189, 0, 255, 0.2);
-  }
-}
-
-#dj_profile .dj_name { 
-  font-family:'Orbitron',sans-serif; 
-  font-weight:900; 
-  font-size:1.5rem; 
-  color:#bd00ff; 
-  text-align:center; 
-  text-transform:uppercase; 
-  letter-spacing:1px; 
-}
-#sonic_dj.cyber-glitch { 
-  font-size:1.5rem; 
-  margin-left:10px; 
-  display:inline-block; 
-  vertical-align:middle; 
+/* Estilo para el DJ con glitch */
+#sonic_dj.cyber-glitch {
+  font-size: 1.5rem;
+  margin-left: 10px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 /* Pie de página */
-footer { 
-  background:linear-gradient(135deg,#1a1a1a 0%,#0d0d0d 100%); 
-  padding:2rem; 
-  text-align:center; 
-  position:relative; 
-  overflow:hidden; 
-  z-index:10; 
+footer {
+background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+padding: 2rem;
+text-align: center;
+position: relative;
+overflow: hidden;
 }
-.led-strip-bottom { 
-  height:8px; 
-  background:linear-gradient(90deg,#0000ff 0%,#00ff41 25%,#bd00ff 50%,#00ff41 75%,#0000ff 100%); 
-  background-size:200% 100%; 
-  animation:led-animation 3s linear infinite reverse; 
-  position:relative; 
+.led-strip-bottom {
+height: 8px;
+background: linear-gradient(90deg,
+#0000ff 0%,
+#00ff41 25%,
+#bd00ff 50%,
+#00ff41 75%,
+#0000ff 100%);
+background-size: 200% 100%;
+animation: led-animation 3s linear infinite reverse;
+position: relative;
 }
-.social-links { 
-  display:flex; 
-  justify-content:center; 
-  gap:2rem; 
-  margin-bottom:1rem; 
-  flex-wrap:wrap; 
+.social-links {
+display: flex;
+justify-content: center;
+gap: 2rem;
+margin-bottom: 1rem;
+flex-wrap: wrap;
 }
-.social-link { 
-  display:inline-block; 
-  width:50px; 
-  height:50px; 
-  border-radius:50%; 
-  background:linear-gradient(135deg,#00ff41,#bd00ff); 
-  display:flex; 
-  align-items:center; 
-  justify-content:center; 
-  text-decoration:none; 
-  color:white; 
-  font-family:'Orbitron',sans-serif; 
-  font-weight:900; 
-  font-size:1.5rem; 
-  transition:all 0.3s ease; 
-  box-shadow:0 0 15px rgba(0,255,65,0.3); 
+.social-link {
+display: inline-block;
+width: 50px;
+height: 50px;
+border-radius: 50%;
+background: linear-gradient(135deg, #00ff41, #bd00ff);
+display: flex;
+align-items: center;
+justify-content: center;
+text-decoration: none;
+color: white;
+font-family: 'Orbitron', sans-serif;
+font-weight: 900;
+font-size: 1.5rem;
+transition: all 0.3s ease;
+box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
 }
-.social-link:hover { 
-  transform:scale(1.1); 
-  box-shadow:0 0 25px rgba(0,255,65,0.5); 
+.social-link:hover {
+transform: scale(1.1);
+box-shadow: 0 0 25px rgba(0, 255, 65, 0.5);
 }
-.copyright { 
-  color:#888; 
-  font-family:'Orbitron',sans-serif; 
-  font-weight:900; 
-  font-size:0.9rem; 
+.copyright {
+color: #888;
+font-family: 'Orbitron', sans-serif;
+font-weight: 900;
+font-size: 0.9rem;
 }
-
 /* Responsive */
-@media (max-width:768px) {
-.main-container { flex-direction:column; padding:1rem; gap:1rem; }
-h1 { font-size:2rem; }
-.player-section,.dj-section { padding:1rem; }
-.song-info { font-size:1.3rem; margin-bottom:5px; min-height:28px; }
-#sonic_title { font-size:1.2rem; }
-.cassette-player { width:100%; max-width:100%; height:auto; min-height:310px; padding:1.2rem; }
-.cassette-tapes { height:auto; min-height:120px; margin-top:3px; padding:0 8px; gap:10px; }
-.tape-reel { width:72px; height:72px; min-width:72px; min-height:72px; }
-.tape-reel::before { width:50px; height:50px; }
-.tape-reel::after { width:23px; height:23px; }
-.tape-reel span { width:6px; height:20px; }
-.tape-reel span:nth-child(1) { transform:rotate(45deg) translate(19px,-4px); }
-.tape-reel span:nth-child(2) { transform:rotate(135deg) translate(19px,-4px); }
-.tape-reel span:nth-child(3) { transform:rotate(225deg) translate(19px,-4px); }
-.tape-reel span:nth-child(4) { transform:rotate(315deg) translate(19px,-4px); }
-.cassette-center { width:145px; height:100px; }
-.play-btn { width:70px; height:28px; font-size:1.15rem; border-width:2.5px; }
-.equalizer-container { height:23px; }
-.bar { width:5px; }
-.volume-label { font-size:1rem; }
-#dj_profile::before { width: 362.25px; height: 362.25px; }
-#dj_profile img { width: 362.25px !important; height: 362.25px !important; }
-.social-links { gap:1.5rem; }
-#sonic_dj.cyber-glitch { font-size:1.3rem; }
+@media (max-width: 768px) {
+.main-container {
+flex-direction: column;
+padding: 1rem;
+gap: 1rem;
 }
-@media (max-width:480px) {
-header { padding:1rem; }
-h1 { font-size:1.5rem; }
-.player-section,.dj-section { padding:0.8rem; }
-.song-info { font-size:1.15rem; margin-bottom:5px; min-height:25px; }
-#sonic_title { font-size:1.05rem; }
-.cassette-player { width:100%; max-width:100%; height:auto; min-height:285px; padding:1rem 0.8rem; }
-.cassette-tapes { height:auto; min-height:105px; margin-top:2px; padding:0 5px; gap:8px; }
-.tape-reel { width:65px; height:65px; min-width:65px; min-height:65px; }
-.tape-reel::before { width:44px; height:44px; }
-.tape-reel::after { width:20px; height:20px; }
-.tape-reel span { width:5px; height:18px; }
-.tape-reel span:nth-child(1) { transform:rotate(45deg) translate(17px,-3px); }
-.tape-reel span:nth-child(2) { transform:rotate(135deg) translate(17px,-3px); }
-.tape-reel span:nth-child(3) { transform:rotate(225deg) translate(17px,-3px); }
-.tape-reel span:nth-child(4) { transform:rotate(315deg) translate(17px,-3px); }
-.cassette-center { width:130px; height:90px; }
-.play-btn { width:62px; height:25px; font-size:1rem; border-width:2px; }
-.equalizer-container { height:20px; }
-.bar { width:4.5px; }
-.volume-label { font-size:0.95rem; }
-.volume-control { max-width:100%; padding:10px; }
-#dj_profile::before { width: 241.5px; height: 241.5px; }
-#dj_profile img { width: 241.5px !important; height: 241.5px !important; }
-.social-links { gap:1rem; }
-.social-link { width:40px; height:40px; font-size:1.2rem; }
-#sonic_dj.cyber-glitch { font-size:1.1rem; }
+h1 {
+font-size: 2rem;
 }
-@media (max-width:320px) {
-h1 { font-size:1.2rem; }
-.song-info { font-size:1.05rem; margin-bottom:5px; min-height:22px; }
-#sonic_title { font-size:0.95rem; }
-.cassette-player { height:auto; min-height:260px; padding:0.8rem 0.6rem; }
-.cassette-tapes { height:auto; min-height:90px; margin-top:1px; padding:0 3px; gap:6px; }
-.tape-reel { width:58px; height:58px; min-width:58px; min-height:58px; }
-.tape-reel::before { width:38px; height:38px; }
-.tape-reel::after { width:17px; height:17px; }
-.tape-reel span { width:4px; height:15px; }
-.tape-reel span:nth-child(1) { transform:rotate(45deg) translate(15px,-2px); }
-.tape-reel span:nth-child(2) { transform:rotate(135deg) translate(15px,-2px); }
-.tape-reel span:nth-child(3) { transform:rotate(225deg) translate(15px,-2px); }
-.tape-reel span:nth-child(4) { transform:rotate(315deg) translate(15px,-2px); }
-.cassette-center { width:110px; height:80px; }
-.play-btn { width:52px; height:21px; font-size:0.9rem; border-width:1.5px; }
-.equalizer-container { height:17px; }
-.bar { width:4px; }
-.volume-label { font-size:0.9rem; }
-#dj_profile::before { width: 181.125px; height: 181.125px; }
-#dj_profile img { width: 181.125px !important; height: 181.125px !important; }
-#sonic_dj.cyber-glitch { font-size:0.95rem; }
+.player-section, .dj-section {
+padding: 1rem;
+}
+.song-info {
+font-size: 1.3rem;
+margin-bottom: 5px;
+min-height: 28px;
+}
+#sonic_title {
+font-size: 1.2rem;
+}
+.cassette-player {
+width: 100%;
+max-width: 100%;
+height: auto;
+min-height: 310px;
+padding: 1.2rem;
+}
+.cassette-tapes {
+height: auto;
+min-height: 120px;
+margin-top: 3px;
+padding: 0 8px;
+gap: 10px;
+}
+.tape-reel {
+width: 72px;
+height: 72px;
+min-width: 72px;
+min-height: 72px;
+}
+.tape-reel::before {
+width: 50px;
+height: 50px;
+}
+.tape-reel::after {
+width: 23px;
+height: 23px;
+}
+.tape-reel span {
+width: 6px;
+height: 20px;
+}
+.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(19px, -4px); }
+.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(19px, -4px); }
+.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(19px, -4px); }
+.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(19px, -4px); }
+.cassette-center {
+width: 145px;
+height: 100px;
+}
+.play-btn {
+width: 70px;
+height: 28px;
+font-size: 1.15rem;
+border-width: 2.5px;
+}
+.equalizer-container {
+height: 23px;
+}
+.bar {
+width: 5px;
+}
+.volume-label {
+font-size: 1rem;
+}
+#dj_profile img {
+width: 362.25px !important; /* 345px + 5% */
+height: 362.25px !important;
+}
+.social-links {
+gap: 1.5rem;
+}
+#sonic_dj.cyber-glitch {
+  font-size: 1.3rem;
+}
+}
+@media (max-width: 480px) {
+header {
+padding: 1rem;
+}
+h1 {
+font-size: 1.5rem;
+}
+.player-section, .dj-section {
+padding: 0.8rem;
+}
+.song-info {
+font-size: 1.15rem;
+margin-bottom: 5px;
+min-height: 25px;
+}
+#sonic_title {
+font-size: 1.05rem;
+}
+.cassette-player {
+width: 100%;
+max-width: 100%;
+height: auto;
+min-height: 285px;
+padding: 1rem 0.8rem;
+}
+.cassette-tapes {
+height: auto;
+min-height: 105px;
+margin-top: 2px;
+padding: 0 5px;
+gap: 8px;
+}
+.tape-reel {
+width: 65px;
+height: 65px;
+min-width: 65px;
+min-height: 65px;
+}
+.tape-reel::before {
+width: 44px;
+height: 44px;
+}
+.tape-reel::after {
+width: 20px;
+height: 20px;
+}
+.tape-reel span {
+width: 5px;
+height: 18px;
+}
+.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(17px, -3px); }
+.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(17px, -3px); }
+.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(17px, -3px); }
+.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(17px, -3px); }
+.cassette-center {
+width: 130px;
+height: 90px;
+}
+.play-btn {
+width: 62px;
+height: 25px;
+font-size: 1rem;
+border-width: 2px;
+}
+.equalizer-container {
+height: 20px;
+}
+.bar {
+width: 4.5px;
+}
+.volume-label {
+font-size: 0.95rem;
+}
+.volume-control {
+max-width: 100%;
+padding: 10px;
+}
+#dj_profile img {
+width: 241.5px !important; /* 230px + 5% */
+height: 241.5px !important;
+}
+.social-links {
+gap: 1rem;
+}
+.social-link {
+width: 40px;
+height: 40px;
+font-size: 1.2rem;
+}
+#sonic_dj.cyber-glitch {
+  font-size: 1.1rem;
+}
+}
+@media (max-width: 320px) {
+h1 {
+font-size: 1.2rem;
+}
+.song-info {
+font-size: 1.05rem;
+margin-bottom: 5px;
+min-height: 22px;
+}
+#sonic_title {
+font-size: 0.95rem;
+}
+.cassette-player {
+height: auto;
+min-height: 260px;
+padding: 0.8rem 0.6rem;
+}
+.cassette-tapes {
+height: auto;
+min-height: 90px;
+margin-top: 1px;
+padding: 0 3px;
+gap: 6px;
+}
+.tape-reel {
+width: 58px;
+height: 58px;
+min-width: 58px;
+min-height: 58px;
+}
+.tape-reel::before {
+width: 38px;
+height: 38px;
+}
+.tape-reel::after {
+width: 17px;
+height: 17px;
+}
+.tape-reel span {
+width: 4px;
+height: 15px;
+}
+.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(15px, -2px); }
+.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(15px, -2px); }
+.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(15px, -2px); }
+.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(15px, -2px); }
+.cassette-center {
+width: 110px;
+height: 80px;
+}
+.play-btn {
+width: 52px;
+height: 21px;
+font-size: 0.9rem;
+border-width: 1.5px;
+}
+.equalizer-container {
+height: 17px;
+}
+.bar {
+width: 4px;
+}
+.volume-label {
+font-size: 0.9rem;
+}
+#dj_profile img {
+width: 181.125px !important; /* 172.5px + 5% */
+height: 181.125px !important;
+}
+#sonic_dj.cyber-glitch {
+  font-size: 0.95rem;
+}
 }
 </style>
 </head>
 <body>
-
 <!-- Script del widget -->
 <script id='sonic_js' data-port='8008' src='https://sonic.sistemahost.es/cp/widgets.js?r=122  '></script>
 <header>
@@ -630,27 +1043,45 @@ h1 { font-size:1.2rem; }
 <div class="cassette-player">
 <div class="album-art-bg" id="album-art-bg"></div>
 <div class="cassette-content">
+<!-- Título de canción DENTRO DEL CASSETTE, EN LA PARTE SUPERIOR - MÁS GRANDE -->
 <div class="song-info">
 <div id='sonic_title' class="cyber-glitch" data-text="Cargando canción...">Cargando canción...</div>
 </div>
 <div class="cassette-tapes">
-<div class="tape-reel" id="tape-left"><span></span><span></span><span></span><span></span></div>
+<div class="tape-reel" id="tape-left">
+<span></span><span></span><span></span><span></span>
+</div>
 <div class="cassette-center">
+<!-- Compartimento superior: Botón de Play estilo retro -->
 <div class="button-compartment">
 <button class="play-btn" id="play-pause-btn">▶</button>
 </div>
+<!-- Compartimento inferior: Ecualizador -->
 <div class="equalizer-compartment">
 <div class="equalizer-container" id="equalizer">
-<div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-<div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-<div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
 </div>
 </div>
 </div>
-<div class="tape-reel" id="tape-right"><span></span><span></span><span></span><span></span></div>
+<div class="tape-reel" id="tape-right">
+<span></span><span></span><span></span><span></span>
+</div>
 </div>
 <div class="volume-control">
-<div class="volume-label"><span>Volumen:</span></div>
+<div class="volume-label">
+<span>Volumen:</span>
+</div>
 <input type="range" id="volume" class="volume-slider" min="0" max="1" step="0.1" value="1">
 </div>
 </div>
@@ -659,7 +1090,7 @@ h1 { font-size:1.2rem; }
 </section>
 <section class="dj-section">
 <h2 class="section-title dj-title">
-Emite: <div id='sonic_dj' class="cyber-glitch" data-text="" style="color:#00ff41; display:inline; margin-left:10px; font-weight:900;"></div>
+Emite: <div id='sonic_dj' class="cyber-glitch" data-text="" style="color: #00ff41; display: inline; margin-left: 10px; font-weight: 900;"></div>
 </h2>
 <div id='dj_profile'></div>
 </section>
@@ -667,12 +1098,15 @@ Emite: <div id='sonic_dj' class="cyber-glitch" data-text="" style="color:#00ff41
 <div class="led-strip-bottom"></div>
 <footer>
 <div class="social-links">
-<a href="#" class="social-link" style="background:linear-gradient(135deg,#00ff41,#bd00ff);">f</a>
-<a href="#" class="social-link" style="background:linear-gradient(135deg,#00ff41,#bd00ff);">i</a>
-<a href="#" class="social-link" style="background:linear-gradient(135deg,#00ff41,#bd00ff);">@</a>
+<a href="#" class="social-link" style="background: linear-gradient(135deg, #00ff41, #bd00ff);">f</a>
+<a href="#" class="social-link" style="background: linear-gradient(135deg, #00ff41, #bd00ff);">i</a>
+<a href="#" class="social-link" style="background: linear-gradient(135deg, #00ff41, #bd00ff);">@</a>
 </div>
-<div class="copyright">&copy; 2026 Castle Radio - Todos los derechos reservados</div>
+<div class="copyright">
+&copy; 2026 Castle Radio - Todos los derechos reservados
+</div>
 </footer>
+<!-- Audio con CORS configurado correctamente -->
 <audio id="radio-player" crossorigin="anonymous" preload="metadata"></audio>
 <script>
 // Elementos del DOM
@@ -687,7 +1121,6 @@ const bars = document.querySelectorAll('.bar');
 const streamUrl = 'https://sonic.sistemahost.es/8008/stream  ';
 const sonicTitle = document.getElementById('sonic_title');
 const sonicDj = document.getElementById('sonic_dj');
-const djProfile = document.getElementById('dj_profile');
 
 // Variables de estado
 let isPlaying = false;
@@ -699,261 +1132,250 @@ let isVisualizing = false;
 const barCount = bars.length;
 let audioGraphSetup = false;
 
-// Variables para sistema glitch avanzado
-let periodicGlitchInterval = null;
-let randomGlitchTimeout = null;
-let lastGlitchTime = 0;
-const GLITCH_THROTTLE_MS = 3000;
-
 // Configuración inicial
 audio.volume = 1.0;
 volumeSlider.value = 1.0;
 audio.crossOrigin = 'anonymous';
 
-// ============================================
-// SISTEMA GLITCH AVANZADO
-// ============================================
-
+// Función para actualizar el atributo data-text en elementos con glitch
 function updateGlitchDataText(element) {
   if (element && element.classList.contains('cyber-glitch')) {
-    const text = element.textContent.trim() || '—';
-    element.setAttribute('data-text', text);
+    element.setAttribute('data-text', element.textContent.trim());
   }
 }
 
-function triggerGlitch(element, type = 'pulse') {
-  if (!element || !element.classList.contains('cyber-glitch')) return;
-  const now = Date.now();
-  if ((now - lastGlitchTime) < GLITCH_THROTTLE_MS && type !== 'flash') return;
-  updateGlitchDataText(element);
-  element.classList.remove('flash', 'pulse', 'chaos');
-  void element.offsetWidth;
-  element.classList.add(type);
-  lastGlitchTime = now;
-  setTimeout(() => { element.classList.remove(type); }, 1000);
-}
-
+// Función para activar efecto glitch intenso aleatorio
 function triggerRandomGlitch(element) {
   if (!element || !element.classList.contains('cyber-glitch')) return;
+  
   const effects = ['flash', 'pulse', 'chaos'];
-  const r = Math.random();
-  let effect = 'pulse';
-  if (r < 0.3) effect = 'flash';
-  else if (r < 0.6) effect = 'chaos';
-  triggerGlitch(element, effect);
+  const randomEffect = effects[Math.floor(Math.random() * effects.length)];
+  
+  // Remover clases previas
+  element.classList.remove('flash', 'pulse', 'chaos');
+  
+  // Forzar reflow para reiniciar animación
+  void element.offsetWidth;
+  
+  // Agregar efecto aleatorio
+  element.classList.add(randomEffect);
+  
+  // Remover la clase después de que termine la animación (1s)
+  setTimeout(() => {
+    element.classList.remove(randomEffect);
+  }, 1000);
 }
 
-function startPeriodicGlitch(element) {
-  if (!element) return;
-  if (periodicGlitchInterval) clearInterval(periodicGlitchInterval);
-  periodicGlitchInterval = setInterval(() => {
-    if (isPlaying) triggerGlitch(element, 'pulse');
-  }, 15000);
-}
-
-function startRandomGlitch(element) {
-  if (!element) return;
-  if (randomGlitchTimeout) clearTimeout(randomGlitchTimeout);
-  const scheduleNext = () => {
-    if (!isPlaying) return;
-    const nextDelay = 5000 + Math.random() * 7000;
-    randomGlitchTimeout = setTimeout(() => {
-      if (isPlaying && Math.random() < 0.35) {
-        triggerRandomGlitch(element);
-      }
-      scheduleNext();
-    }, nextDelay);
-  };
-  scheduleNext();
-}
-
-function stopAllGlitches() {
-  if (periodicGlitchInterval) { clearInterval(periodicGlitchInterval); periodicGlitchInterval = null; }
-  if (randomGlitchTimeout) { clearTimeout(randomGlitchTimeout); randomGlitchTimeout = null; }
-  [sonicTitle, sonicDj].forEach(el => { if (el) el.classList.remove('flash', 'pulse', 'chaos'); });
-}
-
+// Configurar observadores para sincronizar data-text cuando el widget actualice el contenido
 function setupGlitchObservers() {
+  // Observer para el título de la canción
   if (sonicTitle) {
     const titleObserver = new MutationObserver(() => {
-      const currentText = sonicTitle.textContent.trim();
-      const oldText = sonicTitle.getAttribute('data-text') || '';
       updateGlitchDataText(sonicTitle);
-      if (currentText && currentText !== oldText && currentText !== 'Cargando canción...') {
-        triggerGlitch(sonicTitle, 'flash');
-        lastGlitchTime = Date.now();
+      // Activar glitch intenso ocasionalmente (30% de probabilidad)
+      if (Math.random() < 0.3) {
+        triggerRandomGlitch(sonicTitle);
       }
     });
     titleObserver.observe(sonicTitle, { childList: true, characterData: true, subtree: true });
+    // Inicializar
     updateGlitchDataText(sonicTitle);
   }
+  
+  // Observer para el nombre del DJ
   if (sonicDj) {
     const djObserver = new MutationObserver(() => {
-      const currentText = sonicDj.textContent.trim();
-      const oldText = sonicDj.getAttribute('data-text') || '';
       updateGlitchDataText(sonicDj);
-      if (currentText && currentText !== oldText && currentText !== '') {
-        triggerGlitch(sonicDj, 'flash');
-        lastGlitchTime = Date.now();
+      if (Math.random() < 0.3) {
+        triggerRandomGlitch(sonicDj);
       }
     });
     djObserver.observe(sonicDj, { childList: true, characterData: true, subtree: true });
+    // Inicializar
     updateGlitchDataText(sonicDj);
   }
 }
 
-// ============================================
-// OBSERVER PARA SUAVIZAR IMAGEN DJ
-// ============================================
-function setupDjImageSmoothObserver() {
-  if (!djProfile) return;
-  
-  const djObserver = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.addedNodes.length > 0) {
-        mutation.addedNodes.forEach((node) => {
-          if (node.tagName === 'IMG') {
-            node.classList.add('loading');
-            void node.offsetWidth;
-            setTimeout(() => {
-              node.classList.remove('loading');
-            }, 400);
-          }
-        });
-      }
-    });
-  });
-  
-  djObserver.observe(djProfile, { childList: true, subtree: true });
-  
-  const existingImg = djProfile.querySelector('img');
-  if (existingImg) {
-    existingImg.classList.remove('loading');
-  }
-}
-
-// ============================================
-// FUNCIONES EXISTENTES (audio, visualizer, etc.)
-// ============================================
-
+// Función para actualizar la portada
 function updateAlbumArtBackground() {
-  setTimeout(() => {
-    const artContainer = document.getElementById('sonic_art_full');
-    if (artContainer && artContainer.querySelector('img')) {
-      const img = artContainer.querySelector('img');
-      const imgSrc = img.src;
-      if (imgSrc && imgSrc !== '') {
-        albumArtBg.style.backgroundImage = `url('${imgSrc}')`;
-        albumArtBg.style.opacity = '0.4';
-      }
-    }
-  }, 500);
+setTimeout(() => {
+const artContainer = document.getElementById('sonic_art_full');
+if (artContainer && artContainer.querySelector('img')) {
+const img = artContainer.querySelector('img');
+const imgSrc = img.src;
+if (imgSrc && imgSrc !== '') {
+albumArtBg.style.backgroundImage = `url('${imgSrc}')`;
+albumArtBg.style.opacity = '0.4';
+}
+}
+}, 500);
 }
 
+// Configurar el grafo de audio (conexiones) - SOLO UNA VEZ
 function setupAudioGraph() {
-  if (audioGraphSetup || !audioContext) return;
-  try {
-    analyzer = audioContext.createAnalyser();
-    analyzer.fftSize = 512;
-    analyzer.smoothingTimeConstant = 0.7;
-    const bufferLength = analyzer.frequencyBinCount;
-    dataArray = new Uint8Array(bufferLength);
-    const source = audioContext.createMediaElementSource(audio);
-    source.connect(analyzer);
-    analyzer.connect(audioContext.destination);
-    audioGraphSetup = true;
-    console.log("✓ Grafo de audio configurado correctamente");
-  } catch (e) {
-    console.error("✗ Error configurando el grafo de audio:", e);
-    alert("Error al inicializar el reproductor de audio. Por favor recarga la página.");
-  }
+if (audioGraphSetup || !audioContext) return;
+try {
+analyzer = audioContext.createAnalyser();
+analyzer.fftSize = 512;
+analyzer.smoothingTimeConstant = 0.7;
+const bufferLength = analyzer.frequencyBinCount;
+dataArray = new Uint8Array(bufferLength);
+// Conectar el audio al analizador
+const source = audioContext.createMediaElementSource(audio);
+source.connect(analyzer);
+analyzer.connect(audioContext.destination);
+audioGraphSetup = true;
+console.log("✓ Grafo de audio configurado correctamente");
+} catch (e) {
+console.error("✗ Error configurando el grafo de audio:", e);
+alert("Error al inicializar el reproductor de audio. Por favor recarga la página.");
+}
 }
 
+// Iniciar visualización
 function startVisualizer() {
-  if (isVisualizing || !analyzer) return;
-  isVisualizing = true;
-  visualize();
+if (isVisualizing || !analyzer) return;
+isVisualizing = true;
+visualize();
 }
 
+// Detener visualización
 function stopVisualizer() {
-  isVisualizing = false;
-  if (animationId) { cancelAnimationFrame(animationId); animationId = null; }
-  bars.forEach(bar => {
-    bar.style.height = '2px';
-    bar.style.boxShadow = '0 0 5px rgba(0, 255, 65, 0.5)';
-    bar.style.background = 'linear-gradient(to top, #00ff41, #bd00ff)';
-  });
+isVisualizing = false;
+if (animationId) {
+cancelAnimationFrame(animationId);
+animationId = null;
+}
+bars.forEach(bar => {
+bar.style.height = '2px';
+bar.style.boxShadow = '0 0 5px rgba(0, 255, 65, 0.5)';
+bar.style.background = 'linear-gradient(to top, #00ff41, #bd00ff)';
+});
 }
 
+// Visualización en tiempo real - SOLO VERDES Y MORADOS
 function visualize() {
-  if (!isVisualizing || !analyzer || !isPlaying) { stopVisualizer(); return; }
-  analyzer.getByteFrequencyData(dataArray);
-  const totalBins = dataArray.length;
-  const binsPerBar = totalBins / barCount;
-  for (let i = 0; i < barCount; i++) {
-    const startBin = Math.floor(i * binsPerBar);
-    const endBin = Math.floor((i + 1) * binsPerBar);
-    let sum = 0, count = 0;
-    for (let j = startBin; j < endBin && j < totalBins; j++) {
-      const weight = (i < 4) ? 1.4 : (i >= 8 ? 1.5 : 1.15);
-      sum += dataArray[j] * weight; count++;
-    }
-    const avg = count > 0 ? sum / count : 0;
-    let height = Math.sqrt(avg) * 2.0;
-    height = Math.min(height, 28); height = Math.max(height, 2);
-    bars[i].style.height = `${height}px`;
-    const glowFactor = Math.min(height / 28, 1);
-    bars[i].style.boxShadow = `0 0 ${8 * glowFactor}px rgba(0, 255, 65, ${0.4 + glowFactor * 0.6}), 0 0 ${12 * glowFactor}px rgba(189, 0, 255, ${0.4 * glowFactor})`;
-    if (height > 20) bars[i].style.background = 'linear-gradient(to top, #00ff41, #bd00ff)';
-    else if (height > 10) bars[i].style.background = 'linear-gradient(to top, #00cc33, #9900ff)';
-    else bars[i].style.background = 'linear-gradient(to top, #008822, #7a00cc)';
-  }
-  animationId = requestAnimationFrame(visualize);
+if (!isVisualizing || !analyzer || !isPlaying) {
+stopVisualizer();
+return;
+}
+analyzer.getByteFrequencyData(dataArray);
+const totalBins = dataArray.length;
+const binsPerBar = totalBins / barCount;
+for (let i = 0; i < barCount; i++) {
+const startBin = Math.floor(i * binsPerBar);
+const endBin = Math.floor((i + 1) * binsPerBar);
+let sum = 0;
+let count = 0;
+for (let j = startBin; j < endBin && j < totalBins; j++) {
+// Sensibilidad mejorada: Graves 1.4x, Medios 1.15x, Agudos 1.5x
+const weight = (i < 4) ? 1.4 : (i >= 8 ? 1.5 : 1.15);
+sum += dataArray[j] * weight;
+count++;
+}
+const avg = count > 0 ? sum / count : 0;
+let height = Math.sqrt(avg) * 2.0;
+height = Math.min(height, 28);
+height = Math.max(height, 2);
+bars[i].style.height = `${height}px`;
+// Efecto de brillo según intensidad
+const glowFactor = Math.min(height / 28, 1);
+bars[i].style.boxShadow = `
+0 0 ${8 * glowFactor}px rgba(0, 255, 65, ${0.4 + glowFactor * 0.6}),
+0 0 ${12 * glowFactor}px rgba(189, 0, 255, ${0.4 * glowFactor})
+`;
+// PALETA EXCLUSIVA DE VERDES Y MORADOS
+if (height > 20) {
+// Alta intensidad: Verde brillante a morado eléctrico
+bars[i].style.background = 'linear-gradient(to top, #00ff41, #bd00ff)';
+} else if (height > 10) {
+// Media intensidad: Verde neón a morado profundo
+bars[i].style.background = 'linear-gradient(to top, #00cc33, #9900ff)';
+} else {
+// Baja intensidad: Verde suave a morado oscuro
+bars[i].style.background = 'linear-gradient(to top, #008822, #7a00cc)';
+}
+}
+animationId = requestAnimationFrame(visualize);
 }
 
+// Alternar reproducción - CORREGIDO PARA AUTOPLAY
 function togglePlayPause() {
-  if (!isPlaying) {
-    if (audio.src !== streamUrl) audio.src = streamUrl;
-    if (!audioContext) {
-      window.AudioContext = window.AudioContext || window.webkitAudioContext;
-      if (window.AudioContext) {
-        audioContext = new AudioContext();
-        console.log("✓ AudioContext creado");
-      } else { alert("Tu navegador no soporta Web Audio API. Actualiza tu navegador."); return; }
-    }
-    if (audioContext.state === 'suspended') {
-      audioContext.resume().then(() => console.log("✓ AudioContext reanudado"))
-        .catch(e => console.error("✗ Error al reanudar AudioContext:", e));
-    }
-    if (!audioGraphSetup) setupAudioGraph();
-    
-    audio.play().then(() => {
-      isPlaying = true;
-      playPauseBtn.innerHTML = '❚❚';
-      playPauseBtn.classList.add('playing');
-      startTapeAnimation();
-      if (analyzer) startVisualizer();
-      startPeriodicGlitch(sonicTitle); startPeriodicGlitch(sonicDj);
-      startRandomGlitch(sonicTitle); startRandomGlitch(sonicDj);
-    }).catch(error => {
-      console.error("✗ Error de reproducción:", error);
-      let errorMsg = 'Error al reproducir: ';
-      if (error.name === 'NotAllowedError') errorMsg += 'Haz clic nuevamente en el botón de play para permitir el audio.';
-      else if (error.name === 'NetworkError') errorMsg += 'Error de conexión. Verifica tu internet.';
-      else errorMsg += error.message;
-      alert(errorMsg);
-    });
-  } else {
-    audio.pause(); isPlaying = false;
-    playPauseBtn.innerHTML = '▶'; playPauseBtn.classList.remove('playing');
-    stopTapeAnimation(); stopVisualizer(); stopAllGlitches();
-    console.log("⏸ Reproducción pausada");
-  }
+if (!isPlaying) {
+// 1. Configurar URL del stream
+if (audio.src !== streamUrl) {
+audio.src = streamUrl;
+}
+// 2. Crear AudioContext SI NO EXISTE (en gesto de usuario)
+if (!audioContext) {
+window.AudioContext = window.AudioContext || window.webkitAudioContext;
+if (window.AudioContext) {
+audioContext = new AudioContext();
+console.log("✓ AudioContext creado");
+} else {
+alert("Tu navegador no soporta Web Audio API. Actualiza tu navegador.");
+return;
+}
+}
+// 3. Reanudar AudioContext si está suspendido
+if (audioContext.state === 'suspended') {
+audioContext.resume().then(() => {
+console.log("✓ AudioContext reanudado");
+}).catch(e => console.error("✗ Error al reanudar AudioContext:", e));
+}
+// 4. Configurar grafo de audio (solo primera vez)
+if (!audioGraphSetup) {
+setupAudioGraph();
+}
+// 5. Reproducir audio
+audio.play().then(() => {
+isPlaying = true;
+playPauseBtn.innerHTML = '❚❚';
+playPauseBtn.classList.add('playing');
+startTapeAnimation();
+// 6. INICIAR VISUALIZADOR SOLO CUANDO EL AUDIO ESTÁ REPRODUCIENDO
+if (analyzer) {
+startVisualizer();
+console.log("✓ Visualizador iniciado - Ecualizador activo");
+}
+}).catch(error => {
+console.error("✗ Error de reproducción:", error);
+let errorMsg = 'Error al reproducir: ';
+if (error.name === 'NotAllowedError') {
+errorMsg += 'Haz clic nuevamente en el botón de play para permitir el audio.';
+} else if (error.name === 'NetworkError') {
+errorMsg += 'Error de conexión. Verifica tu internet.';
+} else {
+errorMsg += error.message;
+}
+alert(errorMsg);
+});
+} else {
+// Pausar
+audio.pause();
+isPlaying = false;
+playPauseBtn.innerHTML = '▶';
+playPauseBtn.classList.remove('playing');
+stopTapeAnimation();
+stopVisualizer();
+console.log("⏸ Reproducción pausada");
+}
 }
 
-function changeVolume() { audio.volume = parseFloat(volumeSlider.value); }
-function startTapeAnimation() { tapeLeft.classList.add('animated'); tapeRight.classList.add('animated'); }
-function stopTapeAnimation() { tapeLeft.classList.remove('animated'); tapeRight.classList.remove('animated'); }
+// Control de volumen
+function changeVolume() {
+audio.volume = parseFloat(volumeSlider.value);
+}
+
+// Animación de cintas
+function startTapeAnimation() {
+tapeLeft.classList.add('animated');
+tapeRight.classList.add('animated');
+}
+function stopTapeAnimation() {
+tapeLeft.classList.remove('animated');
+tapeRight.classList.remove('animated');
+}
 
 // Event listeners
 playPauseBtn.addEventListener('click', togglePlayPause);
@@ -961,51 +1383,60 @@ volumeSlider.addEventListener('input', changeVolume);
 
 // Actualizar widget cada 10 segundos
 setInterval(function() {
-  const script = document.getElementById('sonic_js');
-  const newScript = document.createElement('script');
-  newScript.id = 'sonic_js';
-  newScript.setAttribute('data-port', '8008');
-  newScript.src = `https://sonic.sistemahost.es/cp/widgets.js?r=622=${new Date().getTime()}`;
-  script.parentNode.replaceChild(newScript, script);
-  updateAlbumArtBackground();
+const script = document.getElementById('sonic_js');
+const newScript = document.createElement('script');
+newScript.id = 'sonic_js';
+newScript.setAttribute('data-port', '8008');
+newScript.src = `https://sonic.sistemahost.es/cp/widgets.js?r=622=${new Date().getTime()}`;
+script.parentNode.replaceChild(newScript, script);
+updateAlbumArtBackground();
 }, 10000);
 
 // Inicializar al cargar
 window.addEventListener('load', function() {
-  updateAlbumArtBackground();
-  setupGlitchObservers();
-  setupDjImageSmoothObserver();
-  console.log("🎧 Castle Radio cargado. Sistema glitch activado. Haz clic en PLAY para iniciar.");
+updateAlbumArtBackground();
+setupGlitchObservers(); // ← Inicializar observadores de glitch
+console.log("🎧 Castle Radio cargado. Haz clic en PLAY para iniciar.");
 });
 
 // Manejar eventos de audio
 audio.addEventListener('ended', () => {
-  isPlaying = false; playPauseBtn.innerHTML = '▶'; playPauseBtn.classList.remove('playing');
-  stopTapeAnimation(); stopVisualizer(); stopAllGlitches();
-  console.log("⏹ Reproducción finalizada");
+isPlaying = false;
+playPauseBtn.innerHTML = '▶';
+playPauseBtn.classList.remove('playing');
+stopTapeAnimation();
+stopVisualizer();
+console.log("⏹ Reproducción finalizada");
 });
 audio.addEventListener('pause', () => {
-  if (isPlaying) {
-    isPlaying = false; playPauseBtn.innerHTML = '▶'; playPauseBtn.classList.remove('playing');
-    stopTapeAnimation(); stopVisualizer(); stopAllGlitches();
-  }
+if (isPlaying) {
+isPlaying = false;
+playPauseBtn.innerHTML = '▶';
+playPauseBtn.classList.remove('playing');
+stopTapeAnimation();
+stopVisualizer();
+}
 });
 audio.addEventListener('error', (e) => {
-  console.error("✗ Error de audio:", e); stopVisualizer();
-  if (isPlaying) {
-    isPlaying = false; playPauseBtn.innerHTML = '▶'; playPauseBtn.classList.remove('playing');
-    stopTapeAnimation(); stopAllGlitches();
-    alert('Error crítico en el stream. Verifica tu conexión o intenta más tarde.');
-  }
+console.error("✗ Error de audio:", e);
+stopVisualizer();
+if (isPlaying) {
+isPlaying = false;
+playPauseBtn.innerHTML = '▶';
+playPauseBtn.classList.remove('playing');
+stopTapeAnimation();
+alert('Error crítico en el stream. Verifica tu conexión o intenta más tarde.');
+}
 });
 
 // Manejo para dispositivos móviles (iOS)
 document.body.addEventListener('touchstart', function initMobile() {
-  if (!audioContext && typeof window.AudioContext !== 'undefined') {
-    audioContext = new AudioContext(); audioContext.suspend();
-    console.log("✓ AudioContext inicializado para móvil");
-  }
-  document.body.removeEventListener('touchstart', initMobile);
+if (!audioContext && typeof window.AudioContext !== 'undefined') {
+audioContext = new AudioContext();
+audioContext.suspend();
+console.log("✓ AudioContext inicializado para móvil");
+}
+document.body.removeEventListener('touchstart', initMobile);
 }, { once: true });
 </script>
 </body>
