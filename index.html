@@ -693,17 +693,25 @@ align-items: center;
 gap: 1rem;
 width: 100%;
 /* ============================================ */
-/* EFECTO RESPIRACIÓN CYBERPUNK - EN EL CONTENEDOR */
+/* EFECTO RESPIRACIÓN CYBERPUNK - CONTENEDOR CIRCULAR */
 /* ============================================ */
+/* Dimensiones fijas para mantener forma circular */
+width: 433.5px !important;
+height: 433.5px !important;
+/* Forma circular perfecta */
+border-radius: 50%;
 /* Animación fluida e infinita que NO se reinicia al actualizar la imagen */
 animation: dj-breathing 3s ease-in-out infinite;
 /* Brillo dividido: morado izquierda, verde derecha */
 box-shadow: 
-  -10px 0 20px rgba(189, 0, 255, 0.5),
-  10px 0 20px rgba(0, 255, 65, 0.5),
-  0 0 25px rgba(139, 139, 139, 0.4);
-border-radius: 50%;
-padding: 3px; /* Espacio para el brillo exterior */
+  -15px 0 25px rgba(189, 0, 255, 0.6),
+  15px 0 25px rgba(0, 255, 65, 0.6),
+  0 0 30px rgba(139, 139, 139, 0.4);
+/* Centrar contenido */
+justify-content: center;
+padding: 0;
+margin: 0 auto;
+position: relative;
 }
 
 /* ============================================ */
@@ -713,16 +721,16 @@ padding: 3px; /* Espacio para el brillo exterior */
   0%, 100% { 
     transform: scale(1);
     box-shadow: 
-      -10px 0 20px rgba(189, 0, 255, 0.5),
-      10px 0 20px rgba(0, 255, 65, 0.5),
-      0 0 25px rgba(139, 139, 139, 0.4);
+      -15px 0 25px rgba(189, 0, 255, 0.6),
+      15px 0 25px rgba(0, 255, 65, 0.6),
+      0 0 30px rgba(139, 139, 139, 0.4);
   }
   50% { 
     transform: scale(1.03);
     box-shadow: 
-      -10px 0 35px rgba(189, 0, 255, 0.9),
-      10px 0 35px rgba(0, 255, 65, 0.9),
-      0 0 45px rgba(139, 139, 139, 0.6);
+      -15px 0 40px rgba(189, 0, 255, 1),
+      15px 0 40px rgba(0, 255, 65, 1),
+      0 0 50px rgba(139, 139, 139, 0.6);
   }
 }
 
@@ -732,13 +740,13 @@ padding: 3px; /* Espacio para el brillo exterior */
   border-radius: 50%;
   border: 3px solid #8b8b8b;
   object-fit: cover;
-  margin: 0 auto;
+  margin: 0;
   display: block;
   /* Sin animación aquí para evitar reinicios */
-  box-shadow: none; /* El brillo lo maneja el contenedor */
+  box-shadow: none;
   position: relative;
   z-index: 2;
-  background: #0f0f0f; /* Fondo por si la imagen tarda en cargar */
+  background: #0f0f0f;
 }
 
 #dj_profile .dj_name {
@@ -890,13 +898,15 @@ width: 5px;
 font-size: 1rem;
 }
 #dj_profile {
-  /* Mantener animación en responsive */
+  /* Contenedor circular en responsive */
+  width: 368.25px !important;
+  height: 368.25px !important;
+  border-radius: 50%;
   animation: dj-breathing 3s ease-in-out infinite;
   box-shadow: 
-    -8px 0 18px rgba(189, 0, 255, 0.5),
-    8px 0 18px rgba(0, 255, 65, 0.5),
-    0 0 22px rgba(139, 139, 139, 0.4);
-  padding: 2px;
+    -12px 0 22px rgba(189, 0, 255, 0.6),
+    12px 0 22px rgba(0, 255, 65, 0.6),
+    0 0 26px rgba(139, 139, 139, 0.4);
 }
 #dj_profile img {
 width: 362.25px !important;
@@ -987,13 +997,15 @@ max-width: 100%;
 padding: 10px;
 }
 #dj_profile {
-  /* Mantener animación en móvil */
+  /* Contenedor circular en móvil */
+  width: 247.5px !important;
+  height: 247.5px !important;
+  border-radius: 50%;
   animation: dj-breathing 3s ease-in-out infinite;
   box-shadow: 
-    -6px 0 14px rgba(189, 0, 255, 0.5),
-    6px 0 14px rgba(0, 255, 65, 0.5),
-    0 0 18px rgba(139, 139, 139, 0.4);
-  padding: 2px;
+    -10px 0 18px rgba(189, 0, 255, 0.6),
+    10px 0 18px rgba(0, 255, 65, 0.6),
+    0 0 22px rgba(139, 139, 139, 0.4);
 }
 #dj_profile img {
 width: 241.5px !important;
@@ -1077,13 +1089,15 @@ width: 4px;
 font-size: 0.9rem;
 }
 #dj_profile {
-  /* Mantener animación en pantallas muy pequeñas */
+  /* Contenedor circular en pantallas muy pequeñas */
+  width: 187.125px !important;
+  height: 187.125px !important;
+  border-radius: 50%;
   animation: dj-breathing 3s ease-in-out infinite;
   box-shadow: 
-    -5px 0 12px rgba(189, 0, 255, 0.5),
-    5px 0 12px rgba(0, 255, 65, 0.5),
-    0 0 15px rgba(139, 139, 139, 0.4);
-  padding: 1px;
+    -8px 0 15px rgba(189, 0, 255, 0.6),
+    8px 0 15px rgba(0, 255, 65, 0.6),
+    0 0 18px rgba(139, 139, 139, 0.4);
 }
 #dj_profile img {
 width: 181.125px !important;
