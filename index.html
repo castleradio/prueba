@@ -185,14 +185,15 @@ to { text-shadow: 0 0 12px rgba(189, 0, 255, 1), 0 0 25px rgba(0, 255, 65, 0.9),
 }
 .cassette-tapes {
 display: flex;
-justify-content: space-around;
+justify-content: space-between;
 align-items: center;
 flex-shrink: 0;
 position: relative;
 height: 150px;
 margin-top: 5px;
 width: 100%;
-overflow: visible;
+padding: 0 10px;
+gap: 10px;
 }
 .tape-reel {
 width: 92px;
@@ -678,27 +679,40 @@ width: 100%;
 max-width: 100%;
 height: auto;
 min-height: 368px;
-padding: 1.5rem;
+padding: 1.2rem;
 }
 .cassette-tapes {
 height: auto;
 min-height: 130px;
 margin-top: 3px;
-padding: 5px;
+padding: 0 5px;
+gap: 8px;
 }
 .tape-reel {
-width: 80px;
-height: 80px;
-min-width: 80px;
-min-height: 80px;
+width: 75px;
+height: 75px;
+min-width: 75px;
+min-height: 75px;
 }
 .tape-reel::before {
-width: 56px;
-height: 56px;
+width: 52px;
+height: 52px;
 }
+.tape-reel::after {
+width: 24px;
+height: 24px;
+}
+.tape-reel span {
+width: 6px;
+height: 20px;
+}
+.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(20px, -4px); }
+.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(20px, -4px); }
+.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(20px, -4px); }
+.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(20px, -4px); }
 .cassette-center {
-width: 160px;
-height: 110px;
+width: 150px;
+height: 105px;
 }
 .play-btn {
 width: 75px;
@@ -743,28 +757,40 @@ width: 100%;
 max-width: 100%;
 height: auto;
 min-height: 322px;
-padding: 1.2rem;
+padding: 1rem 0.8rem;
 }
 .cassette-tapes {
 height: auto;
 min-height: 110px;
 margin-top: 2px;
-padding: 3px;
+padding: 0 3px;
 gap: 5px;
 }
 .tape-reel {
-width: 70px;
-height: 70px;
-min-width: 70px;
-min-height: 70px;
+width: 68px;
+height: 68px;
+min-width: 68px;
+min-height: 68px;
 }
 .tape-reel::before {
-width: 48px;
-height: 48px;
+width: 46px;
+height: 46px;
 }
+.tape-reel::after {
+width: 22px;
+height: 22px;
+}
+.tape-reel span {
+width: 5px;
+height: 18px;
+}
+.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(18px, -3px); }
+.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(18px, -3px); }
+.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(18px, -3px); }
+.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(18px, -3px); }
 .cassette-center {
-width: 140px;
-height: 100px;
+width: 135px;
+height: 95px;
 }
 .play-btn {
 width: 65px;
@@ -813,13 +839,14 @@ font-size: 0.95rem;
 .cassette-player {
 height: auto;
 min-height: 287.5px;
-padding: 1rem;
+padding: 0.8rem 0.6rem;
 }
 .cassette-tapes {
 height: auto;
 min-height: 95px;
 margin-top: 1px;
-padding: 2px;
+padding: 0 2px;
+gap: 3px;
 }
 .tape-reel {
 width: 60px;
@@ -831,6 +858,18 @@ min-height: 60px;
 width: 40px;
 height: 40px;
 }
+.tape-reel::after {
+width: 18px;
+height: 18px;
+}
+.tape-reel span {
+width: 4px;
+height: 15px;
+}
+.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(15px, -2px); }
+.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(15px, -2px); }
+.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(15px, -2px); }
+.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(15px, -2px); }
 .cassette-center {
 width: 115px;
 height: 86px;
