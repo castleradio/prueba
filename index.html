@@ -692,10 +692,22 @@ flex-direction: column;
 align-items: center;
 gap: 1rem;
 width: 100%;
+/* ============================================ */
+/* EFECTO RESPIRACIÓN CYBERPUNK - EN EL CONTENEDOR */
+/* ============================================ */
+/* Animación fluida e infinita que NO se reinicia al actualizar la imagen */
+animation: dj-breathing 3s ease-in-out infinite;
+/* Brillo dividido: morado izquierda, verde derecha */
+box-shadow: 
+  -10px 0 20px rgba(189, 0, 255, 0.5),
+  10px 0 20px rgba(0, 255, 65, 0.5),
+  0 0 25px rgba(139, 139, 139, 0.4);
+border-radius: 50%;
+padding: 3px; /* Espacio para el brillo exterior */
 }
 
 /* ============================================ */
-/* EFECTO RESPIRACIÓN CYBERPUNK PARA DJ */
+/* KEYFRAMES DE RESPIRACIÓN */
 /* ============================================ */
 @keyframes dj-breathing {
   0%, 100% { 
@@ -722,12 +734,11 @@ width: 100%;
   object-fit: cover;
   margin: 0 auto;
   display: block;
-  /* Efecto de respiración con brillo dividido: morado izquierda, verde derecha */
-  animation: dj-breathing 3s ease-in-out infinite;
-  box-shadow: 
-    -10px 0 20px rgba(189, 0, 255, 0.5),
-    10px 0 20px rgba(0, 255, 65, 0.5),
-    0 0 25px rgba(139, 139, 139, 0.4);
+  /* Sin animación aquí para evitar reinicios */
+  box-shadow: none; /* El brillo lo maneja el contenedor */
+  position: relative;
+  z-index: 2;
+  background: #0f0f0f; /* Fondo por si la imagen tarda en cargar */
 }
 
 #dj_profile .dj_name {
@@ -878,15 +889,18 @@ width: 5px;
 .volume-label {
 font-size: 1rem;
 }
+#dj_profile {
+  /* Mantener animación en responsive */
+  animation: dj-breathing 3s ease-in-out infinite;
+  box-shadow: 
+    -8px 0 18px rgba(189, 0, 255, 0.5),
+    8px 0 18px rgba(0, 255, 65, 0.5),
+    0 0 22px rgba(139, 139, 139, 0.4);
+  padding: 2px;
+}
 #dj_profile img {
 width: 362.25px !important;
 height: 362.25px !important;
-/* Mantener efecto de respiración en responsive */
-animation: dj-breathing 3s ease-in-out infinite;
-box-shadow: 
-  -8px 0 18px rgba(189, 0, 255, 0.5),
-  8px 0 18px rgba(0, 255, 65, 0.5),
-  0 0 22px rgba(139, 139, 139, 0.4);
 }
 .social-links {
 gap: 1.5rem;
@@ -972,15 +986,18 @@ font-size: 0.95rem;
 max-width: 100%;
 padding: 10px;
 }
+#dj_profile {
+  /* Mantener animación en móvil */
+  animation: dj-breathing 3s ease-in-out infinite;
+  box-shadow: 
+    -6px 0 14px rgba(189, 0, 255, 0.5),
+    6px 0 14px rgba(0, 255, 65, 0.5),
+    0 0 18px rgba(139, 139, 139, 0.4);
+  padding: 2px;
+}
 #dj_profile img {
 width: 241.5px !important;
 height: 241.5px !important;
-/* Mantener efecto de respiración en móvil */
-animation: dj-breathing 3s ease-in-out infinite;
-box-shadow: 
-  -6px 0 14px rgba(189, 0, 255, 0.5),
-  6px 0 14px rgba(0, 255, 65, 0.5),
-  0 0 18px rgba(139, 139, 139, 0.4);
 }
 .social-links {
 gap: 1rem;
@@ -1059,15 +1076,18 @@ width: 4px;
 .volume-label {
 font-size: 0.9rem;
 }
+#dj_profile {
+  /* Mantener animación en pantallas muy pequeñas */
+  animation: dj-breathing 3s ease-in-out infinite;
+  box-shadow: 
+    -5px 0 12px rgba(189, 0, 255, 0.5),
+    5px 0 12px rgba(0, 255, 65, 0.5),
+    0 0 15px rgba(139, 139, 139, 0.4);
+  padding: 1px;
+}
 #dj_profile img {
 width: 181.125px !important;
 height: 181.125px !important;
-/* Mantener efecto de respiración en pantallas muy pequeñas */
-animation: dj-breathing 3s ease-in-out infinite;
-box-shadow: 
-  -5px 0 12px rgba(189, 0, 255, 0.5),
-  5px 0 12px rgba(0, 255, 65, 0.5),
-  0 0 15px rgba(139, 139, 139, 0.4);
 }
 #sonic_dj.cyber-glitch {
   font-size: 0.95rem;
@@ -1077,7 +1097,7 @@ box-shadow:
 </head>
 <body>
 <!-- Script del widget -->
-<script id='sonic_js' data-port='8008' src='https://sonic.sistemahost.es/cp/widgets.js?r=122    '></script>
+<script id='sonic_js' data-port='8008' src='https://sonic.sistemahost.es/cp/widgets.js?r=122'></script>
 <header>
 <h1>Castle Radio</h1>
 </header>
@@ -1163,7 +1183,7 @@ const albumArtBg = document.getElementById('album-art-bg');
 const volumeSlider = document.getElementById('volume');
 const equalizer = document.getElementById('equalizer');
 const bars = document.querySelectorAll('.bar');
-const streamUrl = 'https://sonic.sistemahost.es/8008/stream    ';
+const streamUrl = 'https://sonic.sistemahost.es/8008/stream';
 const sonicTitle = document.getElementById('sonic_title');
 const sonicDj = document.getElementById('sonic_dj');
 
@@ -1432,7 +1452,7 @@ const script = document.getElementById('sonic_js');
 const newScript = document.createElement('script');
 newScript.id = 'sonic_js';
 newScript.setAttribute('data-port', '8008');
-newScript.src = `https://sonic.sistemahost.es/cp/widgets.js?r=622=  ${new Date().getTime()}`;
+newScript.src = `https://sonic.sistemahost.es/cp/widgets.js?r=622=${new Date().getTime()}`;
 script.parentNode.replaceChild(newScript, script);
 updateAlbumArtBackground();
 }, 10000);
