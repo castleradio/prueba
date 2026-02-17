@@ -107,7 +107,7 @@ padding-bottom: 0.5rem;
 color: #bd00ff;
 padding-bottom: 0.5rem;
 }
-/* Cassette Player - 15% más grande */
+/* Cassette Player */
 .cassette-player {
 width: 95%;
 max-width: 575px;
@@ -117,7 +117,7 @@ border: 3px solid #8b8b8b;
 border-radius: 20px;
 padding: 2rem;
 position: relative;
-overflow: visible;
+overflow: hidden;
 display: flex;
 flex-direction: column;
 }
@@ -152,7 +152,7 @@ display: flex;
 flex-direction: column;
 justify-content: space-between;
 }
-/* Song Info - DENTRO DEL CASSETTE EN LA PARTE SUPERIOR - MÁS GRANDE */
+/* Song Info */
 .song-info {
 width: 100%;
 text-align: center;
@@ -206,7 +206,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 position: relative;
-overflow: visible;
+overflow: hidden;
 z-index: 3;
 box-shadow:
 inset 0 0 10px rgba(0, 0, 0, 0.8),
@@ -366,9 +366,9 @@ z-index: 3;
 box-shadow:
 inset 0 0 15px rgba(0, 0, 0, 0.7),
 0 0 8px rgba(139, 139, 139, 0.4);
-overflow: visible;
+overflow: hidden;
 }
-/* Ranura de la cinta - ahora entre los dos compartimentos */
+/* Ranura de la cinta */
 .cassette-center::before {
 content: '';
 position: absolute;
@@ -395,7 +395,7 @@ position: relative;
 z-index: 6;
 padding: 5px 0;
 }
-/* Botón de Play estilo radio retro con toque cyberpunk */
+/* Botón de Play */
 .play-btn {
 width: 90px;
 height: 35px;
@@ -485,7 +485,7 @@ position: relative;
 z-index: 4;
 padding-bottom: 8px;
 }
-/* Ecualizador REAL - SOLO VERDES Y MORADOS */
+/* Ecualizador */
 .equalizer-container {
 width: 90%;
 height: 30px;
@@ -526,16 +526,13 @@ opacity: 0.7;
 .volume-control {
 width: 100%;
 max-width: 402.5px;
-margin: 10px auto 0 auto;
+margin: 15px auto 0 auto;
 flex-shrink: 0;
 z-index: 3;
 background: rgba(20, 20, 20, 0.85);
 padding: 12px;
 border-radius: 10px;
 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-display: block;
-visibility: visible;
-opacity: 1;
 }
 .volume-label {
 display: flex;
@@ -677,12 +674,11 @@ font-size: 1.2rem;
 width: 95%;
 max-width: 100%;
 height: auto;
-min-height: 420px;
+min-height: 450px;
 padding: 1.5rem;
-overflow: visible;
 }
 .cassette-tapes {
-height: 140px;
+height: 150px;
 margin-top: 5px;
 }
 .tape-reel {
@@ -755,46 +751,45 @@ font-size: 1.05rem;
 width: 95%;
 max-width: 100%;
 height: auto;
-min-height: 380px;
+min-height: 420px;
 padding: 1.2rem;
-overflow: visible;
 }
 .cassette-tapes {
-height: 120px;
+height: 135px;
 margin-top: 3px;
 }
 .tape-reel {
-width: 75px;
-height: 75px;
+width: 78px;
+height: 78px;
 }
 .tape-reel::before {
-width: 53px;
-height: 53px;
+width: 55px;
+height: 55px;
 }
 .tape-reel::after {
-width: 24px;
-height: 24px;
+width: 25px;
+height: 25px;
 }
 .tape-reel span {
 width: 6px;
-height: 20px;
+height: 21px;
 }
-.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(20px, -4px); }
-.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(20px, -4px); }
-.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(20px, -4px); }
-.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(20px, -4px); }
+.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(21px, -4px); }
+.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(21px, -4px); }
+.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(21px, -4px); }
+.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(21px, -4px); }
 .cassette-center {
-width: 150px;
-height: 103px;
+width: 156px;
+height: 107px;
 }
 .play-btn {
-width: 65px;
-height: 26px;
-font-size: 1.05rem;
+width: 68px;
+height: 27px;
+font-size: 1.1rem;
 border-width: 2px;
 }
 .equalizer-container {
-height: 22px;
+height: 23px;
 }
 .bar {
 width: 2.5px;
@@ -806,9 +801,6 @@ font-size: 1.035rem;
 max-width: 100%;
 padding: 10px;
 margin-top: 12px;
-display: block !important;
-visibility: visible !important;
-opacity: 1 !important;
 }
 .volume-slider {
 height: 12px;
@@ -844,46 +836,45 @@ font-size: 0.95rem;
 }
 .cassette-player {
 height: auto;
-min-height: 340px;
+min-height: 380px;
 padding: 1rem;
-overflow: visible;
 }
 .cassette-tapes {
-height: 105px;
+height: 120px;
 margin-top: 2px;
 }
 .tape-reel {
-width: 65px;
-height: 65px;
+width: 70px;
+height: 70px;
 }
 .tape-reel::before {
-width: 46px;
-height: 46px;
+width: 49px;
+height: 49px;
 }
 .tape-reel::after {
-width: 21px;
-height: 21px;
+width: 22px;
+height: 22px;
 }
 .tape-reel span {
 width: 5px;
-height: 17px;
+height: 18px;
 }
-.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(17px, -3px); }
-.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(17px, -3px); }
-.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(17px, -3px); }
-.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(17px, -3px); }
+.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(18px, -3px); }
+.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(18px, -3px); }
+.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(18px, -3px); }
+.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(18px, -3px); }
 .cassette-center {
-width: 128px;
-height: 88px;
+width: 140px;
+height: 96px;
 }
 .play-btn {
-width: 55px;
-height: 22px;
-font-size: 0.95rem;
+width: 60px;
+height: 24px;
+font-size: 1rem;
 border-width: 1.5px;
 }
 .equalizer-container {
-height: 18px;
+height: 20px;
 }
 .bar {
 width: 2px;
@@ -900,30 +891,22 @@ height: 150px !important;
 /* Corrección específica para dispositivos Realme y Redmi */
 @media (max-width: 414px) and (min-width: 360px) {
 .cassette-player {
-height: auto;
-min-height: 390px;
-overflow: visible;
+min-height: 430px;
 }
 .cassette-tapes {
-height: 125px;
+height: 140px;
 }
 .tape-reel {
-width: 78px !important;
-height: 78px !important;
+width: 80px !important;
+height: 80px !important;
 }
 .tape-reel::before {
-width: 55px !important;
-height: 55px !important;
+width: 56px !important;
+height: 56px !important;
 }
 .tape-reel::after {
-width: 25px !important;
-height: 25px !important;
-}
-.volume-control {
-display: block !important;
-visibility: visible !important;
-opacity: 1 !important;
-margin-top: 15px;
+width: 26px !important;
+height: 26px !important;
 }
 }
 </style>
@@ -941,7 +924,7 @@ margin-top: 15px;
 <div class="cassette-player">
 <div class="album-art-bg" id="album-art-bg"></div>
 <div class="cassette-content">
-<!-- Título de canción DENTRO DEL CASSETTE, EN LA PARTE SUPERIOR - MÁS GRANDE -->
+<!-- Título de canción DENTRO DEL CASSETTE, EN LA PARTE SUPERIOR -->
 <div class="song-info">
 <div id='sonic_title'>Cargando canción...</div>
 </div>
@@ -950,7 +933,7 @@ margin-top: 15px;
 <span></span><span></span><span></span><span></span>
 </div>
 <div class="cassette-center">
-<!-- Compartimento superior: Botón de Play estilo retro -->
+<!-- Compartimento superior: Botón de Play -->
 <div class="button-compartment">
 <button class="play-btn" id="play-pause-btn">▶</button>
 </div>
@@ -1125,7 +1108,7 @@ bars[i].style.background = 'linear-gradient(to top, #008822, #7a00cc)';
 }
 animationId = requestAnimationFrame(visualize);
 }
-// Alternar reproducción - CORREGIDO PARA AUTOPLAY
+// Alternar reproducción
 function togglePlayPause() {
 if (!isPlaying) {
 // 1. Configurar URL del stream
