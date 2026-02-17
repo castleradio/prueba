@@ -111,13 +111,13 @@ padding-bottom: 0.5rem;
 .cassette-player {
 width: 95%;
 max-width: 575px;
-height: 403px;
+height: 420px;
 background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
 border: 3px solid #8b8b8b;
 border-radius: 20px;
-padding: 2rem;
+padding: 1.5rem;
 position: relative;
-overflow: hidden;
+overflow: visible;
 display: flex;
 flex-direction: column;
 }
@@ -130,6 +130,7 @@ right: 0;
 height: 8px;
 background: linear-gradient(90deg, #00ff41, #bd00ff, #00ff41);
 opacity: 0.8;
+border-radius: 20px 20px 0 0;
 }
 /* Fondo difuminado de la portada */
 .album-art-bg {
@@ -143,6 +144,7 @@ background-position: center;
 opacity: 0.4;
 filter: blur(3px);
 z-index: 1;
+border-radius: 20px;
 }
 .cassette-content {
 position: relative;
@@ -150,13 +152,14 @@ z-index: 2;
 height: 100%;
 display: flex;
 flex-direction: column;
-justify-content: space-between;
+justify-content: flex-start;
+align-items: center;
 }
 /* Song Info */
 .song-info {
 width: 100%;
 text-align: center;
-margin-bottom: 10px;
+margin-bottom: 8px;
 color: #00ff41;
 font-family: 'Orbitron', sans-serif;
 font-weight: 900;
@@ -185,16 +188,18 @@ to { text-shadow: 0 0 12px rgba(189, 0, 255, 1), 0 0 25px rgba(0, 255, 65, 0.9),
 }
 .cassette-tapes {
 display: flex;
-justify-content: space-around;
+justify-content: space-between;
 align-items: center;
 flex-shrink: 0;
 position: relative;
-height: 150px;
-margin-top: 5px;
+height: 160px;
+width: 100%;
+padding: 0 10px;
+margin: 5px 0;
 }
 .tape-reel {
-width: 92px;
-height: 92px;
+width: 100px;
+height: 100px;
 border: 4px solid #8b8b8b;
 border-radius: 50%;
 background: radial-gradient(circle at center,
@@ -206,7 +211,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 position: relative;
-overflow: hidden;
+overflow: visible;
 z-index: 3;
 box-shadow:
 inset 0 0 10px rgba(0, 0, 0, 0.8),
@@ -222,8 +227,8 @@ flex-shrink: 0;
 .tape-reel::before {
 content: '';
 position: absolute;
-width: 65px;
-height: 65px;
+width: 70px;
+height: 70px;
 border: 3px solid #8b8b8b;
 border-radius: 50%;
 background: radial-gradient(circle at center,
@@ -237,8 +242,8 @@ inset 0 0 8px rgba(0, 0, 0, 0.7),
 .tape-reel::after {
 content: '';
 position: absolute;
-width: 30px;
-height: 30px;
+width: 32px;
+height: 32px;
 border: 2px solid #8b8b8b;
 border-radius: 50%;
 background: #555;
@@ -250,15 +255,15 @@ z-index: 2;
 .tape-reel span {
 position: absolute;
 width: 8px;
-height: 25px;
+height: 28px;
 background: #8b8b8b;
 border-radius: 4px;
 z-index: 1;
 }
-.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(25px, -5px); }
-.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(25px, -5px); }
-.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(25px, -5px); }
-.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(25px, -5px); }
+.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(28px, -5px); }
+.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(28px, -5px); }
+.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(28px, -5px); }
+.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(28px, -5px); }
 /* CARRETE IZQUIERDO - MORADO CYBERPUNK */
 #tape-left {
 border-color: #bd00ff;
@@ -351,8 +356,8 @@ animation: fastSpin 4s linear infinite;
 100% { transform: rotate(720deg); }
 }
 .cassette-center {
-width: 184px;
-height: 126.5px;
+width: 190px;
+height: 130px;
 background: #1a1a1a;
 border: 3px solid #8b8b8b;
 border-radius: 8px;
@@ -366,7 +371,7 @@ z-index: 3;
 box-shadow:
 inset 0 0 15px rgba(0, 0, 0, 0.7),
 0 0 8px rgba(139, 139, 139, 0.4);
-overflow: hidden;
+overflow: visible;
 }
 /* Ranura de la cinta */
 .cassette-center::before {
@@ -522,9 +527,9 @@ pointer-events: none;
 z-index: 6;
 opacity: 0.7;
 }
-/* Volume Control */
+/* Volume Control - FUERA DEL CASSETTE */
 .volume-control {
-width: 100%;
+width: 95%;
 max-width: 402.5px;
 margin: 15px auto 0 auto;
 flex-shrink: 0;
@@ -674,36 +679,38 @@ font-size: 1.2rem;
 width: 95%;
 max-width: 100%;
 height: auto;
-min-height: 450px;
+min-height: 480px;
 padding: 1.5rem;
+overflow: visible;
 }
 .cassette-tapes {
-height: 150px;
-margin-top: 5px;
+height: 170px;
+margin: 10px 0;
+padding: 0 15px;
 }
 .tape-reel {
-width: 85px;
-height: 85px;
+width: 110px;
+height: 110px;
 }
 .tape-reel::before {
-width: 60px;
-height: 60px;
+width: 77px;
+height: 77px;
 }
 .tape-reel::after {
-width: 28px;
-height: 28px;
+width: 35px;
+height: 35px;
 }
 .tape-reel span {
-width: 7px;
-height: 23px;
+width: 9px;
+height: 30px;
 }
-.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(23px, -4px); }
-.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(23px, -4px); }
-.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(23px, -4px); }
-.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(23px, -4px); }
+.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(30px, -5px); }
+.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(30px, -5px); }
+.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(30px, -5px); }
+.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(30px, -5px); }
 .cassette-center {
-width: 170px;
-height: 117px;
+width: 175px;
+height: 120px;
 }
 .play-btn {
 width: 75px;
@@ -751,36 +758,38 @@ font-size: 1.05rem;
 width: 95%;
 max-width: 100%;
 height: auto;
-min-height: 420px;
+min-height: 450px;
 padding: 1.2rem;
+overflow: visible;
 }
 .cassette-tapes {
-height: 135px;
-margin-top: 3px;
+height: 155px;
+margin: 8px 0;
+padding: 0 12px;
 }
 .tape-reel {
-width: 78px;
-height: 78px;
+width: 95px;
+height: 95px;
 }
 .tape-reel::before {
-width: 55px;
-height: 55px;
+width: 67px;
+height: 67px;
 }
 .tape-reel::after {
-width: 25px;
-height: 25px;
+width: 31px;
+height: 31px;
 }
 .tape-reel span {
-width: 6px;
-height: 21px;
+width: 8px;
+height: 26px;
 }
-.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(21px, -4px); }
-.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(21px, -4px); }
-.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(21px, -4px); }
-.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(21px, -4px); }
+.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(26px, -5px); }
+.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(26px, -5px); }
+.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(26px, -5px); }
+.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(26px, -5px); }
 .cassette-center {
-width: 156px;
-height: 107px;
+width: 160px;
+height: 110px;
 }
 .play-btn {
 width: 68px;
@@ -836,36 +845,38 @@ font-size: 0.95rem;
 }
 .cassette-player {
 height: auto;
-min-height: 380px;
+min-height: 410px;
 padding: 1rem;
+overflow: visible;
 }
 .cassette-tapes {
-height: 120px;
-margin-top: 2px;
+height: 140px;
+margin: 6px 0;
+padding: 0 10px;
 }
 .tape-reel {
-width: 70px;
-height: 70px;
+width: 85px;
+height: 85px;
 }
 .tape-reel::before {
-width: 49px;
-height: 49px;
+width: 60px;
+height: 60px;
 }
 .tape-reel::after {
-width: 22px;
-height: 22px;
+width: 28px;
+height: 28px;
 }
 .tape-reel span {
-width: 5px;
-height: 18px;
+width: 7px;
+height: 23px;
 }
-.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(18px, -3px); }
-.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(18px, -3px); }
-.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(18px, -3px); }
-.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(18px, -3px); }
+.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(23px, -4px); }
+.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(23px, -4px); }
+.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(23px, -4px); }
+.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(23px, -4px); }
 .cassette-center {
-width: 140px;
-height: 96px;
+width: 145px;
+height: 100px;
 }
 .play-btn {
 width: 60px;
@@ -888,25 +899,45 @@ width: 150px !important;
 height: 150px !important;
 }
 }
-/* Corrección específica para dispositivos Realme y Redmi */
+/* Corrección ESPECÍFICA para Realme y Redmi (360px-414px) */
 @media (max-width: 414px) and (min-width: 360px) {
 .cassette-player {
-min-height: 430px;
+min-height: 470px !important;
+overflow: visible !important;
 }
 .cassette-tapes {
-height: 140px;
+height: 165px !important;
+margin: 10px 0 !important;
 }
 .tape-reel {
-width: 80px !important;
-height: 80px !important;
+width: 105px !important;
+height: 105px !important;
 }
 .tape-reel::before {
-width: 56px !important;
-height: 56px !important;
+width: 74px !important;
+height: 74px !important;
 }
 .tape-reel::after {
-width: 26px !important;
-height: 26px !important;
+width: 34px !important;
+height: 34px !important;
+}
+.tape-reel span {
+width: 9px !important;
+height: 28px !important;
+}
+.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(28px, -5px) !important; }
+.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(28px, -5px) !important; }
+.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(28px, -5px) !important; }
+.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(28px, -5px) !important; }
+.cassette-center {
+width: 170px !important;
+height: 115px !important;
+}
+.volume-control {
+margin-top: 15px !important;
+display: block !important;
+visibility: visible !important;
+opacity: 1 !important;
 }
 }
 </style>
@@ -924,7 +955,7 @@ height: 26px !important;
 <div class="cassette-player">
 <div class="album-art-bg" id="album-art-bg"></div>
 <div class="cassette-content">
-<!-- Título de canción DENTRO DEL CASSETTE, EN LA PARTE SUPERIOR -->
+<!-- Título de canción -->
 <div class="song-info">
 <div id='sonic_title'>Cargando canción...</div>
 </div>
@@ -959,13 +990,13 @@ height: 26px !important;
 <span></span><span></span><span></span><span></span>
 </div>
 </div>
+</div>
+<!-- Control de volumen FUERA del cassette -->
 <div class="volume-control">
 <div class="volume-label">
 <span>VOLUMEN:</span>
 </div>
 <input type="range" id="volume" class="volume-slider" min="0" max="1" step="0.1" value="1">
-</div>
-</div>
 </div>
 <div id='sonic_art_full' style="display:none;"></div>
 </section>
