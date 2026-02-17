@@ -107,15 +107,16 @@ padding-bottom: 0.5rem;
 color: #bd00ff;
 padding-bottom: 0.5rem;
 }
-/* Cassette Player - 15% más grande */
+/* Cassette Player - Altura adaptable */
 .cassette-player {
 width: 95%;
 max-width: 575px;
-height: 403px;
+height: auto;
+min-height: 340px;
 background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
 border: 3px solid #8b8b8b;
 border-radius: 20px;
-padding: 2rem;
+padding: 1.5rem;
 position: relative;
 overflow: hidden;
 display: flex;
@@ -151,12 +152,13 @@ height: 100%;
 display: flex;
 flex-direction: column;
 justify-content: space-between;
+gap: 15px;
 }
 /* Song Info - DENTRO DEL CASSETTE EN LA PARTE SUPERIOR - MÁS GRANDE */
 .song-info {
 width: 100%;
 text-align: center;
-margin-bottom: 10px;
+margin-bottom: 5px;
 color: #00ff41;
 font-family: 'Orbitron', sans-serif;
 font-weight: 900;
@@ -189,15 +191,15 @@ justify-content: center;
 align-items: center;
 flex-shrink: 0;
 position: relative;
-height: 150px;
+height: 140px;
 margin-top: 5px;
 width: 100%;
-padding: 0 15px;
-gap: 15px;
+padding: 0 10px;
+gap: 12px;
 }
 .tape-reel {
-width: 92px;
-height: 92px;
+width: 85px;
+height: 85px;
 border: 4px solid #8b8b8b;
 border-radius: 50%;
 background: radial-gradient(circle at center,
@@ -226,8 +228,8 @@ aspect-ratio: 1 / 1;
 .tape-reel::before {
 content: '';
 position: absolute;
-width: 65px;
-height: 65px;
+width: 60px;
+height: 60px;
 border: 3px solid #8b8b8b;
 border-radius: 50%;
 background: radial-gradient(circle at center,
@@ -241,8 +243,8 @@ inset 0 0 8px rgba(0, 0, 0, 0.7),
 .tape-reel::after {
 content: '';
 position: absolute;
-width: 30px;
-height: 30px;
+width: 28px;
+height: 28px;
 border: 2px solid #8b8b8b;
 border-radius: 50%;
 background: #555;
@@ -259,10 +261,10 @@ background: #8b8b8b;
 border-radius: 4px;
 z-index: 1;
 }
-.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(25px, -5px); }
-.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(25px, -5px); }
-.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(25px, -5px); }
-.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(25px, -5px); }
+.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(23px, -5px); }
+.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(23px, -5px); }
+.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(23px, -5px); }
+.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(23px, -5px); }
 /* CARRETE IZQUIERDO - MORADO CYBERPUNK */
 #tape-left {
 border-color: #bd00ff;
@@ -355,8 +357,8 @@ animation: fastSpin 4s linear infinite;
 100% { transform: rotate(720deg); }
 }
 .cassette-center {
-width: 184px;
-height: 126.5px;
+width: 170px;
+height: 118px;
 background: #1a1a1a;
 border: 3px solid #8b8b8b;
 border-radius: 8px;
@@ -401,8 +403,8 @@ padding: 5px 0;
 }
 /* Botón de Play estilo radio retro con toque cyberpunk */
 .play-btn {
-width: 90px;
-height: 35px;
+width: 85px;
+height: 33px;
 background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
 border: 3px solid #00ff41;
 border-radius: 6px;
@@ -414,7 +416,7 @@ justify-content: center;
 align-items: center;
 font-family: 'Orbitron', sans-serif;
 font-weight: 900;
-font-size: 1.4rem;
+font-size: 1.3rem;
 color: #00ff41;
 text-shadow: 0 0 8px rgba(0, 255, 65, 0.8);
 box-shadow:
@@ -492,7 +494,7 @@ padding-bottom: 8px;
 /* Ecualizador REAL - SOLO VERDES Y MORADOS */
 .equalizer-container {
 width: 90%;
-height: 30px;
+height: 28px;
 display: flex;
 justify-content: center;
 align-items: flex-end;
@@ -547,7 +549,7 @@ margin-bottom: 8px;
 color: #00ff41;
 font-family: 'Orbitron', sans-serif;
 font-weight: 900;
-font-size: 1.15rem;
+font-size: 1.4rem; /* IGUAL AL TÍTULO DE LA CANCIÓN */
 text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
 }
 .volume-slider {
@@ -669,7 +671,7 @@ padding: 1rem;
 }
 .song-info {
 font-size: 1.3rem;
-margin-bottom: 8px;
+margin-bottom: 5px;
 min-height: 28px;
 }
 #sonic_title {
@@ -679,57 +681,60 @@ font-size: 1.2rem;
 width: 100%;
 max-width: 100%;
 height: auto;
-min-height: 368px;
+min-height: 310px;
 padding: 1.2rem;
 }
 .cassette-tapes {
 height: auto;
-min-height: 130px;
+min-height: 120px;
 margin-top: 3px;
-padding: 0 10px;
-gap: 12px;
+padding: 0 8px;
+gap: 10px;
 }
 .tape-reel {
-width: 75px;
-height: 75px;
-min-width: 75px;
-min-height: 75px;
+width: 72px;
+height: 72px;
+min-width: 72px;
+min-height: 72px;
 }
 .tape-reel::before {
-width: 52px;
-height: 52px;
+width: 50px;
+height: 50px;
 }
 .tape-reel::after {
-width: 24px;
-height: 24px;
+width: 23px;
+height: 23px;
 }
 .tape-reel span {
 width: 6px;
 height: 20px;
 }
-.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(20px, -4px); }
-.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(20px, -4px); }
-.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(20px, -4px); }
-.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(20px, -4px); }
+.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(19px, -4px); }
+.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(19px, -4px); }
+.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(19px, -4px); }
+.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(19px, -4px); }
 .cassette-center {
-width: 150px;
-height: 105px;
+width: 145px;
+height: 100px;
 }
 .play-btn {
-width: 75px;
-height: 30px;
-font-size: 1.2rem;
+width: 70px;
+height: 28px;
+font-size: 1.15rem;
 border-width: 2.5px;
 }
 .equalizer-container {
-height: 25px;
+height: 23px;
 }
 .bar {
 width: 3px;
 }
+.volume-label {
+font-size: 1.2rem;
+}
 #dj_profile img {
-width: 300px !important;
-height: 300px !important;
+width: 345px !important; /* 300px + 15% = 345px */
+height: 345px !important;
 }
 .social-links {
 gap: 1.5rem;
@@ -747,7 +752,7 @@ padding: 0.8rem;
 }
 .song-info {
 font-size: 1.15rem;
-margin-bottom: 6px;
+margin-bottom: 5px;
 min-height: 25px;
 }
 #sonic_title {
@@ -757,64 +762,64 @@ font-size: 1.05rem;
 width: 100%;
 max-width: 100%;
 height: auto;
-min-height: 322px;
+min-height: 285px;
 padding: 1rem 0.8rem;
 }
 .cassette-tapes {
 height: auto;
-min-height: 110px;
+min-height: 105px;
 margin-top: 2px;
-padding: 0 8px;
-gap: 10px;
+padding: 0 5px;
+gap: 8px;
 }
 .tape-reel {
-width: 68px;
-height: 68px;
-min-width: 68px;
-min-height: 68px;
+width: 65px;
+height: 65px;
+min-width: 65px;
+min-height: 65px;
 }
 .tape-reel::before {
-width: 46px;
-height: 46px;
+width: 44px;
+height: 44px;
 }
 .tape-reel::after {
-width: 22px;
-height: 22px;
+width: 20px;
+height: 20px;
 }
 .tape-reel span {
 width: 5px;
 height: 18px;
 }
-.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(18px, -3px); }
-.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(18px, -3px); }
-.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(18px, -3px); }
-.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(18px, -3px); }
+.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(17px, -3px); }
+.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(17px, -3px); }
+.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(17px, -3px); }
+.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(17px, -3px); }
 .cassette-center {
-width: 135px;
-height: 95px;
+width: 130px;
+height: 90px;
 }
 .play-btn {
-width: 65px;
-height: 26px;
-font-size: 1.05rem;
+width: 62px;
+height: 25px;
+font-size: 1rem;
 border-width: 2px;
 }
 .equalizer-container {
-height: 22px;
+height: 20px;
 }
 .bar {
 width: 2.5px;
 }
 .volume-label {
-font-size: 1.035rem;
+font-size: 1.05rem;
 }
 .volume-control {
 max-width: 100%;
 padding: 10px;
 }
 #dj_profile img {
-width: 200px !important;
-height: 200px !important;
+width: 230px !important; /* 200px + 15% = 230px */
+height: 230px !important;
 }
 .social-links {
 gap: 1rem;
@@ -839,29 +844,29 @@ font-size: 0.95rem;
 }
 .cassette-player {
 height: auto;
-min-height: 287.5px;
+min-height: 260px;
 padding: 0.8rem 0.6rem;
 }
 .cassette-tapes {
 height: auto;
-min-height: 95px;
+min-height: 90px;
 margin-top: 1px;
-padding: 0 5px;
-gap: 8px;
+padding: 0 3px;
+gap: 6px;
 }
 .tape-reel {
-width: 60px;
-height: 60px;
-min-width: 60px;
-min-height: 60px;
+width: 58px;
+height: 58px;
+min-width: 58px;
+min-height: 58px;
 }
 .tape-reel::before {
-width: 40px;
-height: 40px;
+width: 38px;
+height: 38px;
 }
 .tape-reel::after {
-width: 18px;
-height: 18px;
+width: 17px;
+height: 17px;
 }
 .tape-reel span {
 width: 4px;
@@ -872,24 +877,27 @@ height: 15px;
 .tape-reel span:nth-child(3) { transform: rotate(225deg) translate(15px, -2px); }
 .tape-reel span:nth-child(4) { transform: rotate(315deg) translate(15px, -2px); }
 .cassette-center {
-width: 115px;
-height: 86px;
+width: 110px;
+height: 80px;
 }
 .play-btn {
-width: 55px;
-height: 22px;
-font-size: 0.95rem;
+width: 52px;
+height: 21px;
+font-size: 0.9rem;
 border-width: 1.5px;
 }
 .equalizer-container {
-height: 18px;
+height: 17px;
 }
 .bar {
 width: 2px;
 }
+.volume-label {
+font-size: 0.95rem;
+}
 #dj_profile img {
-width: 150px !important;
-height: 150px !important;
+width: 172.5px !important; /* 150px + 15% = 172.5px */
+height: 172.5px !important;
 }
 }
 </style>
@@ -1071,20 +1079,20 @@ count++;
 }
 const avg = count > 0 ? sum / count : 0;
 let height = Math.sqrt(avg) * 2.0;
-height = Math.min(height, 30);
+height = Math.min(height, 28);
 height = Math.max(height, 2);
 bars[i].style.height = `${height}px`;
 // Efecto de brillo según intensidad
-const glowFactor = Math.min(height / 30, 1);
+const glowFactor = Math.min(height / 28, 1);
 bars[i].style.boxShadow = `
 0 0 ${8 * glowFactor}px rgba(0, 255, 65, ${0.4 + glowFactor * 0.6}),
 0 0 ${12 * glowFactor}px rgba(189, 0, 255, ${0.4 * glowFactor})
 `;
 // PALETA EXCLUSIVA DE VERDES Y MORADOS
-if (height > 22) {
+if (height > 20) {
 // Alta intensidad: Verde brillante a morado eléctrico
 bars[i].style.background = 'linear-gradient(to top, #00ff41, #bd00ff)';
-} else if (height > 12) {
+} else if (height > 10) {
 // Media intensidad: Verde neón a morado profundo
 bars[i].style.background = 'linear-gradient(to top, #00cc33, #9900ff)';
 } else {
