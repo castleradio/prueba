@@ -20,33 +20,6 @@ display: flex;
 flex-direction: column;
 }
 
-/* ============================================ */
-/* OVERLAYS OPCIONALES (comentar si se desea desactivar) */
-/* ============================================ */
-.scanlines {
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(0,0,0,0.12),
-    rgba(0,0,0,0.12) 1px,
-    transparent 1px,
-    transparent 2px
-  );
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.3;
-}
-
-.noise-overlay {
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.03;
-  pointer-events: none;
-  z-index: 9998;
-}
-
 /* Cabecera */
 header {
 background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
@@ -72,6 +45,7 @@ margin: 0;
 from { text-shadow: 0 0 10px rgba(0, 255, 65, 0.5); }
 to { text-shadow: 0 0 20px rgba(0, 255, 65, 0.8), 0 0 30px rgba(189, 0, 255, 0.6); }
 }
+
 /* Tira LED debajo de la cabecera */
 .led-strip-top {
 height: 8px;
@@ -90,6 +64,7 @@ z-index: 10;
 0% { background-position: 0% 50%; }
 100% { background-position: 200% 50%; }
 }
+
 /* Contenido principal */
 .main-container {
 display: flex;
@@ -235,7 +210,6 @@ letter-spacing: 1.5px;
   opacity: 0.85;
 }
 
-/* Clases para efectos intensos (se activan con JS) */
 .cyber-glitch.flash {
   animation: glitch-flash 1s 1, title-glow 2.5s ease-in-out infinite alternate;
 }
@@ -432,34 +406,158 @@ background-size:100% 4px; pointer-events:none; z-index:6; opacity:0.7;
 .volume-slider::-webkit-slider-thumb { -webkit-appearance:none; width:27.6px; height:27.6px; background:#00ff41; border-radius:50%; cursor:pointer; box-shadow:0 0 12px rgba(0,255,65,0.8), inset 0 0 5px rgba(0,0,0,0.5); border:2px solid #000; }
 
 /* Widget del DJ */
-#dj_profile { display:flex; flex-direction:column; align-items:center; gap:1rem; width:100%; position:relative; }
+#dj_profile { 
+  display:flex; 
+  flex-direction:column; 
+  align-items:center; 
+  gap:1rem; 
+  width:100%; 
+  position:relative; 
+}
 
-/* EFECTO DE RESPIRACIÓN DJ - MITAD MORADA/MITAD VERDE */
+/* ============================================ */
+/* EFECTO DE RESPIRACIÓN DJ - CORREGIDO Y SUAVE */
+/* ============================================ */
 #dj_profile img {
-width:427.5px !important; height:427.5px !important; border-radius:50%; border:3px solid #8b8b8b;
-object-fit:cover; margin:0 auto; display:block; position:relative; z-index:1;
-animation: dj-breathing 3s ease-in-out infinite;
-}
-#dj_profile img::after {
-content:''; position:absolute; top:0; left:0; right:0; bottom:0; border-radius:50%;
-background:linear-gradient(90deg, rgba(189,0,255,0.35) 0%, rgba(189,0,255,0.35) 50%, rgba(0,255,65,0.35) 50%, rgba(0,255,65,0.35) 100%);
-mix-blend-mode:overlay; pointer-events:none; z-index:2;
-}
-@keyframes dj-breathing {
-  0%,100% { box-shadow: 0 0 20px rgba(189,0,255,0.4), 0 0 40px rgba(0,255,65,0.4), inset 0 0 20px rgba(189,0,255,0.2); transform:scale(1); }
-  50% { box-shadow: 0 0 35px rgba(189,0,255,0.6), 0 0 60px rgba(0,255,65,0.6), inset 0 0 30px rgba(0,255,65,0.3); transform:scale(1.02); }
+  width:427.5px !important; 
+  height:427.5px !important; 
+  border-radius:50%; 
+  border:3px solid #8b8b8b;
+  object-fit:cover; 
+  margin:0 auto; 
+  display:block; 
+  position:relative; 
+  z-index:1;
+  /* Animación de respiración corregida */
+  animation: dj-breathing 4s ease-in-out infinite;
+  will-change: transform, box-shadow;
+  /* Asegurar que el overlay de colores se mantenga */
+  isolation: isolate;
 }
 
-#dj_profile .dj_name { font-family:'Orbitron',sans-serif; font-weight:900; font-size:1.5rem; color:#bd00ff; text-align:center; text-transform:uppercase; letter-spacing:1px; }
-#sonic_dj.cyber-glitch { font-size:1.5rem; margin-left:10px; display:inline-block; vertical-align:middle; }
+/* Overlay de colores mitad morada/mitad verde - corregido para no interferir */
+#dj_profile img::after {
+  content:''; 
+  position:absolute; 
+  top:0; left:0; right:0; bottom:0; 
+  border-radius:50%;
+  background:linear-gradient(90deg, 
+    rgba(189,0,255,0.30) 0%, 
+    rgba(189,0,255,0.30) 50%, 
+    rgba(0,255,65,0.30) 50%, 
+    rgba(0,255,65,0.30) 100%);
+  mix-blend-mode: overlay; 
+  pointer-events:none; 
+  z-index:2;
+  /* Heredar la animación de respiración para que el glow también pulse */
+  animation: inherit;
+}
+
+/* Animación de respiración corregida - más suave y sin cortes */
+@keyframes dj-breathing {
+  0% {
+    box-shadow: 
+      0 0 20px rgba(189, 0, 255, 0.35),
+      0 0 40px rgba(0, 255, 65, 0.35),
+      inset 0 0 15px rgba(189, 0, 255, 0.15);
+    transform: scale(1);
+  }
+  25% {
+    box-shadow: 
+      0 0 28px rgba(189, 0, 255, 0.45),
+      0 0 50px rgba(0, 255, 65, 0.45),
+      inset 0 0 22px rgba(189, 0, 255, 0.22);
+    transform: scale(1.012);
+  }
+  50% {
+    box-shadow: 
+      0 0 35px rgba(189, 0, 255, 0.50),
+      0 0 60px rgba(0, 255, 65, 0.50),
+      inset 0 0 28px rgba(0, 255, 65, 0.25);
+    transform: scale(1.02);
+  }
+  75% {
+    box-shadow: 
+      0 0 28px rgba(189, 0, 255, 0.45),
+      0 0 50px rgba(0, 255, 65, 0.45),
+      inset 0 0 22px rgba(189, 0, 255, 0.22);
+    transform: scale(1.012);
+  }
+  100% {
+    box-shadow: 
+      0 0 20px rgba(189, 0, 255, 0.35),
+      0 0 40px rgba(0, 255, 65, 0.35),
+      inset 0 0 15px rgba(189, 0, 255, 0.15);
+    transform: scale(1);
+  }
+}
+
+#dj_profile .dj_name { 
+  font-family:'Orbitron',sans-serif; 
+  font-weight:900; 
+  font-size:1.5rem; 
+  color:#bd00ff; 
+  text-align:center; 
+  text-transform:uppercase; 
+  letter-spacing:1px; 
+}
+#sonic_dj.cyber-glitch { 
+  font-size:1.5rem; 
+  margin-left:10px; 
+  display:inline-block; 
+  vertical-align:middle; 
+}
 
 /* Pie de página */
-footer { background:linear-gradient(135deg,#1a1a1a 0%,#0d0d0d 100%); padding:2rem; text-align:center; position:relative; overflow:hidden; z-index:10; }
-.led-strip-bottom { height:8px; background:linear-gradient(90deg,#0000ff 0%,#00ff41 25%,#bd00ff 50%,#00ff41 75%,#0000ff 100%); background-size:200% 100%; animation:led-animation 3s linear infinite reverse; position:relative; }
-.social-links { display:flex; justify-content:center; gap:2rem; margin-bottom:1rem; flex-wrap:wrap; }
-.social-link { display:inline-block; width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,#00ff41,#bd00ff); display:flex; align-items:center; justify-content:center; text-decoration:none; color:white; font-family:'Orbitron',sans-serif; font-weight:900; font-size:1.5rem; transition:all 0.3s ease; box-shadow:0 0 15px rgba(0,255,65,0.3); }
-.social-link:hover { transform:scale(1.1); box-shadow:0 0 25px rgba(0,255,65,0.5); }
-.copyright { color:#888; font-family:'Orbitron',sans-serif; font-weight:900; font-size:0.9rem; }
+footer { 
+  background:linear-gradient(135deg,#1a1a1a 0%,#0d0d0d 100%); 
+  padding:2rem; 
+  text-align:center; 
+  position:relative; 
+  overflow:hidden; 
+  z-index:10; 
+}
+.led-strip-bottom { 
+  height:8px; 
+  background:linear-gradient(90deg,#0000ff 0%,#00ff41 25%,#bd00ff 50%,#00ff41 75%,#0000ff 100%); 
+  background-size:200% 100%; 
+  animation:led-animation 3s linear infinite reverse; 
+  position:relative; 
+}
+.social-links { 
+  display:flex; 
+  justify-content:center; 
+  gap:2rem; 
+  margin-bottom:1rem; 
+  flex-wrap:wrap; 
+}
+.social-link { 
+  display:inline-block; 
+  width:50px; 
+  height:50px; 
+  border-radius:50%; 
+  background:linear-gradient(135deg,#00ff41,#bd00ff); 
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+  text-decoration:none; 
+  color:white; 
+  font-family:'Orbitron',sans-serif; 
+  font-weight:900; 
+  font-size:1.5rem; 
+  transition:all 0.3s ease; 
+  box-shadow:0 0 15px rgba(0,255,65,0.3); 
+}
+.social-link:hover { 
+  transform:scale(1.1); 
+  box-shadow:0 0 25px rgba(0,255,65,0.5); 
+}
+.copyright { 
+  color:#888; 
+  font-family:'Orbitron',sans-serif; 
+  font-weight:900; 
+  font-size:0.9rem; 
+}
 
 /* Responsive */
 @media (max-width:768px) {
@@ -540,10 +638,6 @@ h1 { font-size:1.2rem; }
 </head>
 <body>
 
-<!-- Overlays de efecto CRT (opcional) -->
-<div class="scanlines"></div>
-<div class="noise-overlay"></div>
-
 <!-- Script del widget -->
 <script id='sonic_js' data-port='8008' src='https://sonic.sistemahost.es/cp/widgets.js?r=122  '></script>
 <header>
@@ -613,6 +707,7 @@ const bars = document.querySelectorAll('.bar');
 const streamUrl = 'https://sonic.sistemahost.es/8008/stream  ';
 const sonicTitle = document.getElementById('sonic_title');
 const sonicDj = document.getElementById('sonic_dj');
+const djProfile = document.getElementById('dj_profile');
 
 // Variables de estado
 let isPlaying = false;
@@ -628,7 +723,7 @@ let audioGraphSetup = false;
 let periodicGlitchInterval = null;
 let randomGlitchTimeout = null;
 let lastGlitchTime = 0;
-const GLITCH_THROTTLE_MS = 3000; // Mínimo 3s entre glitches intensos
+const GLITCH_THROTTLE_MS = 3000;
 
 // Configuración inicial
 audio.volume = 1.0;
@@ -648,36 +743,19 @@ function updateGlitchDataText(element) {
 
 function triggerGlitch(element, type = 'pulse') {
   if (!element || !element.classList.contains('cyber-glitch')) return;
-  
   const now = Date.now();
-  // Throttle: evitar saturación visual
   if ((now - lastGlitchTime) < GLITCH_THROTTLE_MS && type !== 'flash') return;
-  
-  // Actualizar data-text por seguridad
   updateGlitchDataText(element);
-  
-  // Remover clases previas
   element.classList.remove('flash', 'pulse', 'chaos');
-  
-  // Forzar reflow para reiniciar animación CSS
   void element.offsetWidth;
-  
-  // Agregar efecto
   element.classList.add(type);
-  
-  // Registrar tiempo
   lastGlitchTime = now;
-  
-  // Remover clase después de que termine la animación (1s)
-  setTimeout(() => {
-    element.classList.remove(type);
-  }, 1000);
+  setTimeout(() => { element.classList.remove(type); }, 1000);
 }
 
 function triggerRandomGlitch(element) {
   if (!element || !element.classList.contains('cyber-glitch')) return;
   const effects = ['flash', 'pulse', 'chaos'];
-  // 30% flash, 30% pulse, 40% chaos
   const r = Math.random();
   let effect = 'pulse';
   if (r < 0.3) effect = 'flash';
@@ -689,75 +767,51 @@ function startPeriodicGlitch(element) {
   if (!element) return;
   if (periodicGlitchInterval) clearInterval(periodicGlitchInterval);
   periodicGlitchInterval = setInterval(() => {
-    if (isPlaying) {
-      // Glitch suave periódico cada 15s
-      triggerGlitch(element, 'pulse');
-    }
+    if (isPlaying) triggerGlitch(element, 'pulse');
   }, 15000);
 }
 
 function startRandomGlitch(element) {
   if (!element) return;
   if (randomGlitchTimeout) clearTimeout(randomGlitchTimeout);
-  
   const scheduleNext = () => {
     if (!isPlaying) return;
-    // Próximo glitch aleatorio entre 5-12 segundos
     const nextDelay = 5000 + Math.random() * 7000;
     randomGlitchTimeout = setTimeout(() => {
-      if (isPlaying && Math.random() < 0.35) { // 35% de probabilidad de activar
+      if (isPlaying && Math.random() < 0.35) {
         triggerRandomGlitch(element);
       }
-      scheduleNext(); // Programar siguiente
+      scheduleNext();
     }, nextDelay);
   };
   scheduleNext();
 }
 
 function stopAllGlitches() {
-  if (periodicGlitchInterval) {
-    clearInterval(periodicGlitchInterval);
-    periodicGlitchInterval = null;
-  }
-  if (randomGlitchTimeout) {
-    clearTimeout(randomGlitchTimeout);
-    randomGlitchTimeout = null;
-  }
-  // Remover clases activas
-  [sonicTitle, sonicDj].forEach(el => {
-    if (el) el.classList.remove('flash', 'pulse', 'chaos');
-  });
+  if (periodicGlitchInterval) { clearInterval(periodicGlitchInterval); periodicGlitchInterval = null; }
+  if (randomGlitchTimeout) { clearTimeout(randomGlitchTimeout); randomGlitchTimeout = null; }
+  [sonicTitle, sonicDj].forEach(el => { if (el) el.classList.remove('flash', 'pulse', 'chaos'); });
 }
 
 function setupGlitchObservers() {
-  // Observer para título de canción
   if (sonicTitle) {
     const titleObserver = new MutationObserver(() => {
       const currentText = sonicTitle.textContent.trim();
       const oldText = sonicTitle.getAttribute('data-text') || '';
-      
-      // Siempre actualizar data-text
       updateGlitchDataText(sonicTitle);
-      
-      // Si el texto cambió y hay contenido nuevo, activar flash
       if (currentText && currentText !== oldText && currentText !== 'Cargando canción...') {
-        // Flash inmediato por cambio de canción
         triggerGlitch(sonicTitle, 'flash');
-        lastGlitchTime = Date.now(); // Reset throttle
+        lastGlitchTime = Date.now();
       }
     });
     titleObserver.observe(sonicTitle, { childList: true, characterData: true, subtree: true });
     updateGlitchDataText(sonicTitle);
   }
-  
-  // Observer para nombre del DJ
   if (sonicDj) {
     const djObserver = new MutationObserver(() => {
       const currentText = sonicDj.textContent.trim();
       const oldText = sonicDj.getAttribute('data-text') || '';
-      
       updateGlitchDataText(sonicDj);
-      
       if (currentText && currentText !== oldText && currentText !== '') {
         triggerGlitch(sonicDj, 'flash');
         lastGlitchTime = Date.now();
@@ -766,6 +820,24 @@ function setupGlitchObservers() {
     djObserver.observe(sonicDj, { childList: true, characterData: true, subtree: true });
     updateGlitchDataText(sonicDj);
   }
+}
+
+// ============================================
+// OBSERVER PARA MANTENER ANIMACIÓN DJ
+// ============================================
+function setupDjBreathingObserver() {
+  if (!djProfile) return;
+  
+  const djObserver = new MutationObserver(() => {
+    const djImg = djProfile.querySelector('img');
+    if (djImg) {
+      // Reaplicar clase para asegurar que la animación continúe
+      // Usamos animation-play-state para evitar reinicio visual
+      djImg.style.animationPlayState = 'running';
+    }
+  });
+  
+  djObserver.observe(djProfile, { childList: true, subtree: true });
 }
 
 // ============================================
@@ -813,10 +885,7 @@ function startVisualizer() {
 
 function stopVisualizer() {
   isVisualizing = false;
-  if (animationId) {
-    cancelAnimationFrame(animationId);
-    animationId = null;
-  }
+  if (animationId) { cancelAnimationFrame(animationId); animationId = null; }
   bars.forEach(bar => {
     bar.style.height = '2px';
     bar.style.boxShadow = '0 0 5px rgba(0, 255, 65, 0.5)';
@@ -825,10 +894,7 @@ function stopVisualizer() {
 }
 
 function visualize() {
-  if (!isVisualizing || !analyzer || !isPlaying) {
-    stopVisualizer();
-    return;
-  }
+  if (!isVisualizing || !analyzer || !isPlaying) { stopVisualizer(); return; }
   analyzer.getByteFrequencyData(dataArray);
   const totalBins = dataArray.length;
   const binsPerBar = totalBins / barCount;
@@ -838,23 +904,17 @@ function visualize() {
     let sum = 0, count = 0;
     for (let j = startBin; j < endBin && j < totalBins; j++) {
       const weight = (i < 4) ? 1.4 : (i >= 8 ? 1.5 : 1.15);
-      sum += dataArray[j] * weight;
-      count++;
+      sum += dataArray[j] * weight; count++;
     }
     const avg = count > 0 ? sum / count : 0;
     let height = Math.sqrt(avg) * 2.0;
-    height = Math.min(height, 28);
-    height = Math.max(height, 2);
+    height = Math.min(height, 28); height = Math.max(height, 2);
     bars[i].style.height = `${height}px`;
     const glowFactor = Math.min(height / 28, 1);
     bars[i].style.boxShadow = `0 0 ${8 * glowFactor}px rgba(0, 255, 65, ${0.4 + glowFactor * 0.6}), 0 0 ${12 * glowFactor}px rgba(189, 0, 255, ${0.4 * glowFactor})`;
-    if (height > 20) {
-      bars[i].style.background = 'linear-gradient(to top, #00ff41, #bd00ff)';
-    } else if (height > 10) {
-      bars[i].style.background = 'linear-gradient(to top, #00cc33, #9900ff)';
-    } else {
-      bars[i].style.background = 'linear-gradient(to top, #008822, #7a00cc)';
-    }
+    if (height > 20) bars[i].style.background = 'linear-gradient(to top, #00ff41, #bd00ff)';
+    else if (height > 10) bars[i].style.background = 'linear-gradient(to top, #00cc33, #9900ff)';
+    else bars[i].style.background = 'linear-gradient(to top, #008822, #7a00cc)';
   }
   animationId = requestAnimationFrame(visualize);
 }
@@ -867,10 +927,7 @@ function togglePlayPause() {
       if (window.AudioContext) {
         audioContext = new AudioContext();
         console.log("✓ AudioContext creado");
-      } else {
-        alert("Tu navegador no soporta Web Audio API. Actualiza tu navegador.");
-        return;
-      }
+      } else { alert("Tu navegador no soporta Web Audio API. Actualiza tu navegador."); return; }
     }
     if (audioContext.state === 'suspended') {
       audioContext.resume().then(() => console.log("✓ AudioContext reanudado"))
@@ -884,52 +941,27 @@ function togglePlayPause() {
       playPauseBtn.classList.add('playing');
       startTapeAnimation();
       if (analyzer) startVisualizer();
-      
-      // INICIAR SISTEMA GLITCH AVANZADO
-      startPeriodicGlitch(sonicTitle);
-      startPeriodicGlitch(sonicDj);
-      startRandomGlitch(sonicTitle);
-      startRandomGlitch(sonicDj);
-      
+      startPeriodicGlitch(sonicTitle); startPeriodicGlitch(sonicDj);
+      startRandomGlitch(sonicTitle); startRandomGlitch(sonicDj);
     }).catch(error => {
       console.error("✗ Error de reproducción:", error);
       let errorMsg = 'Error al reproducir: ';
-      if (error.name === 'NotAllowedError') {
-        errorMsg += 'Haz clic nuevamente en el botón de play para permitir el audio.';
-      } else if (error.name === 'NetworkError') {
-        errorMsg += 'Error de conexión. Verifica tu internet.';
-      } else {
-        errorMsg += error.message;
-      }
+      if (error.name === 'NotAllowedError') errorMsg += 'Haz clic nuevamente en el botón de play para permitir el audio.';
+      else if (error.name === 'NetworkError') errorMsg += 'Error de conexión. Verifica tu internet.';
+      else errorMsg += error.message;
       alert(errorMsg);
     });
   } else {
-    audio.pause();
-    isPlaying = false;
-    playPauseBtn.innerHTML = '▶';
-    playPauseBtn.classList.remove('playing');
-    stopTapeAnimation();
-    stopVisualizer();
-    
-    // DETENER SISTEMA GLITCH
-    stopAllGlitches();
-    
+    audio.pause(); isPlaying = false;
+    playPauseBtn.innerHTML = '▶'; playPauseBtn.classList.remove('playing');
+    stopTapeAnimation(); stopVisualizer(); stopAllGlitches();
     console.log("⏸ Reproducción pausada");
   }
 }
 
-function changeVolume() {
-  audio.volume = parseFloat(volumeSlider.value);
-}
-
-function startTapeAnimation() {
-  tapeLeft.classList.add('animated');
-  tapeRight.classList.add('animated');
-}
-function stopTapeAnimation() {
-  tapeLeft.classList.remove('animated');
-  tapeRight.classList.remove('animated');
-}
+function changeVolume() { audio.volume = parseFloat(volumeSlider.value); }
+function startTapeAnimation() { tapeLeft.classList.add('animated'); tapeRight.classList.add('animated'); }
+function stopTapeAnimation() { tapeLeft.classList.remove('animated'); tapeRight.classList.remove('animated'); }
 
 // Event listeners
 playPauseBtn.addEventListener('click', togglePlayPause);
@@ -949,39 +981,28 @@ setInterval(function() {
 // Inicializar al cargar
 window.addEventListener('load', function() {
   updateAlbumArtBackground();
-  setupGlitchObservers(); // ← Inicializar sistema glitch avanzado
+  setupGlitchObservers();
+  setupDjBreathingObserver(); // ← Nuevo: observer para animación DJ
   console.log("🎧 Castle Radio cargado. Sistema glitch activado. Haz clic en PLAY para iniciar.");
 });
 
 // Manejar eventos de audio
 audio.addEventListener('ended', () => {
-  isPlaying = false;
-  playPauseBtn.innerHTML = '▶';
-  playPauseBtn.classList.remove('playing');
-  stopTapeAnimation();
-  stopVisualizer();
-  stopAllGlitches();
+  isPlaying = false; playPauseBtn.innerHTML = '▶'; playPauseBtn.classList.remove('playing');
+  stopTapeAnimation(); stopVisualizer(); stopAllGlitches();
   console.log("⏹ Reproducción finalizada");
 });
 audio.addEventListener('pause', () => {
   if (isPlaying) {
-    isPlaying = false;
-    playPauseBtn.innerHTML = '▶';
-    playPauseBtn.classList.remove('playing');
-    stopTapeAnimation();
-    stopVisualizer();
-    stopAllGlitches();
+    isPlaying = false; playPauseBtn.innerHTML = '▶'; playPauseBtn.classList.remove('playing');
+    stopTapeAnimation(); stopVisualizer(); stopAllGlitches();
   }
 });
 audio.addEventListener('error', (e) => {
-  console.error("✗ Error de audio:", e);
-  stopVisualizer();
+  console.error("✗ Error de audio:", e); stopVisualizer();
   if (isPlaying) {
-    isPlaying = false;
-    playPauseBtn.innerHTML = '▶';
-    playPauseBtn.classList.remove('playing');
-    stopTapeAnimation();
-    stopAllGlitches();
+    isPlaying = false; playPauseBtn.innerHTML = '▶'; playPauseBtn.classList.remove('playing');
+    stopTapeAnimation(); stopAllGlitches();
     alert('Error crítico en el stream. Verifica tu conexión o intenta más tarde.');
   }
 });
@@ -989,8 +1010,7 @@ audio.addEventListener('error', (e) => {
 // Manejo para dispositivos móviles (iOS)
 document.body.addEventListener('touchstart', function initMobile() {
   if (!audioContext && typeof window.AudioContext !== 'undefined') {
-    audioContext = new AudioContext();
-    audioContext.suspend();
+    audioContext = new AudioContext(); audioContext.suspend();
     console.log("✓ AudioContext inicializado para móvil");
   }
   document.body.removeEventListener('touchstart', initMobile);
