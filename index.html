@@ -13,7 +13,19 @@ box-sizing: border-box;
 }
 body {
 font-family: 'Orbitron', sans-serif;
+/* Nuevo fondo con degradado y cuadrícula */
 background-color: #0f0f0f;
+background-image: 
+    /* Cuadrícula horizontal */
+    linear-gradient(rgba(128, 128, 128, 0.3) 1px, transparent 1px),
+    /* Cuadrícula vertical */
+    linear-gradient(90deg, rgba(128, 128, 128, 0.3) 1px, transparent 1px),
+    /* Degradado principal: Morada arriba-izq, Verde abajo-der, Centro oscuro */
+    linear-gradient(135deg, #bd00ff 0%, #0f0f0f 50%, #00ff41 100%);
+background-size: 
+    40px 40px, /* Tamaño cuadrícula horizontal */
+    40px 40px, /* Tamaño cuadrícula vertical */
+    100% 100%; /* Tamaño degradado */
 color: #e0e0e0;
 min-height: 100vh;
 display: flex;
@@ -171,119 +183,106 @@ justify-content: center;
 padding: 0 5px;
 letter-spacing: 1.5px;
 }
-
 /* ============================================ */
 /* EFECTO GLITCH CYBERPUNK - ADAPTADO */
 /* ============================================ */
 :root {
-  --pink-neon: #bd00ff;
-  --green-neon: #00ff41;
+--pink-neon: #bd00ff;
+--green-neon: #00ff41;
 }
-
 .cyber-glitch {
-  position: relative;
-  display: inline-block;
-  max-width: 100%;
-  word-break: break-word;
-  /* Mantenemos el glow original como base */
-  text-shadow: 0 0 8px rgba(189, 0, 255, 0.9), 0 0 15px rgba(0, 255, 65, 0.7);
-  animation: title-glow 2.5s ease-in-out infinite alternate;
+position: relative;
+display: inline-block;
+max-width: 100%;
+word-break: break-word;
+/* Mantenemos el glow original como base */
+text-shadow: 0 0 8px rgba(189, 0, 255, 0.9), 0 0 15px rgba(0, 255, 65, 0.7);
+animation: title-glow 2.5s ease-in-out infinite alternate;
 }
-
 .cyber-glitch::before,
 .cyber-glitch::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  text-align: center;
-  pointer-events: none;
+content: attr(data-text);
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+overflow: hidden;
+text-align: center;
+pointer-events: none;
 }
-
 .cyber-glitch::before {
-  color: var(--pink-neon);
-  clip-path: inset(2px 0 11px 0);
-  animation: glitch-shift-1 2.0s infinite;
-  z-index: -1;
-  opacity: 0.85;
+color: var(--pink-neon);
+clip-path: inset(2px 0 11px 0);
+animation: glitch-shift-1 2.0s infinite;
+z-index: -1;
+opacity: 0.85;
 }
-
 .cyber-glitch::after {
-  color: var(--green-neon);
-  clip-path: inset(10px 0 3px 0);
-  animation: glitch-shift-2 2.7s infinite;
-  z-index: -2;
-  opacity: 0.85;
+color: var(--green-neon);
+clip-path: inset(10px 0 3px 0);
+animation: glitch-shift-2 2.7s infinite;
+z-index: -2;
+opacity: 0.85;
 }
-
 /* Clases para efectos intensos (se activan con JS) */
 .cyber-glitch.flash {
-  animation: glitch-flash 1s 1, title-glow 2.5s ease-in-out infinite alternate;
+animation: glitch-flash 1s 1, title-glow 2.5s ease-in-out infinite alternate;
 }
 .cyber-glitch.pulse {
-  animation: glitch-pulse 1s 1, title-glow 2.5s ease-in-out infinite alternate;
+animation: glitch-pulse 1s 1, title-glow 2.5s ease-in-out infinite alternate;
 }
 .cyber-glitch.chaos {
-  animation: glitch-chaos 1s 1, title-glow 2.5s ease-in-out infinite alternate;
+animation: glitch-chaos 1s 1, title-glow 2.5s ease-in-out infinite alternate;
 }
-
 @keyframes glitch-shift-1 {
-  0%, 100% { clip-path: inset(2px 0 11px 0); transform: translate(0, 0) rotate(0); }
-  6%  { clip-path: inset(0px 0 15px 0); transform: translate(-3px, 2px) rotate(1deg); }
-  12% { clip-path: inset(6px 0 6px 0); transform: translate(3px, -2px) rotate(-1deg) scaleX(1.02); }
-  18% { clip-path: inset(1px 0 13px 0); transform: translate(-2px, 3px) rotate(1.5deg); }
-  24% { clip-path: inset(4px 0 9px 0); transform: translate(2px, -1px) skewX(1.5deg); }
-  30% { clip-path: inset(3px 0 10px 0); transform: translate(-2px, 1px) scaleX(0.98); }
+0%, 100% { clip-path: inset(2px 0 11px 0); transform: translate(0, 0) rotate(0); }
+6%  { clip-path: inset(0px 0 15px 0); transform: translate(-3px, 2px) rotate(1deg); }
+12% { clip-path: inset(6px 0 6px 0); transform: translate(3px, -2px) rotate(-1deg) scaleX(1.02); }
+18% { clip-path: inset(1px 0 13px 0); transform: translate(-2px, 3px) rotate(1.5deg); }
+24% { clip-path: inset(4px 0 9px 0); transform: translate(2px, -1px) skewX(1.5deg); }
+30% { clip-path: inset(3px 0 10px 0); transform: translate(-2px, 1px) scaleX(0.98); }
 }
-
 @keyframes glitch-shift-2 {
-  0%, 100% { clip-path: inset(10px 0 3px 0); transform: translate(0, 0) rotate(0); }
-  10% { clip-path: inset(6px 0 7px 0); transform: translate(3px, -3px) rotate(-1.5deg) scaleY(1.03); }
-  20% { clip-path: inset(14px 0 -1px 0); transform: translate(-3px, 2px) rotate(1.2deg); }
-  30% { clip-path: inset(4px 0 9px 0); transform: translate(-2px, -3px) skewY(2deg); }
-  40% { clip-path: inset(12px 0 1px 0); transform: translate(2px, 1px) scaleX(1.03); }
-  50% { clip-path: inset(8px 0 5px 0); transform: translate(0, -1px); }
+0%, 100% { clip-path: inset(10px 0 3px 0); transform: translate(0, 0) rotate(0); }
+10% { clip-path: inset(6px 0 7px 0); transform: translate(3px, -3px) rotate(-1.5deg) scaleY(1.03); }
+20% { clip-path: inset(14px 0 -1px 0); transform: translate(-3px, 2px) rotate(1.2deg); }
+30% { clip-path: inset(4px 0 9px 0); transform: translate(-2px, -3px) skewY(2deg); }
+40% { clip-path: inset(12px 0 1px 0); transform: translate(2px, 1px) scaleX(1.03); }
+50% { clip-path: inset(8px 0 5px 0); transform: translate(0, -1px); }
 }
-
 @keyframes glitch-flash {
-  0%   { text-shadow: 0 0 8px var(--pink-neon), 0 0 15px var(--green-neon); opacity: 1; }
-  15%  { text-shadow: 0 0 24px var(--green-neon), 0 0 38px var(--pink-neon); }
-  30%  { text-shadow: 0 0 28px var(--pink-neon), 0 0 42px var(--green-neon); }
-  45%  { text-shadow: 0 0 0 transparent; opacity: 0.3; }
-  60%  { text-shadow: 0 0 30px var(--green-neon), 0 0 46px var(--pink-neon); opacity: 1; }
-  100% { text-shadow: 0 0 8px var(--pink-neon), 0 0 15px var(--green-neon); opacity: 1; }
+0%   { text-shadow: 0 0 8px var(--pink-neon), 0 0 15px var(--green-neon); opacity: 1; }
+15%  { text-shadow: 0 0 24px var(--green-neon), 0 0 38px var(--pink-neon); }
+30%  { text-shadow: 0 0 28px var(--pink-neon), 0 0 42px var(--green-neon); }
+45%  { text-shadow: 0 0 0 transparent; opacity: 0.3; }
+60%  { text-shadow: 0 0 30px var(--green-neon), 0 0 46px var(--pink-neon); opacity: 1; }
+100% { text-shadow: 0 0 8px var(--pink-neon), 0 0 15px var(--green-neon); opacity: 1; }
 }
-
 @keyframes glitch-pulse {
-  0%   { text-shadow: 0 0 8px var(--pink-neon), 0 0 15px var(--green-neon); }
-  25%  { text-shadow: 0 0 26px var(--green-neon), 0 0 40px var(--pink-neon); }
-  50%  { text-shadow: 0 0 0 transparent; opacity: 0.2; }
-  75%  { text-shadow: 0 0 32px var(--pink-neon), 0 0 50px var(--green-neon); }
-  100% { text-shadow: 0 0 8px var(--pink-neon), 0 0 15px var(--green-neon); opacity: 1; }
+0%   { text-shadow: 0 0 8px var(--pink-neon), 0 0 15px var(--green-neon); }
+25%  { text-shadow: 0 0 26px var(--green-neon), 0 0 40px var(--pink-neon); }
+50%  { text-shadow: 0 0 0 transparent; opacity: 0.2; }
+75%  { text-shadow: 0 0 32px var(--pink-neon), 0 0 50px var(--green-neon); }
+100% { text-shadow: 0 0 8px var(--pink-neon), 0 0 15px var(--green-neon); opacity: 1; }
 }
-
 @keyframes glitch-chaos {
-  0%   { text-shadow: 0 0 8px var(--pink-neon), 0 0 15px var(--green-neon); transform: translate(0,0) rotate(0); }
-  10%  { text-shadow: 0 0 28px var(--green-neon); transform: translate(-3px, 1px) rotate(1.5deg); }
-  20%  { text-shadow: 0 0 0 transparent; opacity: 0.1; transform: translate(0,0); }
-  30%  { text-shadow: 0 0 34px var(--pink-neon); transform: translate(3px, -2px) skewX(3deg); }
-  40%  { text-shadow: 0 0 0 transparent; opacity: 0.15; }
-  50%  { text-shadow: 0 0 40px var(--green-neon); transform: translate(-2px, 3px) scaleX(1.04); }
-  60%  { text-shadow: 0 0 0 transparent; opacity: 0.1; }
-  70%  { text-shadow: 0 0 36px var(--pink-neon); transform: translate(1px, -1px) rotate(-2deg); }
-  80%  { text-shadow: 0 0 0 transparent; opacity: 0.25; }
-  90%  { text-shadow: 0 0 30px var(--green-neon); }
-  100% { text-shadow: 0 0 8px var(--pink-neon), 0 0 15px var(--green-neon); transform: translate(0,0) rotate(0); opacity: 1; }
+0%   { text-shadow: 0 0 8px var(--pink-neon), 0 0 15px var(--green-neon); transform: translate(0,0) rotate(0); }
+10%  { text-shadow: 0 0 28px var(--green-neon); transform: translate(-3px, 1px) rotate(1.5deg); }
+20%  { text-shadow: 0 0 0 transparent; opacity: 0.1; transform: translate(0,0); }
+30%  { text-shadow: 0 0 34px var(--pink-neon); transform: translate(3px, -2px) skewX(3deg); }
+40%  { text-shadow: 0 0 0 transparent; opacity: 0.15; }
+50%  { text-shadow: 0 0 40px var(--green-neon); transform: translate(-2px, 3px) scaleX(1.04); }
+60%  { text-shadow: 0 0 0 transparent; opacity: 0.1; }
+70%  { text-shadow: 0 0 36px var(--pink-neon); transform: translate(1px, -1px) rotate(-2deg); }
+80%  { text-shadow: 0 0 0 transparent; opacity: 0.25; }
+90%  { text-shadow: 0 0 30px var(--green-neon); }
+100% { text-shadow: 0 0 8px var(--pink-neon), 0 0 15px var(--green-neon); transform: translate(0,0) rotate(0); opacity: 1; }
 }
-
 @keyframes title-glow {
 from { text-shadow: 0 0 8px rgba(189, 0, 255, 0.9), 0 0 15px rgba(0, 255, 65, 0.7); }
 to { text-shadow: 0 0 12px rgba(189, 0, 255, 1), 0 0 25px rgba(0, 255, 65, 0.9), 0 0 35px rgba(189, 0, 255, 0.8); }
 }
-
 #sonic_title {
 font-family: 'Orbitron', sans-serif;
 font-weight: 900;
@@ -292,7 +291,6 @@ font-size: 1.4rem;
 text-align: center;
 letter-spacing: 1.5px;
 }
-
 .cassette-tapes {
 display: flex;
 justify-content: center;
@@ -703,52 +701,49 @@ border-radius: 50%;
 /* Animación fluida e infinita que NO se reinicia al actualizar la imagen */
 animation: dj-breathing 3s ease-in-out infinite;
 /* Brillo dividido: morado izquierda, verde derecha */
-box-shadow: 
-  -15px 0 25px rgba(189, 0, 255, 0.6),
-  15px 0 25px rgba(0, 255, 65, 0.6),
-  0 0 30px rgba(139, 139, 139, 0.4);
+box-shadow:
+-15px 0 25px rgba(189, 0, 255, 0.6),
+15px 0 25px rgba(0, 255, 65, 0.6),
+0 0 30px rgba(139, 139, 139, 0.4);
 /* Centrar contenido */
 justify-content: center;
 padding: 0;
 margin: 0 auto;
 position: relative;
 }
-
 /* ============================================ */
 /* KEYFRAMES DE RESPIRACIÓN */
 /* ============================================ */
 @keyframes dj-breathing {
-  0%, 100% { 
-    transform: scale(1);
-    box-shadow: 
-      -15px 0 25px rgba(189, 0, 255, 0.6),
-      15px 0 25px rgba(0, 255, 65, 0.6),
-      0 0 30px rgba(139, 139, 139, 0.4);
-  }
-  50% { 
-    transform: scale(1.03);
-    box-shadow: 
-      -15px 0 40px rgba(189, 0, 255, 1),
-      15px 0 40px rgba(0, 255, 65, 1),
-      0 0 50px rgba(139, 139, 139, 0.6);
-  }
+0%, 100% {
+transform: scale(1);
+box-shadow:
+-15px 0 25px rgba(189, 0, 255, 0.6),
+15px 0 25px rgba(0, 255, 65, 0.6),
+0 0 30px rgba(139, 139, 139, 0.4);
 }
-
+50% {
+transform: scale(1.03);
+box-shadow:
+-15px 0 40px rgba(189, 0, 255, 1),
+15px 0 40px rgba(0, 255, 65, 1),
+0 0 50px rgba(139, 139, 139, 0.6);
+}
+}
 #dj_profile img {
-  width: 406.125px !important;
-  height: 406.125px !important;
-  border-radius: 50%;
-  border: 3px solid #8b8b8b;
-  object-fit: cover;
-  margin: 0;
-  display: block;
-  /* Sin animación aquí para evitar reinicios */
-  box-shadow: none;
-  position: relative;
-  z-index: 2;
-  background: #0f0f0f;
+width: 406.125px !important;
+height: 406.125px !important;
+border-radius: 50%;
+border: 3px solid #8b8b8b;
+object-fit: cover;
+margin: 0;
+display: block;
+/* Sin animación aquí para evitar reinicios */
+box-shadow: none;
+position: relative;
+z-index: 2;
+background: #0f0f0f;
 }
-
 #dj_profile .dj_name {
 font-family: 'Orbitron', sans-serif;
 font-weight: 900;
@@ -758,15 +753,13 @@ text-align: center;
 text-transform: uppercase;
 letter-spacing: 1px;
 }
-
 /* Estilo para el DJ con glitch */
 #sonic_dj.cyber-glitch {
-  font-size: 1.5rem;
-  margin-left: 10px;
-  display: inline-block;
-  vertical-align: middle;
+font-size: 1.5rem;
+margin-left: 10px;
+display: inline-block;
+vertical-align: middle;
 }
-
 /* Pie de página */
 footer {
 background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
@@ -898,15 +891,15 @@ width: 5px;
 font-size: 1rem;
 }
 #dj_profile {
-  /* Contenedor circular en responsive */
-  width: 349.6125px !important;
-  height: 349.6125px !important;
-  border-radius: 50%;
-  animation: dj-breathing 3s ease-in-out infinite;
-  box-shadow: 
-    -12px 0 22px rgba(189, 0, 255, 0.6),
-    12px 0 22px rgba(0, 255, 65, 0.6),
-    0 0 26px rgba(139, 139, 139, 0.4);
+/* Contenedor circular en responsive */
+width: 349.6125px !important;
+height: 349.6125px !important;
+border-radius: 50%;
+animation: dj-breathing 3s ease-in-out infinite;
+box-shadow:
+-12px 0 22px rgba(189, 0, 255, 0.6),
+12px 0 22px rgba(0, 255, 65, 0.6),
+0 0 26px rgba(139, 139, 139, 0.4);
 }
 #dj_profile img {
 width: 343.6125px !important;
@@ -914,7 +907,7 @@ height: 343.6125px !important;
 }
 /* DJ nombre mismo tamaño que "Emite:" en móvil */
 #sonic_dj.cyber-glitch {
-  font-size: 1.5rem;
+font-size: 1.5rem;
 }
 .social-links {
 gap: 1.5rem;
@@ -998,15 +991,15 @@ max-width: 100%;
 padding: 10px;
 }
 #dj_profile {
-  /* Contenedor circular en móvil */
-  width: 235.125px !important;
-  height: 235.125px !important;
-  border-radius: 50%;
-  animation: dj-breathing 3s ease-in-out infinite;
-  box-shadow: 
-    -10px 0 18px rgba(189, 0, 255, 0.6),
-    10px 0 18px rgba(0, 255, 65, 0.6),
-    0 0 22px rgba(139, 139, 139, 0.4);
+/* Contenedor circular en móvil */
+width: 235.125px !important;
+height: 235.125px !important;
+border-radius: 50%;
+animation: dj-breathing 3s ease-in-out infinite;
+box-shadow:
+-10px 0 18px rgba(189, 0, 255, 0.6),
+10px 0 18px rgba(0, 255, 65, 0.6),
+0 0 22px rgba(139, 139, 139, 0.4);
 }
 #dj_profile img {
 width: 229.125px !important;
@@ -1014,7 +1007,7 @@ height: 229.125px !important;
 }
 /* DJ nombre mismo tamaño que "Emite:" en móvil */
 #sonic_dj.cyber-glitch {
-  font-size: 1.5rem;
+font-size: 1.5rem;
 }
 .social-links {
 gap: 1rem;
@@ -1091,15 +1084,15 @@ width: 4px;
 font-size: 0.9rem;
 }
 #dj_profile {
-  /* Contenedor circular en pantallas muy pequeñas */
-  width: 177.5625px !important;
-  height: 177.5625px !important;
-  border-radius: 50%;
-  animation: dj-breathing 3s ease-in-out infinite;
-  box-shadow: 
-    -8px 0 15px rgba(189, 0, 255, 0.6),
-    8px 0 15px rgba(0, 255, 65, 0.6),
-    0 0 18px rgba(139, 139, 139, 0.4);
+/* Contenedor circular en pantallas muy pequeñas */
+width: 177.5625px !important;
+height: 177.5625px !important;
+border-radius: 50%;
+animation: dj-breathing 3s ease-in-out infinite;
+box-shadow:
+-8px 0 15px rgba(189, 0, 255, 0.6),
+8px 0 15px rgba(0, 255, 65, 0.6),
+0 0 18px rgba(139, 139, 139, 0.4);
 }
 #dj_profile img {
 width: 171.5625px !important;
@@ -1107,7 +1100,7 @@ height: 171.5625px !important;
 }
 /* DJ nombre mismo tamaño que "Emite:" en móvil */
 #sonic_dj.cyber-glitch {
-  font-size: 1.5rem;
+font-size: 1.5rem;
 }
 }
 </style>
@@ -1203,7 +1196,6 @@ const bars = document.querySelectorAll('.bar');
 const streamUrl = 'https://sonic.sistemahost.es/8008/stream  ';
 const sonicTitle = document.getElementById('sonic_title');
 const sonicDj = document.getElementById('sonic_dj');
-
 // Variables de estado
 let isPlaying = false;
 let audioContext = null;
@@ -1213,137 +1205,119 @@ let animationId = null;
 let isVisualizing = false;
 const barCount = bars.length;
 let audioGraphSetup = false;
-
 // Configuración inicial
 audio.volume = 1.0;
 volumeSlider.value = 1.0;
 audio.crossOrigin = 'anonymous';
-
 // Función para actualizar el atributo data-text en elementos con glitch
 function updateGlitchDataText(element) {
-  if (element && element.classList.contains('cyber-glitch')) {
-    element.setAttribute('data-text', element.textContent.trim());
-  }
+if (element && element.classList.contains('cyber-glitch')) {
+element.setAttribute('data-text', element.textContent.trim());
 }
-
+}
 // Función para activar efecto glitch intenso aleatorio
 function triggerRandomGlitch(element) {
-  if (!element || !element.classList.contains('cyber-glitch')) return;
-  
-  const effects = ['flash', 'pulse', 'chaos'];
-  const randomEffect = effects[Math.floor(Math.random() * effects.length)];
-  
-  // Remover clases previas
-  element.classList.remove('flash', 'pulse', 'chaos');
-  
-  // Forzar reflow para reiniciar animación
-  void element.offsetWidth;
-  
-  // Agregar efecto aleatorio
-  element.classList.add(randomEffect);
-  
-  // Remover la clase después de que termine la animación (1s)
-  setTimeout(() => {
-    element.classList.remove(randomEffect);
-  }, 1000);
+if (!element || !element.classList.contains('cyber-glitch')) return;
+const effects = ['flash', 'pulse', 'chaos'];
+const randomEffect = effects[Math.floor(Math.random() * effects.length)];
+// Remover clases previas
+element.classList.remove('flash', 'pulse', 'chaos');
+// Forzar reflow para reiniciar animación
+void element.offsetWidth;
+// Agregar efecto aleatorio
+element.classList.add(randomEffect);
+// Remover la clase después de que termine la animación (1s)
+setTimeout(() => {
+element.classList.remove(randomEffect);
+}, 1000);
 }
-
 // ============================================
 // FUNCIONES PARA MANEJAR "NO DJ" → "Auto DJ"
 // ============================================
-
 // Función para verificar y reemplazar "NO DJ" por "Auto DJ"
 function checkAndReplaceNoDJ() {
-  if (sonicDj) {
-    const currentText = sonicDj.textContent.trim();
-    // Detectar si contiene "NO DJ" (case-insensitive para mayor seguridad)
-    if (currentText.toUpperCase().includes('NO DJ')) {
-      // Reemplazar texto visualmente
-      sonicDj.textContent = 'Auto DJ';
-      updateGlitchDataText(sonicDj);
-      
-      // Cambiar imagen del DJ por la local
-      replaceDjImageWithLocal();
-      return true;
-    }
-  }
-  return false;
+if (sonicDj) {
+const currentText = sonicDj.textContent.trim();
+// Detectar si contiene "NO DJ" (case-insensitive para mayor seguridad)
+if (currentText.toUpperCase().includes('NO DJ')) {
+// Reemplazar texto visualmente
+sonicDj.textContent = 'Auto DJ';
+updateGlitchDataText(sonicDj);
+// Cambiar imagen del DJ por la local
+replaceDjImageWithLocal();
+return true;
 }
-
+}
+return false;
+}
 // Función para reemplazar la imagen del DJ con la imagen local autodj.png
 function replaceDjImageWithLocal() {
-  const djProfile = document.getElementById('dj_profile');
-  if (djProfile) {
-    // Buscar si hay una imagen existente
-    const existingImg = djProfile.querySelector('img');
-    if (existingImg) {
-      // Verificar si ya es la imagen local para evitar bucles
-      if (!existingImg.src.includes('img/autodj.png') && !existingImg.src.endsWith('autodj.png')) {
-        existingImg.src = 'img/autodj.png';
-        existingImg.alt = 'Auto DJ';
-      }
-    } else {
-      // Crear nueva imagen si no existe
-      const newImg = document.createElement('img');
-      newImg.src = 'img/autodj.png';
-      newImg.alt = 'Auto DJ';
-      newImg.style.borderRadius = '50%';
-      newImg.style.border = '3px solid #8b8b8b';
-      newImg.style.objectFit = 'cover';
-      djProfile.innerHTML = '';
-      djProfile.appendChild(newImg);
-    }
-  }
+const djProfile = document.getElementById('dj_profile');
+if (djProfile) {
+// Buscar si hay una imagen existente
+const existingImg = djProfile.querySelector('img');
+if (existingImg) {
+// Verificar si ya es la imagen local para evitar bucles
+if (!existingImg.src.includes('img/autodj.png') && !existingImg.src.endsWith('autodj.png')) {
+existingImg.src = 'img/autodj.png';
+existingImg.alt = 'Auto DJ';
 }
-
+} else {
+// Crear nueva imagen si no existe
+const newImg = document.createElement('img');
+newImg.src = 'img/autodj.png';
+newImg.alt = 'Auto DJ';
+newImg.style.borderRadius = '50%';
+newImg.style.border = '3px solid #8b8b8b';
+newImg.style.objectFit = 'cover';
+djProfile.innerHTML = '';
+djProfile.appendChild(newImg);
+}
+}
+}
 // Configurar observadores para sincronizar data-text cuando el widget actualice el contenido
 function setupGlitchObservers() {
-  // Observer para el título de la canción
-  if (sonicTitle) {
-    const titleObserver = new MutationObserver(() => {
-      updateGlitchDataText(sonicTitle);
-      // Activar glitch intenso ocasionalmente (30% de probabilidad)
-      if (Math.random() < 0.3) {
-        triggerRandomGlitch(sonicTitle);
-      }
-    });
-    titleObserver.observe(sonicTitle, { childList: true, characterData: true, subtree: true });
-    // Inicializar
-    updateGlitchDataText(sonicTitle);
-  }
-  
-  // Observer para el nombre del DJ
-  if (sonicDj) {
-    const djObserver = new MutationObserver(() => {
-      // Primero actualizar el atributo data-text con el valor original del widget
-      updateGlitchDataText(sonicDj);
-      
-      // Verificar si es "NO DJ" y reemplazar por "Auto DJ" + imagen local
-      checkAndReplaceNoDJ();
-      
-      if (Math.random() < 0.3) {
-        triggerRandomGlitch(sonicDj);
-      }
-    });
-    djObserver.observe(sonicDj, { childList: true, characterData: true, subtree: true });
-    // Inicializar
-    updateGlitchDataText(sonicDj);
-    checkAndReplaceNoDJ(); // Verificación inicial al cargar
-  }
-  
-  // Observer adicional para el contenedor del perfil del DJ para detectar cambios de imagen
-  const djProfile = document.getElementById('dj_profile');
-  if (djProfile) {
-    const profileObserver = new MutationObserver(() => {
-      // Si el nombre del DJ actual es "NO DJ", mantener la imagen local
-      if (sonicDj && sonicDj.textContent.trim().toUpperCase().includes('NO DJ')) {
-        replaceDjImageWithLocal();
-      }
-    });
-    profileObserver.observe(djProfile, { childList: true, subtree: true });
-  }
+// Observer para el título de la canción
+if (sonicTitle) {
+const titleObserver = new MutationObserver(() => {
+updateGlitchDataText(sonicTitle);
+// Activar glitch intenso ocasionalmente (30% de probabilidad)
+if (Math.random() < 0.3) {
+triggerRandomGlitch(sonicTitle);
 }
-
+});
+titleObserver.observe(sonicTitle, { childList: true, characterData: true, subtree: true });
+// Inicializar
+updateGlitchDataText(sonicTitle);
+}
+// Observer para el nombre del DJ
+if (sonicDj) {
+const djObserver = new MutationObserver(() => {
+// Primero actualizar el atributo data-text con el valor original del widget
+updateGlitchDataText(sonicDj);
+// Verificar si es "NO DJ" y reemplazar por "Auto DJ" + imagen local
+checkAndReplaceNoDJ();
+if (Math.random() < 0.3) {
+triggerRandomGlitch(sonicDj);
+}
+});
+djObserver.observe(sonicDj, { childList: true, characterData: true, subtree: true });
+// Inicializar
+updateGlitchDataText(sonicDj);
+checkAndReplaceNoDJ(); // Verificación inicial al cargar
+}
+// Observer adicional para el contenedor del perfil del DJ para detectar cambios de imagen
+const djProfile = document.getElementById('dj_profile');
+if (djProfile) {
+const profileObserver = new MutationObserver(() => {
+// Si el nombre del DJ actual es "NO DJ", mantener la imagen local
+if (sonicDj && sonicDj.textContent.trim().toUpperCase().includes('NO DJ')) {
+replaceDjImageWithLocal();
+}
+});
+profileObserver.observe(djProfile, { childList: true, subtree: true });
+}
+}
 // Función para actualizar la portada
 function updateAlbumArtBackground() {
 setTimeout(() => {
@@ -1358,7 +1332,6 @@ albumArtBg.style.opacity = '0.4';
 }
 }, 500);
 }
-
 // Configurar el grafo de audio (conexiones) - SOLO UNA VEZ
 function setupAudioGraph() {
 if (audioGraphSetup || !audioContext) return;
@@ -1379,14 +1352,12 @@ console.error("✗ Error configurando el grafo de audio:", e);
 alert("Error al inicializar el reproductor de audio. Por favor recarga la página.");
 }
 }
-
 // Iniciar visualización
 function startVisualizer() {
 if (isVisualizing || !analyzer) return;
 isVisualizing = true;
 visualize();
 }
-
 // Detener visualización
 function stopVisualizer() {
 isVisualizing = false;
@@ -1400,7 +1371,6 @@ bar.style.boxShadow = '0 0 5px rgba(0, 255, 65, 0.5)';
 bar.style.background = 'linear-gradient(to top, #00ff41, #bd00ff)';
 });
 }
-
 // Visualización en tiempo real - SOLO VERDES Y MORADOS
 function visualize() {
 if (!isVisualizing || !analyzer || !isPlaying) {
@@ -1446,7 +1416,6 @@ bars[i].style.background = 'linear-gradient(to top, #008822, #7a00cc)';
 }
 animationId = requestAnimationFrame(visualize);
 }
-
 // Alternar reproducción - CORREGIDO PARA AUTOPLAY
 function togglePlayPause() {
 if (!isPlaying) {
@@ -1509,12 +1478,10 @@ stopVisualizer();
 console.log("⏸ Reproducción pausada");
 }
 }
-
 // Control de volumen
 function changeVolume() {
 audio.volume = parseFloat(volumeSlider.value);
 }
-
 // Animación de cintas
 function startTapeAnimation() {
 tapeLeft.classList.add('animated');
@@ -1524,11 +1491,9 @@ function stopTapeAnimation() {
 tapeLeft.classList.remove('animated');
 tapeRight.classList.remove('animated');
 }
-
 // Event listeners
 playPauseBtn.addEventListener('click', togglePlayPause);
 volumeSlider.addEventListener('input', changeVolume);
-
 // Actualizar widget cada 10 segundos
 setInterval(function() {
 const script = document.getElementById('sonic_js');
@@ -1540,17 +1505,15 @@ script.parentNode.replaceChild(newScript, script);
 updateAlbumArtBackground();
 // Verificar NO DJ después de actualizar el widget
 setTimeout(() => {
-  checkAndReplaceNoDJ();
+checkAndReplaceNoDJ();
 }, 600);
 }, 10000);
-
 // Inicializar al cargar
 window.addEventListener('load', function() {
 updateAlbumArtBackground();
 setupGlitchObservers(); // ← Inicializar observadores de glitch y NO DJ
 console.log("🎧 Castle Radio cargado. Haz clic en PLAY para iniciar.");
 });
-
 // Manejar eventos de audio
 audio.addEventListener('ended', () => {
 isPlaying = false;
@@ -1580,7 +1543,6 @@ stopTapeAnimation();
 alert('Error crítico en el stream. Verifica tu conexión o intenta más tarde.');
 }
 });
-
 // Manejo para dispositivos móviles (iOS)
 document.body.addEventListener('touchstart', function initMobile() {
 if (!audioContext && typeof window.AudioContext !== 'undefined') {
