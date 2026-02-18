@@ -22,7 +22,7 @@ position: relative;
 }
 
 /* ============================================ */
-/* NUEVO: CUADRÍCULA DE FONDO EN MOVIMIENTO */
+/* CUADRÍCULA DE FONDO EN MOVIMIENTO (MANTENIDA) */
 /* ============================================ */
 .background-grid {
 position: fixed;
@@ -31,12 +31,10 @@ left: 0;
 width: 100%;
 height: 100%;
 z-index: -1;
-/* Líneas grises muy finas (1px) con baja opacidad */
 background-image: 
     linear-gradient(rgba(120, 120, 120, 0.15) 1px, transparent 1px),
     linear-gradient(90deg, rgba(120, 120, 120, 0.15) 1px, transparent 1px);
 background-size: 40px 40px;
-/* Animación para simular movimiento aleatorio */
 animation: gridRandomMove 30s linear infinite;
 pointer-events: none;
 }
@@ -56,7 +54,7 @@ background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
 padding: 1.5rem;
 text-align: center;
 position: relative;
-z-index: 10; /* Asegura que la cabecera cubra la cuadrícula */
+z-index: 10;
 }
 h1 {
 font-family: 'Orbitron', sans-serif;
@@ -64,16 +62,17 @@ font-weight: 900;
 font-size: 3rem;
 letter-spacing: 3px;
 text-transform: uppercase;
-background: linear-gradient(to right, #00ff41, #bd00ff);
+/* MODIFICADO: Degradado de Morado a Verde */
+background: linear-gradient(to right, #bd00ff, #00ff41);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
-text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+text-shadow: 0 0 10px rgba(189, 0, 255, 0.5);
 animation: glow 2s ease-in-out infinite alternate;
 margin: 0;
 }
 @keyframes glow {
-from { text-shadow: 0 0 10px rgba(0, 255, 65, 0.5); }
-to { text-shadow: 0 0 20px rgba(0, 255, 65, 0.8), 0 0 30px rgba(189, 0, 255, 0.6); }
+from { text-shadow: 0 0 10px rgba(189, 0, 255, 0.5); }
+to { text-shadow: 0 0 20px rgba(189, 0, 255, 0.8), 0 0 30px rgba(0, 255, 65, 0.6); }
 }
 /* Tira LED debajo de la cabecera */
 .led-strip-top {
@@ -157,7 +156,30 @@ position: relative;
 overflow: hidden;
 display: flex;
 flex-direction: column;
+/* Variable para controlar la intensidad de la luz de neón */
+--neon-opacity: 0.4;
 }
+/* ============================================ */
+/* NUEVO: LUZ DE NEÓN GIRATORIA ALREDEDOR DEL CASSETTE */
+/* ============================================ */
+.cassette-player::after {
+content: '';
+position: absolute;
+top: -4px; left: -4px; right: -4px; bottom: -4px;
+border-radius: 24px;
+background: conic-gradient(#bd00ff, #00ff41, #bd00ff, #00ff41, #bd00ff);
+z-index: -1;
+animation: spin-neon 4s linear infinite;
+opacity: var(--neon-opacity);
+filter: blur(8px);
+transition: opacity 0.1s ease;
+}
+@keyframes spin-neon {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+/* ============================================ */
+
 .cassette-player::before {
 content: '';
 position: absolute;
@@ -219,7 +241,6 @@ position: relative;
 display: inline-block;
 max-width: 100%;
 word-break: break-word;
-/* Mantenemos el glow original como base */
 text-shadow: 0 0 8px rgba(189, 0, 255, 0.9), 0 0 15px rgba(0, 255, 65, 0.7);
 animation: title-glow 2.5s ease-in-out infinite alternate;
 }
@@ -681,7 +702,7 @@ margin-bottom: 8px;
 color: #00ff41;
 font-family: 'Orbitron', sans-serif;
 font-weight: 900;
-font-size: 1.1rem; /* MÁS PEQUEÑO */
+font-size: 1.1rem;
 text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
 }
 .volume-slider {
@@ -786,13 +807,19 @@ vertical-align: middle;
 }
 /* Pie de página */
 footer {
-/* MODIFICADO: Fondo semi-transparente para mostrar la cuadrícula */
-background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(13, 13, 13, 0.9) 100%);
-padding: 2rem;
+/* MODIFICADO: Fondo sólido igual a la cabecera, sin transparencia */
+background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+/* MODIFICADO: Padding reducido para menor altura */
+padding: 1rem;
 text-align: center;
 position: relative;
 overflow: hidden;
 z-index: 1;
+/* Asegurar que el contenido se ajuste sin espacio extra */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
 }
 .led-strip-bottom {
 height: 8px;
@@ -809,14 +836,15 @@ position: relative;
 .social-links {
 display: flex;
 justify-content: center;
-gap: 2rem;
-margin-bottom: 1rem;
+gap: 1.5rem;
+margin-bottom: 0.8rem;
 flex-wrap: wrap;
 }
+/* MODIFICADO: Botones más pequeños (40px) */
 .social-link {
 display: inline-block;
-width: 50px;
-height: 50px;
+width: 40px;
+height: 40px;
 border-radius: 50%;
 background: linear-gradient(135deg, #00ff41, #bd00ff);
 display: flex;
@@ -826,7 +854,7 @@ text-decoration: none;
 color: white;
 font-family: 'Orbitron', sans-serif;
 font-weight: 900;
-font-size: 1.5rem;
+font-size: 1.2rem;
 transition: all 0.3s ease;
 box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
 }
@@ -838,7 +866,7 @@ box-shadow: 0 0 25px rgba(0, 255, 65, 0.5);
 color: #888;
 font-family: 'Orbitron', sans-serif;
 font-weight: 900;
-font-size: 0.9rem;
+font-size: 0.8rem;
 }
 /* Responsive */
 @media (max-width: 768px) {
@@ -936,7 +964,7 @@ height: 343.6125px !important;
 font-size: 1.5rem;
 }
 .social-links {
-gap: 1.5rem;
+gap: 1rem;
 }
 }
 @media (max-width: 480px) {
@@ -1036,12 +1064,12 @@ height: 229.125px !important;
 font-size: 1.5rem;
 }
 .social-links {
-gap: 1rem;
+gap: 0.8rem;
 }
 .social-link {
-width: 40px;
-height: 40px;
-font-size: 1.2rem;
+width: 35px;
+height: 35px;
+font-size: 1rem;
 }
 }
 @media (max-width: 320px) {
@@ -1144,7 +1172,7 @@ font-size: 1.5rem;
 <div class="main-container">
 <section class="player-section">
 <h2 class="section-title player-title">Reproductor</h2>
-<div class="cassette-player">
+<div class="cassette-player" id="cassette-player">
 <div class="album-art-bg" id="album-art-bg"></div>
 <div class="cassette-content">
 <!-- Título de canción DENTRO DEL CASSETTE, EN LA PARTE SUPERIOR - MÁS GRANDE -->
@@ -1202,9 +1230,11 @@ Emite: <div id='sonic_dj' class="cyber-glitch" data-text="" style="color: #00ff4
 <div class="led-strip-bottom"></div>
 <footer>
 <div class="social-links">
-<a href="#" class="social-link" style="background: linear-gradient(135deg, #00ff41, #bd00ff);">f</a>
-<a href="#" class="social-link" style="background: linear-gradient(135deg, #00ff41, #bd00ff);">i</a>
-<a href="#" class="social-link" style="background: linear-gradient(135deg, #00ff41, #bd00ff);">@</a>
+<!-- MODIFICADO: 4 Botones más pequeños con iniciales -->
+<a href="#" class="social-link" title="Telegram">T</a>
+<a href="#" class="social-link" title="Tiktok">Tk</a>
+<a href="#" class="social-link" title="Staff">S</a>
+<a href="#" class="social-link" title="Chat">C</a>
 </div>
 <div class="copyright">
 &copy; 2026 Castle Radio - Todos los derechos reservados
@@ -1225,6 +1255,7 @@ const bars = document.querySelectorAll('.bar');
 const streamUrl = 'https://sonic.sistemahost.es/8008/stream  ';
 const sonicTitle = document.getElementById('sonic_title');
 const sonicDj = document.getElementById('sonic_dj');
+const cassettePlayer = document.getElementById('cassette-player');
 // Variables de estado
 let isPlaying = false;
 let audioContext = null;
@@ -1399,6 +1430,10 @@ bar.style.height = '2px';
 bar.style.boxShadow = '0 0 5px rgba(0, 255, 65, 0.5)';
 bar.style.background = 'linear-gradient(to top, #00ff41, #bd00ff)';
 });
+// Reset cassette light
+if(cassettePlayer) {
+cassettePlayer.style.setProperty('--neon-opacity', '0.4');
+}
 }
 // Visualización en tiempo real - SOLO VERDES Y MORADOS
 function visualize() {
@@ -1409,6 +1444,23 @@ return;
 analyzer.getByteFrequencyData(dataArray);
 const totalBins = dataArray.length;
 const binsPerBar = totalBins / barCount;
+
+// ============================================
+// CÁLCULO DE BAJOS PARA LUZ DEL CASSETTE
+// ============================================
+// Tomamos los primeros 10 bins (graves)
+let bassSum = 0;
+for(let i = 0; i < 10; i++) {
+bassSum += dataArray[i];
+}
+const bassAvg = bassSum / 10;
+// Mapear 0-255 a 0.4-1.0 de opacidad
+const bassIntensity = 0.4 + (Math.min(bassAvg, 255) / 255) * 0.6;
+if(cassettePlayer) {
+cassettePlayer.style.setProperty('--neon-opacity', bassIntensity);
+}
+// ============================================
+
 for (let i = 0; i < barCount; i++) {
 const startBin = Math.floor(i * binsPerBar);
 const endBin = Math.floor((i + 1) * binsPerBar);
