@@ -62,7 +62,6 @@ font-weight: 900;
 font-size: 3rem;
 letter-spacing: 3px;
 text-transform: uppercase;
-/* CORREGIDO: Degradado compatible con todos los navegadores PC */
 background: linear-gradient(to right, #bd00ff, #00ff41);
 -webkit-background-clip: text;
 background-clip: text;
@@ -71,35 +70,24 @@ text-fill-color: transparent;
 text-shadow: 0 0 10px rgba(189, 0, 255, 0.5);
 animation: glow 2s ease-in-out infinite alternate;
 margin: 0;
-/* Asegurar que el degradado se renderice correctamente */
 display: inline-block;
 }
 @keyframes glow {
 from { text-shadow: 0 0 10px rgba(189, 0, 255, 0.5); }
 to { text-shadow: 0 0 20px rgba(189, 0, 255, 0.8), 0 0 30px rgba(0, 255, 65, 0.6); }
 }
-/* Tira LED debajo de la cabecera */
-.led-strip-top {
+
+/* Tira LED debajo de la cabecera - MODIFICADA PARA RITMO MUSICAL */
+.led-strip-top,
+.led-strip-bottom {
 height: 8px;
-background: linear-gradient(90deg,
-#0000ff 0%,
-#00ff41 25%,
-#bd00ff 50%,
-#00ff41 75%,
-#0000ff 100%);
-background-size: 200% 100%;
-animation: led-animation 3s linear infinite;
+background: #8b8b8b;
 position: relative;
 z-index: 10;
+transition: background 0.05s ease, box-shadow 0.05s ease;
+box-shadow: 0 0 0 rgba(139, 139, 139, 0);
 }
-@keyframes led-animation {
-0% {
-background-position: 0% 50%;
-}
-100% {
-background-position: 200% 50%;
-}
-}
+
 /* Contenido principal */
 .main-container {
 display: flex;
@@ -146,7 +134,8 @@ padding-bottom: 0.5rem;
 color: #bd00ff;
 padding-bottom: 0.5rem;
 }
-/* Cassette Player - Restaurado al original */
+
+/* Cassette Player */
 .cassette-player {
 width: 95%;
 max-width: 575px;
@@ -171,6 +160,7 @@ height: 8px;
 background: linear-gradient(90deg, #00ff41, #bd00ff, #00ff41);
 opacity: 0.8;
 }
+
 /* Fondo difuminado de la portada */
 .album-art-bg {
 position: absolute;
@@ -184,6 +174,7 @@ opacity: 0.4;
 filter: blur(3px);
 z-index: 1;
 }
+
 .cassette-content {
 position: relative;
 z-index: 2;
@@ -193,7 +184,8 @@ flex-direction: column;
 justify-content: space-between;
 gap: 15px;
 }
-/* Song Info - DENTRO DEL CASSETTE EN LA PARTE SUPERIOR - MÁS GRANDE */
+
+/* Song Info */
 .song-info {
 width: 100%;
 text-align: center;
@@ -210,8 +202,9 @@ justify-content: center;
 padding: 0 5px;
 letter-spacing: 1.5px;
 }
+
 /* ============================================ */
-/* EFECTO GLITCH CYBERPUNK - ADAPTADO */
+/* EFECTO GLITCH CYBERPUNK */
 /* ============================================ */
 :root {
 --pink-neon: #bd00ff;
@@ -251,7 +244,6 @@ animation: glitch-shift-2 2.7s infinite;
 z-index: -2;
 opacity: 0.85;
 }
-/* Clases para efectos intensos (se activan con JS) */
 .cyber-glitch.flash {
 animation: glitch-flash 1s 1, title-glow 2.5s ease-in-out infinite alternate;
 }
@@ -317,6 +309,7 @@ font-size: 1.4rem;
 text-align: center;
 letter-spacing: 1.5px;
 }
+
 .cassette-tapes {
 display: flex;
 justify-content: center;
@@ -329,6 +322,7 @@ width: 100%;
 padding: 0 10px;
 gap: 12px;
 }
+
 .tape-reel {
 width: 85px;
 height: 85px;
@@ -356,7 +350,8 @@ aspect-ratio: 1 / 1;
 0% { transform: rotate(0deg); }
 100% { transform: rotate(360deg); }
 }
-/* Detalles del carrete - BASE */
+
+/* Detalles del carrete */
 .tape-reel::before {
 content: '';
 position: absolute;
@@ -397,6 +392,7 @@ z-index: 1;
 .tape-reel span:nth-child(2) { transform: rotate(135deg) translate(23px, -5px); }
 .tape-reel span:nth-child(3) { transform: rotate(225deg) translate(23px, -5px); }
 .tape-reel span:nth-child(4) { transform: rotate(315deg) translate(23px, -5px); }
+
 /* CARRETE IZQUIERDO - MORADO CYBERPUNK */
 #tape-left {
 border-color: #bd00ff;
@@ -426,7 +422,6 @@ inset 0 0 6px rgba(0, 0, 0, 0.9),
 background: #bd00ff;
 box-shadow: 0 0 5px rgba(189, 0, 255, 0.8);
 }
-/* Efecto de iluminación pulsante para carrete izquierdo cuando reproduce */
 #tape-left.animated {
 box-shadow:
 inset 0 0 12px rgba(0, 0, 0, 0.9),
@@ -439,6 +434,7 @@ animation: fastSpin 4s linear infinite, purple-pulse 1.5s ease-in-out infinite;
 0%, 100% { box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 20px rgba(189,0,255,0.7), 0 0 35px rgba(189,0,255,0.5); }
 50% { box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 25px rgba(189,0,255,0.9), 0 0 45px rgba(189,0,255,0.7); }
 }
+
 /* CARRETE DERECHO - VERDE CYBERPUNK */
 #tape-right {
 border-color: #00ff41;
@@ -468,7 +464,6 @@ inset 0 0 6px rgba(0, 0, 0, 0.9),
 background: #00ff41;
 box-shadow: 0 0 5px rgba(0, 255, 65, 0.8);
 }
-/* Efecto de iluminación pulsante para carrete derecho cuando reproduce */
 #tape-right.animated {
 box-shadow:
 inset 0 0 12px rgba(0, 0, 0, 0.9),
@@ -481,6 +476,7 @@ animation: fastSpin 4s linear infinite, green-pulse 1.5s ease-in-out infinite;
 0%, 100% { box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 20px rgba(0,255,65,0.7), 0 0 35px rgba(0,255,65,0.5); }
 50% { box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 25px rgba(0,255,65,0.9), 0 0 45px rgba(0,255,65,0.7); }
 }
+
 .tape-reel.animated {
 animation: fastSpin 4s linear infinite;
 }
@@ -488,6 +484,7 @@ animation: fastSpin 4s linear infinite;
 0% { transform: rotate(0deg); }
 100% { transform: rotate(720deg); }
 }
+
 .cassette-center {
 width: 170px;
 height: 118px;
@@ -506,7 +503,7 @@ inset 0 0 15px rgba(0, 0, 0, 0.7),
 0 0 8px rgba(139, 139, 139, 0.4);
 overflow: hidden;
 }
-/* Ranura de la cinta - ahora entre los dos compartimentos */
+
 .cassette-center::before {
 content: '';
 position: absolute;
@@ -522,7 +519,7 @@ inset 0 1px 2px rgba(255, 255, 255, 0.2),
 0 1px 3px rgba(0, 0, 0, 0.7);
 z-index: 5;
 }
-/* Compartimento superior - Botón de Play */
+
 .button-compartment {
 height: 50%;
 width: 100%;
@@ -533,7 +530,7 @@ position: relative;
 z-index: 6;
 padding: 5px 0;
 }
-/* Botón de Play estilo radio retro con toque cyberpunk */
+
 .play-btn {
 width: 85px;
 height: 33px;
@@ -612,7 +609,7 @@ background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
 border-radius: 3px;
 z-index: -1;
 }
-/* Compartimento inferior - Ecualizador */
+
 .equalizer-compartment {
 height: 50%;
 width: 100%;
@@ -623,7 +620,7 @@ position: relative;
 z-index: 4;
 padding-bottom: 8px;
 }
-/* Ecualizador REAL - BARRAS MÁS ANCHAS CON MÁS ESPACIO */
+
 .equalizer-container {
 width: 100%;
 height: 28px;
@@ -646,7 +643,6 @@ position: relative;
 transition: height 0.03s ease-out;
 flex: 1;
 }
-/* Efecto de "scan line" */
 .equalizer-container::after {
 content: '';
 position: absolute;
@@ -663,6 +659,7 @@ pointer-events: none;
 z-index: 6;
 opacity: 0.7;
 }
+
 /* Volume Control */
 .volume-control {
 width: 100%;
@@ -709,6 +706,7 @@ box-shadow:
 inset 0 0 5px rgba(0, 0, 0, 0.5);
 border: 2px solid #000;
 }
+
 /* Widget del DJ */
 #dj_profile {
 display: flex;
@@ -767,13 +765,13 @@ text-align: center;
 text-transform: uppercase;
 letter-spacing: 1px;
 }
-/* Estilo para el DJ con glitch */
 #sonic_dj.cyber-glitch {
 font-size: 1.5rem;
 margin-left: 10px;
 display: inline-block;
 vertical-align: middle;
 }
+
 /* Pie de página */
 footer {
 background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
@@ -787,18 +785,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 }
-.led-strip-bottom {
-height: 8px;
-background: linear-gradient(90deg,
-#0000ff 0%,
-#00ff41 25%,
-#bd00ff 50%,
-#00ff41 75%,
-#0000ff 100%);
-background-size: 200% 100%;
-animation: led-animation 3s linear infinite reverse;
-position: relative;
-}
+
 .social-links {
 display: flex;
 justify-content: center;
@@ -833,6 +820,7 @@ font-family: 'Orbitron', sans-serif;
 font-weight: 900;
 font-size: 0.8rem;
 }
+
 /* Responsive */
 @media (max-width: 768px) {
 .main-container {
@@ -1123,18 +1111,17 @@ font-size: 1.5rem;
 <div class="background-grid"></div>
 
 <!-- Script del widget -->
-<script id='sonic_js' data-port='8008' src='https://sonic.sistemahost.es/cp/widgets.js?r=122  '></script>
+<script id='sonic_js' data-port='8008' src='https://sonic.sistemahost.es/cp/widgets.js?r=122    '></script>
 <header>
 <h1>Castle Radio</h1>
 </header>
-<div class="led-strip-top"></div>
+<div class="led-strip-top" id="led-top"></div>
 <div class="main-container">
 <section class="player-section">
 <h2 class="section-title player-title">Reproductor</h2>
 <div class="cassette-player">
 <div class="album-art-bg" id="album-art-bg"></div>
 <div class="cassette-content">
-<!-- Título de canción DENTRO DEL CASSETTE, EN LA PARTE SUPERIOR - MÁS GRANDE -->
 <div class="song-info">
 <div id='sonic_title' class="cyber-glitch" data-text="Cargando canción...">Cargando canción...</div>
 </div>
@@ -1143,11 +1130,9 @@ font-size: 1.5rem;
 <span></span><span></span><span></span><span></span>
 </div>
 <div class="cassette-center">
-<!-- Compartimento superior: Botón de Play estilo retro -->
 <div class="button-compartment">
 <button class="play-btn" id="play-pause-btn">▶</button>
 </div>
-<!-- Compartimento inferior: Ecualizador -->
 <div class="equalizer-compartment">
 <div class="equalizer-container" id="equalizer">
 <div class="bar"></div>
@@ -1186,7 +1171,7 @@ Emite: <div id='sonic_dj' class="cyber-glitch" data-text="" style="color: #00ff4
 <div id='dj_profile'></div>
 </section>
 </div>
-<div class="led-strip-bottom"></div>
+<div class="led-strip-bottom" id="led-bottom"></div>
 <footer>
 <div class="social-links">
 <a href="#" class="social-link" title="Telegram">T</a>
@@ -1198,7 +1183,6 @@ Emite: <div id='sonic_dj' class="cyber-glitch" data-text="" style="color: #00ff4
 &copy; 2026 Castle Radio - Todos los derechos reservados
 </div>
 </footer>
-<!-- Audio con CORS configurado correctamente -->
 <audio id="radio-player" crossorigin="anonymous" preload="metadata"></audio>
 <script>
 // Elementos del DOM
@@ -1210,9 +1194,12 @@ const albumArtBg = document.getElementById('album-art-bg');
 const volumeSlider = document.getElementById('volume');
 const equalizer = document.getElementById('equalizer');
 const bars = document.querySelectorAll('.bar');
-const streamUrl = 'https://sonic.sistemahost.es/8008/stream  ';
+const streamUrl = 'https://sonic.sistemahost.es/8008/stream    ';
 const sonicTitle = document.getElementById('sonic_title');
 const sonicDj = document.getElementById('sonic_dj');
+const ledTop = document.getElementById('led-top');
+const ledBottom = document.getElementById('led-bottom');
+
 // Variables de estado
 let isPlaying = false;
 let audioContext = null;
@@ -1222,16 +1209,27 @@ let animationId = null;
 let isVisualizing = false;
 const barCount = bars.length;
 let audioGraphSetup = false;
+
+// Colores para las tiras LED
+const ledColors = ['#8b8b8b', '#bd00ff', '#00ff41']; // gris, morado, verde
+let ledColorIndex = 0;
+let lastBeatTime = 0;
+const beatThreshold = 180; // Umbral para detectar bombo
+const colorChangeThreshold = 3; // Cambiar color cada X beats detectados
+let beatCount = 0;
+
 // Configuración inicial
 audio.volume = 1.0;
 volumeSlider.value = 1.0;
 audio.crossOrigin = 'anonymous';
+
 // Función para actualizar el atributo data-text en elementos con glitch
 function updateGlitchDataText(element) {
 if (element && element.classList.contains('cyber-glitch')) {
 element.setAttribute('data-text', element.textContent.trim());
 }
 }
+
 // Función para activar efecto glitch intenso aleatorio
 function triggerRandomGlitch(element) {
 if (!element || !element.classList.contains('cyber-glitch')) return;
@@ -1244,6 +1242,7 @@ setTimeout(() => {
 element.classList.remove(randomEffect);
 }, 1000);
 }
+
 // ============================================
 // FUNCIONES PARA MANEJAR "NO DJ" → "Auto DJ"
 // ============================================
@@ -1326,6 +1325,76 @@ albumArtBg.style.opacity = '0.4';
 }
 }, 500);
 }
+
+// ============================================
+// FUNCIONES PARA TIRAS LED AL RITMO DE LA MÚSICA
+// ============================================
+function getBassIntensity() {
+if (!analyzer || !dataArray) return 0;
+// Analizar frecuencias bajas (bombo/kick drum: ~60-150Hz)
+// Con fftSize=512 y sampleRate~44100, cada bin es ~43Hz
+// Bins 0-3 cubren aproximadamente 0-172Hz
+let bassSum = 0;
+for (let i = 0; i < 4; i++) {
+bassSum += dataArray[i];
+}
+return bassSum / 4;
+}
+
+function updateLedStrips() {
+if (!isPlaying || !analyzer) {
+// Resetear a gris cuando no hay reproducción
+ledTop.style.background = '#8b8b8b';
+ledTop.style.boxShadow = '0 0 0 rgba(139, 139, 139, 0)';
+ledBottom.style.background = '#8b8b8b';
+ledBottom.style.boxShadow = '0 0 0 rgba(139, 139, 139, 0)';
+return;
+}
+
+const bassIntensity = getBassIntensity();
+const now = Date.now();
+
+// Detectar beat del bombo
+if (bassIntensity > beatThreshold && (now - lastBeatTime) > 150) {
+lastBeatTime = now;
+beatCount++;
+
+// Cambiar color cada cierto número de beats
+if (beatCount >= colorChangeThreshold) {
+ledColorIndex = (ledColorIndex + 1) % ledColors.length;
+beatCount = 0;
+}
+
+const currentColor = ledColors[ledColorIndex];
+const intensity = Math.min(bassIntensity / 255, 1);
+
+// Actualizar ambas tiras LED
+[ledTop, ledBottom].forEach(led => {
+led.style.background = currentColor;
+led.style.boxShadow = `
+0 0 ${8 + intensity * 12}px ${currentColor},
+0 0 ${15 + intensity * 20}px ${currentColor}80,
+inset 0 0 ${5 + intensity * 8}px rgba(255,255,255,${0.3 + intensity * 0.4})
+`;
+});
+} else {
+// Efecto de decaimiento suave cuando no hay beat
+const currentTop = ledTop.style.background || '#8b8b8b';
+const currentBottom = ledBottom.style.background || '#8b8b8b';
+
+// Mantener el color actual con intensidad reducida
+[ledTop, ledBottom].forEach(led => {
+const currentShadow = led.style.boxShadow;
+if (currentShadow && currentShadow.includes('px')) {
+led.style.boxShadow = currentShadow.replace(/[\d.]+px/g, match => {
+const val = parseFloat(match);
+return `${Math.max(val * 0.85, 0)}px`;
+});
+}
+});
+}
+}
+
 function setupAudioGraph() {
 if (audioGraphSetup || !audioContext) return;
 try {
@@ -1344,11 +1413,13 @@ console.error("✗ Error configurando el grafo de audio:", e);
 alert("Error al inicializar el reproductor de audio. Por favor recarga la página.");
 }
 }
+
 function startVisualizer() {
 if (isVisualizing || !analyzer) return;
 isVisualizing = true;
 visualize();
 }
+
 function stopVisualizer() {
 isVisualizing = false;
 if (animationId) {
@@ -1360,13 +1431,22 @@ bar.style.height = '2px';
 bar.style.boxShadow = '0 0 5px rgba(0, 255, 65, 0.5)';
 bar.style.background = 'linear-gradient(to top, #00ff41, #bd00ff)';
 });
+// Resetear LEDs
+ledTop.style.background = '#8b8b8b';
+ledTop.style.boxShadow = '0 0 0 rgba(139, 139, 139, 0)';
+ledBottom.style.background = '#8b8b8b';
+ledBottom.style.boxShadow = '0 0 0 rgba(139, 139, 139, 0)';
 }
+
 function visualize() {
 if (!isVisualizing || !analyzer || !isPlaying) {
 stopVisualizer();
 return;
 }
+
 analyzer.getByteFrequencyData(dataArray);
+
+// Actualizar ecualizador
 const totalBins = dataArray.length;
 const binsPerBar = totalBins / barCount;
 for (let i = 0; i < barCount; i++) {
@@ -1397,8 +1477,13 @@ bars[i].style.background = 'linear-gradient(to top, #00cc33, #9900ff)';
 bars[i].style.background = 'linear-gradient(to top, #008822, #7a00cc)';
 }
 }
+
+// Actualizar tiras LED al ritmo del bombo
+updateLedStrips();
+
 animationId = requestAnimationFrame(visualize);
 }
+
 function togglePlayPause() {
 if (!isPlaying) {
 if (audio.src !== streamUrl) {
@@ -1453,19 +1538,24 @@ stopVisualizer();
 console.log("⏸ Reproducción pausada");
 }
 }
+
 function changeVolume() {
 audio.volume = parseFloat(volumeSlider.value);
 }
+
 function startTapeAnimation() {
 tapeLeft.classList.add('animated');
 tapeRight.classList.add('animated');
 }
+
 function stopTapeAnimation() {
 tapeLeft.classList.remove('animated');
 tapeRight.classList.remove('animated');
 }
+
 playPauseBtn.addEventListener('click', togglePlayPause);
 volumeSlider.addEventListener('input', changeVolume);
+
 setInterval(function() {
 const script = document.getElementById('sonic_js');
 const newScript = document.createElement('script');
@@ -1478,11 +1568,13 @@ setTimeout(() => {
 checkAndReplaceNoDJ();
 }, 600);
 }, 10000);
+
 window.addEventListener('load', function() {
 updateAlbumArtBackground();
 setupGlitchObservers();
 console.log("🎧 Castle Radio cargado. Haz clic en PLAY para iniciar.");
 });
+
 audio.addEventListener('ended', () => {
 isPlaying = false;
 playPauseBtn.innerHTML = '▶';
@@ -1491,6 +1583,7 @@ stopTapeAnimation();
 stopVisualizer();
 console.log("⏹ Reproducción finalizada");
 });
+
 audio.addEventListener('pause', () => {
 if (isPlaying) {
 isPlaying = false;
@@ -1500,6 +1593,7 @@ stopTapeAnimation();
 stopVisualizer();
 }
 });
+
 audio.addEventListener('error', (e) => {
 console.error("✗ Error de audio:", e);
 stopVisualizer();
@@ -1511,6 +1605,7 @@ stopTapeAnimation();
 alert('Error crítico en el stream. Verifica tu conexión o intenta más tarde.');
 }
 });
+
 document.body.addEventListener('touchstart', function initMobile() {
 if (!audioContext && typeof window.AudioContext !== 'undefined') {
 audioContext = new AudioContext();
