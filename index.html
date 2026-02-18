@@ -62,7 +62,6 @@ font-weight: 900;
 font-size: 3rem;
 letter-spacing: 3px;
 text-transform: uppercase;
-/* Degradado de Morado a Verde */
 background: linear-gradient(to right, #bd00ff, #00ff41);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
@@ -153,42 +152,73 @@ border: 3px solid #8b8b8b;
 border-radius: 20px;
 padding: 1.5rem;
 position: relative;
-/* CORREGIDO: overflow visible para permitir que la luz se vea */
 overflow: visible;
 display: flex;
 flex-direction: column;
-/* Variable para controlar la intensidad de la luz de neón */
---neon-opacity: 0.8;
 }
 
 /* ============================================ */
-/* LUZ DE NEÓN GIRATORIA ALREDEDOR DEL CASSETTE (CORREGIDA) */
+/* TIRA LED GIRATORIA ALREDEDOR DEL CASSETTE */
 /* ============================================ */
-.cassette-player::after {
-content: '';
+.led-ring {
 position: absolute;
-/* Se extiende más allá del borde para ser visible */
-top: -6px; left: -6px; right: -6px; bottom: -6px;
+top: -8px;
+left: -8px;
+right: -8px;
+bottom: -8px;
 border-radius: 24px;
-/* Gradiente cónico para el efecto giratorio */
-background: conic-gradient(from 0deg, #bd00ff, #00ff41, #bd00ff, #00ff41, #bd00ff);
-z-index: -1; /* Detrás del contenido pero visible por los bordes */
-animation: spin-neon 4s linear infinite;
-opacity: var(--neon-opacity);
-/* Filtro blur para efecto neón difuso */
-filter: blur(10px);
-transition: opacity 0.1s ease;
+pointer-events: none;
+z-index: 100;
+overflow: hidden;
 }
-/* Capa interna para cubrir el centro y dejar solo el borde brillante */
-.cassette-player::before {
+
+.led-ring::before {
 content: '';
 position: absolute;
-top: -3px; left: -3px; right: -3px; bottom: -3px;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+border-radius: 24px;
+padding: 4px;
 background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-border-radius: 20px;
-z-index: 0;
+-webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+-webkit-mask-composite: xor;
+mask-composite: exclude;
 }
-@keyframes spin-neon {
+
+.led-strip {
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+border-radius: 24px;
+background: conic-gradient(
+    #bd00ff 0deg 30deg,
+    #0f0f0f 30deg 60deg,
+    #00ff41 60deg 90deg,
+    #0f0f0f 90deg 120deg,
+    #bd00ff 120deg 150deg,
+    #0f0f0f 150deg 180deg,
+    #00ff41 180deg 210deg,
+    #0f0f0f 210deg 240deg,
+    #bd00ff 240deg 270deg,
+    #0f0f0f 270deg 300deg,
+    #00ff41 300deg 330deg,
+    #0f0f0f 330deg 360deg
+);
+animation: spin-led 3s linear infinite;
+filter: drop-shadow(0 0 8px currentColor);
+}
+
+.led-strip.pulsing {
+filter: drop-shadow(0 0 15px currentColor) brightness(1.5);
+}
+
+@keyframes spin-led {
 0% { transform: rotate(0deg); }
 100% { transform: rotate(360deg); }
 }
@@ -275,7 +305,6 @@ animation: glitch-shift-2 2.7s infinite;
 z-index: -2;
 opacity: 0.85;
 }
-/* Clases para efectos intensos (se activan con JS) */
 .cyber-glitch.flash {
 animation: glitch-flash 1s 1, title-glow 2.5s ease-in-out infinite alternate;
 }
@@ -380,7 +409,6 @@ aspect-ratio: 1 / 1;
 0% { transform: rotate(0deg); }
 100% { transform: rotate(360deg); }
 }
-/* Detalles del carrete - BASE */
 .tape-reel::before {
 content: '';
 position: absolute;
@@ -421,7 +449,6 @@ z-index: 1;
 .tape-reel span:nth-child(2) { transform: rotate(135deg) translate(23px, -5px); }
 .tape-reel span:nth-child(3) { transform: rotate(225deg) translate(23px, -5px); }
 .tape-reel span:nth-child(4) { transform: rotate(315deg) translate(23px, -5px); }
-/* CARRETE IZQUIERDO - MORADO CYBERPUNK */
 #tape-left {
 border-color: #bd00ff;
 box-shadow:
@@ -450,7 +477,6 @@ inset 0 0 6px rgba(0, 0, 0, 0.9),
 background: #bd00ff;
 box-shadow: 0 0 5px rgba(189, 0, 255, 0.8);
 }
-/* Efecto de iluminación pulsante para carrete izquierdo cuando reproduce */
 #tape-left.animated {
 box-shadow:
 inset 0 0 12px rgba(0, 0, 0, 0.9),
@@ -463,7 +489,6 @@ animation: fastSpin 4s linear infinite, purple-pulse 1.5s ease-in-out infinite;
 0%, 100% { box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 20px rgba(189,0,255,0.7), 0 0 35px rgba(189,0,255,0.5); }
 50% { box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 25px rgba(189,0,255,0.9), 0 0 45px rgba(189,0,255,0.7); }
 }
-/* CARRETE DERECHO - VERDE CYBERPUNK */
 #tape-right {
 border-color: #00ff41;
 box-shadow:
@@ -492,7 +517,6 @@ inset 0 0 6px rgba(0, 0, 0, 0.9),
 background: #00ff41;
 box-shadow: 0 0 5px rgba(0, 255, 65, 0.8);
 }
-/* Efecto de iluminación pulsante para carrete derecho cuando reproduce */
 #tape-right.animated {
 box-shadow:
 inset 0 0 12px rgba(0, 0, 0, 0.9),
@@ -530,7 +554,6 @@ inset 0 0 15px rgba(0, 0, 0, 0.7),
 0 0 8px rgba(139, 139, 139, 0.4);
 overflow: hidden;
 }
-/* Ranura de la cinta - ahora entre los dos compartimentos */
 .cassette-center::before {
 content: '';
 position: absolute;
@@ -546,7 +569,6 @@ inset 0 1px 2px rgba(255, 255, 255, 0.2),
 0 1px 3px rgba(0, 0, 0, 0.7);
 z-index: 5;
 }
-/* Compartimento superior - Botón de Play */
 .button-compartment {
 height: 50%;
 width: 100%;
@@ -557,7 +579,6 @@ position: relative;
 z-index: 6;
 padding: 5px 0;
 }
-/* Botón de Play estilo radio retro con toque cyberpunk */
 .play-btn {
 width: 85px;
 height: 33px;
@@ -636,7 +657,6 @@ background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
 border-radius: 3px;
 z-index: -1;
 }
-/* Compartimento inferior - Ecualizador */
 .equalizer-compartment {
 height: 50%;
 width: 100%;
@@ -647,7 +667,6 @@ position: relative;
 z-index: 4;
 padding-bottom: 8px;
 }
-/* Ecualizador REAL - BARRAS MÁS ANCHAS CON MÁS ESPACIO */
 .equalizer-container {
 width: 100%;
 height: 28px;
@@ -670,7 +689,6 @@ position: relative;
 transition: height 0.03s ease-out;
 flex: 1;
 }
-/* Efecto de "scan line" */
 .equalizer-container::after {
 content: '';
 position: absolute;
@@ -687,7 +705,6 @@ pointer-events: none;
 z-index: 6;
 opacity: 0.7;
 }
-/* Volume Control */
 .volume-control {
 width: 100%;
 max-width: 402.5px;
@@ -733,7 +750,6 @@ box-shadow:
 inset 0 0 5px rgba(0, 0, 0, 0.5);
 border: 2px solid #000;
 }
-/* Widget del DJ */
 #dj_profile {
 display: flex;
 flex-direction: column;
@@ -791,7 +807,6 @@ text-align: center;
 text-transform: uppercase;
 letter-spacing: 1px;
 }
-/* Estilo para el DJ con glitch */
 #sonic_dj.cyber-glitch {
 font-size: 1.5rem;
 margin-left: 10px;
@@ -1156,9 +1171,12 @@ font-size: 1.5rem;
 <section class="player-section">
 <h2 class="section-title player-title">Reproductor</h2>
 <div class="cassette-player" id="cassette-player">
+<!-- TIRA LED GIRATORIA -->
+<div class="led-ring">
+<div class="led-strip" id="led-strip"></div>
+</div>
 <div class="album-art-bg" id="album-art-bg"></div>
 <div class="cassette-content">
-<!-- Título de canción DENTRO DEL CASSETTE, EN LA PARTE SUPERIOR - MÁS GRANDE -->
 <div class="song-info">
 <div id='sonic_title' class="cyber-glitch" data-text="Cargando canción...">Cargando canción...</div>
 </div>
@@ -1167,11 +1185,9 @@ font-size: 1.5rem;
 <span></span><span></span><span></span><span></span>
 </div>
 <div class="cassette-center">
-<!-- Compartimento superior: Botón de Play estilo retro -->
 <div class="button-compartment">
 <button class="play-btn" id="play-pause-btn">▶</button>
 </div>
-<!-- Compartimento inferior: Ecualizador -->
 <div class="equalizer-compartment">
 <div class="equalizer-container" id="equalizer">
 <div class="bar"></div>
@@ -1238,6 +1254,7 @@ const streamUrl = 'https://sonic.sistemahost.es/8008/stream  ';
 const sonicTitle = document.getElementById('sonic_title');
 const sonicDj = document.getElementById('sonic_dj');
 const cassettePlayer = document.getElementById('cassette-player');
+const ledStrip = document.getElementById('led-strip');
 // Variables de estado
 let isPlaying = false;
 let audioContext = null;
@@ -1262,13 +1279,9 @@ function triggerRandomGlitch(element) {
 if (!element || !element.classList.contains('cyber-glitch')) return;
 const effects = ['flash', 'pulse', 'chaos'];
 const randomEffect = effects[Math.floor(Math.random() * effects.length)];
-// Remover clases previas
 element.classList.remove('flash', 'pulse', 'chaos');
-// Forzar reflow para reiniciar animación
 void element.offsetWidth;
-// Agregar efecto aleatorio
 element.classList.add(randomEffect);
-// Remover la clase después de que termine la animación (1s)
 setTimeout(() => {
 element.classList.remove(randomEffect);
 }, 1000);
@@ -1276,36 +1289,28 @@ element.classList.remove(randomEffect);
 // ============================================
 // FUNCIONES PARA MANEJAR "NO DJ" → "Auto DJ"
 // ============================================
-// Función para verificar y reemplazar "NO DJ" por "Auto DJ"
 function checkAndReplaceNoDJ() {
 if (sonicDj) {
 const currentText = sonicDj.textContent.trim();
-// Detectar si contiene "NO DJ" (case-insensitive para mayor seguridad)
 if (currentText.toUpperCase().includes('NO DJ')) {
-// Reemplazar texto visualmente
 sonicDj.textContent = 'Auto DJ';
 updateGlitchDataText(sonicDj);
-// Cambiar imagen del DJ por la local
 replaceDjImageWithLocal();
 return true;
 }
 }
 return false;
 }
-// Función para reemplazar la imagen del DJ con la imagen local autodj.png
 function replaceDjImageWithLocal() {
 const djProfile = document.getElementById('dj_profile');
 if (djProfile) {
-// Buscar si hay una imagen existente
 const existingImg = djProfile.querySelector('img');
 if (existingImg) {
-// Verificar si ya es la imagen local para evitar bucles
 if (!existingImg.src.includes('img/autodj.png') && !existingImg.src.endsWith('autodj.png')) {
 existingImg.src = 'img/autodj.png';
 existingImg.alt = 'Auto DJ';
 }
 } else {
-// Crear nueva imagen si no existe
 const newImg = document.createElement('img');
 newImg.src = 'img/autodj.png';
 newImg.alt = 'Auto DJ';
@@ -1317,42 +1322,32 @@ djProfile.appendChild(newImg);
 }
 }
 }
-// Configurar observadores para sincronizar data-text cuando el widget actualice el contenido
 function setupGlitchObservers() {
-// Observer para el título de la canción
 if (sonicTitle) {
 const titleObserver = new MutationObserver(() => {
 updateGlitchDataText(sonicTitle);
-// Activar glitch intenso ocasionalmente (30% de probabilidad)
 if (Math.random() < 0.3) {
 triggerRandomGlitch(sonicTitle);
 }
 });
 titleObserver.observe(sonicTitle, { childList: true, characterData: true, subtree: true });
-// Inicializar
 updateGlitchDataText(sonicTitle);
 }
-// Observer para el nombre del DJ
 if (sonicDj) {
 const djObserver = new MutationObserver(() => {
-// Primero actualizar el atributo data-text con el valor original del widget
 updateGlitchDataText(sonicDj);
-// Verificar si es "NO DJ" y reemplazar por "Auto DJ" + imagen local
 checkAndReplaceNoDJ();
 if (Math.random() < 0.3) {
 triggerRandomGlitch(sonicDj);
 }
 });
 djObserver.observe(sonicDj, { childList: true, characterData: true, subtree: true });
-// Inicializar
 updateGlitchDataText(sonicDj);
-checkAndReplaceNoDJ(); // Verificación inicial al cargar
+checkAndReplaceNoDJ();
 }
-// Observer adicional para el contenedor del perfil del DJ para detectar cambios de imagen
 const djProfile = document.getElementById('dj_profile');
 if (djProfile) {
 const profileObserver = new MutationObserver(() => {
-// Si el nombre del DJ actual es "NO DJ", mantener la imagen local
 if (sonicDj && sonicDj.textContent.trim().toUpperCase().includes('NO DJ')) {
 replaceDjImageWithLocal();
 }
@@ -1360,7 +1355,6 @@ replaceDjImageWithLocal();
 profileObserver.observe(djProfile, { childList: true, subtree: true });
 }
 }
-// Función para actualizar la portada
 function updateAlbumArtBackground() {
 setTimeout(() => {
 const artContainer = document.getElementById('sonic_art_full');
@@ -1374,7 +1368,6 @@ albumArtBg.style.opacity = '0.4';
 }
 }, 500);
 }
-// Configurar el grafo de audio (conexiones) - SOLO UNA VEZ
 function setupAudioGraph() {
 if (audioGraphSetup || !audioContext) return;
 try {
@@ -1383,7 +1376,6 @@ analyzer.fftSize = 512;
 analyzer.smoothingTimeConstant = 0.7;
 const bufferLength = analyzer.frequencyBinCount;
 dataArray = new Uint8Array(bufferLength);
-// Conectar el audio al analizador
 const source = audioContext.createMediaElementSource(audio);
 source.connect(analyzer);
 analyzer.connect(audioContext.destination);
@@ -1394,13 +1386,11 @@ console.error("✗ Error configurando el grafo de audio:", e);
 alert("Error al inicializar el reproductor de audio. Por favor recarga la página.");
 }
 }
-// Iniciar visualización
 function startVisualizer() {
 if (isVisualizing || !analyzer) return;
 isVisualizing = true;
 visualize();
 }
-// Detener visualización
 function stopVisualizer() {
 isVisualizing = false;
 if (animationId) {
@@ -1412,12 +1402,12 @@ bar.style.height = '2px';
 bar.style.boxShadow = '0 0 5px rgba(0, 255, 65, 0.5)';
 bar.style.background = 'linear-gradient(to top, #00ff41, #bd00ff)';
 });
-// Reset cassette light
-if(cassettePlayer) {
-cassettePlayer.style.setProperty('--neon-opacity', '0.8');
+// Reset LED strip
+if(ledStrip) {
+ledStrip.classList.remove('pulsing');
+ledStrip.style.opacity = '1';
 }
 }
-// Visualización en tiempo real - SOLO VERDES Y MORADOS
 function visualize() {
 if (!isVisualizing || !analyzer || !isPlaying) {
 stopVisualizer();
@@ -1428,18 +1418,25 @@ const totalBins = dataArray.length;
 const binsPerBar = totalBins / barCount;
 
 // ============================================
-// CÁLCULO DE BAJOS PARA LUZ DEL CASSETTE
+// CÁLCULO DE BAJOS PARA TIRA LED
 // ============================================
-// Tomamos los primeros 10 bins (graves)
 let bassSum = 0;
 for(let i = 0; i < 10; i++) {
 bassSum += dataArray[i];
 }
 const bassAvg = bassSum / 10;
-// Mapear 0-255 a 0.8-1.0 de opacidad (más visible base)
-const bassIntensity = 0.8 + (Math.min(bassAvg, 255) / 255) * 0.2;
-if(cassettePlayer) {
-cassettePlayer.style.setProperty('--neon-opacity', bassIntensity);
+// Intensidad de los bajos (0-255)
+const bassIntensity = bassAvg / 255;
+
+// Pulsar la tira LED con los bajos
+if(ledStrip) {
+if(bassIntensity > 0.5) {
+ledStrip.classList.add('pulsing');
+ledStrip.style.opacity = '0.7' + (bassIntensity * 0.3);
+} else {
+ledStrip.classList.remove('pulsing');
+ledStrip.style.opacity = '1';
+}
 }
 // ============================================
 
@@ -1449,7 +1446,6 @@ const endBin = Math.floor((i + 1) * binsPerBar);
 let sum = 0;
 let count = 0;
 for (let j = startBin; j < endBin && j < totalBins; j++) {
-// Sensibilidad mejorada: Graves 1.4x, Medios 1.15x, Agudos 1.5x
 const weight = (i < 4) ? 1.4 : (i >= 8 ? 1.5 : 1.15);
 sum += dataArray[j] * weight;
 count++;
@@ -1459,34 +1455,26 @@ let height = Math.sqrt(avg) * 2.0;
 height = Math.min(height, 28);
 height = Math.max(height, 2);
 bars[i].style.height = `${height}px`;
-// Efecto de brillo según intensidad
 const glowFactor = Math.min(height / 28, 1);
 bars[i].style.boxShadow = `
 0 0 ${8 * glowFactor}px rgba(0, 255, 65, ${0.4 + glowFactor * 0.6}),
 0 0 ${12 * glowFactor}px rgba(189, 0, 255, ${0.4 * glowFactor})
 `;
-// PALETA EXCLUSIVA DE VERDES Y MORADOS
 if (height > 20) {
-// Alta intensidad: Verde brillante a morado eléctrico
 bars[i].style.background = 'linear-gradient(to top, #00ff41, #bd00ff)';
 } else if (height > 10) {
-// Media intensidad: Verde neón a morado profundo
 bars[i].style.background = 'linear-gradient(to top, #00cc33, #9900ff)';
 } else {
-// Baja intensidad: Verde suave a morado oscuro
 bars[i].style.background = 'linear-gradient(to top, #008822, #7a00cc)';
 }
 }
 animationId = requestAnimationFrame(visualize);
 }
-// Alternar reproducción - CORREGIDO PARA AUTOPLAY
 function togglePlayPause() {
 if (!isPlaying) {
-// 1. Configurar URL del stream
 if (audio.src !== streamUrl) {
 audio.src = streamUrl;
 }
-// 2. Crear AudioContext SI NO EXISTE (en gesto de usuario)
 if (!audioContext) {
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 if (window.AudioContext) {
@@ -1497,23 +1485,19 @@ alert("Tu navegador no soporta Web Audio API. Actualiza tu navegador.");
 return;
 }
 }
-// 3. Reanudar AudioContext si está suspendido
 if (audioContext.state === 'suspended') {
 audioContext.resume().then(() => {
 console.log("✓ AudioContext reanudado");
 }).catch(e => console.error("✗ Error al reanudar AudioContext:", e));
 }
-// 4. Configurar grafo de audio (solo primera vez)
 if (!audioGraphSetup) {
 setupAudioGraph();
 }
-// 5. Reproducir audio
 audio.play().then(() => {
 isPlaying = true;
 playPauseBtn.innerHTML = '❚❚';
 playPauseBtn.classList.add('playing');
 startTapeAnimation();
-// 6. INICIAR VISUALIZADOR SOLO CUANDO EL AUDIO ESTÁ REPRODUCIENDO
 if (analyzer) {
 startVisualizer();
 console.log("✓ Visualizador iniciado - Ecualizador activo");
@@ -1531,7 +1515,6 @@ errorMsg += error.message;
 alert(errorMsg);
 });
 } else {
-// Pausar
 audio.pause();
 isPlaying = false;
 playPauseBtn.innerHTML = '▶';
@@ -1541,11 +1524,9 @@ stopVisualizer();
 console.log("⏸ Reproducción pausada");
 }
 }
-// Control de volumen
 function changeVolume() {
 audio.volume = parseFloat(volumeSlider.value);
 }
-// Animación de cintas
 function startTapeAnimation() {
 tapeLeft.classList.add('animated');
 tapeRight.classList.add('animated');
@@ -1554,10 +1535,8 @@ function stopTapeAnimation() {
 tapeLeft.classList.remove('animated');
 tapeRight.classList.remove('animated');
 }
-// Event listeners
 playPauseBtn.addEventListener('click', togglePlayPause);
 volumeSlider.addEventListener('input', changeVolume);
-// Actualizar widget cada 10 segundos
 setInterval(function() {
 const script = document.getElementById('sonic_js');
 const newScript = document.createElement('script');
@@ -1566,18 +1545,15 @@ newScript.setAttribute('data-port', '8008');
 newScript.src = `https://sonic.sistemahost.es/cp/widgets.js?r=622=${new Date().getTime()}`;
 script.parentNode.replaceChild(newScript, script);
 updateAlbumArtBackground();
-// Verificar NO DJ después de actualizar el widget
 setTimeout(() => {
 checkAndReplaceNoDJ();
 }, 600);
 }, 10000);
-// Inicializar al cargar
 window.addEventListener('load', function() {
 updateAlbumArtBackground();
-setupGlitchObservers(); // ← Inicializar observadores de glitch y NO DJ
+setupGlitchObservers();
 console.log("🎧 Castle Radio cargado. Haz clic en PLAY para iniciar.");
 });
-// Manejar eventos de audio
 audio.addEventListener('ended', () => {
 isPlaying = false;
 playPauseBtn.innerHTML = '▶';
@@ -1606,7 +1582,6 @@ stopTapeAnimation();
 alert('Error crítico en el stream. Verifica tu conexión o intenta más tarde.');
 }
 });
-// Manejo para dispositivos móviles (iOS)
 document.body.addEventListener('touchstart', function initMobile() {
 if (!audioContext && typeof window.AudioContext !== 'undefined') {
 audioContext = new AudioContext();
