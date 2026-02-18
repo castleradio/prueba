@@ -1270,7 +1270,7 @@ function checkAndReplaceNoDJ() {
   return false;
 }
 
-// Función para reemplazar la imagen del DJ con la imagen local autodj.jpg
+// Función para reemplazar la imagen del DJ con la imagen local autodj.png
 function replaceDjImageWithLocal() {
   const djProfile = document.getElementById('dj_profile');
   if (djProfile) {
@@ -1278,8 +1278,8 @@ function replaceDjImageWithLocal() {
     const existingImg = djProfile.querySelector('img');
     if (existingImg) {
       // Verificar si ya es la imagen local para evitar bucles
-      if (!existingImg.src.includes('img/autodj.jpg') && !existingImg.src.endsWith('autodj.jpg')) {
-        existingImg.src = 'img/autodj.jpg';
+      if (!existingImg.src.includes('img/autodj.png') && !existingImg.src.endsWith('autodj.png')) {
+        existingImg.src = 'img/autodj.png';
         existingImg.alt = 'Auto DJ';
       }
     } else {
