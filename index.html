@@ -1114,7 +1114,7 @@ height: 171.5625px !important;
 </head>
 <body>
 <!-- Script del widget -->
-<script id='sonic_js' data-port='8008' src='https://sonic.sistemahost.es/cp/widgets.js?r=122'></script>
+<script id='sonic_js' data-port='8008' src='https://sonic.sistemahost.es/cp/widgets.js?r=122  '></script>
 <header>
 <h1>Castle Radio</h1>
 </header>
@@ -1200,7 +1200,7 @@ const albumArtBg = document.getElementById('album-art-bg');
 const volumeSlider = document.getElementById('volume');
 const equalizer = document.getElementById('equalizer');
 const bars = document.querySelectorAll('.bar');
-const streamUrl = 'https://sonic.sistemahost.es/8008/stream';
+const streamUrl = 'https://sonic.sistemahost.es/8008/stream  ';
 const sonicTitle = document.getElementById('sonic_title');
 const sonicDj = document.getElementById('sonic_dj');
 
@@ -1248,6 +1248,54 @@ function triggerRandomGlitch(element) {
   }, 1000);
 }
 
+// ============================================
+// FUNCIONES PARA MANEJAR "NO DJ" → "Auto DJ"
+// ============================================
+
+// Función para verificar y reemplazar "NO DJ" por "Auto DJ"
+function checkAndReplaceNoDJ() {
+  if (sonicDj) {
+    const currentText = sonicDj.textContent.trim();
+    // Detectar si contiene "NO DJ" (case-insensitive para mayor seguridad)
+    if (currentText.toUpperCase().includes('NO DJ')) {
+      // Reemplazar texto visualmente
+      sonicDj.textContent = 'Auto DJ';
+      updateGlitchDataText(sonicDj);
+      
+      // Cambiar imagen del DJ por la local
+      replaceDjImageWithLocal();
+      return true;
+    }
+  }
+  return false;
+}
+
+// Función para reemplazar la imagen del DJ con la imagen local autodj.jpg
+function replaceDjImageWithLocal() {
+  const djProfile = document.getElementById('dj_profile');
+  if (djProfile) {
+    // Buscar si hay una imagen existente
+    const existingImg = djProfile.querySelector('img');
+    if (existingImg) {
+      // Verificar si ya es la imagen local para evitar bucles
+      if (!existingImg.src.includes('img/autodj.jpg') && !existingImg.src.endsWith('autodj.jpg')) {
+        existingImg.src = 'img/autodj.jpg';
+        existingImg.alt = 'Auto DJ';
+      }
+    } else {
+      // Crear nueva imagen si no existe
+      const newImg = document.createElement('img');
+      newImg.src = 'img/autodj.jpg';
+      newImg.alt = 'Auto DJ';
+      newImg.style.borderRadius = '50%';
+      newImg.style.border = '3px solid #8b8b8b';
+      newImg.style.objectFit = 'cover';
+      djProfile.innerHTML = '';
+      djProfile.appendChild(newImg);
+    }
+  }
+}
+
 // Configurar observadores para sincronizar data-text cuando el widget actualice el contenido
 function setupGlitchObservers() {
   // Observer para el título de la canción
@@ -1267,7 +1315,12 @@ function setupGlitchObservers() {
   // Observer para el nombre del DJ
   if (sonicDj) {
     const djObserver = new MutationObserver(() => {
+      // Primero actualizar el atributo data-text con el valor original del widget
       updateGlitchDataText(sonicDj);
+      
+      // Verificar si es "NO DJ" y reemplazar por "Auto DJ" + imagen local
+      checkAndReplaceNoDJ();
+      
       if (Math.random() < 0.3) {
         triggerRandomGlitch(sonicDj);
       }
@@ -1275,6 +1328,19 @@ function setupGlitchObservers() {
     djObserver.observe(sonicDj, { childList: true, characterData: true, subtree: true });
     // Inicializar
     updateGlitchDataText(sonicDj);
+    checkAndReplaceNoDJ(); // Verificación inicial al cargar
+  }
+  
+  // Observer adicional para el contenedor del perfil del DJ para detectar cambios de imagen
+  const djProfile = document.getElementById('dj_profile');
+  if (djProfile) {
+    const profileObserver = new MutationObserver(() => {
+      // Si el nombre del DJ actual es "NO DJ", mantener la imagen local
+      if (sonicDj && sonicDj.textContent.trim().toUpperCase().includes('NO DJ')) {
+        replaceDjImageWithLocal();
+      }
+    });
+    profileObserver.observe(djProfile, { childList: true, subtree: true });
   }
 }
 
@@ -1472,12 +1538,16 @@ newScript.setAttribute('data-port', '8008');
 newScript.src = `https://sonic.sistemahost.es/cp/widgets.js?r=622=${new Date().getTime()}`;
 script.parentNode.replaceChild(newScript, script);
 updateAlbumArtBackground();
+// Verificar NO DJ después de actualizar el widget
+setTimeout(() => {
+  checkAndReplaceNoDJ();
+}, 600);
 }, 10000);
 
 // Inicializar al cargar
 window.addEventListener('load', function() {
 updateAlbumArtBackground();
-setupGlitchObservers(); // ← Inicializar observadores de glitch
+setupGlitchObservers(); // ← Inicializar observadores de glitch y NO DJ
 console.log("🎧 Castle Radio cargado. Haz clic en PLAY para iniciar.");
 });
 
