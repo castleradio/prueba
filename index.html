@@ -62,12 +62,17 @@ font-weight: 900;
 font-size: 3rem;
 letter-spacing: 3px;
 text-transform: uppercase;
+/* CORREGIDO: Degradado compatible con todos los navegadores PC */
 background: linear-gradient(to right, #bd00ff, #00ff41);
 -webkit-background-clip: text;
+background-clip: text;
 -webkit-text-fill-color: transparent;
+text-fill-color: transparent;
 text-shadow: 0 0 10px rgba(189, 0, 255, 0.5);
 animation: glow 2s ease-in-out infinite alternate;
 margin: 0;
+/* Asegurar que el degradado se renderice correctamente */
+display: inline-block;
 }
 @keyframes glow {
 from { text-shadow: 0 0 10px rgba(189, 0, 255, 0.5); }
