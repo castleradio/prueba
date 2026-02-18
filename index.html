@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Castle Radio</title>
+<title>Nexus Zone</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
 * {
@@ -56,28 +56,64 @@ text-align: center;
 position: relative;
 z-index: 10;
 }
+
+/* Título con efecto de encendido/apagado */
 h1 {
 font-family: 'Orbitron', sans-serif;
 font-weight: 900;
 font-size: 3rem;
 letter-spacing: 3px;
 text-transform: uppercase;
-background: linear-gradient(to right, #bd00ff, #00ff41);
--webkit-background-clip: text;
-background-clip: text;
--webkit-text-fill-color: transparent;
-text-fill-color: transparent;
-text-shadow: 0 0 10px rgba(189, 0, 255, 0.5);
-animation: glow 2s ease-in-out infinite alternate;
 margin: 0;
-display: inline-block;
-}
-@keyframes glow {
-from { text-shadow: 0 0 10px rgba(189, 0, 255, 0.5); }
-to { text-shadow: 0 0 20px rgba(189, 0, 255, 0.8), 0 0 30px rgba(0, 255, 65, 0.6); }
+display: inline-flex;
+gap: 8px;
+animation: power-flicker 4s infinite;
 }
 
-/* Tira LED debajo de la cabecera - MODIFICADA PARA RITMO MUSICAL */
+.nexus {
+color: #bd00ff;
+text-shadow: 0 0 10px rgba(189, 0, 255, 0.7), 0 0 20px rgba(189, 0, 255, 0.4);
+animation: neon-pulse-nexus 2s ease-in-out infinite alternate;
+}
+
+.zone {
+color: #00ff41;
+text-shadow: 0 0 10px rgba(0, 255, 65, 0.7), 0 0 20px rgba(0, 255, 65, 0.4);
+animation: neon-pulse-zone 2s ease-in-out infinite alternate;
+}
+
+@keyframes neon-pulse-nexus {
+from { 
+    text-shadow: 0 0 10px rgba(189, 0, 255, 0.7), 0 0 20px rgba(189, 0, 255, 0.4); 
+    opacity: 1;
+}
+to { 
+    text-shadow: 0 0 20px rgba(189, 0, 255, 1), 0 0 40px rgba(189, 0, 255, 0.8), 0 0 60px rgba(189, 0, 255, 0.6); 
+    opacity: 1;
+}
+}
+
+@keyframes neon-pulse-zone {
+from { 
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.7), 0 0 20px rgba(0, 255, 65, 0.4); 
+    opacity: 1;
+}
+to { 
+    text-shadow: 0 0 20px rgba(0, 255, 65, 1), 0 0 40px rgba(0, 255, 65, 0.8), 0 0 60px rgba(0, 255, 65, 0.6); 
+    opacity: 1;
+}
+}
+
+@keyframes power-flicker {
+0%, 100% { opacity: 1; }
+92% { opacity: 1; }
+93% { opacity: 0.3; }
+94% { opacity: 1; }
+95% { opacity: 0.1; }
+96% { opacity: 1; }
+}
+
+/* Tira LED debajo de la cabecera */
 .led-strip-top,
 .led-strip-bottom {
 height: 8px;
@@ -786,6 +822,43 @@ justify-content: center;
 align-items: center;
 }
 
+/* Texto del footer con estilo Nexus Zone */
+.footer-brand {
+display: inline-flex;
+gap: 4px;
+align-items: center;
+margin-bottom: 0.8rem;
+animation: power-flicker 5s infinite;
+}
+
+.footer-nexus {
+color: #bd00ff;
+font-family: 'Orbitron', sans-serif;
+font-weight: 900;
+font-size: 1rem;
+text-shadow: 0 0 8px rgba(189, 0, 255, 0.6);
+}
+
+.footer-zone {
+color: #00ff41;
+font-family: 'Orbitron', sans-serif;
+font-weight: 900;
+font-size: 1rem;
+text-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
+}
+
+.footer-separator {
+color: #888;
+margin: 0 8px;
+}
+
+.footer-credit {
+color: #888;
+font-family: 'Orbitron', sans-serif;
+font-weight: 900;
+font-size: 1rem;
+}
+
 .social-links {
 display: flex;
 justify-content: center;
@@ -814,11 +887,13 @@ box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
 transform: scale(1.1);
 box-shadow: 0 0 25px rgba(0, 255, 65, 0.5);
 }
+
 .copyright {
-color: #888;
+color: #666;
 font-family: 'Orbitron', sans-serif;
-font-weight: 900;
-font-size: 0.8rem;
+font-weight: 400;
+font-size: 0.7rem;
+margin-top: 0.5rem;
 }
 
 /* Responsive */
@@ -1020,6 +1095,13 @@ width: 35px;
 height: 35px;
 font-size: 1rem;
 }
+.footer-brand {
+flex-wrap: wrap;
+justify-content: center;
+}
+.footer-nexus, .footer-zone, .footer-credit {
+font-size: 0.9rem;
+}
 }
 @media (max-width: 320px) {
 h1 {
@@ -1113,7 +1195,7 @@ font-size: 1.5rem;
 <!-- Script del widget -->
 <script id='sonic_js' data-port='8008' src='https://sonic.sistemahost.es/cp/widgets.js?r=122    '></script>
 <header>
-<h1>Castle Radio</h1>
+<h1><span class="nexus">Nexus</span> <span class="zone">Zone</span></h1>
 </header>
 <div class="led-strip-top" id="led-top"></div>
 <div class="main-container">
@@ -1180,7 +1262,11 @@ Emite: <div id='sonic_dj' class="cyber-glitch" data-text="" style="color: #00ff4
 <a href="#" class="social-link" title="Chat">C</a>
 </div>
 <div class="copyright">
-&copy; 2026 Castle Radio - Todos los derechos reservados
+<span class="footer-brand">
+<span class="footer-nexus">Nexus</span><span class="footer-zone">Zone</span>
+</span>
+<span class="footer-separator">|</span>
+<span class="footer-credit">Dobby DS</span>
 </div>
 </footer>
 <audio id="radio-player" crossorigin="anonymous" preload="metadata"></audio>
@@ -1572,7 +1658,7 @@ checkAndReplaceNoDJ();
 window.addEventListener('load', function() {
 updateAlbumArtBackground();
 setupGlitchObservers();
-console.log("🎧 Castle Radio cargado. Haz clic en PLAY para iniciar.");
+console.log("🎧 Nexus Zone cargado. Haz clic en PLAY para iniciar.");
 });
 
 audio.addEventListener('ended', () => {
