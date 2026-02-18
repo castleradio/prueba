@@ -13,19 +13,28 @@ box-sizing: border-box;
 }
 body {
 font-family: 'Orbitron', sans-serif;
-/* Nuevo fondo con degradado suave y cuadrícula fina */
-background-color: #1a1a1a;
+/* Fondo Cyberpunk Retro Elegante */
+background-color: #0a0a0f;
 background-image: 
-    /* Cuadrícula horizontal */
-    linear-gradient(rgba(100, 100, 100, 0.15) 1px, transparent 1px),
-    /* Cuadrícula vertical */
-    linear-gradient(90deg, rgba(100, 100, 100, 0.15) 1px, transparent 1px),
-    /* Degradado principal: Morado oscuro arriba-izq, Verde oscuro abajo-der, Mezcla en el centro */
-    linear-gradient(135deg, #3a003a 0%, #003a00 100%);
+    /* Scanlines efecto CRT muy sutil */
+    repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15) 0px,
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    ),
+    /* Cuadrícula retro fina */
+    linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(189, 0, 255, 0.03) 1px, transparent 1px),
+    /* Degradado radial suave desde el centro */
+    radial-gradient(ellipse at center, rgba(20, 20, 35, 0.8) 0%, rgba(10, 10, 15, 1) 100%);
 background-size: 
-    40px 40px, /* Tamaño cuadrícula horizontal */
-    40px 40px, /* Tamaño cuadrícula vertical */
-    100% 100%; /* Tamaño degradado */
+    100% 3px, /* Scanlines */
+    50px 50px, /* Cuadrícula horizontal */
+    50px 50px, /* Cuadrícula vertical */
+    100% 100%; /* Degradado */
+background-attachment: fixed;
 color: #e0e0e0;
 min-height: 100vh;
 display: flex;
@@ -36,6 +45,7 @@ header {
 background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
 padding: 1.5rem;
 text-align: center;
+border-bottom: 1px solid rgba(0, 255, 65, 0.1);
 }
 h1 {
 font-family: 'Orbitron', sans-serif;
@@ -84,23 +94,27 @@ gap: 2rem;
 }
 .player-section {
 flex: 1;
-background: transparent;
+background: rgba(20, 20, 30, 0.6);
+backdrop-filter: blur(10px);
 border-radius: 10px;
 padding: 2rem;
 display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+border: 1px solid rgba(0, 255, 65, 0.1);
 }
 .dj-section {
 flex: 1;
-background: transparent;
+background: rgba(20, 20, 30, 0.6);
+backdrop-filter: blur(10px);
 border-radius: 10px;
 padding: 2rem;
 display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+border: 1px solid rgba(189, 0, 255, 0.1);
 }
 .section-title {
 font-family: 'Orbitron', sans-serif;
@@ -762,12 +776,13 @@ vertical-align: middle;
 }
 /* Pie de página */
 footer {
-/* Fondo transparente para que se vea el degradado del body */
+/* Fondo transparente para que se vea el fondo del body */
 background: transparent;
 padding: 2rem;
 text-align: center;
 position: relative;
 overflow: hidden;
+border-top: 1px solid rgba(189, 0, 255, 0.1);
 }
 .led-strip-bottom {
 height: 8px;
@@ -810,7 +825,7 @@ transform: scale(1.1);
 box-shadow: 0 0 25px rgba(0, 255, 65, 0.5);
 }
 .copyright {
-color: #e0e0e0;
+color: #a0a0a0;
 font-family: 'Orbitron', sans-serif;
 font-weight: 900;
 font-size: 0.9rem;
