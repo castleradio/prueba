@@ -57,60 +57,27 @@ position: relative;
 z-index: 10;
 }
 
-/* Título con efecto de encendido/apagado */
+/* Título con degradado original */
 h1 {
 font-family: 'Orbitron', sans-serif;
 font-weight: 900;
 font-size: 3rem;
 letter-spacing: 3px;
 text-transform: uppercase;
+background: linear-gradient(to right, #bd00ff, #00ff41);
+-webkit-background-clip: text;
+background-clip: text;
+-webkit-text-fill-color: transparent;
+text-fill-color: transparent;
+text-shadow: 0 0 10px rgba(189, 0, 255, 0.5);
+animation: glow 2s ease-in-out infinite alternate;
 margin: 0;
-display: inline-flex;
-gap: 8px;
-animation: power-flicker 4s infinite;
+display: inline-block;
 }
 
-.nexus {
-color: #bd00ff;
-text-shadow: 0 0 10px rgba(189, 0, 255, 0.7), 0 0 20px rgba(189, 0, 255, 0.4);
-animation: neon-pulse-nexus 2s ease-in-out infinite alternate;
-}
-
-.zone {
-color: #00ff41;
-text-shadow: 0 0 10px rgba(0, 255, 65, 0.7), 0 0 20px rgba(0, 255, 65, 0.4);
-animation: neon-pulse-zone 2s ease-in-out infinite alternate;
-}
-
-@keyframes neon-pulse-nexus {
-from { 
-    text-shadow: 0 0 10px rgba(189, 0, 255, 0.7), 0 0 20px rgba(189, 0, 255, 0.4); 
-    opacity: 1;
-}
-to { 
-    text-shadow: 0 0 20px rgba(189, 0, 255, 1), 0 0 40px rgba(189, 0, 255, 0.8), 0 0 60px rgba(189, 0, 255, 0.6); 
-    opacity: 1;
-}
-}
-
-@keyframes neon-pulse-zone {
-from { 
-    text-shadow: 0 0 10px rgba(0, 255, 65, 0.7), 0 0 20px rgba(0, 255, 65, 0.4); 
-    opacity: 1;
-}
-to { 
-    text-shadow: 0 0 20px rgba(0, 255, 65, 1), 0 0 40px rgba(0, 255, 65, 0.8), 0 0 60px rgba(0, 255, 65, 0.6); 
-    opacity: 1;
-}
-}
-
-@keyframes power-flicker {
-0%, 100% { opacity: 1; }
-92% { opacity: 1; }
-93% { opacity: 0.3; }
-94% { opacity: 1; }
-95% { opacity: 0.1; }
-96% { opacity: 1; }
+@keyframes glow {
+from { text-shadow: 0 0 10px rgba(189, 0, 255, 0.5); }
+to { text-shadow: 0 0 20px rgba(189, 0, 255, 0.8), 0 0 30px rgba(0, 255, 65, 0.6); }
 }
 
 /* Tira LED debajo de la cabecera */
@@ -1195,7 +1162,7 @@ font-size: 1.5rem;
 <!-- Script del widget -->
 <script id='sonic_js' data-port='8008' src='https://sonic.sistemahost.es/cp/widgets.js?r=122    '></script>
 <header>
-<h1><span class="nexus">Nexus</span> <span class="zone">Zone</span></h1>
+<h1>Nexus Zone</h1>
 </header>
 <div class="led-strip-top" id="led-top"></div>
 <div class="main-container">
