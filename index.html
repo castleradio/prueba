@@ -13,15 +13,15 @@ box-sizing: border-box;
 }
 body {
 font-family: 'Orbitron', sans-serif;
-/* Nuevo fondo con degradado y cuadrícula */
-background-color: #0f0f0f;
+/* Nuevo fondo con degradado suave y cuadrícula fina */
+background-color: #1a1a1a;
 background-image: 
     /* Cuadrícula horizontal */
-    linear-gradient(rgba(128, 128, 128, 0.3) 1px, transparent 1px),
+    linear-gradient(rgba(100, 100, 100, 0.15) 1px, transparent 1px),
     /* Cuadrícula vertical */
-    linear-gradient(90deg, rgba(128, 128, 128, 0.3) 1px, transparent 1px),
-    /* Degradado principal: Morada arriba-izq, Verde abajo-der, Centro oscuro */
-    linear-gradient(135deg, #bd00ff 0%, #0f0f0f 50%, #00ff41 100%);
+    linear-gradient(90deg, rgba(100, 100, 100, 0.15) 1px, transparent 1px),
+    /* Degradado principal: Morado oscuro arriba-izq, Verde oscuro abajo-der, Mezcla en el centro */
+    linear-gradient(135deg, #3a003a 0%, #003a00 100%);
 background-size: 
     40px 40px, /* Tamaño cuadrícula horizontal */
     40px 40px, /* Tamaño cuadrícula vertical */
@@ -762,7 +762,8 @@ vertical-align: middle;
 }
 /* Pie de página */
 footer {
-background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+/* Fondo transparente para que se vea el degradado del body */
+background: transparent;
 padding: 2rem;
 text-align: center;
 position: relative;
@@ -809,10 +810,11 @@ transform: scale(1.1);
 box-shadow: 0 0 25px rgba(0, 255, 65, 0.5);
 }
 .copyright {
-color: #888;
+color: #e0e0e0;
 font-family: 'Orbitron', sans-serif;
 font-weight: 900;
 font-size: 0.9rem;
+text-shadow: 0 0 5px rgba(0,0,0,0.8);
 }
 /* Responsive */
 @media (max-width: 768px) {
