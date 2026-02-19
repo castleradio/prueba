@@ -1349,41 +1349,59 @@ element.classList.remove(randomEffect);
 }, 1000);
 }
 // ============================================
-// FUNCIONES PARA MANEJAR "NO DJ" → "Auto DJ"
+// FUNCIONES PARA MANEJAR IMÁGENES DE DJS
 // ============================================
+// Función para sanitizar el nombre del DJ y crear un filename válido
+function sanitizeDjName(djName) {
+    return djName.toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // Eliminar acentos
+        .replace(/[^a-z0-9]/g, '_'); // Reemplazar caracteres no alfanuméricos con _
+}
+
+// Función para cargar la imagen del DJ
+function replaceDjImageWithLocal(djName = 'autodj') {
+    const djProfile = document.getElementById('dj_profile');
+    if (djProfile) {
+        const existingImg = djProfile.querySelector('img');
+        // Sanitizar el nombre del DJ
+        const sanitizedName = sanitizeDjName(djName);
+        const imagePath = `portadasdjs/${sanitizedName}.png`;
+        
+        if (existingImg) {
+            if (!existingImg.src.includes(imagePath)) {
+                existingImg.src = imagePath;
+                existingImg.alt = djName;
+            }
+        } else {
+            const newImg = document.createElement('img');
+            newImg.src = imagePath;
+            newImg.alt = djName;
+            newImg.style.borderRadius = '50%';
+            newImg.style.border = '3px solid #8b8b8b';
+            newImg.style.objectFit = 'cover';
+            djProfile.innerHTML = '';
+            djProfile.appendChild(newImg);
+        }
+    }
+}
+
+// Función para verificar y reemplazar DJ
 function checkAndReplaceNoDJ() {
-if (sonicDj) {
-const currentText = sonicDj.textContent.trim();
-if (currentText.toUpperCase().includes('NO DJ')) {
-sonicDj.textContent = 'Auto DJ';
-updateGlitchDataText(sonicDj);
-replaceDjImageWithLocal();
-return true;
+    if (sonicDj) {
+        const currentText = sonicDj.textContent.trim();
+        if (currentText.toUpperCase().includes('NO DJ') || currentText === '') {
+            sonicDj.textContent = 'Auto DJ';
+            updateGlitchDataText(sonicDj);
+            replaceDjImageWithLocal('autodj');
+            return true;
+        } else if (currentText && currentText.toUpperCase() !== 'AUTO DJ') {
+            // Si hay un DJ real, cargar su imagen
+            replaceDjImageWithLocal(currentText);
+        }
+    }
+    return false;
 }
-}
-return false;
-}
-function replaceDjImageWithLocal() {
-const djProfile = document.getElementById('dj_profile');
-if (djProfile) {
-const existingImg = djProfile.querySelector('img');
-if (existingImg) {
-if (!existingImg.src.includes('portadasdjs/autodj.png') && !existingImg.src.endsWith('portadasdjs/autodj.png')) {
-existingImg.src = 'portadasdjs/autodj.png';
-existingImg.alt = 'Auto DJ';
-}
-} else {
-const newImg = document.createElement('img');
-newImg.src = 'portadasdjs/autodj.png';
-newImg.alt = 'Auto DJ';
-newImg.style.borderRadius = '50%';
-newImg.style.border = '3px solid #8b8b8b';
-newImg.style.objectFit = 'cover';
-djProfile.innerHTML = '';
-djProfile.appendChild(newImg);
-}
-}
-}
+
 function setupGlitchObservers() {
 if (sonicTitle) {
 const titleObserver = new MutationObserver(() => {
@@ -1411,7 +1429,7 @@ const djProfile = document.getElementById('dj_profile');
 if (djProfile) {
 const profileObserver = new MutationObserver(() => {
 if (sonicDj && sonicDj.textContent.trim().toUpperCase().includes('NO DJ')) {
-replaceDjImageWithLocal();
+replaceDjImageWithLocal('autodj');
 }
 });
 profileObserver.observe(djProfile, { childList: true, subtree: true });
