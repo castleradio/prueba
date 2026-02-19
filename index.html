@@ -1158,6 +1158,73 @@ h1 { font-size: 2.2rem; }
 .play-btn { width: 70px; height: 28px; font-size: 1.1rem; }
 }
 
+/* ============================================ */
+/* NUEVO: TABLETS EN VERTICAL - LAYOUT COMO MÓVIL */
+/* ============================================ */
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: portrait) {
+.main-container {
+flex-direction: column;
+padding: 1rem;
+gap: 1rem;
+}
+h1 { font-size: 2rem; }
+.player-section, .dj-section { padding: 1rem; }
+.song-info { font-size: 1.3rem; min-height: 28px; }
+#sonic_title { font-size: 1.2rem; }
+.cassette-player {
+width: 100%;
+max-width: 100%;
+height: auto;
+min-height: 310px;
+padding: 1.2rem;
+}
+.cassette-tapes {
+height: auto;
+min-height: 120px;
+margin-top: 3px;
+padding: 0 8px;
+gap: 10px;
+}
+.tape-reel {
+width: 72px;
+height: 72px;
+min-width: 72px;
+min-height: 72px;
+}
+.tape-reel::before { width: 50px; height: 50px; }
+.tape-reel::after { width: 23px; height: 23px; }
+.tape-reel span { width: 6px; height: 20px; }
+.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(19px, -4px); }
+.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(19px, -4px); }
+.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(19px, -4px); }
+.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(19px, -4px); }
+.cassette-center { width: 145px; height: 100px; }
+.play-btn { width: 70px; height: 28px; font-size: 1.15rem; border-width: 2.5px; }
+.equalizer-container { height: 23px; }
+.bar { width: 5px; }
+.volume-label { font-size: 1rem; }
+#dj_profile {
+width: 349.6125px !important;
+height: 349.6125px !important;
+}
+#dj_profile img {
+width: 343.6125px !important;
+height: 343.6125px !important;
+}
+#sonic_dj.cyber-glitch { font-size: 1.5rem; }
+.social-links { gap: 1rem; }
+.chat-panel {
+width: 100vw;
+right: -100vw;
+height: 100dvh;
+height: -webkit-fill-available;
+}
+.chat-panel.visible { right: 0; }
+.chat-header h3 { font-size: 1rem; }
+.chat-close-btn { width: 28px; height: 28px; font-size: 1.1rem; }
+.chat-iframe-container { padding-bottom: 60px; }
+}
+
 /* Tablets en vertical y móviles grandes (481px - 768px) */
 @media (max-width: 768px) {
 .main-container {
