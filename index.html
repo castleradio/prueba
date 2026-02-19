@@ -988,6 +988,118 @@ opacity: 1;
 visibility: visible;
 }
 /* ============================================ */
+/* STAFF PANEL - NUEVO */
+/* ============================================ */
+.staff-panel {
+position: fixed;
+top: 0;
+right: -50vw;
+width: 50vw;
+height: 100vh;
+height: 100dvh;
+background: #0a0a0a;
+border-left: 3px solid #00ff41;
+box-shadow: -5px 0 25px rgba(0, 255, 65, 0.4), 0 0 30px rgba(0, 0, 0, 0.8);
+z-index: 1001;
+transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+display: flex;
+flex-direction: column;
+font-family: 'Orbitron', sans-serif;
+overflow: hidden;
+}
+.staff-panel.visible {
+right: 0;
+}
+.staff-panel.hidden {
+display: none;
+}
+.staff-header {
+padding: 1rem;
+background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+border-bottom: 2px solid #00ff41;
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-shrink: 0;
+}
+.staff-header h3 {
+color: #bd00ff;
+font-size: clamp(1rem, 1.5vw, 1.1rem);
+text-shadow: 0 0 8px rgba(189, 0, 255, 0.6);
+margin: 0;
+}
+.staff-close-btn {
+background: none;
+border: 2px solid #00ff41;
+color: #00ff41;
+width: 30px;
+height: 30px;
+border-radius: 50%;
+cursor: pointer;
+font-family: 'Orbitron', sans-serif;
+font-weight: 900;
+font-size: 1.2rem;
+transition: all 0.2s ease;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+}
+.staff-close-btn:hover {
+background: #00ff41;
+color: #0a0a0a;
+box-shadow: 0 0 15px rgba(0, 255, 65, 0.8);
+}
+.staff-grid {
+flex: 1;
+overflow-y: auto;
+padding: 1.5rem;
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 1.5rem;
+align-content: start;
+}
+.staff-photo {
+width: 100%;
+aspect-ratio: 1 / 1;
+border-radius: 50%;
+object-fit: cover;
+border: 3px solid #00ff41;
+box-shadow: 0 0 15px rgba(0, 255, 65, 0.4);
+transition: all 0.3s ease;
+display: none;
+}
+.staff-photo:hover {
+transform: scale(1.05);
+box-shadow: 0 0 25px rgba(0, 255, 65, 0.7), 0 0 40px rgba(189, 0, 255, 0.5);
+border-color: #bd00ff;
+}
+.staff-photo.loaded {
+display: block;
+animation: staffFadeIn 0.5s ease;
+}
+@keyframes staffFadeIn {
+from { opacity: 0; transform: scale(0.8); }
+to { opacity: 1; transform: scale(1); }
+}
+/* Overlay para staff */
+.staff-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.7);
+z-index: 1000;
+opacity: 0;
+visibility: hidden;
+transition: all 0.3s ease;
+}
+.staff-overlay.active {
+opacity: 1;
+visibility: visible;
+}
+/* ============================================ */
 /* RESPONSIVE GENERAL - PC Y TODOS LOS DISPOSITIVOS */
 /* ============================================ */
 /* Pantallas muy grandes (4K, monitores ultrawide) - SOLO LIMITAR CASSETTE */
@@ -1279,6 +1391,16 @@ height: -webkit-fill-available;
 .chat-header h3 { font-size: 1rem; }
 .chat-close-btn { width: 28px; height: 28px; font-size: 1.1rem; }
 .chat-iframe-container { padding-bottom: 60px; }
+/* Staff panel mobile */
+.staff-panel {
+width: 100vw;
+right: -100vw;
+}
+.staff-grid {
+grid-template-columns: 1fr;
+gap: 1rem;
+padding: 1rem;
+}
 }
 /* Tablets en vertical y móviles grandes (481px - 768px) */
 @media (max-width: 768px) {
@@ -1348,6 +1470,16 @@ height: -webkit-fill-available;
 .chat-header h3 { font-size: 1rem; }
 .chat-close-btn { width: 28px; height: 28px; font-size: 1.1rem; }
 .chat-iframe-container { padding-bottom: 60px; }
+/* Staff panel mobile - 1 columna */
+.staff-panel {
+width: 100vw;
+right: -100vw;
+}
+.staff-grid {
+grid-template-columns: 1fr;
+gap: 1rem;
+padding: 1rem;
+}
 }
 /* Móviles pequeños (321px - 480px) */
 @media (max-width: 480px) {
@@ -1405,6 +1537,11 @@ height: 229.125px !important;
 .footer-nexus, .footer-zone, .footer-credit, .footer-separator { font-size: 0.8rem; }
 footer { padding: 0.25rem; min-height: 75px; }
 .chat-iframe-container { padding-bottom: 55px; }
+/* Staff mobile pequeño */
+.staff-grid {
+gap: 0.8rem;
+padding: 0.8rem;
+}
 }
 /* Móviles muy pequeños (hasta 320px) */
 @media (max-width: 320px) {
@@ -1537,7 +1674,7 @@ Emite: <div id='sonic_dj' class="cyber-glitch" data-text="" style="color: #00ff4
 <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v6.16c0 2.52-1.12 4.84-2.9 6.24-1.72 1.36-3.92 1.9-6.09 1.49-2.17-.41-4.13-1.73-5.36-3.59-1.23-1.86-1.6-4.22-1.02-6.42.58-2.2 2.05-4.08 4.03-5.19 1.98-1.11 4.37-1.36 6.54-.69v4.08c-1.14-.36-2.38-.26-3.46.29-1.08.55-1.91 1.53-2.26 2.71-.35 1.18-.18 2.48.47 3.54.65 1.06 1.73 1.82 2.96 2.09 1.23.27 2.52.02 3.58-.69 1.06-.71 1.79-1.85 1.99-3.11.08-.51.12-1.02.12-1.54V.02h-2.68z"/></svg>
 </a>
 <!-- Staff/Group Icon -->
-<a href="#" class="social-link" title="Staff">
+<a href="#" class="social-link" id="staff-btn" title="Staff">
 <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
 </a>
 <!-- Chat Icon -->
@@ -1567,6 +1704,19 @@ document.write(`<iframe src="https://chat.chatzona.org/index.html#nick=nexus_use
 </div>
 </div>
 <div class="chat-overlay" id="chat-overlay"></div>
+
+<!-- STAFF PANEL -->
+<div class="staff-panel hidden" id="staff-panel">
+<div class="staff-header">
+<h3>🎧 Staff Nexus</h3>
+<button class="staff-close-btn" id="staff-close">×</button>
+</div>
+<div class="staff-grid" id="staff-grid">
+<!-- Las imágenes se cargarán dinámicamente -->
+</div>
+</div>
+<div class="staff-overlay" id="staff-overlay"></div>
+
 <audio id="radio-player" crossorigin="anonymous" preload="metadata"></audio>
 <script>
 // Elementos del DOM
@@ -1591,6 +1741,12 @@ const chatBtn = document.getElementById('chat-btn');
 const chatOverlay = document.getElementById('chat-overlay');
 const chatIframe = document.getElementById('chat-iframe');
 const chatIframeContainer = document.querySelector('.chat-iframe-container');
+// Elementos del staff
+const staffPanel = document.getElementById('staff-panel');
+const staffClose = document.getElementById('staff-close');
+const staffBtn = document.getElementById('staff-btn');
+const staffOverlay = document.getElementById('staff-overlay');
+const staffGrid = document.getElementById('staff-grid');
 // Variables de estado
 let isPlaying = false;
 let audioContext = null;
@@ -1601,6 +1757,8 @@ let isVisualizing = false;
 const barCount = bars.length;
 let audioGraphSetup = false;
 let isChatVisible = false;
+let isStaffVisible = false;
+let staffLoaded = false;
 // Colores para las tiras LED
 const ledColors = ['#8b8b8b', '#bd00ff', '#00ff41'];
 let ledColorIndex = 0;
@@ -1612,17 +1770,15 @@ let beatCount = 0;
 audio.volume = 1.0;
 volumeSlider.value = 1.0;
 audio.crossOrigin = 'anonymous';
-
 // ============================================
 // FUNCIONES VOLUMEN (ACTUALIZADAS)
 // ============================================
 function updateVolumeDisplay() {
-    const percent = Math.round(audio.volume * 100);
-    volumePercentage.textContent = percent + '%';
-    // Actualizar gradiente: Verde hasta el porcentaje, gris después
-    volumeSlider.style.background = `linear-gradient(to right, #00ff41 0%, #00ff41 ${percent}%, #333 ${percent}%, #333 100%)`;
+const percent = Math.round(audio.volume * 100);
+volumePercentage.textContent = percent + '%';
+// Actualizar gradiente: Verde hasta el porcentaje, gris después
+volumeSlider.style.background = `linear-gradient(to right, #00ff41 0%, #00ff41 ${percent}%, #333 ${percent}%, #333 100%)`;
 }
-
 // ============================================
 // FUNCIONES CHAT + AJUSTE MÓVIL
 // ============================================
@@ -1672,6 +1828,75 @@ chatOverlay.addEventListener('click', toggleChat);
 document.addEventListener('keydown', (e) => {
 if (e.key === 'Escape' && isChatVisible) {
 toggleChat();
+}
+});
+}
+// ============================================
+// FUNCIONES STAFF PANEL
+// ============================================
+function loadStaffImages() {
+const maxImages = 20;
+let loadedCount = 0;
+let attemptedCount = 0;
+const maxAttempts = 50;
+// Limpiar grid
+staffGrid.innerHTML = '';
+// Intentar cargar imágenes dj1.png, dj2.png, etc.
+for (let i = 1; i <= maxAttempts && loadedCount < maxImages; i++) {
+const img = document.createElement('img');
+img.src = `staff/dj${i}.png`;
+img.alt = `Staff member ${i}`;
+img.classList.add('staff-photo');
+img.dataset.index = i;
+// Cuando la imagen carga correctamente
+img.onload = function() {
+loadedCount++;
+this.classList.add('loaded');
+this.style.display = 'block';
+console.log(`✓ Cargada: staff/dj${i}.png`);
+};
+// Cuando la imagen no existe
+img.onerror = function() {
+attemptedCount++;
+this.style.display = 'none';
+// Si hemos tenido muchos errores seguidos sin éxito, paramos
+if (attemptedCount >= 10 && loadedCount === 0) {
+console.warn('⚠ No se encontraron imágenes en la carpeta staff/');
+}
+};
+staffGrid.appendChild(img);
+}
+console.log(`Staff panel inicializado. Buscando hasta ${maxAttempts} imágenes...`);
+}
+// Toggle staff panel
+function toggleStaffPanel() {
+isStaffVisible = !isStaffVisible;
+if (isStaffVisible) {
+staffPanel.classList.remove('hidden');
+staffPanel.classList.add('visible');
+staffOverlay.classList.add('active');
+// Cargar imágenes la primera vez
+if (!staffLoaded) {
+loadStaffImages();
+staffLoaded = true;
+}
+} else {
+staffPanel.classList.remove('visible');
+staffPanel.classList.add('hidden');
+staffOverlay.classList.remove('active');
+}
+}
+function initStaffListeners() {
+staffBtn.addEventListener('click', (e) => {
+e.preventDefault();
+toggleStaffPanel();
+});
+staffClose.addEventListener('click', toggleStaffPanel);
+staffOverlay.addEventListener('click', toggleStaffPanel);
+// Keyboard support
+document.addEventListener('keydown', (e) => {
+if (e.key === 'Escape' && isStaffVisible) {
+toggleStaffPanel();
 }
 });
 }
@@ -1987,7 +2212,6 @@ playPauseBtn.addEventListener('click', togglePlayPause);
 volumeSlider.addEventListener('input', changeVolume);
 // Inicializar display de volumen
 updateVolumeDisplay();
-
 setInterval(function() {
 const script = document.getElementById('sonic_js');
 const newScript = document.createElement('script');
@@ -2004,6 +2228,7 @@ window.addEventListener('load', function() {
 updateAlbumArtBackground();
 setupGlitchObservers();
 initChatListeners();
+initStaffListeners();
 adjustChatIframeForMobile();
 console.log("🎧 Nexus Zone cargado. Haz clic en PLAY para iniciar.");
 });
