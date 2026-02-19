@@ -1535,7 +1535,7 @@ Emite: <div id='sonic_dj' class="cyber-glitch" data-text="" style="color: #00ff4
 </div>
 <div class="copyright">
 <span class="footer-brand">
-<span class="footer-nexus">Nexus</span><span class="footer-zone">Zone</span>
+<span class="footer-nexus">NEXUS</span><span class="footer-zone">ZONE</span>
 </span>
 <span class="footer-separator">|</span>
 <span class="footer-credit">Dobby DS</span>
@@ -1548,7 +1548,10 @@ Emite: <div id='sonic_dj' class="cyber-glitch" data-text="" style="color: #00ff4
 <button class="chat-close-btn" id="chat-close">×</button>
 </div>
 <div class="chat-iframe-container">
-<iframe id="chat-iframe" src="https://chat.chatzona.org/index.html#nick=&channel=Nexus_Zone" width="100%" height="100%" frameborder="0" loading="lazy"></iframe>
+<script>
+  const num = Math.floor(Math.random() * 1000);
+  document.write(`<iframe src="https://chat.chatzona.org/index.html#nick=nexus_user${num}&channel=Nexus_Zone" width="100%" height="100%" frameborder="0" loading="lazy"></iframe>`);
+</script>
 </div>
 </div>
 <div class="chat-overlay" id="chat-overlay"></div>
