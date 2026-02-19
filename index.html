@@ -689,21 +689,23 @@ font-weight: 900;
 font-size: 0.85rem;
 text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
 }
+/* MODIFICADO: Barra más fina */
 .volume-slider {
 width: 100%;
-height: 13.8px;
+height: 6px;
 -webkit-appearance: none;
-background: linear-gradient(to right, #333 0%, #00ff41 100%);
+background: linear-gradient(to right, #00ff41 0%, #00ff41 100%, #333 100%, #333 100%);
 border-radius: 6px;
 outline: none;
 box-shadow:
 inset 0 2px 4px rgba(0, 0, 0, 0.5),
 0 2px 4px rgba(0, 0, 0, 0.3);
 }
+/* MODIFICADO: Controlador más pequeño */
 .volume-slider::-webkit-slider-thumb {
 -webkit-appearance: none;
-width: 27.6px;
-height: 27.6px;
+width: 16px;
+height: 16px;
 background: #00ff41;
 border-radius: 50%;
 cursor: pointer;
@@ -846,12 +848,11 @@ margin-bottom: 0.2rem;
 flex-wrap: wrap;
 }
 .social-link {
-display: inline-block;
+display: inline-flex;
 width: 35px;
 height: 35px;
 border-radius: 50%;
 background: linear-gradient(135deg, #00ff41, #bd00ff);
-display: flex;
 align-items: center;
 justify-content: center;
 text-decoration: none;
@@ -863,9 +864,19 @@ transition: all 0.3s ease;
 box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
 cursor: pointer;
 }
+/* Ajuste para iconos SVG */
+.social-link svg {
+width: 18px;
+height: 18px;
+fill: white;
+transition: all 0.3s ease;
+}
 .social-link:hover {
 transform: scale(1.1);
 box-shadow: 0 0 25px rgba(0, 255, 65, 0.5);
+}
+.social-link:hover svg {
+fill: #0f0f0f;
 }
 .copyright {
 color: #666;
@@ -1499,6 +1510,7 @@ footer { padding: 0.2rem; min-height: 70px; }
 <div class="volume-control">
 <div class="volume-label">
 <span>Volumen:</span>
+<span id="volume-percentage">100%</span>
 </div>
 <input type="range" id="volume" class="volume-slider" min="0" max="1" step="0.1" value="1">
 </div>
@@ -1516,10 +1528,22 @@ Emite: <div id='sonic_dj' class="cyber-glitch" data-text="" style="color: #00ff4
 <div class="led-strip-bottom" id="led-bottom"></div>
 <footer>
 <div class="social-links">
-<a href="#" class="social-link" title="Telegram">T</a>
-<a href="#" class="social-link" title="Tiktok">Tk</a>
-<a href="#" class="social-link" title="Staff">S</a>
-<a href="#" class="social-link" id="chat-btn" title="Chat">C</a>
+<!-- Telegram Icon -->
+<a href="#" class="social-link" title="Telegram">
+<svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.054 5.56-5.022c.242-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/></svg>
+</a>
+<!-- TikTok Icon -->
+<a href="#" class="social-link" title="Tiktok">
+<svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v6.16c0 2.52-1.12 4.84-2.9 6.24-1.72 1.36-3.92 1.9-6.09 1.49-2.17-.41-4.13-1.73-5.36-3.59-1.23-1.86-1.6-4.22-1.02-6.42.58-2.2 2.05-4.08 4.03-5.19 1.98-1.11 4.37-1.36 6.54-.69v4.08c-1.14-.36-2.38-.26-3.46.29-1.08.55-1.91 1.53-2.26 2.71-.35 1.18-.18 2.48.47 3.54.65 1.06 1.73 1.82 2.96 2.09 1.23.27 2.52.02 3.58-.69 1.06-.71 1.79-1.85 1.99-3.11.08-.51.12-1.02.12-1.54V.02h-2.68z"/></svg>
+</a>
+<!-- Staff/Group Icon -->
+<a href="#" class="social-link" title="Staff">
+<svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+</a>
+<!-- Chat Icon -->
+<a href="#" class="social-link" id="chat-btn" title="Chat">
+<svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+</a>
 </div>
 <div class="copyright">
 <span class="footer-brand">
@@ -1552,6 +1576,7 @@ const tapeLeft = document.getElementById('tape-left');
 const tapeRight = document.getElementById('tape-right');
 const albumArtBg = document.getElementById('album-art-bg');
 const volumeSlider = document.getElementById('volume');
+const volumePercentage = document.getElementById('volume-percentage');
 const equalizer = document.getElementById('equalizer');
 const bars = document.querySelectorAll('.bar');
 const streamUrl = 'https://sonic.sistemahost.es/8008/stream';
@@ -1587,6 +1612,17 @@ let beatCount = 0;
 audio.volume = 1.0;
 volumeSlider.value = 1.0;
 audio.crossOrigin = 'anonymous';
+
+// ============================================
+// FUNCIONES VOLUMEN (ACTUALIZADAS)
+// ============================================
+function updateVolumeDisplay() {
+    const percent = Math.round(audio.volume * 100);
+    volumePercentage.textContent = percent + '%';
+    // Actualizar gradiente: Verde hasta el porcentaje, gris después
+    volumeSlider.style.background = `linear-gradient(to right, #00ff41 0%, #00ff41 ${percent}%, #333 ${percent}%, #333 100%)`;
+}
+
 // ============================================
 // FUNCIONES CHAT + AJUSTE MÓVIL
 // ============================================
@@ -1937,6 +1973,7 @@ console.log("⏸ Reproducción pausada");
 }
 function changeVolume() {
 audio.volume = parseFloat(volumeSlider.value);
+updateVolumeDisplay();
 }
 function startTapeAnimation() {
 tapeLeft.classList.add('animated');
@@ -1948,6 +1985,9 @@ tapeRight.classList.remove('animated');
 }
 playPauseBtn.addEventListener('click', togglePlayPause);
 volumeSlider.addEventListener('input', changeVolume);
+// Inicializar display de volumen
+updateVolumeDisplay();
+
 setInterval(function() {
 const script = document.getElementById('sonic_js');
 const newScript = document.createElement('script');
