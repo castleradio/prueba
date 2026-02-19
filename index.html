@@ -49,16 +49,24 @@ pointer-events: none;
 /* Cabecera */
 header {
 background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-padding: 1.5rem;
+padding: 1rem 1.5rem;
 text-align: center;
 position: relative;
 z-index: 10;
+}
+/* Contenedor del título y subtítulo */
+.header-content {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 0.3rem;
 }
 /* Título con degradado original */
 h1 {
 font-family: 'Orbitron', sans-serif;
 font-weight: 900;
-font-size: clamp(1.5rem, 4vw, 3rem);
+font-size: clamp(1.3rem, 3.5vw, 2.5rem);
 letter-spacing: 3px;
 text-transform: uppercase;
 background: linear-gradient(to right, #bd00ff, #00ff41);
@@ -70,6 +78,24 @@ text-shadow: 0 0 10px rgba(189, 0, 255, 0.5);
 animation: glow 2s ease-in-out infinite alternate;
 margin: 0;
 display: inline-block;
+line-height: 1.1;
+}
+/* Subtítulo verde degradado */
+.header-subtitle {
+font-family: 'Orbitron', sans-serif;
+font-weight: 700;
+font-size: clamp(0.7rem, 1.5vw, 1rem);
+letter-spacing: 2px;
+text-transform: uppercase;
+background: linear-gradient(to right, #00ff41, #00cc33);
+-webkit-background-clip: text;
+background-clip: text;
+-webkit-text-fill-color: transparent;
+text-fill-color: transparent;
+text-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
+margin: 0;
+display: inline-block;
+line-height: 1.1;
 }
 @keyframes glow {
 from { text-shadow: 0 0 10px rgba(189, 0, 255, 0.5); }
@@ -753,7 +779,7 @@ vertical-align: middle;
 /* Pie de página */
 footer {
 background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-padding: 0.5rem;
+padding: 0.3rem;
 text-align: center;
 position: relative;
 overflow: hidden;
@@ -768,7 +794,7 @@ align-items: center;
 display: inline-flex;
 gap: 4px;
 align-items: center;
-margin-bottom: 0.5rem;
+margin-bottom: 0.3rem;
 animation: power-flicker 5s infinite;
 }
 .footer-nexus {
@@ -798,14 +824,14 @@ font-size: 1rem;
 .social-links {
 display: flex;
 justify-content: center;
-gap: 1.5rem;
-margin-bottom: 0.5rem;
+gap: 1.2rem;
+margin-bottom: 0.3rem;
 flex-wrap: wrap;
 }
 .social-link {
 display: inline-block;
-width: 40px;
-height: 40px;
+width: 35px;
+height: 35px;
 border-radius: 50%;
 background: linear-gradient(135deg, #00ff41, #bd00ff);
 display: flex;
@@ -815,7 +841,7 @@ text-decoration: none;
 color: white;
 font-family: 'Orbitron', sans-serif;
 font-weight: 900;
-font-size: 1.2rem;
+font-size: 1.1rem;
 transition: all 0.3s ease;
 box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
 cursor: pointer;
@@ -828,8 +854,8 @@ box-shadow: 0 0 25px rgba(0, 255, 65, 0.5);
 color: #666;
 font-family: 'Orbitron', sans-serif;
 font-weight: 400;
-font-size: 0.7rem;
-margin-top: 0.3rem;
+font-size: 0.65rem;
+margin-top: 0.2rem;
 }
 /* ============================================ */
 /* CHAT PANEL - 50% PANTALLA EN PC */
@@ -951,8 +977,9 @@ visibility: visible;
 
 /* 1920x1080 (Full HD) - La más común */
 @media (max-width: 1920px) and (min-width: 1601px) and (max-height: 1080px) {
-header { padding: 1.2rem; }
-h1 { font-size: 2.4rem; }
+header { padding: 0.8rem 1.2rem; }
+h1 { font-size: clamp(1.2rem, 3vw, 2.2rem); }
+.header-subtitle { font-size: clamp(0.65rem, 1.3vw, 0.9rem); }
 .main-container { padding: 1.5rem; gap: 1.5rem; }
 .player-section, .dj-section { padding: 1.2rem; }
 .section-title { font-size: clamp(1rem, 1.8vw, 1.4rem); margin-bottom: 1.2rem; }
@@ -975,16 +1002,17 @@ h1 { font-size: 2.4rem; }
 .volume-label { font-size: clamp(1rem, 1.8vw, 1.4rem); margin-bottom: 7px; }
 #dj_profile { max-width: 380px; }
 #sonic_dj.cyber-glitch { font-size: clamp(1rem, 1.8vw, 1.4rem); }
-footer { padding: 0.5rem; }
-.social-link { width: 38px; height: 38px; font-size: 1.15rem; }
+footer { padding: 0.3rem; }
+.social-link { width: 35px; height: 35px; font-size: 1.1rem; }
 .footer-nexus, .footer-zone, .footer-credit { font-size: 1rem; }
 .led-strip-top, .led-strip-bottom { height: 7px; }
 }
 
 /* 1600x900 (HD+) - Común en laptops */
 @media (max-width: 1600px) and (min-width: 1441px) and (max-height: 900px) {
-header { padding: 1.1rem; }
-h1 { font-size: 2.2rem; }
+header { padding: 0.8rem 1.1rem; }
+h1 { font-size: clamp(1.2rem, 3vw, 2rem); }
+.header-subtitle { font-size: clamp(0.65rem, 1.3vw, 0.85rem); }
 .main-container { padding: 1.3rem; gap: 1.3rem; }
 .player-section, .dj-section { padding: 1.1rem; }
 .section-title { font-size: clamp(1rem, 1.8vw, 1.4rem); margin-bottom: 1.1rem; }
@@ -1007,16 +1035,17 @@ h1 { font-size: 2.2rem; }
 .volume-label { font-size: clamp(1rem, 1.8vw, 1.4rem); margin-bottom: 7px; }
 #dj_profile { max-width: 350px; }
 #sonic_dj.cyber-glitch { font-size: clamp(1rem, 1.8vw, 1.4rem); }
-footer { padding: 0.5rem; }
-.social-link { width: 37px; height: 37px; font-size: 1.1rem; }
+footer { padding: 0.3rem; }
+.social-link { width: 35px; height: 35px; font-size: 1.1rem; }
 .footer-nexus, .footer-zone, .footer-credit { font-size: 1rem; }
 .led-strip-top, .led-strip-bottom { height: 7px; }
 }
 
 /* 1536x864 - Común en laptops */
 @media (max-width: 1536px) and (min-width: 1401px) and (max-height: 864px) {
-header { padding: 1.1rem; }
-h1 { font-size: 2.1rem; }
+header { padding: 0.8rem 1.1rem; }
+h1 { font-size: clamp(1.2rem, 3vw, 1.9rem); }
+.header-subtitle { font-size: clamp(0.65rem, 1.3vw, 0.85rem); }
 .main-container { padding: 1.2rem; gap: 1.2rem; }
 .player-section, .dj-section { padding: 1rem; }
 .section-title { font-size: clamp(1rem, 1.8vw, 1.4rem); margin-bottom: 1.1rem; }
@@ -1039,16 +1068,17 @@ h1 { font-size: 2.1rem; }
 .volume-label { font-size: clamp(1rem, 1.8vw, 1.4rem); margin-bottom: 7px; }
 #dj_profile { max-width: 340px; }
 #sonic_dj.cyber-glitch { font-size: clamp(1rem, 1.8vw, 1.4rem); }
-footer { padding: 0.5rem; }
-.social-link { width: 36px; height: 36px; font-size: 1.1rem; }
+footer { padding: 0.3rem; }
+.social-link { width: 35px; height: 35px; font-size: 1.1rem; }
 .footer-nexus, .footer-zone, .footer-credit { font-size: 1rem; }
 .led-strip-top, .led-strip-bottom { height: 7px; }
 }
 
 /* 1440x900 (WXGA+) - Laptops antiguas */
 @media (max-width: 1440px) and (min-width: 1367px) and (max-height: 900px) {
-header { padding: 1rem; }
-h1 { font-size: 2rem; }
+header { padding: 0.8rem 1rem; }
+h1 { font-size: clamp(1.2rem, 3vw, 1.8rem); }
+.header-subtitle { font-size: clamp(0.65rem, 1.3vw, 0.8rem); }
 .main-container { padding: 1.2rem; gap: 1.2rem; }
 .player-section, .dj-section { padding: 1rem; }
 .section-title { font-size: clamp(1rem, 1.8vw, 1.4rem); margin-bottom: 1rem; }
@@ -1071,16 +1101,17 @@ h1 { font-size: 2rem; }
 .volume-label { font-size: clamp(1rem, 1.8vw, 1.4rem); margin-bottom: 7px; }
 #dj_profile { max-width: 330px; }
 #sonic_dj.cyber-glitch { font-size: clamp(1rem, 1.8vw, 1.4rem); }
-footer { padding: 0.5rem; }
-.social-link { width: 36px; height: 36px; font-size: 1.08rem; }
+footer { padding: 0.3rem; }
+.social-link { width: 35px; height: 35px; font-size: 1.1rem; }
 .footer-nexus, .footer-zone, .footer-credit { font-size: 1rem; }
 .led-strip-top, .led-strip-bottom { height: 7px; }
 }
 
 /* 1366x768 (HD) - Muy común en laptops */
 @media (max-width: 1366px) and (min-width: 1281px) and (max-height: 768px) {
-header { padding: 1rem; }
-h1 { font-size: 2rem; }
+header { padding: 0.7rem 1rem; }
+h1 { font-size: clamp(1.1rem, 2.8vw, 1.7rem); }
+.header-subtitle { font-size: clamp(0.6rem, 1.2vw, 0.75rem); }
 .main-container { padding: 1rem; gap: 1rem; }
 .player-section, .dj-section { padding: 0.8rem; }
 .section-title { font-size: clamp(1rem, 1.8vw, 1.4rem); margin-bottom: 1rem; }
@@ -1103,7 +1134,7 @@ h1 { font-size: 2rem; }
 .volume-label { font-size: clamp(1rem, 1.8vw, 1.4rem); margin-bottom: 6px; }
 #dj_profile { max-width: 280px; }
 #sonic_dj.cyber-glitch { font-size: clamp(1rem, 1.8vw, 1.4rem); }
-footer { padding: 0.5rem; }
+footer { padding: 0.3rem; }
 .social-link { width: 35px; height: 35px; font-size: 1.1rem; }
 .footer-nexus, .footer-zone, .footer-credit { font-size: 1rem; }
 .led-strip-top, .led-strip-bottom { height: 6px; }
@@ -1111,8 +1142,9 @@ footer { padding: 0.5rem; }
 
 /* 1280x720 (HD) - Laptops antiguas */
 @media (max-width: 1280px) and (min-width: 1025px) and (max-height: 720px) {
-header { padding: 0.9rem; }
-h1 { font-size: 1.9rem; }
+header { padding: 0.7rem 0.9rem; }
+h1 { font-size: clamp(1.1rem, 2.8vw, 1.6rem); }
+.header-subtitle { font-size: clamp(0.6rem, 1.2vw, 0.7rem); }
 .main-container { padding: 0.9rem; gap: 0.9rem; }
 .player-section, .dj-section { padding: 0.7rem; }
 .section-title { font-size: clamp(1rem, 1.8vw, 1.4rem); margin-bottom: 0.9rem; }
@@ -1135,8 +1167,8 @@ h1 { font-size: 1.9rem; }
 .volume-label { font-size: clamp(1rem, 1.8vw, 1.4rem); margin-bottom: 6px; }
 #dj_profile { max-width: 260px; }
 #sonic_dj.cyber-glitch { font-size: clamp(1rem, 1.8vw, 1.4rem); }
-footer { padding: 0.5rem; }
-.social-link { width: 34px; height: 34px; font-size: 1.05rem; }
+footer { padding: 0.3rem; }
+.social-link { width: 35px; height: 35px; font-size: 1.1rem; }
 .footer-nexus, .footer-zone, .footer-credit { font-size: 1rem; }
 .led-strip-top, .led-strip-bottom { height: 6px; }
 }
@@ -1148,7 +1180,9 @@ footer { padding: 0.5rem; }
 
 /* Tablets en horizontal (769px - 1024px) */
 @media (min-width: 769px) and (max-width: 1024px) {
-h1 { font-size: 2.2rem; }
+header { padding: 0.8rem 1rem; }
+h1 { font-size: clamp(1.2rem, 3vw, 1.9rem); }
+.header-subtitle { font-size: clamp(0.65rem, 1.3vw, 0.85rem); }
 .main-container { padding: 1.5rem; gap: 1.5rem; }
 .cassette-player { max-width: 450px; min-height: 280px; }
 #dj_profile { max-width: 300px; }
@@ -1162,12 +1196,14 @@ h1 { font-size: 2.2rem; }
 /* NUEVO: TABLETS EN VERTICAL - LAYOUT COMO MÓVIL */
 /* ============================================ */
 @media (min-width: 769px) and (max-width: 1024px) and (orientation: portrait) {
+header { padding: 0.7rem 1rem; }
+h1 { font-size: clamp(1.1rem, 2.8vw, 1.7rem); }
+.header-subtitle { font-size: clamp(0.6rem, 1.2vw, 0.75rem); }
 .main-container {
 flex-direction: column;
 padding: 1rem;
 gap: 1rem;
 }
-h1 { font-size: 2rem; }
 .player-section, .dj-section { padding: 1rem; }
 .song-info { font-size: clamp(1rem, 1.8vw, 1.4rem); min-height: 28px; }
 #sonic_title { font-size: clamp(1rem, 1.8vw, 1.4rem); }
@@ -1213,6 +1249,7 @@ height: 343.6125px !important;
 }
 #sonic_dj.cyber-glitch { font-size: clamp(1rem, 1.8vw, 1.4rem); }
 .social-links { gap: 1rem; }
+footer { padding: 0.3rem; }
 .chat-panel {
 width: 100vw;
 right: -100vw;
@@ -1227,12 +1264,14 @@ height: -webkit-fill-available;
 
 /* Tablets en vertical y móviles grandes (481px - 768px) */
 @media (max-width: 768px) {
+header { padding: 0.7rem 1rem; }
+h1 { font-size: clamp(1.1rem, 2.8vw, 1.7rem); }
+.header-subtitle { font-size: clamp(0.6rem, 1.2vw, 0.75rem); }
 .main-container {
 flex-direction: column;
 padding: 1rem;
 gap: 1rem;
 }
-h1 { font-size: 2rem; }
 .player-section, .dj-section { padding: 1rem; }
 .song-info { font-size: clamp(1rem, 1.8vw, 1.4rem); min-height: 28px; }
 #sonic_title { font-size: clamp(1rem, 1.8vw, 1.4rem); }
@@ -1278,6 +1317,7 @@ height: 343.6125px !important;
 }
 #sonic_dj.cyber-glitch { font-size: clamp(1rem, 1.8vw, 1.4rem); }
 .social-links { gap: 1rem; }
+footer { padding: 0.3rem; }
 /* Chat ocupa TODO el ancho en móvil */
 .chat-panel {
 width: 100vw;
@@ -1293,8 +1333,9 @@ height: -webkit-fill-available;
 
 /* Móviles pequeños (321px - 480px) */
 @media (max-width: 480px) {
-header { padding: 1rem; }
-h1 { font-size: 1.5rem; }
+header { padding: 0.6rem 0.8rem; }
+h1 { font-size: clamp(1rem, 2.5vw, 1.5rem); }
+.header-subtitle { font-size: clamp(0.55rem, 1.1vw, 0.7rem); }
 .player-section, .dj-section { padding: 0.8rem; }
 .song-info { font-size: clamp(1rem, 1.8vw, 1.4rem); min-height: 25px; }
 #sonic_title { font-size: clamp(1rem, 1.8vw, 1.4rem); }
@@ -1341,15 +1382,18 @@ height: 229.125px !important;
 }
 #sonic_dj.cyber-glitch { font-size: clamp(1rem, 1.8vw, 1.4rem); }
 .social-links { gap: 0.8rem; }
-.social-link { width: 35px; height: 35px; font-size: 1rem; }
+.social-link { width: 32px; height: 32px; font-size: 1rem; }
 .footer-brand { flex-wrap: wrap; justify-content: center; }
-.footer-nexus, .footer-zone, .footer-credit { font-size: 1rem; }
+.footer-nexus, .footer-zone, .footer-credit { font-size: 0.9rem; }
+footer { padding: 0.25rem; }
 .chat-iframe-container { padding-bottom: 55px; }
 }
 
 /* Móviles muy pequeños (hasta 320px) */
 @media (max-width: 320px) {
-h1 { font-size: 1.2rem; }
+header { padding: 0.5rem 0.6rem; }
+h1 { font-size: clamp(0.95rem, 2.3vw, 1.3rem); }
+.header-subtitle { font-size: clamp(0.5rem, 1vw, 0.65rem); }
 .song-info { font-size: clamp(1rem, 1.8vw, 1.4rem); min-height: 22px; }
 #sonic_title { font-size: clamp(1rem, 1.8vw, 1.4rem); }
 .cassette-player {
@@ -1391,6 +1435,7 @@ width: 171.5625px !important;
 height: 171.5625px !important;
 }
 #sonic_dj.cyber-glitch { font-size: clamp(1rem, 1.8vw, 1.4rem); }
+footer { padding: 0.2rem; }
 }
 </style>
 </head>
@@ -1400,7 +1445,10 @@ height: 171.5625px !important;
 <!-- Script del widget -->
 <script id='sonic_js' data-port='8008' src='https://sonic.sistemahost.es/cp/widgets.js?r=122'></script>
 <header>
+<div class="header-content">
 <h1>Nexus Zone</h1>
+<p class="header-subtitle">Música sin límites</p>
+</div>
 </header>
 <div class="led-strip-top" id="led-top"></div>
 <div class="main-container">
