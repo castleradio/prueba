@@ -849,6 +849,7 @@ font-weight: 900;
 font-size: 1.2rem;
 transition: all 0.3s ease;
 box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+cursor: pointer;
 }
 .social-link:hover {
 transform: scale(1.1);
@@ -861,6 +862,194 @@ font-family: 'Orbitron', sans-serif;
 font-weight: 400;
 font-size: 0.7rem;
 margin-top: 0.5rem;
+}
+
+/* ============================================ */
+/* CHAT PANEL - SLIDE IN/OUT */
+/* ============================================ */
+.chat-panel {
+position: fixed;
+top: 0;
+right: -100%;
+width: 380px;
+max-width: 90vw;
+height: 100vh;
+background: #0a0a0a;
+border-left: 3px solid #bd00ff;
+box-shadow: -5px 0 25px rgba(189, 0, 255, 0.4), 0 0 30px rgba(0, 0, 0, 0.8);
+z-index: 1000;
+transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+display: flex;
+flex-direction: column;
+font-family: 'Orbitron', sans-serif;
+}
+
+.chat-panel.visible {
+right: 0;
+}
+
+.chat-toggle-tab {
+position: absolute;
+top: 50%;
+left: -42px;
+transform: translateY(-50%);
+width: 40px;
+height: 100px;
+background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+border: 2px solid #bd00ff;
+border-right: none;
+border-radius: 8px 0 0 8px;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+z-index: 1001;
+transition: all 0.3s ease;
+box-shadow: -3px 0 15px rgba(189, 0, 255, 0.3);
+writing-mode: vertical-rl;
+text-orientation: mixed;
+font-weight: 900;
+font-size: 0.9rem;
+color: #00ff41;
+text-shadow: 0 0 8px rgba(0, 255, 65, 0.7);
+letter-spacing: 2px;
+}
+
+.chat-toggle-tab:hover {
+background: linear-gradient(135deg, #252525, #151515);
+box-shadow: -3px 0 20px rgba(189, 0, 255, 0.6), 0 0 15px rgba(0, 255, 65, 0.4);
+transform: translateY(-50%) scale(1.05);
+}
+
+.chat-panel.hidden .chat-toggle-tab {
+left: auto;
+right: -42px;
+border-radius: 0 8px 8px 0;
+border-left: none;
+border-right: 2px solid #00ff41;
+color: #bd00ff;
+text-shadow: 0 0 8px rgba(189, 0, 255, 0.7);
+box-shadow: 3px 0 15px rgba(0, 255, 65, 0.3);
+}
+
+.chat-panel.hidden .chat-toggle-tab:hover {
+box-shadow: 3px 0 20px rgba(0, 255, 65, 0.6), 0 0 15px rgba(189, 0, 255, 0.4);
+}
+
+.chat-header {
+padding: 1rem;
+background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+border-bottom: 2px solid #bd00ff;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.chat-header h3 {
+color: #00ff41;
+font-size: 1.1rem;
+text-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
+margin: 0;
+}
+
+.chat-close-btn {
+background: none;
+border: 2px solid #bd00ff;
+color: #bd00ff;
+width: 30px;
+height: 30px;
+border-radius: 50%;
+cursor: pointer;
+font-family: 'Orbitron', sans-serif;
+font-weight: 900;
+font-size: 1.2rem;
+transition: all 0.2s ease;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.chat-close-btn:hover {
+background: #bd00ff;
+color: #0a0a0a;
+box-shadow: 0 0 15px rgba(189, 0, 255, 0.8);
+}
+
+.chat-iframe-container {
+flex: 1;
+overflow: hidden;
+position: relative;
+}
+
+.chat-iframe-container::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 3px;
+background: linear-gradient(90deg, #00ff41, #bd00ff, #00ff41);
+z-index: 2;
+}
+
+#chat-iframe {
+width: 100%;
+height: 100%;
+border: none;
+background: #0a0a0a;
+/* Fallback para modo oscuro si el iframe no lo soporta nativamente */
+filter: contrast(1.1) brightness(0.95);
+}
+
+/* Overlay oscuro para cuando el chat está cerrado (en móviles) */
+.chat-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.7);
+z-index: 999;
+opacity: 0;
+visibility: hidden;
+transition: all 0.3s ease;
+}
+
+.chat-overlay.active {
+opacity: 1;
+visibility: visible;
+}
+
+/* Responsive para chat */
+@media (max-width: 768px) {
+.chat-panel {
+width: 100vw;
+right: -100vw;
+}
+.chat-toggle-tab {
+width: 35px;
+height: 80px;
+left: -37px;
+font-size: 0.8rem;
+}
+.chat-panel.hidden .chat-toggle-tab {
+right: -37px;
+}
+}
+
+@media (max-width: 480px) {
+.chat-toggle-tab {
+width: 30px;
+height: 70px;
+left: -32px;
+font-size: 0.75rem;
+}
+.chat-panel.hidden .chat-toggle-tab {
+right: -32px;
+}
+.chat-header h3 {
+font-size: 1rem;
+}
 }
 
 /* Responsive */
@@ -1160,7 +1349,7 @@ font-size: 1.5rem;
 <div class="background-grid"></div>
 
 <!-- Script del widget -->
-<script id='sonic_js' data-port='8008' src='https://sonic.sistemahost.es/cp/widgets.js?r=122    '></script>
+<script id='sonic_js' data-port='8008' src='https://sonic.sistemahost.es/cp/widgets.js?r=122'></script>
 <header>
 <h1>Nexus Zone</h1>
 </header>
@@ -1226,7 +1415,7 @@ Emite: <div id='sonic_dj' class="cyber-glitch" data-text="" style="color: #00ff4
 <a href="#" class="social-link" title="Telegram">T</a>
 <a href="#" class="social-link" title="Tiktok">Tk</a>
 <a href="#" class="social-link" title="Staff">S</a>
-<a href="#" class="social-link" title="Chat">C</a>
+<a href="#" class="social-link" id="chat-btn" title="Chat">C</a>
 </div>
 <div class="copyright">
 <span class="footer-brand">
@@ -1236,6 +1425,20 @@ Emite: <div id='sonic_dj' class="cyber-glitch" data-text="" style="color: #00ff4
 <span class="footer-credit">Dobby DS</span>
 </div>
 </footer>
+
+<!-- CHAT PANEL -->
+<div class="chat-panel hidden" id="chat-panel">
+<div class="chat-toggle-tab" id="chat-toggle">Ocultar</div>
+<div class="chat-header">
+<h3>💬 Chat Nexus</h3>
+<button class="chat-close-btn" id="chat-close">×</button>
+</div>
+<div class="chat-iframe-container">
+<iframe id="chat-iframe" src="https://chat.chatzona.org/index.html#nick=&channel=Nexus_Zone&theme=dark" width="100%" height="100%" frameborder="0" loading="lazy"></iframe>
+</div>
+</div>
+<div class="chat-overlay" id="chat-overlay"></div>
+
 <audio id="radio-player" crossorigin="anonymous" preload="metadata"></audio>
 <script>
 // Elementos del DOM
@@ -1247,11 +1450,19 @@ const albumArtBg = document.getElementById('album-art-bg');
 const volumeSlider = document.getElementById('volume');
 const equalizer = document.getElementById('equalizer');
 const bars = document.querySelectorAll('.bar');
-const streamUrl = 'https://sonic.sistemahost.es/8008/stream    ';
+const streamUrl = 'https://sonic.sistemahost.es/8008/stream';
 const sonicTitle = document.getElementById('sonic_title');
 const sonicDj = document.getElementById('sonic_dj');
 const ledTop = document.getElementById('led-top');
 const ledBottom = document.getElementById('led-bottom');
+
+// Elementos del chat
+const chatPanel = document.getElementById('chat-panel');
+const chatToggle = document.getElementById('chat-toggle');
+const chatClose = document.getElementById('chat-close');
+const chatBtn = document.getElementById('chat-btn');
+const chatOverlay = document.getElementById('chat-overlay');
+const chatIframe = document.getElementById('chat-iframe');
 
 // Variables de estado
 let isPlaying = false;
@@ -1262,6 +1473,7 @@ let animationId = null;
 let isVisualizing = false;
 const barCount = bars.length;
 let audioGraphSetup = false;
+let isChatVisible = false;
 
 // Colores para las tiras LED
 const ledColors = ['#8b8b8b', '#bd00ff', '#00ff41']; // gris, morado, verde
@@ -1275,6 +1487,50 @@ let beatCount = 0;
 audio.volume = 1.0;
 volumeSlider.value = 1.0;
 audio.crossOrigin = 'anonymous';
+
+// ============================================
+// FUNCIONES CHAT
+// ============================================
+function toggleChat() {
+isChatVisible = !isChatVisible;
+if (isChatVisible) {
+chatPanel.classList.remove('hidden');
+chatPanel.classList.add('visible');
+chatToggle.textContent = 'Ocultar';
+chatOverlay.classList.add('active');
+// Intentar forzar modo oscuro en el iframe si es posible
+try {
+const iframeDoc = chatIframe.contentDocument || chatIframe.contentWindow.document;
+iframeDoc.body.style.background = '#0a0a0a';
+iframeDoc.body.style.color = '#e0e0e0';
+} catch(e) {
+// CORS: no podemos acceder al iframe, el filtro CSS del contenedor actuará como fallback
+console.log('Iframe en dominio externo - usando filtro CSS para modo oscuro');
+}
+} else {
+chatPanel.classList.remove('visible');
+chatPanel.classList.add('hidden');
+chatToggle.textContent = 'Mostrar';
+chatOverlay.classList.remove('active');
+}
+}
+
+function initChatListeners() {
+chatBtn.addEventListener('click', (e) => {
+e.preventDefault();
+toggleChat();
+});
+chatToggle.addEventListener('click', toggleChat);
+chatClose.addEventListener('click', toggleChat);
+chatOverlay.addEventListener('click', toggleChat);
+
+// Cerrar chat con tecla Escape
+document.addEventListener('keydown', (e) => {
+if (e.key === 'Escape' && isChatVisible) {
+toggleChat();
+}
+});
+}
 
 // Función para actualizar el atributo data-text en elementos con glitch
 function updateGlitchDataText(element) {
@@ -1625,6 +1881,7 @@ checkAndReplaceNoDJ();
 window.addEventListener('load', function() {
 updateAlbumArtBackground();
 setupGlitchObservers();
+initChatListeners(); // Inicializar listeners del chat
 console.log("🎧 Nexus Zone cargado. Haz clic en PLAY para iniciar.");
 });
 
