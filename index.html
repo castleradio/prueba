@@ -53,6 +53,7 @@ padding: 1.5rem;
 text-align: center;
 position: relative;
 z-index: 10;
+flex-shrink: 0;
 }
 /* Título con degradado original */
 h1 {
@@ -84,6 +85,7 @@ position: relative;
 z-index: 10;
 transition: background 0.05s ease, box-shadow 0.05s ease;
 box-shadow: 0 0 0 rgba(139, 139, 139, 0);
+flex-shrink: 0;
 }
 /* Contenido principal */
 .main-container {
@@ -93,6 +95,8 @@ padding: clamp(1rem, 3vw, 2rem);
 gap: clamp(1rem, 2vw, 2rem);
 position: relative;
 z-index: 1;
+align-items: center;
+justify-content: center;
 }
 .player-section {
 flex: 1;
@@ -103,6 +107,7 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+max-width: 650px;
 }
 .dj-section {
 flex: 1;
@@ -113,6 +118,7 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+max-width: 500px;
 }
 .section-title {
 font-family: 'Orbitron', sans-serif;
@@ -762,6 +768,7 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+flex-shrink: 0;
 }
 /* Texto del footer con estilo Nexus Zone */
 .footer-brand {
@@ -837,8 +844,8 @@ margin-top: 0.5rem;
 .chat-panel {
 position: fixed;
 top: 0;
-right: -50vw; /* EXACTAMENTE 50% de la pantalla */
-width: 50vw; /* EXACTAMENTE 50% de la pantalla */
+right: -50vw;
+width: 50vw;
 height: 100vh;
 height: 100dvh;
 background: #0a0a0a;
@@ -936,38 +943,63 @@ visibility: visible;
 /* ============================================ */
 /* RESPONSIVE GENERAL - PC Y TODOS LOS DISPOSITIVOS */
 /* ============================================ */
-/* Pantallas muy grandes (4K, monitores ultrawide) */
+/* Pantallas muy grandes (4K, monitores ultrawide) - LIMITADO PARA NO ESTIRAR EL CASSETTE */
 @media (min-width: 2560px) {
-h1 { font-size: 4rem; }
-.main-container { padding: 3rem; gap: 3rem; }
-.cassette-player { max-width: 800px; }
-#dj_profile { max-width: 500px; }
-}
-/* Pantallas grandes (1920px - 2559px) */
-@media (min-width: 1920px) and (max-width: 2559px) {
 h1 { font-size: 3.5rem; }
-.main-container { padding: 2.5rem; gap: 2.5rem; }
-.cassette-player { max-width: 700px; }
+.main-container { padding: 2rem; gap: 2rem; max-width: 1800px; margin: 0 auto; }
+.cassette-player { max-width: 650px !important; }
 #dj_profile { max-width: 450px; }
+.player-section { max-width: 700px; }
+.dj-section { max-width: 500px; }
 }
-/* Pantallas estándar (1367px - 1919px) */
-@media (min-width: 1367px) and (max-width: 1919px) {
+/* Pantallas grandes (1920px - 2559px) - LIMITADO PARA NO ESTIRAR EL CASSETTE */
+@media (min-width: 1920px) and (max-width: 2559px) {
 h1 { font-size: 3rem; }
-.main-container { padding: 2rem; gap: 2rem; }
-.cassette-player { max-width: 600px; }
-#dj_profile { max-width: 412px; }
+.main-container { padding: 2rem; gap: 2rem; max-width: 1600px; margin: 0 auto; }
+.cassette-player { max-width: 600px !important; }
+#dj_profile { max-width: 420px; }
+.player-section { max-width: 650px; }
+.dj-section { max-width: 480px; }
 }
-/* Laptops pequeñas (1025px - 1366px) */
-@media (min-width: 1025px) and (max-width: 1366px) {
+/* Pantallas estándar (1367px - 1919px) - OPTIMIZADO PARA 1366x768 */
+@media (min-width: 1367px) and (max-width: 1919px) {
 h1 { font-size: 2.5rem; }
 .main-container { padding: 1.5rem; gap: 1.5rem; }
-.cassette-player { max-width: 500px; min-height: 300px; }
-#dj_profile { max-width: 350px; }
+.cassette-player { max-width: 550px; min-height: 320px; }
+#dj_profile { max-width: 380px; }
+.player-section { max-width: 600px; }
+.dj-section { max-width: 450px; }
 .section-title { font-size: 1.3rem; }
+}
+/* Laptops pequeñas (1025px - 1366px) - AJUSTADO PARA 1366x768 */
+@media (min-width: 1025px) and (max-width: 1366px) {
+h1 { font-size: 2.2rem; }
+.main-container { padding: 1rem 1.5rem; gap: 1.5rem; }
+.cassette-player { max-width: 500px; min-height: 300px; padding: 1.2rem; }
+#dj_profile { max-width: 340px; }
+.player-section { max-width: 550px; padding: 1rem; }
+.dj-section { max-width: 400px; padding: 1rem; }
+.section-title { font-size: 1.2rem; margin-bottom: 1rem; }
+.tape-reel { width: 75px; height: 75px; }
+.tape-reel::before { width: 52px; height: 52px; }
+.tape-reel::after { width: 24px; height: 24px; }
+.tape-reel span { width: 7px; height: 22px; }
+.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(20px, -4px); }
+.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(20px, -4px); }
+.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(20px, -4px); }
+.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(20px, -4px); }
+.cassette-center { width: 150px; height: 105px; }
+.play-btn { width: 75px; height: 30px; font-size: 1.2rem; }
+.equalizer-container { height: 25px; }
+.bar { width: 5px; }
+.volume-control { max-width: 380px; padding: 10px; }
+.volume-label { font-size: 1rem; }
+header { padding: 1rem; }
+footer { padding: 0.8rem; }
 }
 /* Tablets en horizontal (769px - 1024px) */
 @media (min-width: 769px) and (max-width: 1024px) {
-h1 { font-size: 2.2rem; }
+h1 { font-size: 2rem; }
 .main-container { padding: 1.5rem; gap: 1.5rem; }
 .cassette-player { max-width: 450px; min-height: 280px; }
 #dj_profile { max-width: 300px; }
@@ -1353,55 +1385,51 @@ element.classList.remove(randomEffect);
 // ============================================
 // Función para sanitizar el nombre del DJ y crear un filename válido
 function sanitizeDjName(djName) {
-    return djName.toLowerCase()
-        .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // Eliminar acentos
-        .replace(/[^a-z0-9]/g, '_'); // Reemplazar caracteres no alfanuméricos con _
+return djName.toLowerCase()
+.normalize('NFD').replace(/[\u0300-\u036f]/g, '') // Eliminar acentos
+.replace(/[^a-z0-9]/g, '_'); // Reemplazar caracteres no alfanuméricos con _
 }
-
 // Función para cargar la imagen del DJ
 function replaceDjImageWithLocal(djName = 'autodj') {
-    const djProfile = document.getElementById('dj_profile');
-    if (djProfile) {
-        const existingImg = djProfile.querySelector('img');
-        // Sanitizar el nombre del DJ
-        const sanitizedName = sanitizeDjName(djName);
-        const imagePath = `portadasdjs/${sanitizedName}.png`;
-        
-        if (existingImg) {
-            if (!existingImg.src.includes(imagePath)) {
-                existingImg.src = imagePath;
-                existingImg.alt = djName;
-            }
-        } else {
-            const newImg = document.createElement('img');
-            newImg.src = imagePath;
-            newImg.alt = djName;
-            newImg.style.borderRadius = '50%';
-            newImg.style.border = '3px solid #8b8b8b';
-            newImg.style.objectFit = 'cover';
-            djProfile.innerHTML = '';
-            djProfile.appendChild(newImg);
-        }
-    }
+const djProfile = document.getElementById('dj_profile');
+if (djProfile) {
+const existingImg = djProfile.querySelector('img');
+// Sanitizar el nombre del DJ
+const sanitizedName = sanitizeDjName(djName);
+const imagePath = `portadasdjs/${sanitizedName}.png`;
+if (existingImg) {
+if (!existingImg.src.includes(imagePath)) {
+existingImg.src = imagePath;
+existingImg.alt = djName;
 }
-
+} else {
+const newImg = document.createElement('img');
+newImg.src = imagePath;
+newImg.alt = djName;
+newImg.style.borderRadius = '50%';
+newImg.style.border = '3px solid #8b8b8b';
+newImg.style.objectFit = 'cover';
+djProfile.innerHTML = '';
+djProfile.appendChild(newImg);
+}
+}
+}
 // Función para verificar y reemplazar DJ
 function checkAndReplaceNoDJ() {
-    if (sonicDj) {
-        const currentText = sonicDj.textContent.trim();
-        if (currentText.toUpperCase().includes('NO DJ') || currentText === '') {
-            sonicDj.textContent = 'Auto DJ';
-            updateGlitchDataText(sonicDj);
-            replaceDjImageWithLocal('autodj');
-            return true;
-        } else if (currentText && currentText.toUpperCase() !== 'AUTO DJ') {
-            // Si hay un DJ real, cargar su imagen
-            replaceDjImageWithLocal(currentText);
-        }
-    }
-    return false;
+if (sonicDj) {
+const currentText = sonicDj.textContent.trim();
+if (currentText.toUpperCase().includes('NO DJ') || currentText === '') {
+sonicDj.textContent = 'Auto DJ';
+updateGlitchDataText(sonicDj);
+replaceDjImageWithLocal('autodj');
+return true;
+} else if (currentText && currentText.toUpperCase() !== 'AUTO DJ') {
+// Si hay un DJ real, cargar su imagen
+replaceDjImageWithLocal(currentText);
 }
-
+}
+return false;
+}
 function setupGlitchObservers() {
 if (sonicTitle) {
 const titleObserver = new MutationObserver(() => {
