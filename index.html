@@ -992,13 +992,29 @@ background: linear-gradient(90deg, #00ff41, #bd00ff, #00ff41);
 z-index: 2;
 }
 
+/* === FIX CHAT VISIBILIDAD: FILTRO CSS DE RESCATE === */
+.chat-iframe-container::after {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(20, 20, 30, 0.12);
+mix-blend-mode: screen;
+pointer-events: none;
+z-index: 1;
+}
+
 #chat-iframe {
 width: 100%;
 height: 100%;
 border: none;
 background: #0a0a0a;
-/* Fallback para modo oscuro si el iframe no lo soporta nativamente */
-filter: contrast(1.1) brightness(0.95);
+position: relative;
+z-index: 0;
+/* Filtro de rescate: aclara texto oscuro sobre fondo oscuro */
+filter: brightness(1.25) contrast(1.35);
 }
 
 /* Overlay oscuro para cuando el chat está cerrado (en móviles) */
@@ -1434,7 +1450,7 @@ Emite: <div id='sonic_dj' class="cyber-glitch" data-text="" style="color: #00ff4
 <button class="chat-close-btn" id="chat-close">×</button>
 </div>
 <div class="chat-iframe-container">
-<iframe id="chat-iframe" src="https://chat.chatzona.org/index.html#nick=&channel=Nexus_Zone&theme=dark" width="100%" height="100%" frameborder="0" loading="lazy"></iframe>
+<iframe id="chat-iframe" src="https://chat.chatzona.org/index.html#nick=&channel=Nexus_Zone" width="100%" height="100%" frameborder="0" loading="lazy"></iframe>
 </div>
 </div>
 <div class="chat-overlay" id="chat-overlay"></div>
@@ -1498,15 +1514,6 @@ chatPanel.classList.remove('hidden');
 chatPanel.classList.add('visible');
 chatToggle.textContent = 'Ocultar';
 chatOverlay.classList.add('active');
-// Intentar forzar modo oscuro en el iframe si es posible
-try {
-const iframeDoc = chatIframe.contentDocument || chatIframe.contentWindow.document;
-iframeDoc.body.style.background = '#0a0a0a';
-iframeDoc.body.style.color = '#e0e0e0';
-} catch(e) {
-// CORS: no podemos acceder al iframe, el filtro CSS del contenedor actuará como fallback
-console.log('Iframe en dominio externo - usando filtro CSS para modo oscuro');
-}
 } else {
 chatPanel.classList.remove('visible');
 chatPanel.classList.add('hidden');
