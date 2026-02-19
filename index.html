@@ -165,7 +165,7 @@ right: 0;
 bottom: 0;
 background-size: cover;
 background-position: center;
-opacity: 0.6;
+opacity: 0.4;
 filter: blur(3px);
 z-index: 1;
 }
@@ -311,7 +311,7 @@ height: 140px;
 margin-top: 5px;
 width: 100%;
 padding: 0 10px;
-gap: 30px; /* MODIFICADO: Aumentado a 25px para separación sutil */
+gap: 25px;
 }
 .tape-reel {
 width: 85px;
@@ -1368,13 +1368,13 @@ const djProfile = document.getElementById('dj_profile');
 if (djProfile) {
 const existingImg = djProfile.querySelector('img');
 if (existingImg) {
-if (!existingImg.src.includes('img/portadasdjs/autodj.png') && !existingImg.src.endsWith('autodj.png')) {
-existingImg.src = 'img/portadasdjs/autodj.png';
+if (!existingImg.src.includes('portadasdjs/autodj.png') && !existingImg.src.endsWith('portadasdjs/autodj.png')) {
+existingImg.src = 'portadasdjs/autodj.png';
 existingImg.alt = 'Auto DJ';
 }
 } else {
 const newImg = document.createElement('img');
-newImg.src = 'img/portadasdjs/autodj.png';
+newImg.src = 'portadasdjs/autodj.png';
 newImg.alt = 'Auto DJ';
 newImg.style.borderRadius = '50%';
 newImg.style.border = '3px solid #8b8b8b';
@@ -1425,7 +1425,7 @@ const img = artContainer.querySelector('img');
 const imgSrc = img.src;
 if (imgSrc && imgSrc !== '') {
 albumArtBg.style.backgroundImage = `url('${imgSrc}')`;
-albumArtBg.style.opacity = '0.6';
+albumArtBg.style.opacity = '0.4';
 }
 }
 }, 500);
