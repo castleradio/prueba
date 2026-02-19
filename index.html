@@ -870,9 +870,9 @@ margin-top: 0.5rem;
 .chat-panel {
 position: fixed;
 top: 0;
-right: -100%;
-width: 380px;
-max-width: 90vw;
+right: -50vw; /* PC: ocupa mitad derecha */
+width: 50vw;
+max-width: 100%;
 height: 100vh;
 background: #0a0a0a;
 border-left: 3px solid #bd00ff;
@@ -943,6 +943,7 @@ border-bottom: 2px solid #bd00ff;
 display: flex;
 justify-content: space-between;
 align-items: center;
+flex-shrink: 0;
 }
 
 .chat-header h3 {
@@ -992,29 +993,14 @@ background: linear-gradient(90deg, #00ff41, #bd00ff, #00ff41);
 z-index: 2;
 }
 
-/* === FIX CHAT VISIBILIDAD: FILTRO CSS DE RESCATE === */
-.chat-iframe-container::after {
-content: '';
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: rgba(20, 20, 30, 0.12);
-mix-blend-mode: screen;
-pointer-events: none;
-z-index: 1;
-}
-
+/* Iframe original sin filtros */
 #chat-iframe {
 width: 100%;
 height: 100%;
 border: none;
-background: #0a0a0a;
+background: transparent;
 position: relative;
 z-index: 0;
-/* Filtro de rescate: aclara texto oscuro sobre fondo oscuro */
-filter: brightness(1.25) contrast(1.35);
 }
 
 /* Overlay oscuro para cuando el chat está cerrado (en móviles) */
@@ -1036,39 +1022,53 @@ opacity: 1;
 visibility: visible;
 }
 
-/* Responsive para chat */
+/* ============================================ */
+/* RESPONSIVE CHAT - MÓVILES */
+/* ============================================ */
 @media (max-width: 768px) {
 .chat-panel {
-width: 100vw;
-right: -100vw;
+width: calc(100vw - 40px); /* Deja espacio para la pestaña toggle */
+right: calc(-100vw + 40px);
+}
+.chat-panel.visible {
+right: 0;
 }
 .chat-toggle-tab {
-width: 35px;
-height: 80px;
-left: -37px;
-font-size: 0.8rem;
+width: 38px;
+height: 90px;
+left: -40px;
+font-size: 0.85rem;
 }
 .chat-panel.hidden .chat-toggle-tab {
-right: -37px;
-}
-}
-
-@media (max-width: 480px) {
-.chat-toggle-tab {
-width: 30px;
-height: 70px;
-left: -32px;
-font-size: 0.75rem;
-}
-.chat-panel.hidden .chat-toggle-tab {
-right: -32px;
+right: -40px;
 }
 .chat-header h3 {
 font-size: 1rem;
 }
+.chat-close-btn {
+width: 28px;
+height: 28px;
+font-size: 1.1rem;
+}
 }
 
-/* Responsive */
+@media (max-width: 480px) {
+.chat-panel {
+width: calc(100vw - 36px);
+right: calc(-100vw + 36px);
+}
+.chat-toggle-tab {
+width: 34px;
+height: 80px;
+left: -36px;
+font-size: 0.75rem;
+}
+.chat-panel.hidden .chat-toggle-tab {
+right: -36px;
+}
+}
+
+/* Responsive general */
 @media (max-width: 768px) {
 .main-container {
 flex-direction: column;
@@ -1450,7 +1450,7 @@ Emite: <div id='sonic_dj' class="cyber-glitch" data-text="" style="color: #00ff4
 <button class="chat-close-btn" id="chat-close">×</button>
 </div>
 <div class="chat-iframe-container">
-<iframe id="chat-iframe" src="https://chat.chatzona.org/index.html#nick=&channel=Nexus_Zone" width="100%" height="100%" frameborder="0" loading="lazy"></iframe>
+<iframe id="chat-iframe" src="https://chat.chatzona.org/index.html#nick=&channel=Nexus_Zone" width="100%" height="100%" frameborder="0"></iframe>
 </div>
 </div>
 <div class="chat-overlay" id="chat-overlay"></div>
@@ -1647,9 +1647,6 @@ albumArtBg.style.opacity = '0.4';
 // ============================================
 function getBassIntensity() {
 if (!analyzer || !dataArray) return 0;
-// Analizar frecuencias bajas (bombo/kick drum: ~60-150Hz)
-// Con fftSize=512 y sampleRate~44100, cada bin es ~43Hz
-// Bins 0-3 cubren aproximadamente 0-172Hz
 let bassSum = 0;
 for (let i = 0; i < 4; i++) {
 bassSum += dataArray[i];
@@ -1659,7 +1656,6 @@ return bassSum / 4;
 
 function updateLedStrips() {
 if (!isPlaying || !analyzer) {
-// Resetear a gris cuando no hay reproducción
 ledTop.style.background = '#8b8b8b';
 ledTop.style.boxShadow = '0 0 0 rgba(139, 139, 139, 0)';
 ledBottom.style.background = '#8b8b8b';
@@ -1670,12 +1666,10 @@ return;
 const bassIntensity = getBassIntensity();
 const now = Date.now();
 
-// Detectar beat del bombo
 if (bassIntensity > beatThreshold && (now - lastBeatTime) > 150) {
 lastBeatTime = now;
 beatCount++;
 
-// Cambiar color cada cierto número de beats
 if (beatCount >= colorChangeThreshold) {
 ledColorIndex = (ledColorIndex + 1) % ledColors.length;
 beatCount = 0;
@@ -1684,7 +1678,6 @@ beatCount = 0;
 const currentColor = ledColors[ledColorIndex];
 const intensity = Math.min(bassIntensity / 255, 1);
 
-// Actualizar ambas tiras LED
 [ledTop, ledBottom].forEach(led => {
 led.style.background = currentColor;
 led.style.boxShadow = `
@@ -1694,11 +1687,6 @@ inset 0 0 ${5 + intensity * 8}px rgba(255,255,255,${0.3 + intensity * 0.4})
 `;
 });
 } else {
-// Efecto de decaimiento suave cuando no hay beat
-const currentTop = ledTop.style.background || '#8b8b8b';
-const currentBottom = ledBottom.style.background || '#8b8b8b';
-
-// Mantener el color actual con intensidad reducida
 [ledTop, ledBottom].forEach(led => {
 const currentShadow = led.style.boxShadow;
 if (currentShadow && currentShadow.includes('px')) {
@@ -1747,7 +1735,6 @@ bar.style.height = '2px';
 bar.style.boxShadow = '0 0 5px rgba(0, 255, 65, 0.5)';
 bar.style.background = 'linear-gradient(to top, #00ff41, #bd00ff)';
 });
-// Resetear LEDs
 ledTop.style.background = '#8b8b8b';
 ledTop.style.boxShadow = '0 0 0 rgba(139, 139, 139, 0)';
 ledBottom.style.background = '#8b8b8b';
@@ -1762,7 +1749,6 @@ return;
 
 analyzer.getByteFrequencyData(dataArray);
 
-// Actualizar ecualizador
 const totalBins = dataArray.length;
 const binsPerBar = totalBins / barCount;
 for (let i = 0; i < barCount; i++) {
@@ -1794,9 +1780,7 @@ bars[i].style.background = 'linear-gradient(to top, #008822, #7a00cc)';
 }
 }
 
-// Actualizar tiras LED al ritmo del bombo
 updateLedStrips();
-
 animationId = requestAnimationFrame(visualize);
 }
 
@@ -1888,7 +1872,7 @@ checkAndReplaceNoDJ();
 window.addEventListener('load', function() {
 updateAlbumArtBackground();
 setupGlitchObservers();
-initChatListeners(); // Inicializar listeners del chat
+initChatListeners();
 console.log("🎧 Nexus Zone cargado. Haz clic en PLAY para iniciar.");
 });
 
