@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Nexus Zone</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
@@ -19,6 +19,8 @@ min-height: 100vh;
 display: flex;
 flex-direction: column;
 position: relative;
+/* Prevenir zoom en móviles que rompe el layout */
+touch-action: manipulation;
 }
 
 /* ============================================ */
@@ -874,6 +876,7 @@ right: -50vw; /* PC: ocupa mitad derecha */
 width: 50vw;
 max-width: 100%;
 height: 100vh;
+height: 100dvh; /* Dynamic viewport height para móviles modernos */
 background: #0a0a0a;
 border-left: 3px solid #bd00ff;
 box-shadow: -5px 0 25px rgba(189, 0, 255, 0.4), 0 0 30px rgba(0, 0, 0, 0.8);
@@ -980,6 +983,8 @@ box-shadow: 0 0 15px rgba(189, 0, 255, 0.8);
 flex: 1;
 overflow: hidden;
 position: relative;
+/* Padding extra en móvil para teclado */
+padding-bottom: env(safe-area-inset-bottom);
 }
 
 .chat-iframe-container::before {
@@ -1001,6 +1006,8 @@ border: none;
 background: transparent;
 position: relative;
 z-index: 0;
+/* Permitir scroll dentro del iframe en móviles */
+display: block;
 }
 
 /* Overlay oscuro para cuando el chat está cerrado (en móviles) */
@@ -1029,6 +1036,8 @@ visibility: visible;
 .chat-panel {
 width: calc(100vw - 40px); /* Deja espacio para la pestaña toggle */
 right: calc(-100vw + 40px);
+height: 100dvh; /* Altura dinámica para móviles */
+height: -webkit-fill-available; /* Fallback Safari iOS */
 }
 .chat-panel.visible {
 right: 0;
@@ -1050,6 +1059,10 @@ width: 28px;
 height: 28px;
 font-size: 1.1rem;
 }
+/* Contenedor iframe con padding para teclado móvil */
+.chat-iframe-container {
+padding-bottom: 60px; /* Espacio reservado para teclado virtual */
+}
 }
 
 @media (max-width: 480px) {
@@ -1065,6 +1078,9 @@ font-size: 0.75rem;
 }
 .chat-panel.hidden .chat-toggle-tab {
 right: -36px;
+}
+.chat-iframe-container {
+padding-bottom: 55px; /* Ajuste para pantallas muy pequeñas */
 }
 }
 
@@ -1450,7 +1466,7 @@ Emite: <div id='sonic_dj' class="cyber-glitch" data-text="" style="color: #00ff4
 <button class="chat-close-btn" id="chat-close">×</button>
 </div>
 <div class="chat-iframe-container">
-<iframe id="chat-iframe" src="https://chat.chatzona.org/index.html#nick=&channel=Nexus_Zone" width="100%" height="100%" frameborder="0"></iframe>
+<iframe id="chat-iframe" src="https://chat.chatzona.org/index.html#nick=&channel=Nexus_Zone" width="100%" height="100%" frameborder="0" loading="lazy"></iframe>
 </div>
 </div>
 <div class="chat-overlay" id="chat-overlay"></div>
@@ -1479,6 +1495,7 @@ const chatClose = document.getElementById('chat-close');
 const chatBtn = document.getElementById('chat-btn');
 const chatOverlay = document.getElementById('chat-overlay');
 const chatIframe = document.getElementById('chat-iframe');
+const chatIframeContainer = document.querySelector('.chat-iframe-container');
 
 // Variables de estado
 let isPlaying = false;
@@ -1505,8 +1522,40 @@ volumeSlider.value = 1.0;
 audio.crossOrigin = 'anonymous';
 
 // ============================================
-// FUNCIONES CHAT
+// FUNCIONES CHAT + AJUSTE MÓVIL
 // ============================================
+
+// Ajustar altura del iframe en móviles cuando aparece el teclado
+function adjustChatIframeForMobile() {
+if (window.innerWidth <= 768 && isChatVisible) {
+// Usar visualViewport si está disponible (más preciso con teclado)
+if (window.visualViewport) {
+const viewportHeight = window.visualViewport.height;
+chatPanel.style.height = viewportHeight + 'px';
+} else {
+// Fallback: usar innerHeight
+chatPanel.style.height = window.innerHeight + 'px';
+}
+// Asegurar que el contenedor del iframe tenga espacio para el input
+if (chatIframeContainer) {
+const keyboardSpace = window.innerWidth < 480 ? 55 : 60;
+chatIframeContainer.style.paddingBottom = keyboardSpace + 'px';
+}
+}
+}
+
+// Escuchar cambios en el viewport (teclado móvil)
+if (window.visualViewport) {
+window.visualViewport.addEventListener('resize', adjustChatIframeForMobile);
+window.visualViewport.addEventListener('scroll', adjustChatIframeForMobile);
+}
+// Fallback para navegadores sin visualViewport
+window.addEventListener('resize', () => {
+// Debounce simple para no ejecutar demasiado seguido
+clearTimeout(window.chatResizeTimer);
+window.chatResizeTimer = setTimeout(adjustChatIframeForMobile, 150);
+});
+
 function toggleChat() {
 isChatVisible = !isChatVisible;
 if (isChatVisible) {
@@ -1514,11 +1563,15 @@ chatPanel.classList.remove('hidden');
 chatPanel.classList.add('visible');
 chatToggle.textContent = 'Ocultar';
 chatOverlay.classList.add('active');
+// Ajustar altura inmediatamente al abrir
+setTimeout(adjustChatIframeForMobile, 300);
 } else {
 chatPanel.classList.remove('visible');
 chatPanel.classList.add('hidden');
 chatToggle.textContent = 'Mostrar';
 chatOverlay.classList.remove('active');
+// Resetear altura
+chatPanel.style.height = '';
 }
 }
 
@@ -1873,6 +1926,8 @@ window.addEventListener('load', function() {
 updateAlbumArtBackground();
 setupGlitchObservers();
 initChatListeners();
+// Ajuste inicial para móvil
+adjustChatIframeForMobile();
 console.log("🎧 Nexus Zone cargado. Haz clic en PLAY para iniciar.");
 });
 
