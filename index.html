@@ -20,7 +20,6 @@ display: flex;
 flex-direction: column;
 position: relative;
 }
-
 /* ============================================ */
 /* CUADRÍCULA DE FONDO EN MOVIMIENTO */
 /* ============================================ */
@@ -31,14 +30,13 @@ left: 0;
 width: 100%;
 height: 100%;
 z-index: -1;
-background-image: 
-    linear-gradient(rgba(120, 120, 120, 0.15) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(120, 120, 120, 0.15) 1px, transparent 1px);
+background-image:
+linear-gradient(rgba(120, 120, 120, 0.15) 1px, transparent 1px),
+linear-gradient(90deg, rgba(120, 120, 120, 0.15) 1px, transparent 1px);
 background-size: 40px 40px;
 animation: gridRandomMove 30s linear infinite;
 pointer-events: none;
 }
-
 @keyframes gridRandomMove {
 0% { background-position: 0 0; }
 25% { background-position: 15px 10px; }
@@ -47,7 +45,6 @@ pointer-events: none;
 100% { background-position: 0 0; }
 }
 /* ============================================ */
-
 /* Cabecera */
 header {
 background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
@@ -56,7 +53,6 @@ text-align: center;
 position: relative;
 z-index: 10;
 }
-
 /* Título con degradado original */
 h1 {
 font-family: 'Orbitron', sans-serif;
@@ -74,12 +70,10 @@ animation: glow 2s ease-in-out infinite alternate;
 margin: 0;
 display: inline-block;
 }
-
 @keyframes glow {
 from { text-shadow: 0 0 10px rgba(189, 0, 255, 0.5); }
 to { text-shadow: 0 0 20px rgba(189, 0, 255, 0.8), 0 0 30px rgba(0, 255, 65, 0.6); }
 }
-
 /* Tira LED debajo de la cabecera */
 .led-strip-top,
 .led-strip-bottom {
@@ -90,7 +84,6 @@ z-index: 10;
 transition: background 0.05s ease, box-shadow 0.05s ease;
 box-shadow: 0 0 0 rgba(139, 139, 139, 0);
 }
-
 /* Contenido principal */
 .main-container {
 display: flex;
@@ -137,7 +130,6 @@ padding-bottom: 0.5rem;
 color: #bd00ff;
 padding-bottom: 0.5rem;
 }
-
 /* Cassette Player */
 .cassette-player {
 width: 95%;
@@ -163,7 +155,6 @@ height: 8px;
 background: linear-gradient(90deg, #00ff41, #bd00ff, #00ff41);
 opacity: 0.8;
 }
-
 /* Fondo difuminado de la portada */
 .album-art-bg {
 position: absolute;
@@ -177,7 +168,6 @@ opacity: 0.4;
 filter: blur(3px);
 z-index: 1;
 }
-
 .cassette-content {
 position: relative;
 z-index: 2;
@@ -187,7 +177,6 @@ flex-direction: column;
 justify-content: space-between;
 gap: 15px;
 }
-
 /* Song Info */
 .song-info {
 width: 100%;
@@ -205,7 +194,6 @@ justify-content: center;
 padding: 0 5px;
 letter-spacing: 1.5px;
 }
-
 /* ============================================ */
 /* EFECTO GLITCH CYBERPUNK */
 /* ============================================ */
@@ -312,7 +300,6 @@ font-size: 1.4rem;
 text-align: center;
 letter-spacing: 1.5px;
 }
-
 .cassette-tapes {
 display: flex;
 justify-content: center;
@@ -325,7 +312,6 @@ width: 100%;
 padding: 0 10px;
 gap: 12px;
 }
-
 .tape-reel {
 width: 85px;
 height: 85px;
@@ -353,7 +339,6 @@ aspect-ratio: 1 / 1;
 0% { transform: rotate(0deg); }
 100% { transform: rotate(360deg); }
 }
-
 /* Detalles del carrete */
 .tape-reel::before {
 content: '';
@@ -395,7 +380,6 @@ z-index: 1;
 .tape-reel span:nth-child(2) { transform: rotate(135deg) translate(23px, -5px); }
 .tape-reel span:nth-child(3) { transform: rotate(225deg) translate(23px, -5px); }
 .tape-reel span:nth-child(4) { transform: rotate(315deg) translate(23px, -5px); }
-
 /* CARRETE IZQUIERDO - MORADO CYBERPUNK */
 #tape-left {
 border-color: #bd00ff;
@@ -437,7 +421,6 @@ animation: fastSpin 4s linear infinite, purple-pulse 1.5s ease-in-out infinite;
 0%, 100% { box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 20px rgba(189,0,255,0.7), 0 0 35px rgba(189,0,255,0.5); }
 50% { box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 25px rgba(189,0,255,0.9), 0 0 45px rgba(189,0,255,0.7); }
 }
-
 /* CARRETE DERECHO - VERDE CYBERPUNK */
 #tape-right {
 border-color: #00ff41;
@@ -479,7 +462,6 @@ animation: fastSpin 4s linear infinite, green-pulse 1.5s ease-in-out infinite;
 0%, 100% { box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 20px rgba(0,255,65,0.7), 0 0 35px rgba(0,255,65,0.5); }
 50% { box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 10px rgba(139,139,139,0.6), 0 0 25px rgba(0,255,65,0.9), 0 0 45px rgba(0,255,65,0.7); }
 }
-
 .tape-reel.animated {
 animation: fastSpin 4s linear infinite;
 }
@@ -487,7 +469,6 @@ animation: fastSpin 4s linear infinite;
 0% { transform: rotate(0deg); }
 100% { transform: rotate(720deg); }
 }
-
 .cassette-center {
 width: 170px;
 height: 118px;
@@ -506,7 +487,6 @@ inset 0 0 15px rgba(0, 0, 0, 0.7),
 0 0 8px rgba(139, 139, 139, 0.4);
 overflow: hidden;
 }
-
 .cassette-center::before {
 content: '';
 position: absolute;
@@ -522,7 +502,6 @@ inset 0 1px 2px rgba(255, 255, 255, 0.2),
 0 1px 3px rgba(0, 0, 0, 0.7);
 z-index: 5;
 }
-
 .button-compartment {
 height: 50%;
 width: 100%;
@@ -533,7 +512,6 @@ position: relative;
 z-index: 6;
 padding: 5px 0;
 }
-
 .play-btn {
 width: 85px;
 height: 33px;
@@ -612,7 +590,6 @@ background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
 border-radius: 3px;
 z-index: -1;
 }
-
 .equalizer-compartment {
 height: 50%;
 width: 100%;
@@ -623,7 +600,6 @@ position: relative;
 z-index: 4;
 padding-bottom: 8px;
 }
-
 .equalizer-container {
 width: 100%;
 height: 28px;
@@ -662,7 +638,6 @@ pointer-events: none;
 z-index: 6;
 opacity: 0.7;
 }
-
 /* Volume Control */
 .volume-control {
 width: 100%;
@@ -709,7 +684,6 @@ box-shadow:
 inset 0 0 5px rgba(0, 0, 0, 0.5);
 border: 2px solid #000;
 }
-
 /* Widget del DJ */
 #dj_profile {
 display: flex;
@@ -774,7 +748,6 @@ margin-left: 10px;
 display: inline-block;
 vertical-align: middle;
 }
-
 /* Pie de página */
 footer {
 background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
@@ -788,7 +761,6 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 }
-
 /* Texto del footer con estilo Nexus Zone */
 .footer-brand {
 display: inline-flex;
@@ -797,7 +769,6 @@ align-items: center;
 margin-bottom: 0.8rem;
 animation: power-flicker 5s infinite;
 }
-
 .footer-nexus {
 color: #bd00ff;
 font-family: 'Orbitron', sans-serif;
@@ -805,7 +776,6 @@ font-weight: 900;
 font-size: 1rem;
 text-shadow: 0 0 8px rgba(189, 0, 255, 0.6);
 }
-
 .footer-zone {
 color: #00ff41;
 font-family: 'Orbitron', sans-serif;
@@ -813,19 +783,16 @@ font-weight: 900;
 font-size: 1rem;
 text-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
 }
-
 .footer-separator {
 color: #888;
 margin: 0 8px;
 }
-
 .footer-credit {
 color: #888;
 font-family: 'Orbitron', sans-serif;
 font-weight: 900;
 font-size: 1rem;
 }
-
 .social-links {
 display: flex;
 justify-content: center;
@@ -849,18 +816,135 @@ font-weight: 900;
 font-size: 1.2rem;
 transition: all 0.3s ease;
 box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+cursor: pointer;
 }
 .social-link:hover {
 transform: scale(1.1);
 box-shadow: 0 0 25px rgba(0, 255, 65, 0.5);
 }
-
 .copyright {
 color: #666;
 font-family: 'Orbitron', sans-serif;
 font-weight: 400;
 font-size: 0.7rem;
 margin-top: 0.5rem;
+}
+
+/* ============================================ */
+/* CHAT SLIDING PANEL - NUEVO */
+/* ============================================ */
+.chat-panel {
+position: fixed;
+top: 0;
+right: 0;
+width: 380px;
+height: 100vh;
+background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+border-left: 3px solid #bd00ff;
+box-shadow: -5px 0 25px rgba(189, 0, 255, 0.4), 0 0 30px rgba(0, 255, 65, 0.2);
+z-index: 1000;
+transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+display: flex;
+flex-direction: column;
+}
+.chat-panel.closed {
+transform: translateX(100%);
+}
+.chat-panel iframe {
+flex: 1;
+width: 100%;
+border: none;
+background-color: #1a1a1a;
+}
+.chat-toggle-tab {
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+width: 32px;
+height: 80px;
+background: linear-gradient(135deg, #bd00ff, #00ff41);
+border-radius: 8px 0 0 8px;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+font-family: 'Orbitron', sans-serif;
+font-weight: 900;
+font-size: 0.7rem;
+color: #0f0f0f;
+text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+box-shadow: 0 0 15px rgba(189, 0, 255, 0.6), 0 0 25px rgba(0, 255, 65, 0.4);
+transition: all 0.3s ease;
+writing-mode: vertical-rl;
+text-orientation: mixed;
+letter-spacing: 1px;
+z-index: 1001;
+}
+.chat-toggle-tab:hover {
+box-shadow: 0 0 20px rgba(189, 0, 255, 0.9), 0 0 35px rgba(0, 255, 65, 0.7);
+transform: translateY(-50%) scale(1.05);
+}
+.chat-panel .chat-toggle-tab {
+right: -32px;
+border-radius: 8px 0 0 8px;
+}
+.chat-panel.closed .chat-toggle-tab {
+right: 0;
+border-radius: 0 8px 8px 0;
+}
+.chat-header {
+padding: 12px 15px;
+background: linear-gradient(90deg, rgba(189,0,255,0.2), rgba(0,255,65,0.2));
+border-bottom: 2px solid #bd00ff;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.chat-header-title {
+color: #00ff41;
+font-family: 'Orbitron', sans-serif;
+font-weight: 900;
+font-size: 1rem;
+text-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
+}
+.chat-close-btn {
+background: transparent;
+border: 2px solid #bd00ff;
+color: #bd00ff;
+font-family: 'Orbitron', sans-serif;
+font-weight: 900;
+font-size: 1.2rem;
+width: 30px;
+height: 30px;
+border-radius: 50%;
+cursor: pointer;
+transition: all 0.2s ease;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.chat-close-btn:hover {
+background: #bd00ff;
+color: #0f0f0f;
+box-shadow: 0 0 15px rgba(189, 0, 255, 0.8);
+}
+
+/* Responsive para el chat */
+@media (max-width: 768px) {
+.chat-panel {
+width: 100%;
+max-width: 380px;
+}
+}
+@media (max-width: 480px) {
+.chat-panel {
+width: 100%;
+}
+.chat-toggle-tab {
+width: 28px;
+height: 70px;
+font-size: 0.65rem;
+}
 }
 
 /* Responsive */
@@ -1158,7 +1242,6 @@ font-size: 1.5rem;
 <body>
 <!-- CUADRÍCULA DE FONDO -->
 <div class="background-grid"></div>
-
 <!-- Script del widget -->
 <script id='sonic_js' data-port='8008' src='https://sonic.sistemahost.es/cp/widgets.js?r=122    '></script>
 <header>
@@ -1226,7 +1309,7 @@ Emite: <div id='sonic_dj' class="cyber-glitch" data-text="" style="color: #00ff4
 <a href="#" class="social-link" title="Telegram">T</a>
 <a href="#" class="social-link" title="Tiktok">Tk</a>
 <a href="#" class="social-link" title="Staff">S</a>
-<a href="#" class="social-link" title="Chat">C</a>
+<a href="#" class="social-link chat-trigger" title="Chat">C</a>
 </div>
 <div class="copyright">
 <span class="footer-brand">
@@ -1237,7 +1320,65 @@ Emite: <div id='sonic_dj' class="cyber-glitch" data-text="" style="color: #00ff4
 </div>
 </footer>
 <audio id="radio-player" crossorigin="anonymous" preload="metadata"></audio>
+
+<!-- ============================================ -->
+<!-- PANEL DE CHAT SLIDING -->
+<!-- ============================================ -->
+<div class="chat-panel closed" id="chat-panel">
+<div class="chat-header">
+<span class="chat-header-title">💬 Chat Nexus</span>
+<button class="chat-close-btn" id="chat-close-btn">×</button>
+</div>
+<iframe 
+    src="https://kiwiirc.com/nextclient/irc.chatzona.org/?nick=Nexus_User?#Nexus_Zone" 
+    style="border:0; width:100%; height:calc(100% - 50px); background-color: #1a1a1a;">
+</iframe>
+<div class="chat-toggle-tab" id="chat-tab-hide">Ocultar</div>
+</div>
+<div class="chat-toggle-tab" id="chat-tab-show" style="display: none;">Mostrar</div>
+
 <script>
+// ============================================
+// FUNCIONES PARA EL CHAT SLIDING
+// ============================================
+const chatPanel = document.getElementById('chat-panel');
+const chatTabHide = document.getElementById('chat-tab-hide');
+const chatTabShow = document.getElementById('chat-tab-show');
+const chatCloseBtn = document.getElementById('chat-close-btn');
+const chatTrigger = document.querySelector('.chat-trigger');
+
+// Mostrar chat
+function showChat() {
+chatPanel.classList.remove('closed');
+chatTabHide.style.display = 'flex';
+chatTabShow.style.display = 'none';
+}
+
+// Ocultar chat
+function hideChat() {
+chatPanel.classList.add('closed');
+chatTabHide.style.display = 'none';
+chatTabShow.style.display = 'flex';
+}
+
+// Event listeners
+chatTrigger.addEventListener('click', (e) => {
+e.preventDefault();
+showChat();
+});
+
+chatTabHide.addEventListener('click', hideChat);
+chatTabShow.addEventListener('click', showChat);
+chatCloseBtn.addEventListener('click', hideChat);
+
+// Cerrar chat con tecla Escape
+document.addEventListener('keydown', (e) => {
+if (e.key === 'Escape' && !chatPanel.classList.contains('closed')) {
+hideChat();
+}
+});
+// ============================================
+
 // Elementos del DOM
 const audio = document.getElementById('radio-player');
 const playPauseBtn = document.getElementById('play-pause-btn');
@@ -1252,7 +1393,6 @@ const sonicTitle = document.getElementById('sonic_title');
 const sonicDj = document.getElementById('sonic_dj');
 const ledTop = document.getElementById('led-top');
 const ledBottom = document.getElementById('led-bottom');
-
 // Variables de estado
 let isPlaying = false;
 let audioContext = null;
@@ -1262,7 +1402,6 @@ let animationId = null;
 let isVisualizing = false;
 const barCount = bars.length;
 let audioGraphSetup = false;
-
 // Colores para las tiras LED
 const ledColors = ['#8b8b8b', '#bd00ff', '#00ff41']; // gris, morado, verde
 let ledColorIndex = 0;
@@ -1270,19 +1409,16 @@ let lastBeatTime = 0;
 const beatThreshold = 180; // Umbral para detectar bombo
 const colorChangeThreshold = 3; // Cambiar color cada X beats detectados
 let beatCount = 0;
-
 // Configuración inicial
 audio.volume = 1.0;
 volumeSlider.value = 1.0;
 audio.crossOrigin = 'anonymous';
-
 // Función para actualizar el atributo data-text en elementos con glitch
 function updateGlitchDataText(element) {
 if (element && element.classList.contains('cyber-glitch')) {
 element.setAttribute('data-text', element.textContent.trim());
 }
 }
-
 // Función para activar efecto glitch intenso aleatorio
 function triggerRandomGlitch(element) {
 if (!element || !element.classList.contains('cyber-glitch')) return;
@@ -1295,7 +1431,6 @@ setTimeout(() => {
 element.classList.remove(randomEffect);
 }, 1000);
 }
-
 // ============================================
 // FUNCIONES PARA MANEJAR "NO DJ" → "Auto DJ"
 // ============================================
@@ -1378,7 +1513,6 @@ albumArtBg.style.opacity = '0.4';
 }
 }, 500);
 }
-
 // ============================================
 // FUNCIONES PARA TIRAS LED AL RITMO DE LA MÚSICA
 // ============================================
@@ -1393,7 +1527,6 @@ bassSum += dataArray[i];
 }
 return bassSum / 4;
 }
-
 function updateLedStrips() {
 if (!isPlaying || !analyzer) {
 // Resetear a gris cuando no hay reproducción
@@ -1403,24 +1536,19 @@ ledBottom.style.background = '#8b8b8b';
 ledBottom.style.boxShadow = '0 0 0 rgba(139, 139, 139, 0)';
 return;
 }
-
 const bassIntensity = getBassIntensity();
 const now = Date.now();
-
 // Detectar beat del bombo
 if (bassIntensity > beatThreshold && (now - lastBeatTime) > 150) {
 lastBeatTime = now;
 beatCount++;
-
 // Cambiar color cada cierto número de beats
 if (beatCount >= colorChangeThreshold) {
 ledColorIndex = (ledColorIndex + 1) % ledColors.length;
 beatCount = 0;
 }
-
 const currentColor = ledColors[ledColorIndex];
 const intensity = Math.min(bassIntensity / 255, 1);
-
 // Actualizar ambas tiras LED
 [ledTop, ledBottom].forEach(led => {
 led.style.background = currentColor;
@@ -1434,7 +1562,6 @@ inset 0 0 ${5 + intensity * 8}px rgba(255,255,255,${0.3 + intensity * 0.4})
 // Efecto de decaimiento suave cuando no hay beat
 const currentTop = ledTop.style.background || '#8b8b8b';
 const currentBottom = ledBottom.style.background || '#8b8b8b';
-
 // Mantener el color actual con intensidad reducida
 [ledTop, ledBottom].forEach(led => {
 const currentShadow = led.style.boxShadow;
@@ -1447,7 +1574,6 @@ return `${Math.max(val * 0.85, 0)}px`;
 });
 }
 }
-
 function setupAudioGraph() {
 if (audioGraphSetup || !audioContext) return;
 try {
@@ -1466,13 +1592,11 @@ console.error("✗ Error configurando el grafo de audio:", e);
 alert("Error al inicializar el reproductor de audio. Por favor recarga la página.");
 }
 }
-
 function startVisualizer() {
 if (isVisualizing || !analyzer) return;
 isVisualizing = true;
 visualize();
 }
-
 function stopVisualizer() {
 isVisualizing = false;
 if (animationId) {
@@ -1490,15 +1614,12 @@ ledTop.style.boxShadow = '0 0 0 rgba(139, 139, 139, 0)';
 ledBottom.style.background = '#8b8b8b';
 ledBottom.style.boxShadow = '0 0 0 rgba(139, 139, 139, 0)';
 }
-
 function visualize() {
 if (!isVisualizing || !analyzer || !isPlaying) {
 stopVisualizer();
 return;
 }
-
 analyzer.getByteFrequencyData(dataArray);
-
 // Actualizar ecualizador
 const totalBins = dataArray.length;
 const binsPerBar = totalBins / barCount;
@@ -1530,13 +1651,10 @@ bars[i].style.background = 'linear-gradient(to top, #00cc33, #9900ff)';
 bars[i].style.background = 'linear-gradient(to top, #008822, #7a00cc)';
 }
 }
-
 // Actualizar tiras LED al ritmo del bombo
 updateLedStrips();
-
 animationId = requestAnimationFrame(visualize);
 }
-
 function togglePlayPause() {
 if (!isPlaying) {
 if (audio.src !== streamUrl) {
@@ -1591,24 +1709,19 @@ stopVisualizer();
 console.log("⏸ Reproducción pausada");
 }
 }
-
 function changeVolume() {
 audio.volume = parseFloat(volumeSlider.value);
 }
-
 function startTapeAnimation() {
 tapeLeft.classList.add('animated');
 tapeRight.classList.add('animated');
 }
-
 function stopTapeAnimation() {
 tapeLeft.classList.remove('animated');
 tapeRight.classList.remove('animated');
 }
-
 playPauseBtn.addEventListener('click', togglePlayPause);
 volumeSlider.addEventListener('input', changeVolume);
-
 setInterval(function() {
 const script = document.getElementById('sonic_js');
 const newScript = document.createElement('script');
@@ -1621,13 +1734,11 @@ setTimeout(() => {
 checkAndReplaceNoDJ();
 }, 600);
 }, 10000);
-
 window.addEventListener('load', function() {
 updateAlbumArtBackground();
 setupGlitchObservers();
 console.log("🎧 Nexus Zone cargado. Haz clic en PLAY para iniciar.");
 });
-
 audio.addEventListener('ended', () => {
 isPlaying = false;
 playPauseBtn.innerHTML = '▶';
@@ -1636,7 +1747,6 @@ stopTapeAnimation();
 stopVisualizer();
 console.log("⏹ Reproducción finalizada");
 });
-
 audio.addEventListener('pause', () => {
 if (isPlaying) {
 isPlaying = false;
@@ -1646,7 +1756,6 @@ stopTapeAnimation();
 stopVisualizer();
 }
 });
-
 audio.addEventListener('error', (e) => {
 console.error("✗ Error de audio:", e);
 stopVisualizer();
@@ -1658,7 +1767,6 @@ stopTapeAnimation();
 alert('Error crítico en el stream. Verifica tu conexión o intenta más tarde.');
 }
 });
-
 document.body.addEventListener('touchstart', function initMobile() {
 if (!audioContext && typeof window.AudioContext !== 'undefined') {
 audioContext = new AudioContext();
