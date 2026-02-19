@@ -129,6 +129,7 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+position: relative;
 }
 .dj-section {
 flex: 1;
@@ -157,7 +158,167 @@ padding-bottom: 0.5rem;
 color: #bd00ff;
 padding-bottom: 0.5rem;
 }
+/* ============================================ */
+/* EFECTO DE RAYOS TORMENTA ELÉCTRICA */
+/* ============================================ */
+.lightning-container {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 140%;
+height: 140%;
+pointer-events: none;
+z-index: 0;
+overflow: visible;
+}
+.lightning-bolt {
+position: absolute;
+width: 3px;
+height: 100px;
+opacity: 0;
+transform-origin: top center;
+filter: drop-shadow(0 0 8px currentColor);
+}
+.lightning-bolt.green {
+color: #00ff41;
+background: linear-gradient(to bottom, 
+#00ff41 0%, 
+#00cc33 40%, 
+#008822 70%, 
+transparent 100%);
+box-shadow: 
+0 0 10px #00ff41,
+0 0 20px #00ff41,
+0 0 30px #00ff41,
+0 0 40px #00ff41;
+}
+.lightning-bolt.purple {
+color: #bd00ff;
+background: linear-gradient(to bottom, 
+#bd00ff 0%, 
+#9900cc 40%, 
+#660088 70%, 
+transparent 100%);
+box-shadow: 
+0 0 10px #bd00ff,
+0 0 20px #bd00ff,
+0 0 30px #bd00ff,
+0 0 40px #bd00ff;
+}
+.lightning-bolt.active {
+animation: lightning-strike 0.2s ease-out forwards;
+}
+@keyframes lightning-strike {
+0% {
+opacity: 0;
+transform: scaleY(0.1) skewX(0deg);
+}
+10% {
+opacity: 1;
+transform: scaleY(1) skewX(5deg);
+}
+20% {
+opacity: 0.8;
+transform: scaleY(0.95) skewX(-5deg);
+}
+30% {
+opacity: 1;
+transform: scaleY(1) skewX(3deg);
+}
+40% {
+opacity: 0.7;
+transform: scaleY(0.9) skewX(-3deg);
+}
+50% {
+opacity: 0.9;
+transform: scaleY(0.85) skewX(2deg);
+}
+70% {
+opacity: 0.5;
+transform: scaleY(0.6) skewX(0deg);
+}
+100% {
+opacity: 0;
+transform: scaleY(0.3) skewX(0deg);
+}
+}
+.lightning-bolt::before,
+.lightning-bolt::after {
+content: '';
+position: absolute;
+width: 2px;
+background: inherit;
+filter: inherit;
+}
+.lightning-bolt::before {
+height: 60%;
+top: 30%;
+left: -8px;
+transform: rotate(35deg);
+}
+.lightning-bolt::after {
+height: 40%;
+top: 50%;
+right: -6px;
+transform: rotate(-40deg);
+}
+.lightning-flash {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 100%;
+height: 100%;
+border-radius: 50%;
+background: radial-gradient(ellipse at center, 
+rgba(189, 0, 255, 0) 0%, 
+rgba(0, 255, 65, 0) 0%);
+filter: blur(60px);
+opacity: 0;
+transition: opacity 0.05s ease;
+z-index: 0;
+}
+.lightning-flash.active {
+opacity: var(--flash-opacity);
+background: radial-gradient(ellipse at center, 
+rgba(189, 0, 255, var(--flash-opacity)) 0%, 
+rgba(0, 255, 65, var(--flash-opacity)) 50%, 
+transparent 80%);
+animation: flash-pulse 0.15s ease-out;
+}
+@keyframes flash-pulse {
+0% { transform: translate(-50%, -50%) scale(0.8); }
+50% { transform: translate(-50%, -50%) scale(1.2); }
+100% { transform: translate(-50%, -50%) scale(1); }
+}
+.lightning-glow-center {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 200px;
+height: 200px;
+background: radial-gradient(circle, 
+rgba(189, 0, 255, 0.4) 0%, 
+rgba(0, 255, 65, 0.3) 50%, 
+transparent 70%);
+filter: blur(40px);
+border-radius: 50%;
+opacity: 0;
+z-index: 0;
+}
+.lightning-glow-center.active {
+animation: glow-pulse 0.2s ease-out;
+}
+@keyframes glow-pulse {
+0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.3); }
+100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
+}
+/* ============================================ */
 /* Cassette Player */
+/* ============================================ */
 .cassette-player {
 width: 95%;
 max-width: 575px;
@@ -171,6 +332,7 @@ position: relative;
 overflow: hidden;
 display: flex;
 flex-direction: column;
+z-index: 1;
 }
 .cassette-player::before {
 content: '';
@@ -1472,6 +1634,12 @@ footer { padding: 0.2rem; min-height: 70px; }
 <div class="main-container">
 <section class="player-section">
 <h2 class="section-title player-title">Reproductor</h2>
+<!-- CONTENEDOR DE RAYOS TORMENTA ELÉCTRICA -->
+<div class="lightning-container" id="lightning-container">
+<div class="lightning-flash" id="lightning-flash"></div>
+<div class="lightning-glow-center" id="lightning-glow-center"></div>
+<!-- Los rayos se generan dinámicamente con JS -->
+</div>
 <div class="cassette-player">
 <div class="album-art-bg" id="album-art-bg"></div>
 <div class="cassette-content">
@@ -1591,6 +1759,11 @@ const chatBtn = document.getElementById('chat-btn');
 const chatOverlay = document.getElementById('chat-overlay');
 const chatIframe = document.getElementById('chat-iframe');
 const chatIframeContainer = document.querySelector('.chat-iframe-container');
+// Elementos de rayos tormenta
+const lightningContainer = document.getElementById('lightning-container');
+const lightningFlash = document.getElementById('lightning-flash');
+const lightningGlowCenter = document.getElementById('lightning-glow-center');
+
 // Variables de estado
 let isPlaying = false;
 let audioContext = null;
@@ -1601,6 +1774,7 @@ let isVisualizing = false;
 const barCount = bars.length;
 let audioGraphSetup = false;
 let isChatVisible = false;
+
 // Colores para las tiras LED
 const ledColors = ['#8b8b8b', '#bd00ff', '#00ff41'];
 let ledColorIndex = 0;
@@ -1608,19 +1782,91 @@ let lastBeatTime = 0;
 const beatThreshold = 180;
 const colorChangeThreshold = 3;
 let beatCount = 0;
-// Configuración inicial
-audio.volume = 1.0;
-volumeSlider.value = 1.0;
-audio.crossOrigin = 'anonymous';
+
+// ============================================
+// CONFIGURACIÓN DE RAYOS TORMENTA ELÉCTRICA
+// ============================================
+const maxLightningBolts = 12;
+const lightningBolts = [];
+let lastLightningTime = 0;
+const lightningInterval = 80;
+
+// Crear los rayos de tormenta dinámicamente
+function createLightningBolts() {
+for (let i = 0; i < maxLightningBolts; i++) {
+const bolt = document.createElement('div');
+bolt.className = `lightning-bolt ${i % 2 === 0 ? 'purple' : 'green'}`;
+bolt.style.display = 'none';
+lightningContainer.appendChild(bolt);
+lightningBolts.push(bolt);
+}
+}
+
+// Activar rayos de tormenta según intensidad del bombo
+function triggerLightningStorm(bassIntensity) {
+if (!isPlaying || bassIntensity < beatThreshold) return;
+
+const now = Date.now();
+if (now - lastLightningTime < lightningInterval) return;
+lastLightningTime = now;
+
+const intensity = Math.min(bassIntensity / 255, 1);
+const flashOpacity = 0.4 + (intensity * 0.6);
+const boltsToActivate = Math.floor(2 + (intensity * 5));
+
+// Activar flash de fondo
+lightningFlash.style.setProperty('--flash-opacity', flashOpacity);
+lightningFlash.classList.add('active');
+setTimeout(() => {
+lightningFlash.classList.remove('active');
+}, 150);
+
+// Activar resplandor central
+lightningGlowCenter.classList.add('active');
+setTimeout(() => {
+lightningGlowCenter.classList.remove('active');
+}, 200);
+
+// Activar rayos aleatorios alrededor del cassette
+const activatedIndices = new Set();
+for (let i = 0; i < boltsToActivate; i++) {
+let index;
+do {
+index = Math.floor(Math.random() * maxLightningBolts);
+} while (activatedIndices.has(index));
+activatedIndices.add(index);
+
+const bolt = lightningBolts[index];
+const angle = Math.random() * 360;
+const distance = 120 + Math.random() * 100;
+const boltLength = 80 + (intensity * 100);
+const boltWidth = 2 + (intensity * 2);
+
+bolt.style.display = 'block';
+bolt.style.width = `${boltWidth}px`;
+bolt.style.height = `${boltLength}px`;
+bolt.style.left = `calc(50% + ${Math.cos(angle * Math.PI / 180) * distance}px)`;
+bolt.style.top = `calc(50% + ${Math.sin(angle * Math.PI / 180) * distance}px)`;
+bolt.style.transform = `rotate(${angle + 90}deg)`;
+bolt.style.opacity = '0';
+
+bolt.classList.add('active');
+
+setTimeout(() => {
+bolt.classList.remove('active');
+bolt.style.display = 'none';
+}, 200);
+}
+}
 
 // ============================================
 // FUNCIONES VOLUMEN (ACTUALIZADAS)
 // ============================================
 function updateVolumeDisplay() {
-    const percent = Math.round(audio.volume * 100);
-    volumePercentage.textContent = percent + '%';
-    // Actualizar gradiente: Verde hasta el porcentaje, gris después
-    volumeSlider.style.background = `linear-gradient(to right, #00ff41 0%, #00ff41 ${percent}%, #333 ${percent}%, #333 100%)`;
+const percent = Math.round(audio.volume * 100);
+volumePercentage.textContent = percent + '%';
+// Actualizar gradiente: Verde hasta el porcentaje, gris después
+volumeSlider.style.background = `linear-gradient(to right, #00ff41 0%, #00ff41 ${percent}%, #333 ${percent}%, #333 100%)`;
 }
 
 // ============================================
@@ -1640,14 +1886,17 @@ chatIframeContainer.style.paddingBottom = keyboardSpace + 'px';
 }
 }
 }
+
 if (window.visualViewport) {
 window.visualViewport.addEventListener('resize', adjustChatIframeForMobile);
 window.visualViewport.addEventListener('scroll', adjustChatIframeForMobile);
 }
+
 window.addEventListener('resize', () => {
 clearTimeout(window.chatResizeTimer);
 window.chatResizeTimer = setTimeout(adjustChatIframeForMobile, 150);
 });
+
 function toggleChat() {
 isChatVisible = !isChatVisible;
 if (isChatVisible) {
@@ -1662,6 +1911,7 @@ chatOverlay.classList.remove('active');
 chatPanel.style.height = '';
 }
 }
+
 function initChatListeners() {
 chatBtn.addEventListener('click', (e) => {
 e.preventDefault();
@@ -1675,12 +1925,14 @@ toggleChat();
 }
 });
 }
+
 // Función para actualizar el atributo data-text en elementos con glitch
 function updateGlitchDataText(element) {
 if (element && element.classList.contains('cyber-glitch')) {
 element.setAttribute('data-text', element.textContent.trim());
 }
 }
+
 // Función para activar efecto glitch intenso aleatorio
 function triggerRandomGlitch(element) {
 if (!element || !element.classList.contains('cyber-glitch')) return;
@@ -1693,6 +1945,7 @@ setTimeout(() => {
 element.classList.remove(randomEffect);
 }, 1000);
 }
+
 // ============================================
 // FUNCIONES PARA MANEJAR IMÁGENES DE DJS
 // ============================================
@@ -1702,6 +1955,7 @@ return djName.toLowerCase()
 .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // Eliminar acentos
 .replace(/[^a-z0-9]/g, '_'); // Reemplazar caracteres no alfanuméricos con _
 }
+
 // Función para cargar la imagen del DJ
 function replaceDjImageWithLocal(djName = 'autodj') {
 const djProfile = document.getElementById('dj_profile');
@@ -1727,6 +1981,7 @@ djProfile.appendChild(newImg);
 }
 }
 }
+
 // Función para verificar y reemplazar DJ
 function checkAndReplaceNoDJ() {
 if (sonicDj) {
@@ -1743,6 +1998,7 @@ replaceDjImageWithLocal(currentText);
 }
 return false;
 }
+
 function setupGlitchObservers() {
 if (sonicTitle) {
 const titleObserver = new MutationObserver(() => {
@@ -1776,6 +2032,7 @@ replaceDjImageWithLocal('autodj');
 profileObserver.observe(djProfile, { childList: true, subtree: true });
 }
 }
+
 function updateAlbumArtBackground() {
 setTimeout(() => {
 const artContainer = document.getElementById('sonic_art_full');
@@ -1789,6 +2046,7 @@ albumArtBg.style.opacity = '0.4';
 }
 }, 500);
 }
+
 // ============================================
 // FUNCIONES PARA TIRAS LED AL RITMO DE LA MÚSICA
 // ============================================
@@ -1800,6 +2058,7 @@ bassSum += dataArray[i];
 }
 return bassSum / 4;
 }
+
 function updateLedStrips() {
 if (!isPlaying || !analyzer) {
 ledTop.style.background = '#8b8b8b';
@@ -1839,6 +2098,7 @@ return `${Math.max(val * 0.85, 0)}px`;
 });
 }
 }
+
 function setupAudioGraph() {
 if (audioGraphSetup || !audioContext) return;
 try {
@@ -1857,11 +2117,13 @@ console.error("✗ Error configurando el grafo de audio:", e);
 alert("Error al inicializar el reproductor de audio. Por favor recarga la página.");
 }
 }
+
 function startVisualizer() {
 if (isVisualizing || !analyzer) return;
 isVisualizing = true;
 visualize();
 }
+
 function stopVisualizer() {
 isVisualizing = false;
 if (animationId) {
@@ -1878,6 +2140,7 @@ ledTop.style.boxShadow = '0 0 0 rgba(139, 139, 139, 0)';
 ledBottom.style.background = '#8b8b8b';
 ledBottom.style.boxShadow = '0 0 0 rgba(139, 139, 139, 0)';
 }
+
 function visualize() {
 if (!isVisualizing || !analyzer || !isPlaying) {
 stopVisualizer();
@@ -1915,8 +2178,16 @@ bars[i].style.background = 'linear-gradient(to top, #008822, #7a00cc)';
 }
 }
 updateLedStrips();
+
+// ============================================
+// ACTIVAR RAYOS TORMENTA SEGÚN EL BOMBO
+// ============================================
+const bassIntensity = getBassIntensity();
+triggerLightningStorm(bassIntensity);
+
 animationId = requestAnimationFrame(visualize);
 }
+
 function togglePlayPause() {
 if (!isPlaying) {
 if (audio.src !== streamUrl) {
@@ -1971,22 +2242,30 @@ stopVisualizer();
 console.log("⏸ Reproducción pausada");
 }
 }
+
 function changeVolume() {
 audio.volume = parseFloat(volumeSlider.value);
 updateVolumeDisplay();
 }
+
 function startTapeAnimation() {
 tapeLeft.classList.add('animated');
 tapeRight.classList.add('animated');
 }
+
 function stopTapeAnimation() {
 tapeLeft.classList.remove('animated');
 tapeRight.classList.remove('animated');
 }
+
 playPauseBtn.addEventListener('click', togglePlayPause);
 volumeSlider.addEventListener('input', changeVolume);
+
 // Inicializar display de volumen
 updateVolumeDisplay();
+
+// Crear los rayos de tormenta al cargar
+createLightningBolts();
 
 setInterval(function() {
 const script = document.getElementById('sonic_js');
@@ -2000,6 +2279,7 @@ setTimeout(() => {
 checkAndReplaceNoDJ();
 }, 600);
 }, 10000);
+
 window.addEventListener('load', function() {
 updateAlbumArtBackground();
 setupGlitchObservers();
@@ -2007,6 +2287,7 @@ initChatListeners();
 adjustChatIframeForMobile();
 console.log("🎧 Nexus Zone cargado. Haz clic en PLAY para iniciar.");
 });
+
 audio.addEventListener('ended', () => {
 isPlaying = false;
 playPauseBtn.innerHTML = '▶';
@@ -2015,6 +2296,7 @@ stopTapeAnimation();
 stopVisualizer();
 console.log("⏹ Reproducción finalizada");
 });
+
 audio.addEventListener('pause', () => {
 if (isPlaying) {
 isPlaying = false;
@@ -2024,6 +2306,7 @@ stopTapeAnimation();
 stopVisualizer();
 }
 });
+
 audio.addEventListener('error', (e) => {
 console.error("✗ Error de audio:", e);
 stopVisualizer();
@@ -2035,6 +2318,7 @@ stopTapeAnimation();
 alert('Error crítico en el stream. Verifica tu conexión o intenta más tarde.');
 }
 });
+
 document.body.addEventListener('touchstart', function initMobile() {
 if (!audioContext && typeof window.AudioContext !== 'undefined') {
 audioContext = new AudioContext();
