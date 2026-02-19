@@ -788,44 +788,60 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+min-height: 80px;
 }
 /* Texto del footer con estilo Nexus Zone */
 .footer-brand {
 display: inline-flex;
 gap: 4px;
 align-items: center;
-margin-bottom: 0.3rem;
-animation: power-flicker 5s infinite;
+margin-bottom: 0.2rem;
+animation: power-flicker 8s infinite;
+}
+/* Efecto de encendido/apagado solo para NEXUS ZONE */
+@keyframes power-flicker {
+0%, 100% { opacity: 1; text-shadow: 0 0 8px rgba(189, 0, 255, 0.6), 0 0 8px rgba(0, 255, 65, 0.6); }
+3% { opacity: 0.3; text-shadow: none; }
+6% { opacity: 1; text-shadow: 0 0 8px rgba(189, 0, 255, 0.6), 0 0 8px rgba(0, 255, 65, 0.6); }
+8% { opacity: 0.5; text-shadow: none; }
+10% { opacity: 1; text-shadow: 0 0 8px rgba(189, 0, 255, 0.6), 0 0 8px rgba(0, 255, 65, 0.6); }
+40% { opacity: 1; text-shadow: 0 0 8px rgba(189, 0, 255, 0.6), 0 0 8px rgba(0, 255, 65, 0.6); }
+42% { opacity: 0.2; text-shadow: none; }
+44% { opacity: 1; text-shadow: 0 0 8px rgba(189, 0, 255, 0.6), 0 0 8px rgba(0, 255, 65, 0.6); }
+46% { opacity: 0.4; text-shadow: none; }
+48% { opacity: 1; text-shadow: 0 0 8px rgba(189, 0, 255, 0.6), 0 0 8px rgba(0, 255, 65, 0.6); }
+100% { opacity: 1; text-shadow: 0 0 8px rgba(189, 0, 255, 0.6), 0 0 8px rgba(0, 255, 65, 0.6); }
 }
 .footer-nexus {
 color: #bd00ff;
 font-family: 'Orbitron', sans-serif;
 font-weight: 900;
-font-size: 1rem;
+font-size: 0.85rem;
 text-shadow: 0 0 8px rgba(189, 0, 255, 0.6);
 }
 .footer-zone {
 color: #00ff41;
 font-family: 'Orbitron', sans-serif;
 font-weight: 900;
-font-size: 1rem;
+font-size: 0.85rem;
 text-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
 }
 .footer-separator {
 color: #888;
 margin: 0 8px;
+font-size: 0.85rem;
 }
 .footer-credit {
 color: #888;
 font-family: 'Orbitron', sans-serif;
 font-weight: 900;
-font-size: 1rem;
+font-size: 0.85rem;
 }
 .social-links {
 display: flex;
 justify-content: center;
 gap: 1.2rem;
-margin-bottom: 0.3rem;
+margin-bottom: 0.2rem;
 flex-wrap: wrap;
 }
 .social-link {
@@ -854,7 +870,7 @@ box-shadow: 0 0 25px rgba(0, 255, 65, 0.5);
 color: #666;
 font-family: 'Orbitron', sans-serif;
 font-weight: 400;
-font-size: 0.65rem;
+font-size: 0.6rem;
 margin-top: 0.2rem;
 }
 /* ============================================ */
@@ -1002,9 +1018,9 @@ h1 { font-size: clamp(1.2rem, 3vw, 2.2rem); }
 .volume-label { font-size: clamp(1rem, 1.8vw, 1.4rem); margin-bottom: 7px; }
 #dj_profile { max-width: 380px; }
 #sonic_dj.cyber-glitch { font-size: clamp(1rem, 1.8vw, 1.4rem); }
-footer { padding: 0.3rem; }
+footer { padding: 0.3rem; min-height: 80px; }
 .social-link { width: 35px; height: 35px; font-size: 1.1rem; }
-.footer-nexus, .footer-zone, .footer-credit { font-size: 1rem; }
+.footer-nexus, .footer-zone, .footer-credit, .footer-separator { font-size: 0.85rem; }
 .led-strip-top, .led-strip-bottom { height: 7px; }
 }
 
@@ -1035,9 +1051,9 @@ h1 { font-size: clamp(1.2rem, 3vw, 2rem); }
 .volume-label { font-size: clamp(1rem, 1.8vw, 1.4rem); margin-bottom: 7px; }
 #dj_profile { max-width: 350px; }
 #sonic_dj.cyber-glitch { font-size: clamp(1rem, 1.8vw, 1.4rem); }
-footer { padding: 0.3rem; }
+footer { padding: 0.3rem; min-height: 80px; }
 .social-link { width: 35px; height: 35px; font-size: 1.1rem; }
-.footer-nexus, .footer-zone, .footer-credit { font-size: 1rem; }
+.footer-nexus, .footer-zone, .footer-credit, .footer-separator { font-size: 0.85rem; }
 .led-strip-top, .led-strip-bottom { height: 7px; }
 }
 
@@ -1068,9 +1084,9 @@ h1 { font-size: clamp(1.2rem, 3vw, 1.9rem); }
 .volume-label { font-size: clamp(1rem, 1.8vw, 1.4rem); margin-bottom: 7px; }
 #dj_profile { max-width: 340px; }
 #sonic_dj.cyber-glitch { font-size: clamp(1rem, 1.8vw, 1.4rem); }
-footer { padding: 0.3rem; }
+footer { padding: 0.3rem; min-height: 80px; }
 .social-link { width: 35px; height: 35px; font-size: 1.1rem; }
-.footer-nexus, .footer-zone, .footer-credit { font-size: 1rem; }
+.footer-nexus, .footer-zone, .footer-credit, .footer-separator { font-size: 0.85rem; }
 .led-strip-top, .led-strip-bottom { height: 7px; }
 }
 
@@ -1101,9 +1117,9 @@ h1 { font-size: clamp(1.2rem, 3vw, 1.8rem); }
 .volume-label { font-size: clamp(1rem, 1.8vw, 1.4rem); margin-bottom: 7px; }
 #dj_profile { max-width: 330px; }
 #sonic_dj.cyber-glitch { font-size: clamp(1rem, 1.8vw, 1.4rem); }
-footer { padding: 0.3rem; }
+footer { padding: 0.3rem; min-height: 80px; }
 .social-link { width: 35px; height: 35px; font-size: 1.1rem; }
-.footer-nexus, .footer-zone, .footer-credit { font-size: 1rem; }
+.footer-nexus, .footer-zone, .footer-credit, .footer-separator { font-size: 0.85rem; }
 .led-strip-top, .led-strip-bottom { height: 7px; }
 }
 
@@ -1134,9 +1150,9 @@ h1 { font-size: clamp(1.1rem, 2.8vw, 1.7rem); }
 .volume-label { font-size: clamp(1rem, 1.8vw, 1.4rem); margin-bottom: 6px; }
 #dj_profile { max-width: 280px; }
 #sonic_dj.cyber-glitch { font-size: clamp(1rem, 1.8vw, 1.4rem); }
-footer { padding: 0.3rem; }
+footer { padding: 0.3rem; min-height: 80px; }
 .social-link { width: 35px; height: 35px; font-size: 1.1rem; }
-.footer-nexus, .footer-zone, .footer-credit { font-size: 1rem; }
+.footer-nexus, .footer-zone, .footer-credit, .footer-separator { font-size: 0.85rem; }
 .led-strip-top, .led-strip-bottom { height: 6px; }
 }
 
@@ -1167,9 +1183,9 @@ h1 { font-size: clamp(1.1rem, 2.8vw, 1.6rem); }
 .volume-label { font-size: clamp(1rem, 1.8vw, 1.4rem); margin-bottom: 6px; }
 #dj_profile { max-width: 260px; }
 #sonic_dj.cyber-glitch { font-size: clamp(1rem, 1.8vw, 1.4rem); }
-footer { padding: 0.3rem; }
+footer { padding: 0.3rem; min-height: 80px; }
 .social-link { width: 35px; height: 35px; font-size: 1.1rem; }
-.footer-nexus, .footer-zone, .footer-credit { font-size: 1rem; }
+.footer-nexus, .footer-zone, .footer-credit, .footer-separator { font-size: 0.85rem; }
 .led-strip-top, .led-strip-bottom { height: 6px; }
 }
 
@@ -1249,7 +1265,8 @@ height: 343.6125px !important;
 }
 #sonic_dj.cyber-glitch { font-size: clamp(1rem, 1.8vw, 1.4rem); }
 .social-links { gap: 1rem; }
-footer { padding: 0.3rem; }
+footer { padding: 0.3rem; min-height: 80px; }
+.footer-nexus, .footer-zone, .footer-credit, .footer-separator { font-size: 0.85rem; }
 .chat-panel {
 width: 100vw;
 right: -100vw;
@@ -1317,7 +1334,8 @@ height: 343.6125px !important;
 }
 #sonic_dj.cyber-glitch { font-size: clamp(1rem, 1.8vw, 1.4rem); }
 .social-links { gap: 1rem; }
-footer { padding: 0.3rem; }
+footer { padding: 0.3rem; min-height: 80px; }
+.footer-nexus, .footer-zone, .footer-credit, .footer-separator { font-size: 0.85rem; }
 /* Chat ocupa TODO el ancho en móvil */
 .chat-panel {
 width: 100vw;
@@ -1384,8 +1402,8 @@ height: 229.125px !important;
 .social-links { gap: 0.8rem; }
 .social-link { width: 32px; height: 32px; font-size: 1rem; }
 .footer-brand { flex-wrap: wrap; justify-content: center; }
-.footer-nexus, .footer-zone, .footer-credit { font-size: 0.9rem; }
-footer { padding: 0.25rem; }
+.footer-nexus, .footer-zone, .footer-credit, .footer-separator { font-size: 0.8rem; }
+footer { padding: 0.25rem; min-height: 75px; }
 .chat-iframe-container { padding-bottom: 55px; }
 }
 
@@ -1435,7 +1453,8 @@ width: 171.5625px !important;
 height: 171.5625px !important;
 }
 #sonic_dj.cyber-glitch { font-size: clamp(1rem, 1.8vw, 1.4rem); }
-footer { padding: 0.2rem; }
+footer { padding: 0.2rem; min-height: 70px; }
+.footer-nexus, .footer-zone, .footer-credit, .footer-separator { font-size: 0.75rem; }
 }
 </style>
 </head>
@@ -1516,7 +1535,7 @@ Emite: <div id='sonic_dj' class="cyber-glitch" data-text="" style="color: #00ff4
 </div>
 <div class="copyright">
 <span class="footer-brand">
-<span class="footer-nexus">NEXUS</span><span class="footer-zone">ZONE</span>
+<span class="footer-nexus">Nexus</span><span class="footer-zone">Zone</span>
 </span>
 <span class="footer-separator">|</span>
 <span class="footer-credit">Dobby DS</span>
@@ -1529,10 +1548,7 @@ Emite: <div id='sonic_dj' class="cyber-glitch" data-text="" style="color: #00ff4
 <button class="chat-close-btn" id="chat-close">×</button>
 </div>
 <div class="chat-iframe-container">
-<script>
-  const num = Math.floor(Math.random() * 1000);
-  document.write(`<iframe src="https://chat.chatzona.org/index.html#nick=nexus_user${num}&channel=Nexus_Zone" width="100%" height="100%" frameborder="0" loading="lazy"></iframe>`);
-</script>
+<iframe id="chat-iframe" src="https://chat.chatzona.org/index.html#nick=&channel=Nexus_Zone" width="100%" height="100%" frameborder="0" loading="lazy"></iframe>
 </div>
 </div>
 <div class="chat-overlay" id="chat-overlay"></div>
@@ -1832,7 +1848,7 @@ bar.style.background = 'linear-gradient(to top, #00ff41, #bd00ff)';
 });
 ledTop.style.background = '#8b8b8b';
 ledTop.style.boxShadow = '0 0 0 rgba(139, 139, 139, 0)';
-ledBottom.style.background = '#8b8b8b';
+ledBottom.style.background = #8b8b8b';
 ledBottom.style.boxShadow = '0 0 0 rgba(139, 139, 139, 0)';
 }
 function visualize() {
