@@ -19,6 +19,7 @@ min-height: 100vh;
 display: flex;
 flex-direction: column;
 position: relative;
+/* Prevenir zoom en móviles que rompe el layout */
 touch-action: manipulation;
 }
 
@@ -875,7 +876,7 @@ right: -50vw; /* PC: ocupa mitad derecha */
 width: 50vw;
 max-width: 100%;
 height: 100vh;
-height: 100dvh;
+height: 100dvh; /* Dynamic viewport height para móviles modernos */
 background: #0a0a0a;
 border-left: 3px solid #bd00ff;
 box-shadow: -5px 0 25px rgba(189, 0, 255, 0.4), 0 0 30px rgba(0, 0, 0, 0.8);
@@ -890,7 +891,6 @@ font-family: 'Orbitron', sans-serif;
 right: 0;
 }
 
-/* Pestaña toggle - SOLO EN PC */
 .chat-toggle-tab {
 position: absolute;
 top: 50%;
@@ -983,6 +983,7 @@ box-shadow: 0 0 15px rgba(189, 0, 255, 0.8);
 flex: 1;
 overflow: hidden;
 position: relative;
+/* Padding extra en móvil para teclado */
 padding-bottom: env(safe-area-inset-bottom);
 }
 
@@ -1005,6 +1006,7 @@ border: none;
 background: transparent;
 position: relative;
 z-index: 0;
+/* Permitir scroll dentro del iframe en móviles */
 display: block;
 }
 
@@ -1031,19 +1033,23 @@ visibility: visible;
 /* RESPONSIVE CHAT - MÓVILES */
 /* ============================================ */
 @media (max-width: 768px) {
-/* Chat ocupa TODO el ancho en móvil */
 .chat-panel {
-width: 100vw;
-right: -100vw;
-height: 100dvh;
-height: -webkit-fill-available;
+width: calc(100vw - 40px); /* Deja espacio para la pestaña toggle */
+right: calc(-100vw + 40px);
+height: 100dvh; /* Altura dinámica para móviles */
+height: -webkit-fill-available; /* Fallback Safari iOS */
 }
 .chat-panel.visible {
 right: 0;
 }
-/* Ocultar pestaña toggle en móvil */
 .chat-toggle-tab {
-display: none;
+width: 38px;
+height: 90px;
+left: -40px;
+font-size: 0.85rem;
+}
+.chat-panel.hidden .chat-toggle-tab {
+right: -40px;
 }
 .chat-header h3 {
 font-size: 1rem;
@@ -1053,15 +1059,28 @@ width: 28px;
 height: 28px;
 font-size: 1.1rem;
 }
-/* Espacio para teclado en móvil */
+/* Contenedor iframe con padding para teclado móvil */
 .chat-iframe-container {
-padding-bottom: 60px;
+padding-bottom: 60px; /* Espacio reservado para teclado virtual */
 }
 }
 
 @media (max-width: 480px) {
+.chat-panel {
+width: calc(100vw - 36px);
+right: calc(-100vw + 36px);
+}
+.chat-toggle-tab {
+width: 34px;
+height: 80px;
+left: -36px;
+font-size: 0.75rem;
+}
+.chat-panel.hidden .chat-toggle-tab {
+right: -36px;
+}
 .chat-iframe-container {
-padding-bottom: 55px;
+padding-bottom: 55px; /* Ajuste para pantallas muy pequeñas */
 }
 }
 
@@ -1490,11 +1509,11 @@ let audioGraphSetup = false;
 let isChatVisible = false;
 
 // Colores para las tiras LED
-const ledColors = ['#8b8b8b', '#bd00ff', '#00ff41'];
+const ledColors = ['#8b8b8b', '#bd00ff', '#00ff41']; // gris, morado, verde
 let ledColorIndex = 0;
 let lastBeatTime = 0;
-const beatThreshold = 180;
-const colorChangeThreshold = 3;
+const beatThreshold = 180; // Umbral para detectar bombo
+const colorChangeThreshold = 3; // Cambiar color cada X beats detectados
 let beatCount = 0;
 
 // Configuración inicial
@@ -1505,14 +1524,19 @@ audio.crossOrigin = 'anonymous';
 // ============================================
 // FUNCIONES CHAT + AJUSTE MÓVIL
 // ============================================
+
+// Ajustar altura del iframe en móviles cuando aparece el teclado
 function adjustChatIframeForMobile() {
 if (window.innerWidth <= 768 && isChatVisible) {
+// Usar visualViewport si está disponible (más preciso con teclado)
 if (window.visualViewport) {
 const viewportHeight = window.visualViewport.height;
 chatPanel.style.height = viewportHeight + 'px';
 } else {
+// Fallback: usar innerHeight
 chatPanel.style.height = window.innerHeight + 'px';
 }
+// Asegurar que el contenedor del iframe tenga espacio para el input
 if (chatIframeContainer) {
 const keyboardSpace = window.innerWidth < 480 ? 55 : 60;
 chatIframeContainer.style.paddingBottom = keyboardSpace + 'px';
@@ -1520,11 +1544,14 @@ chatIframeContainer.style.paddingBottom = keyboardSpace + 'px';
 }
 }
 
+// Escuchar cambios en el viewport (teclado móvil)
 if (window.visualViewport) {
 window.visualViewport.addEventListener('resize', adjustChatIframeForMobile);
 window.visualViewport.addEventListener('scroll', adjustChatIframeForMobile);
 }
+// Fallback para navegadores sin visualViewport
 window.addEventListener('resize', () => {
+// Debounce simple para no ejecutar demasiado seguido
 clearTimeout(window.chatResizeTimer);
 window.chatResizeTimer = setTimeout(adjustChatIframeForMobile, 150);
 });
@@ -1536,12 +1563,14 @@ chatPanel.classList.remove('hidden');
 chatPanel.classList.add('visible');
 chatToggle.textContent = 'Ocultar';
 chatOverlay.classList.add('active');
+// Ajustar altura inmediatamente al abrir
 setTimeout(adjustChatIframeForMobile, 300);
 } else {
 chatPanel.classList.remove('visible');
 chatPanel.classList.add('hidden');
 chatToggle.textContent = 'Mostrar';
 chatOverlay.classList.remove('active');
+// Resetear altura
 chatPanel.style.height = '';
 }
 }
@@ -1555,6 +1584,7 @@ chatToggle.addEventListener('click', toggleChat);
 chatClose.addEventListener('click', toggleChat);
 chatOverlay.addEventListener('click', toggleChat);
 
+// Cerrar chat con tecla Escape
 document.addEventListener('keydown', (e) => {
 if (e.key === 'Escape' && isChatVisible) {
 toggleChat();
@@ -1896,6 +1926,7 @@ window.addEventListener('load', function() {
 updateAlbumArtBackground();
 setupGlitchObservers();
 initChatListeners();
+// Ajuste inicial para móvil
 adjustChatIframeForMobile();
 console.log("🎧 Nexus Zone cargado. Haz clic en PLAY para iniciar.");
 });
