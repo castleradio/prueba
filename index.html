@@ -948,6 +948,109 @@ visibility: visible;
 @media (min-width: 1367px) and (max-width: 1919px) {
 .cassette-player { max-width: 575px; }
 }
+/* ============================================ */
+/* NUEVO: RESOLUCIÓN 1366x768 - AJUSTES ESPECÍFICOS */
+/* ============================================ */
+@media (max-width: 1366px) and (max-height: 768px) {
+header {
+padding: 1rem;
+}
+h1 {
+font-size: 2rem;
+}
+.main-container {
+padding: 1rem;
+gap: 1rem;
+}
+.player-section,
+.dj-section {
+padding: 0.8rem;
+}
+.section-title {
+font-size: 1.1rem;
+margin-bottom: 1rem;
+}
+.cassette-player {
+max-width: 500px;
+min-height: 300px;
+padding: 1rem;
+}
+.cassette-tapes {
+height: 120px;
+margin-top: 3px;
+gap: 20px;
+padding: 0 8px;
+}
+.tape-reel {
+width: 75px;
+height: 75px;
+}
+.tape-reel::before {
+width: 52px;
+height: 52px;
+}
+.tape-reel::after {
+width: 24px;
+height: 24px;
+}
+.tape-reel span {
+width: 7px;
+height: 22px;
+}
+.tape-reel span:nth-child(1) { transform: rotate(45deg) translate(20px, -4px); }
+.tape-reel span:nth-child(2) { transform: rotate(135deg) translate(20px, -4px); }
+.tape-reel span:nth-child(3) { transform: rotate(225deg) translate(20px, -4px); }
+.tape-reel span:nth-child(4) { transform: rotate(315deg) translate(20px, -4px); }
+.cassette-center {
+width: 150px;
+height: 105px;
+}
+.play-btn {
+width: 75px;
+height: 30px;
+font-size: 1.2rem;
+}
+.equalizer-container {
+height: 24px;
+}
+.song-info {
+font-size: 1.2rem;
+min-height: 26px;
+}
+#sonic_title {
+font-size: 1.1rem;
+}
+.volume-control {
+padding: 10px;
+}
+.volume-label {
+font-size: 1rem;
+margin-bottom: 6px;
+}
+#dj_profile {
+max-width: 280px;
+}
+#sonic_dj.cyber-glitch {
+font-size: 1.3rem;
+}
+footer {
+padding: 0.8rem;
+}
+.social-link {
+width: 35px;
+height: 35px;
+font-size: 1.1rem;
+}
+.footer-nexus,
+.footer-zone,
+.footer-credit {
+font-size: 0.9rem;
+}
+.led-strip-top,
+.led-strip-bottom {
+height: 6px;
+}
+}
 /* Laptops pequeñas (1025px - 1366px) - ORIGINAL */
 @media (min-width: 1025px) and (max-width: 1366px) {
 .cassette-player { max-width: 500px; min-height: 300px; }
