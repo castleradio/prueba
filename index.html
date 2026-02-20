@@ -1951,16 +1951,18 @@ djProfile.appendChild(newImg);
 }
 }
 }
-// Función para verificar y reemplazar DJ
+// Función para verificar y reemplazar DJ - CORREGIDA CON NEXUS DJ
 function checkAndReplaceNoDJ() {
 if (sonicDj) {
 const currentText = sonicDj.textContent.trim();
 if (currentText.toUpperCase().includes('NO DJ') || currentText === '') {
-sonicDj.textContent = 'Auto DJ';
+// ✅ CORREGIDO: "Nexus DJ" en lugar de "Auto DJ"
+sonicDj.textContent = 'Nexus DJ';
 updateGlitchDataText(sonicDj);
+// ✅ Mantiene la imagen autodj.png de portadasdjs/
 replaceDjImageWithLocal('autodj');
 return true;
-} else if (currentText && currentText.toUpperCase() !== 'AUTO DJ') {
+} else if (currentText && currentText.toUpperCase() !== 'NEXUS DJ') {
 // Si hay un DJ real, cargar su imagen
 replaceDjImageWithLocal(currentText);
 }
