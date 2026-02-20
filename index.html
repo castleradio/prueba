@@ -23,6 +23,24 @@ position: relative;
 touch-action: manipulation;
 }
 /* ============================================ */
+/* LOGO CENTRAL DE FONDO */
+/* ============================================ */
+.center-logo {
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 1024px;
+height: 1024px;
+background-image: url('img/logo.png');
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+opacity: 0.15;
+z-index: -2;
+pointer-events: none;
+}
+/* ============================================ */
 /* CUADRÍCULA DE FONDO EN MOVIMIENTO */
 /* ============================================ */
 .background-grid {
@@ -1596,6 +1614,8 @@ footer { padding: 0.2rem; min-height: 70px; }
 </style>
 </head>
 <body>
+<!-- LOGO CENTRAL DE FONDO -->
+<div class="center-logo"></div>
 <!-- CUADRÍCULA DE FONDO -->
 <div class="background-grid"></div>
 <!-- Script del widget -->
@@ -1705,7 +1725,6 @@ document.write(`<iframe src="https://chat.chatzona.org/index.html#nick=nexus_use
 </div>
 </div>
 <div class="chat-overlay" id="chat-overlay"></div>
-
 <!-- STAFF PANEL -->
 <div class="staff-panel hidden" id="staff-panel">
 <div class="staff-header">
@@ -1717,7 +1736,6 @@ document.write(`<iframe src="https://chat.chatzona.org/index.html#nick=nexus_use
 </div>
 </div>
 <div class="staff-overlay" id="staff-overlay"></div>
-
 <audio id="radio-player" crossorigin="anonymous" preload="metadata"></audio>
 <script>
 // Elementos del DOM
@@ -2016,7 +2034,7 @@ albumArtBg.style.opacity = '0.4';
 }, 500);
 }
 // ============================================
-// FUNCIONES PARA TIRAS LED AL RITMO DE LA MÚSICA
+// FUNCIONES PARA TIRAS LED AL RITMO DE LA MÚSICA */
 // ============================================
 function getBassIntensity() {
 if (!analyzer || !dataArray) return 0;
