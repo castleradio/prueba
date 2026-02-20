@@ -1953,6 +1953,7 @@ if (djProfile) {
 const existingImg = djProfile.querySelector('img');
 // Sanitizar el nombre del DJ
 const sanitizedName = sanitizeDjName(djName);
+// RUTA CORRECTA: portadasdjs/
 const imagePath = `portadasdjs/${sanitizedName}.png`;
 if (existingImg) {
 if (!existingImg.src.includes(imagePath)) {
@@ -1976,9 +1977,9 @@ function checkAndReplaceNoDJ() {
 if (sonicDj) {
 const currentText = sonicDj.textContent.trim();
 if (currentText.toUpperCase().includes('NO DJ') || currentText === '') {
-sonicDj.textContent = 'Nexus DJ';  // CAMBIADO DE 'Auto DJ' A 'Nexus DJ'
+sonicDj.textContent = 'Nexus DJ';  // CAMBIADO A 'Nexus DJ'
 updateGlitchDataText(sonicDj);
-replaceDjImageWithLocal('autodj');  // MANTIENE LA MISMA IMAGEN autodj.png
+replaceDjImageWithLocal('autodj');  // Usa portadasdjs/autodj.png
 return true;
 } else if (currentText && currentText.toUpperCase() !== 'AUTO DJ') {
 // Si hay un DJ real, cargar su imagen
