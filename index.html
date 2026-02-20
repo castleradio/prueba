@@ -1976,11 +1976,11 @@ function checkAndReplaceNoDJ() {
 if (sonicDj) {
 const currentText = sonicDj.textContent.trim();
 if (currentText.toUpperCase().includes('NO DJ') || currentText === '') {
-sonicDj.textContent = 'Auto DJ';
+sonicDj.textContent = 'Nexus Dj';
 updateGlitchDataText(sonicDj);
 replaceDjImageWithLocal('autodj');
 return true;
-} else if (currentText && currentText.toUpperCase() !== 'AUTO DJ') {
+} else if (currentText && currentText.toUpperCase() !== 'Nexus Dj') {
 // Si hay un DJ real, cargar su imagen
 replaceDjImageWithLocal(currentText);
 }
