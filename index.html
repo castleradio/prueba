@@ -23,24 +23,6 @@ position: relative;
 touch-action: manipulation;
 }
 /* ============================================ */
-/* LOGO CENTRAL DE FONDO */
-/* ============================================ */
-.center-logo {
-position: fixed;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-width: 1024px;
-height: 1024px;
-background-image: url('img/logo.png');
-background-size: contain;
-background-repeat: no-repeat;
-background-position: center;
-opacity: 0.15;
-z-index: -2;
-pointer-events: none;
-}
-/* ============================================ */
 /* CUADRÍCULA DE FONDO EN MOVIMIENTO */
 /* ============================================ */
 .background-grid {
@@ -1614,8 +1596,6 @@ footer { padding: 0.2rem; min-height: 70px; }
 </style>
 </head>
 <body>
-<!-- LOGO CENTRAL DE FONDO -->
-<div class="center-logo"></div>
 <!-- CUADRÍCULA DE FONDO -->
 <div class="background-grid"></div>
 <!-- Script del widget -->
@@ -1778,7 +1758,6 @@ let audioGraphSetup = false;
 let isChatVisible = false;
 let isStaffVisible = false;
 let staffLoaded = false;
-let isAutoDJMode = false; // NUEVO: Variable para rastrear modo Auto DJ
 // Colores para las tiras LED
 const ledColors = ['#8b8b8b', '#bd00ff', '#00ff41'];
 let ledColorIndex = 0;
@@ -1955,12 +1934,10 @@ const existingImg = djProfile.querySelector('img');
 // Sanitizar el nombre del DJ
 const sanitizedName = sanitizeDjName(djName);
 const imagePath = `portadasdjs/${sanitizedName}.png`;
-console.log('🖼️ Intentando cargar imagen:', imagePath); // DEBUG
 if (existingImg) {
 if (!existingImg.src.includes(imagePath)) {
 existingImg.src = imagePath;
 existingImg.alt = djName;
-console.log('✅ Imagen actualizada:', imagePath);
 }
 } else {
 const newImg = document.createElement('img');
@@ -1969,35 +1946,23 @@ newImg.alt = djName;
 newImg.style.borderRadius = '50%';
 newImg.style.border = '3px solid #8b8b8b';
 newImg.style.objectFit = 'cover';
-newImg.onerror = function() {
-console.error('❌ Error cargando imagen:', imagePath);
-};
-newImg.onload = function() {
-console.log('✅ Imagen cargada exitosamente:', imagePath);
-};
 djProfile.innerHTML = '';
 djProfile.appendChild(newImg);
 }
 }
 }
-// Función para verificar y reemplazar DJ - CORREGIDA
+// Función para verificar y reemplazar DJ
 function checkAndReplaceNoDJ() {
 if (sonicDj) {
 const currentText = sonicDj.textContent.trim();
-// Detectar si es NO DJ o vacío
-if (currentText.toUpperCase().includes('NO DJ') || currentText === '' || currentText.toUpperCase() === 'AUTO DJ') {
-// CORRECCIÓN: Siempre usar 'autodj' para la imagen cuando no hay DJ real
-sonicDj.textContent = 'Nexus DJ';
+if (currentText.toUpperCase().includes('NO DJ') || currentText === '') {
+sonicDj.textContent = 'Auto DJ';
 updateGlitchDataText(sonicDj);
-replaceDjImageWithLocal('autodj'); // Siempre usa autodj.png
-isAutoDJMode = true;
-console.log('🎧 Modo Nexus DJ activado - Imagen: portadasdjs/autodj.png');
+replaceDjImageWithLocal('autodj');
 return true;
-} else if (currentText && !isAutoDJMode) {
-// Si hay un DJ real y no estamos en modo Auto DJ, cargar su imagen
-console.log('🎤 DJ real detectado:', currentText);
+} else if (currentText && currentText.toUpperCase() !== 'AUTO DJ') {
+// Si hay un DJ real, cargar su imagen
 replaceDjImageWithLocal(currentText);
-isAutoDJMode = false;
 }
 }
 return false;
@@ -2265,10 +2230,6 @@ initChatListeners();
 initStaffListeners();
 adjustChatIframeForMobile();
 console.log("🎧 Nexus Zone cargado. Haz clic en PLAY para iniciar.");
-// Forzar carga de imagen autodj al cargar la página
-setTimeout(() => {
-checkAndReplaceNoDJ();
-}, 1000);
 });
 audio.addEventListener('ended', () => {
 isPlaying = false;
