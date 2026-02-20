@@ -30,8 +30,8 @@ position: fixed;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
-width: 650px;
-height: 650px;
+width: 1024px;
+height: 1024px;
 background-image: url('img/logo.png');
 background-size: contain;
 background-repeat: no-repeat;
@@ -1976,9 +1976,9 @@ function checkAndReplaceNoDJ() {
 if (sonicDj) {
 const currentText = sonicDj.textContent.trim();
 if (currentText.toUpperCase().includes('NO DJ') || currentText === '') {
-sonicDj.textContent = 'Auto Dj';
+sonicDj.textContent = 'Nexus DJ';  // CAMBIADO DE 'Auto DJ' A 'Nexus DJ'
 updateGlitchDataText(sonicDj);
-replaceDjImageWithLocal('autodj');
+replaceDjImageWithLocal('autodj');  // MANTIENE LA MISMA IMAGEN autodj.png
 return true;
 } else if (currentText && currentText.toUpperCase() !== 'AUTO DJ') {
 // Si hay un DJ real, cargar su imagen
@@ -2034,7 +2034,7 @@ albumArtBg.style.opacity = '0.4';
 }, 500);
 }
 // ============================================
-// FUNCIONES PARA TIRAS LED AL RITMO DE LA MÚSICA */
+// FUNCIONES PARA TIRAS LED AL RITMO DE LA MÚSICA
 // ============================================
 function getBassIntensity() {
 if (!analyzer || !dataArray) return 0;
