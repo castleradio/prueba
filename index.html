@@ -1976,7 +1976,7 @@ function checkAndReplaceNoDJ() {
 if (sonicDj) {
 const currentText = sonicDj.textContent.trim();
 if (currentText.toUpperCase().includes('NO DJ') || currentText === '') {
-sonicDj.textContent = 'Nexus Dj';
+sonicDj.textContent = 'Auto Dj';
 updateGlitchDataText(sonicDj);
 replaceDjImageWithLocal('autodj');
 return true;
