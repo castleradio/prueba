@@ -1778,6 +1778,7 @@ let audioGraphSetup = false;
 let isChatVisible = false;
 let isStaffVisible = false;
 let staffLoaded = false;
+let isAutoDJMode = false; // NUEVO: Variable para rastrear modo Auto DJ
 // Colores para las tiras LED
 const ledColors = ['#8b8b8b', '#bd00ff', '#00ff41'];
 let ledColorIndex = 0;
@@ -1953,12 +1954,13 @@ if (djProfile) {
 const existingImg = djProfile.querySelector('img');
 // Sanitizar el nombre del DJ
 const sanitizedName = sanitizeDjName(djName);
-// RUTA CORRECTA: portadasdjs/
 const imagePath = `portadasdjs/${sanitizedName}.png`;
+console.log('🖼️ Intentando cargar imagen:', imagePath); // DEBUG
 if (existingImg) {
 if (!existingImg.src.includes(imagePath)) {
 existingImg.src = imagePath;
 existingImg.alt = djName;
+console.log('✅ Imagen actualizada:', imagePath);
 }
 } else {
 const newImg = document.createElement('img');
@@ -1967,23 +1969,35 @@ newImg.alt = djName;
 newImg.style.borderRadius = '50%';
 newImg.style.border = '3px solid #8b8b8b';
 newImg.style.objectFit = 'cover';
+newImg.onerror = function() {
+console.error('❌ Error cargando imagen:', imagePath);
+};
+newImg.onload = function() {
+console.log('✅ Imagen cargada exitosamente:', imagePath);
+};
 djProfile.innerHTML = '';
 djProfile.appendChild(newImg);
 }
 }
 }
-// Función para verificar y reemplazar DJ
+// Función para verificar y reemplazar DJ - CORREGIDA
 function checkAndReplaceNoDJ() {
 if (sonicDj) {
 const currentText = sonicDj.textContent.trim();
-if (currentText.toUpperCase().includes('NO DJ') || currentText === '') {
-sonicDj.textContent = 'Nexus DJ';  // CAMBIADO A 'Nexus DJ'
+// Detectar si es NO DJ o vacío
+if (currentText.toUpperCase().includes('NO DJ') || currentText === '' || currentText.toUpperCase() === 'AUTO DJ') {
+// CORRECCIÓN: Siempre usar 'autodj' para la imagen cuando no hay DJ real
+sonicDj.textContent = 'Nexus DJ';
 updateGlitchDataText(sonicDj);
-replaceDjImageWithLocal('autodj');  // Usa portadasdjs/autodj.png
+replaceDjImageWithLocal('autodj'); // Siempre usa autodj.png
+isAutoDJMode = true;
+console.log('🎧 Modo Nexus DJ activado - Imagen: portadasdjs/autodj.png');
 return true;
-} else if (currentText && currentText.toUpperCase() !== 'AUTO DJ') {
-// Si hay un DJ real, cargar su imagen
+} else if (currentText && !isAutoDJMode) {
+// Si hay un DJ real y no estamos en modo Auto DJ, cargar su imagen
+console.log('🎤 DJ real detectado:', currentText);
 replaceDjImageWithLocal(currentText);
+isAutoDJMode = false;
 }
 }
 return false;
@@ -2251,6 +2265,10 @@ initChatListeners();
 initStaffListeners();
 adjustChatIframeForMobile();
 console.log("🎧 Nexus Zone cargado. Haz clic en PLAY para iniciar.");
+// Forzar carga de imagen autodj al cargar la página
+setTimeout(() => {
+checkAndReplaceNoDJ();
+}, 1000);
 });
 audio.addEventListener('ended', () => {
 isPlaying = false;
