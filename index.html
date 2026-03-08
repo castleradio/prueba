@@ -835,6 +835,7 @@
       const visualizer = document.getElementById('visualizer');
       const sonicTitle = document.getElementById('sonic_title');
       const albumArtVisible = document.getElementById('album-art-visible');
+      const sonicArtFull = document.getElementById('sonic_art_full');
 
       let isPlaying = false;
       let volume = 1.0;
@@ -845,6 +846,7 @@
       let isDragging = false;
       let displayedArtUrl = null;
       let displayedTitle = null;
+      let artUpdateInterval = null;
 
       function showAlert(message) {
         alert(`${message}\n\nPróximamente disponible en Castlebul Radio.`);
@@ -1037,28 +1039,39 @@
         });
       });
 
-      // ✅ ACTUALIZAR PORTADA - SOLO CSS background-image (COMO NEXUS ZONE)
+      // ✅✅✅ FUNCIÓN MEJORADA PARA ACTUALIZAR PORTADA AUTOMÁTICAMENTE
       function updateAlbumArtBackground() {
-        setTimeout(() => {
-          const artContainer = document.getElementById('sonic_art_full');
-          if (artContainer && artContainer.querySelector('img')) {
-            const img = artContainer.querySelector('img');
-            const imgSrc = img.src;
-            if (imgSrc && imgSrc !== '' && albumArtVisible) {
-              // ✅ Solo actualiza CSS, NO reemplaza HTML
-              albumArtVisible.style.backgroundImage = `url('${imgSrc}')`;
-              // Ocultar fallback cuando hay imagen
-              const fallback = albumArtVisible.querySelector('.fallback');
-              if (fallback) {
-                fallback.style.display = 'none';
-              }
+        if (!sonicArtFull || !albumArtVisible) return;
+        
+        const img = sonicArtFull.querySelector('img');
+        
+        if (img && img.src && img.src !== '' && img.src !== displayedArtUrl) {
+          // Nueva imagen detectada
+          displayedArtUrl = img.src;
+          
+          // Crear nueva imagen para pre-cargar
+          const preloadImg = new Image();
+          preloadImg.onload = function() {
+            albumArtVisible.style.backgroundImage = `url('${img.src}')`;
+            const fallback = albumArtVisible.querySelector('.fallback');
+            if (fallback) {
+              fallback.style.display = 'none';
             }
-          }
-        }, 500);
+          };
+          preloadImg.onerror = function() {
+            // Si falla, mantener fallback
+            const fallback = albumArtVisible.querySelector('.fallback');
+            if (fallback) {
+              fallback.style.display = 'flex';
+            }
+          };
+          preloadImg.src = img.src;
+        }
       }
 
       function setupSonicAPI() {
         if (window.SonicAPI && typeof window.SonicAPI.on === 'function') {
+          // ✅ Evento cuando cambia la canción
           window.SonicAPI.on('track', function(data) {
             // Actualizar título
             if (data && data.title && data.title !== displayedTitle) {
@@ -1066,15 +1079,19 @@
               sonicTitle.textContent = data.title;
             }
             
-            // ✅ Actualizar portada cada 10 segundos (pero solo CSS)
-            updateAlbumArtBackground();
+            // ✅ Actualizar portada inmediatamente
+            setTimeout(updateAlbumArtBackground, 300);
           });
           
+          // ✅ Evento de error
           window.SonicAPI.on('error', function() {
             sonicTitle.textContent = 'Castlebul Radio';
             displayedTitle = 'Castlebul Radio';
           });
         }
+        
+        // ✅✅✅ INTERVALO PARA VERIFICAR CAMBIOS DE PORTADA CADA 3 SEGUNDOS
+        artUpdateInterval = setInterval(updateAlbumArtBackground, 3000);
       }
 
       initVisualizer();
@@ -1085,6 +1102,15 @@
       // Actualizar portada al cargar
       window.addEventListener('load', function() {
         updateAlbumArtBackground();
+        // Primera verificación después de 1 segundo
+        setTimeout(updateAlbumArtBackground, 1000);
+      });
+
+      // ✅ Limpiar intervalo al cerrar página
+      window.addEventListener('beforeunload', function() {
+        if (artUpdateInterval) {
+          clearInterval(artUpdateInterval);
+        }
       });
 
     })();
