@@ -81,7 +81,7 @@
 
     /* ===== TURNTABLE CONTAINER ===== */
     .turntable-wrapper {
-      width: min(95vw, 540px);
+      width: 540px;
       aspect-ratio: 4/3;
       background: var(--deck-base);
       border-radius: 12px;
@@ -96,6 +96,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      transform-origin: top center;
     }
 
     .turntable-body {
@@ -686,76 +687,56 @@
       bottom: -20px;
     }
 
-    /* ✅ SIN MEDIA QUERIES QUE CAMBIEN LAYOUT - Solo escalado proporcional */
+    /* ✅ RESPONSIVE - ESCALADO PROPORCIONAL SIN CAMBIAR DISTRIBUCIÓN */
+    /* Tablet */
     @media (max-width: 650px) {
       .turntable-wrapper {
-        padding: 20px 20px 30px 20px;
-        border-radius: 10px;
+        transform: scale(0.85);
+        margin: 10px 0;
       }
       
       .logo {
         font-size: 2.2rem;
         letter-spacing: 6px;
       }
-      
-      .platter {
-        width: 240px;
-        height: 240px;
+    }
+
+    /* Móvil grande */
+    @media (max-width: 500px) {
+      .turntable-wrapper {
+        transform: scale(0.75);
+        margin: 5px 0;
       }
       
-      .tonearm-assembly {
-        transform: scale(0.82);
-      }
-      
-      .fader-container {
-        width: 36px;
-        height: 170px;
-      }
-      
-      .start-stop-btn {
-        width: 48px;
-        height: 48px;
-      }
-      
-      .footer-btn {
-        width: 32px;
-        height: 32px;
+      .logo {
+        font-size: 2rem;
+        letter-spacing: 5px;
       }
     }
 
-    @media (max-width: 480px) {
+    /* Móvil mediano */
+    @media (max-width: 420px) {
       .turntable-wrapper {
-        width: min(98vw, 480px);
-        padding: 18px 18px 26px 18px;
+        transform: scale(0.68);
+        margin: 0 0 5px 0;
       }
       
-      .platter {
-        width: 210px;
-        height: 210px;
+      .logo {
+        font-size: 1.8rem;
+        letter-spacing: 4px;
+      }
+    }
+
+    /* Móvil pequeño */
+    @media (max-width: 360px) {
+      .turntable-wrapper {
+        transform: scale(0.62);
+        margin: 0 0 5px 0;
       }
       
-      .tonearm-assembly {
-        transform: scale(0.72);
-      }
-      
-      .fader-container {
-        width: 32px;
-        height: 150px;
-      }
-      
-      .start-stop-btn {
-        width: 44px;
-        height: 44px;
-      }
-      
-      .footer-btn {
-        width: 30px;
-        height: 30px;
-      }
-      
-      .footer-btn .btn-label {
-        font-size: 0.8rem;
-        bottom: -20px;
+      .logo {
+        font-size: 1.6rem;
+        letter-spacing: 3px;
       }
     }
   </style>
