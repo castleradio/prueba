@@ -94,11 +94,11 @@
       padding: 15px 10px;
     }
 
-    /* ===== CHASIS ROBUSTO PIONEER PLX-1000 ===== */
+    /* ===== CHASIS PIONEER PLX-1000 EQUILIBRADO ===== */
     .turntable-wrapper {
-      width: 710px;
-      height: 545px;
-      background: linear-gradient(180deg, #1c1d24 0%, #0e0f13 40%, #060709 100%);
+      width: 720px;
+      height: 540px;
+      background: linear-gradient(180deg, #1b1c23 0%, #0d0e12 40%, #050608 100%);
       border-radius: 6px;
       position: relative;
       border: 1px solid #282a35;
@@ -107,7 +107,7 @@
         0 15px 35px rgba(0, 0, 0, 0.85),
         inset 0 1px 1px rgba(255, 255, 255, 0.2),
         inset 0 -2px 6px rgba(0, 0, 0, 0.95),
-        0 0 40px rgba(0, 168, 255, 0.08);
+        0 0 35px rgba(0, 168, 255, 0.08);
       transform-origin: center top;
       margin: 10px 0;
     }
@@ -115,10 +115,10 @@
     /* Adaptador 45 RPM (Top-Left) */
     .rpm45-well {
       position: absolute;
-      top: 20px;
-      left: 24px;
-      width: 44px;
-      height: 44px;
+      top: 18px;
+      left: 20px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       background: #08080c;
       border: 1px solid #22242d;
@@ -129,8 +129,8 @@
       z-index: 10;
     }
     .rpm45-puck {
-      width: 36px;
-      height: 36px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #ffffff, #8a8e9b 55%, #32343d 100%);
       border: 1px solid #555;
@@ -149,13 +149,13 @@
       background: #111;
     }
 
-    /* ===== PANTALLA OLED / VFD COMPACTA ===== */
+    /* ===== PANTALLA OLED / VFD CENTRADA ARRIBA ===== */
     .vfd-console {
       position: absolute;
       top: 14px;
-      left: 82px;
-      width: 360px;
-      height: 60px;
+      left: 78px;
+      width: 350px;
+      height: 58px;
       background: #020408;
       border-radius: 4px;
       border: 1.5px solid #142838;
@@ -275,7 +275,7 @@
       box-shadow: 0 0 8px var(--pioneer-blue);
     }
 
-    /* Placa de modelo Pioneer */
+    /* Placa de modelo Pioneer (Top-Right) */
     .pioneer-specs {
       position: absolute;
       top: 16px;
@@ -293,13 +293,13 @@
       font-weight: 800;
     }
 
-    /* ===== CUENCA Y PLATO AGRANDADOS (OCUPAN TODO EL ESPACIO) ===== */
+    /* ===== CUENCA DEL PLATO (CENTRADA HORIZONTAL Y VERTICALMENTE) ===== */
     .platter-bay {
       position: absolute;
-      top: 75px;
-      left: 20px;
-      width: 405px;
-      height: 405px;
+      top: 85px;
+      left: 45px;
+      width: 370px;
+      height: 370px;
       border-radius: 50%;
       background: radial-gradient(circle, #040507 68%, #14151c 100%);
       border: 1px solid #232530;
@@ -313,10 +313,10 @@
       z-index: 5;
     }
 
-    /* Plato de aluminio torneado grande (385px) */
+    /* Plato de aluminio torneado con puntos estroboscópicos */
     .platter {
-      width: 385px;
-      height: 385px;
+      width: 355px;
+      height: 355px;
       border-radius: 50%;
       background: 
         radial-gradient(circle, #1a1b24 87%, #2a2c38 89%, #12131a 91%),
@@ -342,10 +342,28 @@
       pointer-events: none;
     }
 
-    /* ===== DISCO DE VINILO AGRANDADO (360px) ===== */
+    /* Reflejo LED azul rasante que baña SOLAMENTE el borde de los puntos (sin tocar el vinilo) */
+    .platter-strobe-reflection {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 185deg at 50% 50%,
+        transparent 0deg,
+        rgba(0, 168, 255, 0.45) 15deg,
+        rgba(0, 243, 255, 0.7) 25deg,
+        rgba(0, 168, 255, 0.3) 38deg,
+        transparent 55deg
+      );
+      mask: radial-gradient(circle, transparent 90%, black 91%);
+      -webkit-mask: radial-gradient(circle, transparent 90%, black 91%);
+      pointer-events: none;
+    }
+
+    /* ===== VINILO CON PORTADA MÁS GRANDE (145px) ===== */
     .vinyl {
-      width: 360px;
-      height: 360px;
+      width: 335px;
+      height: 335px;
       border-radius: 50%;
       position: absolute;
       background: 
@@ -378,9 +396,10 @@
       to { transform: rotate(360deg); }
     }
 
+    /* Portada del álbum ligeramente agrandada para que destaque */
     .album-art-visible {
-      width: 125px;
-      height: 125px;
+      width: 145px;
+      height: 145px;
       border-radius: 50%;
       background-size: cover;
       background-position: center;
@@ -428,146 +447,141 @@
       display: none !important;
     }
 
-    /* ===== UNIDAD DE ENCENDIDO Y LUZ ESTROBOSCÓPICA AZUL (PIONEER PLX-1000) ===== */
-    .pioneer-power-unit {
+    /* ===== UNIDAD ESTROBOSCÓPICA & INTERRUPTOR DE ENCENDIDO (LIMPIO EN CHASIS) ===== */
+    .plx-power-tower {
       position: absolute;
-      bottom: 125px;
+      bottom: 110px;
       left: 14px;
-      width: 62px;
-      height: 62px;
+      width: 48px;
+      height: 72px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       z-index: 30;
     }
 
-    /* Dial rotativo con textura estriada y marcas OFF - ON */
-    .power-rotary-base {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 50px;
-      height: 50px;
+    /* Torreta estroboscópica con ventana prismática de LED azul */
+    .strobe-aperture-box {
+      width: 22px;
+      height: 26px;
+      background: linear-gradient(135deg, #2b2d38, #121318);
+      border-radius: 3px 3px 0 0;
+      border: 1px solid #444856;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* LEDs emisores de precisión */
+    .strobe-blue-emitter {
+      width: 8px;
+      height: 14px;
+      background: #ffffff;
+      border-radius: 1.5px;
+      box-shadow: 
+        0 0 8px var(--pioneer-blue),
+        0 0 16px var(--neon-cyan),
+        inset 0 0 2px #fff;
+    }
+
+    /* Base rotativa estriada OFF / ON */
+    .power-rotary-housing {
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      background: radial-gradient(circle, #1e2028 40%, #090a0d 85%);
+      background: radial-gradient(circle, #1a1c24 45%, #08090c 90%);
       border: 2px solid #333644;
       box-shadow: 0 4px 10px rgba(0,0,0,0.9), inset 0 1px 2px rgba(255,255,255,0.2);
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
+      margin-top: -2px;
     }
 
-    .power-knurled-knob {
-      width: 32px;
-      height: 32px;
+    .power-ribbed-knob {
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
-      background: 
-        repeating-conic-gradient(#111 0deg 15deg, #333 15deg 30deg);
+      background: repeating-conic-gradient(#111 0deg 15deg, #2d2e38 15deg 30deg);
       border: 1px solid #444;
-      box-shadow: inset 0 0 5px #000, 0 2px 4px rgba(0,0,0,0.8);
+      box-shadow: inset 0 0 4px #000;
       position: relative;
     }
-    .power-knurled-knob::after {
+    .power-ribbed-knob::after {
       content: '';
       position: absolute;
       top: 2px;
       left: 50%;
       transform: translateX(-50%);
-      width: 3px;
-      height: 8px;
-      background: #fff;
+      width: 2.5px;
+      height: 7px;
+      background: #ffffff;
       border-radius: 1px;
     }
 
-    .power-labels {
+    .power-text-labels {
       position: absolute;
       width: 100%;
       height: 100%;
-      font-size: 0.42rem;
+      font-size: 0.4rem;
       font-family: 'Orbitron', sans-serif;
       font-weight: 700;
-      color: #8c90a2;
+      color: #787c8e;
       pointer-events: none;
     }
-    .power-labels .lbl-off { position: absolute; top: 2px; left: 6px; }
-    .power-labels .lbl-on { position: absolute; top: 2px; right: 6px; color: var(--pioneer-blue); }
-    .power-labels .lbl-pwr { position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%); font-size: 0.4rem; }
+    .power-text-labels .lbl-off { position: absolute; top: 1px; left: 4px; }
+    .power-text-labels .lbl-on { position: absolute; top: 1px; right: 4px; color: var(--pioneer-blue); }
+    .power-text-labels .lbl-pwr { position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); font-size: 0.38rem; }
 
-    /* Torreta estroboscópica con haz de luz azul proyectado sobre el plato */
-    .strobe-tower-lens {
-      position: absolute;
-      top: -12px;
-      right: -8px;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #ffffff 10%, var(--pioneer-blue) 45%, #0d1a29 85%);
-      box-shadow: 
-        0 0 12px var(--pioneer-blue),
-        0 0 24px rgba(0, 168, 255, 0.8);
-      border: 1.5px solid #fff;
-      z-index: 35;
-    }
-
-    /* Haz de luz azul que ilumina los puntos del plato exactamente como en la imagen */
-    .strobe-blue-beam {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 105px;
-      height: 75px;
-      transform: translateY(-50%) rotate(25deg);
-      transform-origin: left center;
-      background: radial-gradient(ellipse at left, rgba(0, 168, 255, 0.75) 0%, rgba(0, 168, 255, 0.35) 45%, transparent 80%);
-      pointer-events: none;
-      filter: blur(1.5px);
-    }
-
-    /* ===== ENSAMBLE ROBUSTO DEL BRAZO (PIONEER PLX-1000) ===== */
+    /* ===== BRAZO ROBUSTO Y CARDÁN REORGANIZADOS ===== */
     .tonearm-assembly {
       position: absolute;
-      top: 45px;
-      left: 445px;
-      width: 155px;
+      top: 65px;
+      left: 440px;
+      width: 140px;
       height: 380px;
       pointer-events: none;
       z-index: 25;
     }
 
-    /* Cazoleta grande con ajuste de altura (Height Adjust 0-6mm) */
+    /* Base cardánica masiva con anillo de ajuste de altura (Height Adjust) */
     .gimbal-base {
       position: absolute;
-      top: 15px;
-      left: 15px;
-      width: 95px;
-      height: 95px;
+      top: 10px;
+      left: 10px;
+      width: 88px;
+      height: 88px;
       border-radius: 50%;
       background: radial-gradient(circle, #1f2029 45%, #0f1015 70%, #050507 100%);
-      border: 3px solid #3c3f4e;
+      border: 2.5px solid #3c3f4e;
       box-shadow: 
         0 10px 25px rgba(0,0,0,0.95),
         inset 0 1px 2px rgba(255,255,255,0.4),
-        0 0 0 2px #181920;
+        0 0 0 2px #14151a;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    /* Escala graduada Height Adjust en la base */
     .gimbal-base::after {
       content: 'HEIGHT ADJUST';
       position: absolute;
-      bottom: 5px;
-      font-size: 0.38rem;
+      bottom: 4px;
+      font-size: 0.35rem;
       font-family: 'Orbitron', sans-serif;
       color: #65697a;
       letter-spacing: 0.5px;
     }
 
-    /* Anillo cardánico y pernos de pivote masivos */
     .gimbal-ring {
-      width: 58px;
-      height: 58px;
+      width: 54px;
+      height: 54px;
       border-radius: 50%;
       background: linear-gradient(135deg, #c5cad8, #3b3e4c);
-      border: 2px solid #888d9e;
+      border: 1.5px solid #888d9e;
       box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), 0 3px 6px rgba(0,0,0,0.8);
       position: relative;
     }
@@ -575,9 +589,9 @@
       content: '';
       position: absolute;
       top: 50%;
-      left: -4px;
-      width: 8px;
-      height: 8px;
+      left: -3px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       background: radial-gradient(circle, #fff, #444);
       transform: translateY(-50%);
@@ -586,21 +600,20 @@
       content: '';
       position: absolute;
       top: 50%;
-      right: -4px;
-      width: 8px;
-      height: 8px;
+      right: -3px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       background: radial-gradient(circle, #fff, #444);
       transform: translateY(-50%);
     }
 
-    /* Dial lateral Anti-Skating */
     .anti-skate-dial {
       position: absolute;
-      top: 30px;
-      right: -4px;
-      width: 18px;
-      height: 18px;
+      top: 24px;
+      right: 0px;
+      width: 16px;
+      height: 16px;
       border-radius: 50%;
       background: radial-gradient(circle, #333 40%, #111 100%);
       border: 1px solid #555;
@@ -612,16 +625,16 @@
       top: 2px;
       left: 50%;
       transform: translateX(-50%);
-      width: 1.5px;
-      height: 4px;
+      width: 1px;
+      height: 3.5px;
       background: #fff;
     }
 
-    /* Brazo articulado */
+    /* Brazo en S */
     .tonearm {
       position: absolute;
-      top: 62px;
-      left: 62px;
+      top: 54px;
+      left: 54px;
       width: 80px;
       height: 220px;
       transform-origin: 0px 0px;
@@ -632,7 +645,7 @@
     }
 
     .tonearm.playing {
-      transform: rotate(35deg);
+      transform: rotate(32deg);
     }
 
     .tonearm-svg {
@@ -641,12 +654,12 @@
       overflow: visible;
     }
 
-    /* ===== VOLUMEN / TEMPO FADER PIONEER PLX-1000 ===== */
+    /* ===== VOLUMEN / TEMPO FADER (A LA DERECHA, CON ESPACIO LIMPIO) ===== */
     .pitch-fader-assembly {
       position: absolute;
-      top: 135px;
-      right: 20px;
-      width: 88px;
+      top: 125px;
+      right: 28px;
+      width: 85px;
       height: 330px;
       background: linear-gradient(180deg, #14151b, #09090d);
       border-radius: 4px;
@@ -660,7 +673,6 @@
       z-index: 20;
     }
 
-    /* Botones de rango de tempo Pioneer (±8, ±16, ±50) */
     .tempo-range-buttons {
       position: absolute;
       top: 10px;
@@ -685,7 +697,6 @@
       box-shadow: 0 0 6px var(--pioneer-blue);
     }
 
-    /* Escala graduada e iluminada de 0 a 10 */
     .volume-scale {
       position: absolute;
       left: 10px;
@@ -791,13 +802,13 @@
       font-weight: 700;
     }
 
-    /* ===== BOTÓN PLAY / STOP CON ANILLO LUMINOSO PIONEER ===== */
+    /* ===== BOTÓN PLAY / STOP ===== */
     .start-stop-round-btn {
       position: absolute;
       bottom: 22px;
       left: 28px;
-      width: 62px;
-      height: 62px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #ffffff 0%, #b8bcc8 50%, #464955 100%);
       border: 2px solid #1c1d24;
@@ -839,7 +850,7 @@
 
     .start-stop-text {
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.55rem;
+      font-size: 0.52rem;
       font-weight: 900;
       letter-spacing: 0.5px;
       color: #1a1b22;
@@ -847,10 +858,9 @@
       text-align: center;
     }
 
-    /* Botones 33 / 45 RPM */
     .rpm-buttons {
       position: absolute;
-      bottom: 32px;
+      bottom: 30px;
       left: 104px;
       display: flex;
       gap: 5px;
@@ -858,13 +868,13 @@
     }
 
     .rpm-btn {
-      width: 32px;
-      height: 22px;
+      width: 30px;
+      height: 20px;
       background: linear-gradient(180deg, #242630, #13141a);
       border: 1px solid #3c3f4e;
       color: #717588;
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.58rem;
+      font-size: 0.55rem;
       border-radius: 2px;
       display: flex;
       align-items: center;
@@ -878,11 +888,10 @@
       box-shadow: 0 0 6px rgba(0, 168, 255, 0.5);
     }
 
-    /* Serigrafía inferior derecha */
     .plx-bottom-brand {
       position: absolute;
       bottom: 20px;
-      right: 125px;
+      right: 135px;
       font-size: 0.58rem;
       color: #6a6d7d;
       letter-spacing: 1px;
@@ -959,13 +968,13 @@
     }
 
     /* ===== RESPONSIVE ===== */
-    @media (max-width: 730px) {
+    @media (max-width: 740px) {
       .turntable-wrapper {
         transform: scale(0.82);
         margin: -40px 0;
       }
     }
-    @media (max-width: 580px) {
+    @media (max-width: 590px) {
       .turntable-wrapper {
         transform: scale(0.68);
         margin: -75px 0;
@@ -974,13 +983,13 @@
         font-size: 1.5rem;
       }
     }
-    @media (max-width: 480px) {
+    @media (max-width: 490px) {
       .turntable-wrapper {
         transform: scale(0.56);
         margin: -105px 0;
       }
     }
-    @media (max-width: 380px) {
+    @media (max-width: 390px) {
       .turntable-wrapper {
         transform: scale(0.48);
         margin: -125px 0;
@@ -1029,9 +1038,12 @@
         <strong>Pioneer</strong><br>PROFESSIONAL TURNTABLE PLX-1000
       </div>
 
-      <!-- Cuenca agrandada del plato (ocupa el centro-izq sin espacio desaprovechado) -->
+      <!-- Cuenca centrada del plato -->
       <div class="platter-bay">
         <div class="platter" id="platter">
+          <!-- Reflejo azul que baña SOLAMENTE los puntos del borde de aluminio -->
+          <div class="platter-strobe-reflection"></div>
+
           <div class="vinyl" id="vinyl">
             <div class="album-art-visible" id="album-art-visible">
               <div class="fallback">
@@ -1044,17 +1056,15 @@
         </div>
       </div>
 
-      <!-- UNIDAD DE ENCENDIDO CON HAZ DE LUZ ESTROBOSCÓPICA AZUL (PLX-1000) -->
-      <div class="pioneer-power-unit">
-        <!-- Haz de luz azul que ilumina los puntos del plato -->
-        <div class="strobe-tower-lens">
-          <div class="strobe-blue-beam"></div>
+      <!-- UNIDAD ESTROBOSCÓPICA & INTERRUPTOR (EN EL CHASIS, SIN TOCAR EL PLATO) -->
+      <div class="plx-power-tower">
+        <div class="strobe-aperture-box">
+          <div class="strobe-blue-emitter"></div>
         </div>
         
-        <!-- Dial rotativo estriado -->
-        <div class="power-rotary-base">
-          <div class="power-knurled-knob"></div>
-          <div class="power-labels">
+        <div class="power-rotary-housing">
+          <div class="power-ribbed-knob"></div>
+          <div class="power-text-labels">
             <span class="lbl-off">OFF</span>
             <span class="lbl-on">ON</span>
             <span class="lbl-pwr">POWER</span>
@@ -1062,14 +1072,12 @@
         </div>
       </div>
 
-      <!-- BRAZO EN 'S' ROBUSTO ESTILO PIONEER PLX-1000 -->
+      <!-- BRAZO METÁLICO EN 'S' Y CARDÁN -->
       <div class="tonearm-assembly">
-        <!-- Base cardánica pesada con anillo graduado -->
         <div class="gimbal-base">
           <div class="gimbal-ring"></div>
         </div>
 
-        <!-- Dial lateral Anti-Skating -->
         <div class="anti-skate-dial"></div>
         
         <div class="tonearm" id="tonearm">
@@ -1104,33 +1112,28 @@
             <circle cx="0" cy="0" r="7" fill="#c2c7d6" stroke="#222" stroke-width="2" />
             <circle cx="0" cy="0" r="2.5" fill="#222" />
 
-            <!-- Tubo cromado en 'S' robusto y grueso -->
+            <!-- Tubo cromado en 'S' robusto -->
             <path d="M 0,0 C 18,40 20,95 -8,155 L -14,175" 
                   fill="none" 
                   stroke="url(#chromeTube)" 
                   stroke-width="6.5" 
                   stroke-linecap="round" />
 
-            <!-- Portacápsulas profesional Pioneer con aguja -->
+            <!-- Portacápsulas con aguja -->
             <g transform="translate(-14, 175) rotate(-16)">
-              <!-- Bloque conector cromado -->
               <rect x="-5" y="-6" width="10" height="6" rx="1" fill="#bbb" stroke="#333" stroke-width="0.8" />
-              <!-- Cuerpo cápsula con ranuras -->
               <rect x="-8" y="0" width="16" height="34" rx="2" fill="url(#pioneerHeadshell)" stroke="#666" stroke-width="1" />
               <line x1="-4" y1="8" x2="4" y2="8" stroke="#999" stroke-width="1.2" />
               <line x1="-4" y1="14" x2="4" y2="14" stroke="#999" stroke-width="1.2" />
-              <!-- Tirador lateral curvo para dedo (Finger Lift) -->
               <path d="M 8,10 Q 18,10 16,20" fill="none" stroke="#eee" stroke-width="2.2" stroke-linecap="round" />
-              <!-- Aguja fonocaptora dorada -->
               <polygon points="-3,34 3,34 0,40" fill="#ffcc00" />
             </g>
           </svg>
         </div>
       </div>
 
-      <!-- FADER DE VOLUMEN CON ILUMINACIÓN PIONEER Y ESCALA 0 A 10 -->
+      <!-- FADER DE VOLUMEN GRADUADO DE 0 A 10 CON ILUMINACIÓN -->
       <div class="pitch-fader-assembly" id="fader-container">
-        <!-- Botones de rango de tempo ±8, ±16, ±50 -->
         <div class="tempo-range-buttons">
           <div class="tempo-btn active">±8</div>
           <div class="tempo-btn">±16</div>
@@ -1154,7 +1157,7 @@
         <div class="fader-label">VOLUME</div>
       </div>
 
-      <!-- BOTÓN PLAY / STOP PLATEADO CON ANILLO LED AZUL -->
+      <!-- BOTÓN PLAY / STOP CON HALO AZUL -->
       <div class="start-stop-round-btn" id="play-btn">
         <div class="start-stop-text">PLAY<br>STOP</div>
       </div>
@@ -1230,7 +1233,6 @@
       }
       window.showAlert = showAlert;
 
-      // Marquesina fluida
       function updateMarqueeTitle(title) {
         if (!sonicTitle || !marqueeTrack) return;
         sonicTitle.textContent = title;
