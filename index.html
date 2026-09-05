@@ -112,17 +112,17 @@
       margin: 10px 0;
     }
 
-    /* ===== ADAPTADOR 45 RPM (GRANDE Y DE ALUMINIO PULIDO MECANIZADO) ===== */
+    /* ===== ADAPTADOR 45 RPM (MÁS GRANDE Y DE ALUMINIO PULIDO MACIZO) ===== */
     .rpm45-well {
       position: absolute;
-      top: 18px;
-      left: 18px;
-      width: 58px;
-      height: 58px;
+      top: 14px;
+      left: 14px;
+      width: 72px; /* Aumentado a petición */
+      height: 72px;
       border-radius: 50%;
       background: radial-gradient(circle, #08090d 50%, #1a1b24 100%);
-      border: 1.5px solid #2a2c38;
-      box-shadow: inset 0 4px 10px rgba(0,0,0,0.95), 0 1px 2px rgba(255,255,255,0.05);
+      border: 2px solid #2a2c38;
+      box-shadow: inset 0 5px 12px rgba(0,0,0,0.95), 0 1px 2px rgba(255,255,255,0.08);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -130,36 +130,36 @@
     }
 
     .rpm45-puck {
-      width: 48px;
-      height: 48px;
+      width: 60px; /* Aumentado */
+      height: 60px;
       border-radius: 50%;
       background: 
         conic-gradient(
-          from 0deg,
+          from 45deg,
           #ffffff 0deg,
-          #c8ccd6 45deg,
-          #727685 90deg,
+          #d8dbe2 30deg,
+          #6c707d 90deg,
           #ffffff 135deg,
-          #c8ccd6 180deg,
-          #727685 225deg,
+          #d8dbe2 165deg,
+          #6c707d 225deg,
           #ffffff 270deg,
-          #c8ccd6 315deg,
-          #727685 360deg
+          #d8dbe2 300deg,
+          #6c707d 360deg
         );
-      border: 1px solid #9aa0b0;
+      border: 1.5px solid #aeb4c6;
       box-shadow: 
-        0 4px 12px rgba(0,0,0,0.85),
-        inset 0 1px 2px rgba(255,255,255,0.9),
-        inset 0 -1px 2px rgba(0,0,0,0.5);
+        0 5px 15px rgba(0,0,0,0.9),
+        inset 0 1px 2px rgba(255,255,255,0.95),
+        inset 0 -2px 4px rgba(0,0,0,0.6);
       position: relative;
     }
 
     .rpm45-puck::before {
       content: '';
       position: absolute;
-      inset: 6px;
+      inset: 8px;
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.3);
+      border: 1px solid rgba(255,255,255,0.35);
       background: repeating-radial-gradient(circle, transparent 0, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 3px);
     }
 
@@ -169,19 +169,19 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 12px;
-      height: 12px;
+      width: 14px;
+      height: 14px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #555, #111);
       border: 1px solid #777;
-      box-shadow: inset 0 1px 2px rgba(0,0,0,0.9);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.9);
     }
 
     /* ===== PANTALLA OLED / VFD (MISMO ANCHO QUE EL VINILO: 394px) ===== */
     .vfd-console {
       position: absolute;
       top: 12px;
-      left: 106px; /* Alineada exactamente con el ancho del vinilo */
+      left: 106px; /* Mismo alineamiento que el vinilo */
       width: 394px; /* Mismo ancho que el vinilo */
       height: 78px;
       background: #020408;
@@ -321,10 +321,10 @@
       font-weight: 800;
     }
 
-    /* ===== CUENCA DEL PLATO (CENTRADA 50/50 ENTRE PANTALLA Y BORDE INFERIOR) ===== */
+    /* ===== CUENCA DEL PLATO (CENTRADA 50/50: 20px ARRIBA Y 20px ABAJO) ===== */
     .platter-bay {
       position: absolute;
-      top: 110px; /* Exacto: 20px bajo la pantalla y 20px sobre el borde inferior */
+      top: 110px;
       left: 88px;
       width: 430px;
       height: 430px;
@@ -558,7 +558,7 @@
     .power-text-labels .lbl-on { position: absolute; top: 1px; right: 4px; color: var(--pioneer-blue); }
     .power-text-labels .lbl-pwr { position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); font-size: 0.38rem; }
 
-    /* ===== BRAZO ROBUSTO Y CARDÁN LIMPIO (94px) ===== */
+    /* ===== BRAZO METÁLICO EN 'S' Y PIVOTE (94px) ===== */
     .tonearm-assembly {
       position: absolute;
       top: 75px;
@@ -664,7 +664,7 @@
       overflow: visible;
     }
 
-    /* ===== VOLUMEN CALIBRADO VERTICALMENTE (ROJO AL BAJAR / AZUL AL SUBIR) ===== */
+    /* ===== VOLUMEN CALIBRADO CON ESCALA SINCRONIZADA ===== */
     .pitch-fader-assembly {
       position: absolute;
       top: 105px;
@@ -715,7 +715,7 @@
       transition: background 0.12s ease, box-shadow 0.12s ease;
     }
 
-    /* Iluminación AZUL al subir */
+    /* AZUL al estar activo o subir */
     .scale-step.lit-blue {
       color: var(--pioneer-blue);
       text-shadow: 0 0 8px var(--pioneer-blue), 0 0 14px rgba(0, 168, 255, 0.8);
@@ -726,7 +726,7 @@
       box-shadow: 0 0 6px var(--pioneer-blue);
     }
 
-    /* Iluminación ROJA al bajar */
+    /* ROJO al bajar o cuando el volumen cae por debajo del nivel */
     .scale-step.lit-red {
       color: var(--neon-red);
       text-shadow: 0 0 8px var(--neon-red), 0 0 14px rgba(255, 42, 75, 0.8);
@@ -802,7 +802,97 @@
       font-weight: 700;
     }
 
-    /* ===== BOTÓN PLAY / STOP CON PARPADEO BIDIRECCIONAL ===== */
+    /* ===== BOTONES DE VOLUMEN RÁPIDO (+20% y -20%) DEBAJO DEL FADER ===== */
+    .fader-step-controls {
+      position: absolute;
+      bottom: 25px;
+      right: 18px;
+      width: 85px;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      z-index: 25;
+    }
+
+    .vol-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 6px; /* Cuadrado con bordes suaves */
+      background: linear-gradient(145deg, #252834, #121318);
+      border: 1.5px solid #3c4052;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.15);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+    .vol-btn:active {
+      transform: scale(0.94);
+    }
+
+    .vol-arrow-svg {
+      width: 18px;
+      height: 18px;
+      pointer-events: none;
+    }
+
+    /* Botón izquierdo: Aumenta volumen (+20%) y parpadea en azul */
+    .vol-up-btn {
+      color: var(--pioneer-blue);
+      animation: pulse-vol-blue 1.6s infinite ease-in-out;
+    }
+
+    @keyframes pulse-vol-blue {
+      0%, 100% {
+        box-shadow: 0 2px 6px rgba(0,0,0,0.8), inset 0 0 4px rgba(0, 168, 255, 0.1);
+        border-color: rgba(0, 168, 255, 0.3);
+        color: rgba(0, 168, 255, 0.6);
+      }
+      50% {
+        box-shadow: 0 0 12px rgba(0, 168, 255, 0.7), inset 0 0 8px rgba(0, 168, 255, 0.4);
+        border-color: var(--pioneer-blue);
+        color: #ffffff;
+      }
+    }
+
+    /* Botón derecho: Disminuye volumen (-20%) y parpadea en rojo */
+    .vol-down-btn {
+      color: var(--neon-red);
+      animation: pulse-vol-red 1.6s infinite ease-in-out;
+    }
+
+    @keyframes pulse-vol-red {
+      0%, 100% {
+        box-shadow: 0 2px 6px rgba(0,0,0,0.8), inset 0 0 4px rgba(255, 42, 75, 0.1);
+        border-color: rgba(255, 42, 75, 0.3);
+        color: rgba(255, 42, 75, 0.6);
+      }
+      50% {
+        box-shadow: 0 0 12px rgba(255, 42, 75, 0.7), inset 0 0 8px rgba(255, 42, 75, 0.4);
+        border-color: var(--neon-red);
+        color: #ffffff;
+      }
+    }
+
+    /* Parpadeos rápidos durante el clic */
+    .vol-up-btn.fast-blink-blue {
+      animation: rapid-blue 0.16s infinite alternate !important;
+    }
+    @keyframes rapid-blue {
+      0% { box-shadow: 0 0 4px var(--pioneer-blue); color: #00a8ff; border-color: #00a8ff; }
+      100% { box-shadow: 0 0 18px #00f3ff, inset 0 0 10px #00f3ff; color: #ffffff; border-color: #ffffff; }
+    }
+
+    .vol-down-btn.fast-blink-red {
+      animation: rapid-red 0.16s infinite alternate !important;
+    }
+    @keyframes rapid-red {
+      0% { box-shadow: 0 0 4px var(--neon-red); color: #ff2a4b; border-color: #ff2a4b; }
+      100% { box-shadow: 0 0 18px #ff0055, inset 0 0 10px #ff0055; color: #ffffff; border-color: #ffffff; }
+    }
+
+    /* ===== BOTÓN PLAY / STOP ===== */
     .start-stop-round-btn {
       position: absolute;
       bottom: 16px;
@@ -840,15 +930,16 @@
       transition: all 0.2s ease;
     }
 
-    /* DETENIDO: PLAY parpadea en azul, STOP apagado */
+    /* DETENIDO: PLAY parpadea en azul, STOP encendido fijo en rojo */
     .start-stop-round-btn:not(.playing) .play-word {
       color: var(--pioneer-blue);
       animation: blink-blue-text 1.2s infinite ease-in-out;
     }
 
     .start-stop-round-btn:not(.playing) .stop-word {
-      color: #555866;
-      text-shadow: none;
+      color: #ff2a4b;
+      text-shadow: 0 0 8px #ff2a4b;
+      opacity: 1;
       animation: none;
     }
 
@@ -1071,7 +1162,7 @@
         <strong>Pioneer</strong><br>PROFESSIONAL TURNTABLE PLX-1000
       </div>
 
-      <!-- Cuenca centrada verticalmente 50/50 entre la pantalla y el borde inferior -->
+      <!-- Cuenca centrada verticalmente 50/50 entre pantalla y borde inferior -->
       <div class="platter-bay">
         <div class="platter" id="platter">
           <div class="platter-strobe-reflection"></div>
@@ -1151,7 +1242,7 @@
             <line x1="0" y1="-12" x2="0" y2="-6" stroke="#fff" stroke-width="1" />
             <line x1="8" y1="-12" x2="8" y2="-6" stroke="#fff" stroke-width="1" />
 
-            <!-- Pivote central reforzado -->
+            <!-- Pivote central -->
             <circle cx="0" cy="0" r="8" fill="#c8cddc" stroke="#222" stroke-width="2" />
             <circle cx="0" cy="0" r="3" fill="#222" />
 
@@ -1177,7 +1268,7 @@
         </div>
       </div>
 
-      <!-- FADER DE VOLUMEN CALIBRADO (ROJO AL BAJAR / AZUL AL SUBIR) -->
+      <!-- FADER DE VOLUMEN CALIBRADO -->
       <div class="pitch-fader-assembly" id="fader-container">
         <div class="volume-scale" id="volume-scale">
           <div class="scale-step" data-val="10"><span>10</span><i class="tick"></i></div>
@@ -1196,7 +1287,21 @@
         <div class="fader-label">VOLUME</div>
       </div>
 
-      <!-- BOTÓN PLAY / STOP CON PARPADEO DINÁMICO -->
+      <!-- BOTONES DE VOLUMEN RÁPIDO (+20% y -20%) -->
+      <div class="fader-step-controls">
+        <button class="vol-btn vol-up-btn" id="vol-up-btn" title="Aumentar volumen (+20%)">
+          <svg viewBox="0 0 24 24" class="vol-arrow-svg">
+            <path d="M15 19l-7-7 7-7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="vol-btn vol-down-btn" id="vol-down-btn" title="Bajar volumen (-20%)">
+          <svg viewBox="0 0 24 24" class="vol-arrow-svg">
+            <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- BOTÓN PLAY / STOP -->
       <div class="start-stop-round-btn" id="play-btn">
         <span class="btn-word play-word">PLAY</span>
         <span class="btn-word stop-word">STOP</span>
@@ -1245,13 +1350,13 @@
       const sonicArtFull = document.getElementById('sonic_art_full');
       const platter = document.getElementById('platter');
       const scaleSteps = document.querySelectorAll('.scale-step');
+      const volUpBtn = document.getElementById('vol-up-btn');
+      const volDownBtn = document.getElementById('vol-down-btn');
 
       const STREAM_URL = 'https://mars.streamerr.co/8422/stream';
 
       let isPlaying = false;
       let volume = 1.0;
-      let previousVolume = 1.0;
-      let volumeDirection = 'up'; // 'up' o 'down'
       let audioContext = null;
       let analyser = null;
       let dataArray = null;
@@ -1260,6 +1365,8 @@
       let displayedArtUrl = null;
       let displayedTitle = null;
       let artUpdateInterval = null;
+      let volUpTimeout = null;
+      let volDownTimeout = null;
 
       let currentHue = 195;
       let targetHue = 195;
@@ -1420,7 +1527,7 @@
         }
       }
 
-      // ✅ ACTUALIZACIÓN DE VOLUMEN CON ILUMINACIÓN AZUL AL SUBIR / ROJA AL BAJAR
+      // ✅ LÓGICA DE VOLUMEN EXACTA: ROJO AL BAJAR DE CADA NÚMERO / AZUL AL ESTAR ACTIVO / TODO ROJO EN 0
       function updateFaderPosition(vol) {
         const trackHeight = faderTrack.clientHeight;
         const knobHeight = faderKnob.clientHeight || 22;
@@ -1429,7 +1536,6 @@
 
         faderKnob.style.bottom = `${posPx}px`;
 
-        // Barra de volumen: llega al fondo exacto en 0
         if (faderFill) {
           if (vol === 0) {
             faderFill.style.height = '0px';
@@ -1438,29 +1544,35 @@
           }
         }
 
-        // Si el volumen es 0, todo se apaga (incluso el 0)
+        const currentScaleVal = Math.round(vol * 10 * 10) / 10;
+
+        // Si está en 0: TODOS los números se iluminan en ROJO
         if (vol === 0) {
           scaleSteps.forEach(step => {
-            step.classList.remove('lit-blue', 'lit-red');
+            step.classList.remove('lit-blue');
+            step.classList.add('lit-red');
           });
           return;
         }
 
-        const currentScaleVal = vol * 10;
+        // Iluminación según regla: si el nivel es inferior al número, en ROJO; si está activo o por encima, en AZUL
         scaleSteps.forEach(step => {
           const stepVal = parseFloat(step.getAttribute('data-val'));
-          if (currentScaleVal >= stepVal - 0.2) {
-            if (volumeDirection === 'down') {
-              step.classList.remove('lit-blue');
-              step.classList.add('lit-red');
-            } else {
-              step.classList.remove('lit-red');
-              step.classList.add('lit-blue');
-            }
+
+          if (currentScaleVal < stepVal - 0.05) {
+            step.classList.remove('lit-blue');
+            step.classList.add('lit-red');
           } else {
-            step.classList.remove('lit-blue', 'lit-red');
+            step.classList.remove('lit-red');
+            step.classList.add('lit-blue');
           }
         });
+      }
+
+      function setVolume(newVol) {
+        volume = Math.max(0, Math.min(1, newVol));
+        audio.volume = volume;
+        updateFaderPosition(volume);
       }
 
       function setVolumeFromPosition(clientY) {
@@ -1472,20 +1584,7 @@
         let newVol = 1 - (relativeY / maxTravel);
         newVol = Math.max(0, Math.min(1, newVol));
 
-        // Detectar dirección de movimiento
-        if (newVol < previousVolume) {
-          volumeDirection = 'down';
-        } else if (newVol > previousVolume) {
-          volumeDirection = 'up';
-        }
-        previousVolume = newVol;
-
-        volume = newVol;
-        audio.volume = volume;
-
-        faderKnob.style.transition = 'none';
-        if (faderFill) faderFill.style.transition = 'none';
-        updateFaderPosition(volume);
+        setVolume(newVol);
       }
 
       function handleStart(e) {
@@ -1513,6 +1612,7 @@
         }
       }
 
+      // Eventos Fader
       faderContainer.addEventListener('mousedown', handleStart);
       window.addEventListener('mousemove', handleMove);
       window.addEventListener('mouseup', handleEnd);
@@ -1520,6 +1620,29 @@
       faderContainer.addEventListener('touchstart', handleStart, { passive: false });
       window.addEventListener('touchmove', handleMove, { passive: false });
       window.addEventListener('touchend', handleEnd);
+
+      // Eventos Botones +20% y -20%
+      volUpBtn.addEventListener('click', () => {
+        let newVol = Math.min(1.0, Math.round((volume + 0.2) * 10) / 10);
+        setVolume(newVol);
+
+        volUpBtn.classList.add('fast-blink-blue');
+        clearTimeout(volUpTimeout);
+        volUpTimeout = setTimeout(() => {
+          volUpBtn.classList.remove('fast-blink-blue');
+        }, 2000);
+      });
+
+      volDownBtn.addEventListener('click', () => {
+        let newVol = Math.max(0.0, Math.round((volume - 0.2) * 10) / 10);
+        setVolume(newVol);
+
+        volDownBtn.classList.add('fast-blink-red');
+        clearTimeout(volDownTimeout);
+        volDownTimeout = setTimeout(() => {
+          volDownBtn.classList.remove('fast-blink-red');
+        }, 2000);
+      });
 
       playBtn.addEventListener('click', togglePlay);
       vinyl.addEventListener('click', togglePlay);
