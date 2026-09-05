@@ -165,7 +165,7 @@
       border: 1px solid #666;
     }
 
-    /* ===== PANTALLA DIGITAL VFD (CON MARQUESINA INFINITA) ===== */
+    /* ===== PANTALLA DIGITAL VFD (CON MARQUESINA EN BUCLE) ===== */
     .vfd-console {
       position: absolute;
       top: 18px;
@@ -219,7 +219,6 @@
       margin-right: 4px;
     }
 
-    /* Contenedor del título con desvanecimiento lateral elegante */
     .vfd-title-container {
       width: 100%;
       overflow: hidden;
@@ -232,7 +231,6 @@
       -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
     }
 
-    /* Pista de marquesina en bucle */
     .vfd-marquee-track {
       display: inline-flex;
       align-items: center;
@@ -283,7 +281,6 @@
       display: inline-block;
     }
 
-    /* Visualizador en pantalla */
     .visualizer {
       display: flex;
       align-items: flex-end;
@@ -379,7 +376,7 @@
       pointer-events: none;
     }
 
-    /* ===== VINILO CON REFLEJO ANISÓTROPO ===== */
+    /* ===== VINILO ===== */
     .vinyl {
       width: 308px;
       height: 308px;
@@ -465,7 +462,7 @@
       display: none !important;
     }
 
-    /* ===== ENSAMBLE DEL BRAZO (GEOMETRÍA Y ROTACIÓN EXACTA) ===== */
+    /* ===== ENSAMBLE DEL BRAZO (LIMPIO, SIN ELEMENTOS QUE SOBREN) ===== */
     .tonearm-assembly {
       position: absolute;
       top: 75px;
@@ -500,52 +497,6 @@
       box-shadow: inset 0 2px 4px rgba(255,255,255,0.4);
     }
 
-    .counterweight {
-      position: absolute;
-      top: -8px;
-      left: 37px;
-      width: 28px;
-      height: 24px;
-      background: linear-gradient(90deg, #181920, #5a5e70, #181920);
-      border-radius: 3px;
-      border: 1px solid #555;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.8);
-    }
-    .counterweight::after {
-      content: '';
-      position: absolute;
-      right: 4px;
-      top: 0;
-      bottom: 0;
-      width: 6px;
-      background: repeating-linear-gradient(180deg, #111, #111 2px, #fff 2px, #fff 3px);
-      opacity: 0.6;
-    }
-
-    /* Soporte de descanso alineado con el tubo en reposo */
-    .arm-rest {
-      position: absolute;
-      top: 150px;
-      left: 48px;
-      width: 14px;
-      height: 26px;
-      background: #111;
-      border-radius: 3px;
-      border: 1px solid #444;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.7);
-    }
-    .arm-rest::before {
-      content: '';
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      right: 2px;
-      height: 5px;
-      background: #555;
-      border-radius: 2px;
-    }
-
-    /* ===== BRAZO CORTO EN 'S' DE LONGITUD REAL ===== */
     .tonearm {
       position: absolute;
       top: 61px;
@@ -553,13 +504,12 @@
       width: 60px;
       height: 180px;
       transform-origin: 0px 0px;
-      transform: rotate(0deg); /* Reposo seguro en el soporte */
+      transform: rotate(0deg);
       transition: transform 1.3s cubic-bezier(0.4, 0, 0.2, 1);
       filter: drop-shadow(-4px 6px 8px rgba(0,0,0,0.8));
       overflow: visible;
     }
 
-    /* ✅ ROTACIÓN HACIA LA IZQUIERDA (HACIA EL PLATO Y VINILO) */
     .tonearm.playing {
       transform: rotate(38deg);
     }
@@ -570,15 +520,15 @@
       overflow: visible;
     }
 
-    /* ===== PITCH / VOLUME FADER ===== */
+    /* ===== FADER DE VOLUMEN CON ESCALA NUMERADA E ILUMINADA ===== */
     .pitch-fader-assembly {
       position: absolute;
       top: 145px;
       right: 25px;
-      width: 74px;
+      width: 82px;
       height: 300px;
       background: linear-gradient(180deg, #181922, #0d0e14);
-      border-radius: 6px;
+      border-radius: 8px;
       border: 1px solid #2e3142;
       box-shadow: inset 0 2px 8px rgba(0,0,0,0.9), 0 4px 10px rgba(0,0,0,0.6);
       display: flex;
@@ -589,41 +539,70 @@
       z-index: 20;
     }
 
-    .pitch-scale {
+    /* Escala de volumen graduada e iluminada */
+    .volume-scale {
       position: absolute;
-      left: 7px;
+      left: 10px;
       top: 25px;
       bottom: 25px;
-      width: 14px;
+      width: 22px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.5rem;
-      color: #6a6f85;
+      font-size: 0.6rem;
       pointer-events: none;
-      line-height: 1;
     }
 
-    .quartz-lock-led {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
+    .scale-step {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #3f4255;
+      transition: color 0.15s ease, text-shadow 0.15s ease;
+    }
+
+    .scale-step .tick {
+      display: inline-block;
       width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--neon-green);
-      box-shadow: 0 0 6px var(--neon-green);
+      height: 1.5px;
+      background: #2e3242;
+      transition: background 0.15s ease, box-shadow 0.15s ease;
     }
 
+    /* Estado iluminado */
+    .scale-step.lit {
+      color: var(--neon-cyan);
+      text-shadow: 0 0 8px var(--neon-cyan), 0 0 14px rgba(0, 243, 255, 0.7);
+      font-weight: 800;
+    }
+
+    .scale-step.lit .tick {
+      background: var(--neon-cyan);
+      box-shadow: 0 0 6px var(--neon-cyan);
+    }
+
+    /* Pista y barra luminosa interior */
     .fader-track {
       position: relative;
+      margin-left: 20px;
       width: 6px;
       height: 240px;
-      background: #000;
+      background: #08090d;
       border-radius: 3px;
       box-shadow: inset 0 0 6px #000, 0 1px 1px rgba(255,255,255,0.1);
+    }
+
+    .fader-fill {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      border-radius: 3px;
+      background: linear-gradient(to top, var(--neon-cyan) 0%, var(--neon-green) 100%);
+      box-shadow: 0 0 8px var(--neon-cyan);
+      pointer-events: none;
+      transition: height 0.08s ease-out;
     }
 
     .fader-knob {
@@ -640,6 +619,7 @@
       border: 1px solid #333;
       transition: bottom 0.08s ease-out;
       touch-action: none;
+      z-index: 5;
     }
     .fader-knob:active {
       cursor: grabbing;
@@ -658,15 +638,16 @@
 
     .fader-label {
       position: absolute;
-      bottom: 5px;
+      bottom: 6px;
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.5rem;
+      font-size: 0.52rem;
       color: #7b8196;
       letter-spacing: 2px;
       text-transform: uppercase;
+      font-weight: 700;
     }
 
-    /* ===== BOTONES TECHNICS START / STOP ===== */
+    /* ===== BOTONES START / STOP & VELOCIDAD ===== */
     .start-stop-btn {
       position: absolute;
       bottom: 25px;
@@ -935,15 +916,12 @@
         </div>
       </div>
 
-      <!-- Ensamble mecánico del brazo -->
+      <!-- Ensamble mecánico del brazo (Limpio y estilizado) -->
       <div class="tonearm-assembly">
-        <div class="arm-rest"></div>
-        <div class="counterweight"></div>
         <div class="gimbal-base">
           <div class="gimbal-ring"></div>
         </div>
         
-        <!-- Brazo en S que gira hacia la izquierda hacia el disco -->
         <div class="tonearm" id="tonearm">
           <svg class="tonearm-svg" viewBox="0 0 70 190">
             <defs>
@@ -962,7 +940,7 @@
             <!-- Pivote central -->
             <circle cx="0" cy="0" r="5" fill="#888" stroke="#222" stroke-width="1.5" />
 
-            <!-- Tubo cromado en forma de S -->
+            <!-- Tubo cromado en S -->
             <path d="M 0,0 C 14,35 15,75 -6,120 L -10,135" 
                   fill="none" 
                   stroke="url(#chromeTube)" 
@@ -981,24 +959,23 @@
         </div>
       </div>
 
-      <!-- Fader de control de Pitch / Volumen -->
+      <!-- Fader de control de Volumen numerado de 0 a 10 con iluminación -->
       <div class="pitch-fader-assembly" id="fader-container">
-        <div class="pitch-scale">
-          <span>+8</span>
-          <span>+6</span>
-          <span>+4</span>
-          <span>+2</span>
-          <span>0</span>
-          <span>-2</span>
-          <span>-4</span>
-          <span>-6</span>
-          <span>-8</span>
+        <div class="volume-scale" id="volume-scale">
+          <div class="scale-step" data-val="10"><span>10</span><i class="tick"></i></div>
+          <div class="scale-step" data-val="8"><span>8</span><i class="tick"></i></div>
+          <div class="scale-step" data-val="6"><span>6</span><i class="tick"></i></div>
+          <div class="scale-step" data-val="4"><span>4</span><i class="tick"></i></div>
+          <div class="scale-step" data-val="2"><span>2</span><i class="tick"></i></div>
+          <div class="scale-step" data-val="0"><span>0</span><i class="tick"></i></div>
         </div>
-        <div class="quartz-lock-led" title="0% Quartz Lock"></div>
+
         <div class="fader-track" id="fader-track">
+          <div class="fader-fill" id="fader-fill"></div>
           <div class="fader-knob" id="fader-knob"></div>
         </div>
-        <div class="fader-label">Volume</div>
+
+        <div class="fader-label">VOLUME</div>
       </div>
 
       <!-- Botón START / STOP -->
@@ -1040,6 +1017,7 @@
       const vinyl = document.getElementById('vinyl');
       const tonearm = document.getElementById('tonearm');
       const faderKnob = document.getElementById('fader-knob');
+      const faderFill = document.getElementById('fader-fill');
       const faderContainer = document.getElementById('fader-container');
       const faderTrack = document.getElementById('fader-track');
       const visualizer = document.getElementById('visualizer');
@@ -1049,6 +1027,7 @@
       const albumArtVisible = document.getElementById('album-art-visible');
       const sonicArtFull = document.getElementById('sonic_art_full');
       const platter = document.getElementById('platter');
+      const scaleSteps = document.querySelectorAll('.scale-step');
 
       let isPlaying = false;
       let volume = 1.0;
@@ -1072,7 +1051,7 @@
       }
       window.showAlert = showAlert;
 
-      // Actualizar marquesina fluida y sin saltos
+      // Marquesina fluida
       function updateMarqueeTitle(title) {
         if (!sonicTitle || !marqueeTrack) return;
         sonicTitle.textContent = title;
@@ -1085,12 +1064,10 @@
         if (sonicTitleDup) sonicTitleDup.textContent = '';
 
         requestAnimationFrame(() => {
-          // Detectar si el texto sobrepasa el contenedor
           if (sonicTitle.offsetWidth > container.clientWidth - 15) {
             if (sonicTitleDup) sonicTitleDup.textContent = title;
             marqueeTrack.classList.add('scrolling');
             
-            // Velocidad constante y cómoda para lectura (35 px/segundo)
             const distance = sonicTitle.offsetWidth + 50;
             const duration = Math.max(8, distance / 35);
             marqueeTrack.style.animationDuration = `${duration}s`;
@@ -1100,7 +1077,6 @@
         });
       }
 
-      // Observador automático por si SonicAPI modifica el texto directamente
       let lastObservedTitle = '';
       const titleObserver = new MutationObserver(() => {
         const text = sonicTitle.textContent.trim();
@@ -1220,11 +1196,27 @@
         }
       }
 
+      // Actualización de posición e iluminación de la escala y pista
       function updateFaderPosition(vol) {
         const minPos = 5;
         const maxPos = 95;
         const pos = minPos + (vol * (maxPos - minPos));
         faderKnob.style.bottom = `${pos}%`;
+        
+        if (faderFill) {
+          faderFill.style.height = `${pos}%`;
+        }
+
+        // Iluminar números según el valor actual (de 0 a 10)
+        const currentScaleVal = vol * 10;
+        scaleSteps.forEach(step => {
+          const stepVal = parseFloat(step.getAttribute('data-val'));
+          if (currentScaleVal >= stepVal - 0.2) {
+            step.classList.add('lit');
+          } else {
+            step.classList.remove('lit');
+          }
+        });
       }
 
       function setVolumeFromPosition(clientY) {
@@ -1239,12 +1231,14 @@
         audio.volume = volume;
 
         faderKnob.style.transition = 'none';
+        if (faderFill) faderFill.style.transition = 'none';
         updateFaderPosition(volume);
       }
 
       function handleStart(e) {
         isDragging = true;
         faderKnob.style.transition = 'none';
+        if (faderFill) faderFill.style.transition = 'none';
         const clientY = e.touches ? e.touches[0].clientY : e.clientY;
         setVolumeFromPosition(clientY);
         e.preventDefault();
@@ -1262,6 +1256,7 @@
         if (isDragging) {
           isDragging = false;
           faderKnob.style.transition = 'bottom 0.08s ease-out';
+          if (faderFill) faderFill.style.transition = 'height 0.08s ease-out';
         }
       }
 
