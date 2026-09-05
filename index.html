@@ -91,7 +91,7 @@
       padding: 15px 10px;
     }
 
-    /* ===== CHASIS TECHNICS SL-1200 ===== */
+    /* ===== CHASIS REALISTA TECHNICS SL-1200 ===== */
     .turntable-wrapper {
       width: 680px;
       height: 530px;
@@ -128,7 +128,7 @@
     .screw.bl { bottom: 12px; left: 12px; }
     .screw.br { bottom: 12px; right: 12px; }
 
-    /* Adaptador 45 RPM (Top-Left) */
+    /* Adaptador 45 RPM */
     .rpm45-well {
       position: absolute;
       top: 24px;
@@ -165,7 +165,7 @@
       border: 1px solid #666;
     }
 
-    /* ===== PANTALLA DIGITAL VFD EMPOTRADA ===== */
+    /* ===== PANTALLA DIGITAL VFD (CON MARQUESINA INFINITA) ===== */
     .vfd-console {
       position: absolute;
       top: 18px;
@@ -219,20 +219,71 @@
       margin-right: 4px;
     }
 
-    #sonic_title {
+    /* Contenedor del título con desvanecimiento lateral elegante */
+    .vfd-title-container {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
+    }
+
+    /* Pista de marquesina en bucle */
+    .vfd-marquee-track {
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      will-change: transform;
+    }
+
+    .vfd-marquee-track.scrolling {
+      justify-content: flex-start;
+      animation: vfd-scroll-left linear infinite;
+    }
+
+    @keyframes vfd-scroll-left {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    #sonic_title,
+    .sonic-title-dup {
       font-size: 1.25rem;
       color: var(--neon-cyan);
       text-transform: uppercase;
-      letter-spacing: 2.5px;
+      letter-spacing: 2px;
       text-shadow: 0 0 10px rgba(0, 243, 255, 0.7);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
       line-height: 1.2;
-      text-align: center;
-      margin: 1px 0;
+      flex-shrink: 0;
     }
 
+    .marquee-spacer {
+      display: none;
+      color: var(--neon-green);
+      font-size: 1.25rem;
+      padding: 0 25px;
+      flex-shrink: 0;
+      text-shadow: 0 0 8px var(--neon-green);
+    }
+
+    .sonic-title-dup {
+      display: none;
+    }
+
+    .vfd-marquee-track.scrolling .marquee-spacer,
+    .vfd-marquee-track.scrolling .sonic-title-dup {
+      display: inline-block;
+    }
+
+    /* Visualizador en pantalla */
     .visualizer {
       display: flex;
       align-items: flex-end;
@@ -276,7 +327,6 @@
       justify-content: center;
     }
 
-    /* Torreta de luz estroboscópica roja Technics */
     .strobe-tower {
       position: absolute;
       top: -4px;
@@ -301,7 +351,6 @@
       box-shadow: 0 0 14px #ff1f3d, inset 0 0 4px #fff;
     }
 
-    /* Plato de aluminio torneado */
     .platter {
       width: 330px;
       height: 330px;
@@ -416,18 +465,17 @@
       display: none !important;
     }
 
-    /* ===== ENSAMBLE DEL BRAZO (CORREGIDO GEOMÉTRICAMENTE) ===== */
+    /* ===== ENSAMBLE DEL BRAZO (GEOMETRÍA Y ROTACIÓN EXACTA) ===== */
     .tonearm-assembly {
       position: absolute;
       top: 75px;
-      left: 395px; /* Pegado inmediatamente al borde del plato (36 + 345 = 381px) */
+      left: 395px;
       width: 130px;
       height: 330px;
       pointer-events: none;
       z-index: 25;
     }
 
-    /* Base circular cardánica (Gimbal collar) */
     .gimbal-base {
       position: absolute;
       top: 25px;
@@ -452,7 +500,6 @@
       box-shadow: inset 0 2px 4px rgba(255,255,255,0.4);
     }
 
-    /* Contrapeso trasero graduado */
     .counterweight {
       position: absolute;
       top: -8px;
@@ -475,11 +522,11 @@
       opacity: 0.6;
     }
 
-    /* Soporte de descanso (Arm Rest con clip) */
+    /* Soporte de descanso alineado con el tubo en reposo */
     .arm-rest {
       position: absolute;
-      top: 145px;
-      left: 36px;
+      top: 150px;
+      left: 48px;
       width: 14px;
       height: 26px;
       background: #111;
@@ -502,18 +549,19 @@
     .tonearm {
       position: absolute;
       top: 61px;
-      left: 51px; /* Eje exacto de rotación del pivote */
+      left: 51px;
       width: 60px;
       height: 180px;
       transform-origin: 0px 0px;
-      transform: rotate(0deg); /* En reposo sobre el soporte */
-      transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: rotate(0deg); /* Reposo seguro en el soporte */
+      transition: transform 1.3s cubic-bezier(0.4, 0, 0.2, 1);
       filter: drop-shadow(-4px 6px 8px rgba(0,0,0,0.8));
+      overflow: visible;
     }
 
-    /* Posición exacta sobre el vinilo en reproducción */
+    /* ✅ ROTACIÓN HACIA LA IZQUIERDA (HACIA EL PLATO Y VINILO) */
     .tonearm.playing {
-      transform: rotate(-32deg); /* Gira hacia adentro y cae sobre los surcos */
+      transform: rotate(38deg);
     }
 
     .tonearm-svg {
@@ -522,7 +570,7 @@
       overflow: visible;
     }
 
-    /* ===== PITCH / VOLUME FADER (DERECHA) ===== */
+    /* ===== PITCH / VOLUME FADER ===== */
     .pitch-fader-assembly {
       position: absolute;
       top: 145px;
@@ -832,7 +880,7 @@
   <div class="main-content">
     <div class="turntable-wrapper">
       
-      <!-- Tornillos reales de chasis -->
+      <!-- Tornillos de chasis -->
       <div class="screw tl"></div>
       <div class="screw tr"></div>
       <div class="screw bl"></div>
@@ -843,13 +891,22 @@
         <div class="rpm45-puck"></div>
       </div>
 
-      <!-- Pantalla VFD con visualizador -->
+      <!-- Pantalla VFD con marquesina en bucle -->
       <div class="vfd-console">
         <div class="vfd-status-bar">
           <span><span class="vfd-dot"></span>LIVE BROADCAST</span>
           <span>QUARTZ LOCK • 44.1 kHz</span>
         </div>
-        <div id="sonic_title">Castlebul Radio</div>
+        
+        <div class="vfd-title-container">
+          <div class="vfd-marquee-track" id="vfd-marquee-track">
+            <span id="sonic_title">Castlebul Radio</span>
+            <span class="marquee-spacer">•</span>
+            <span class="sonic-title-dup" id="sonic_title_dup"></span>
+            <span class="marquee-spacer">•</span>
+          </div>
+        </div>
+
         <div class="visualizer" id="visualizer"></div>
       </div>
 
@@ -878,7 +935,7 @@
         </div>
       </div>
 
-      <!-- Ensamble mecánico del brazo (Acoplado al borde del plato) -->
+      <!-- Ensamble mecánico del brazo -->
       <div class="tonearm-assembly">
         <div class="arm-rest"></div>
         <div class="counterweight"></div>
@@ -886,11 +943,10 @@
           <div class="gimbal-ring"></div>
         </div>
         
-        <!-- Brazo en S SVG de longitud física real -->
+        <!-- Brazo en S que gira hacia la izquierda hacia el disco -->
         <div class="tonearm" id="tonearm">
           <svg class="tonearm-svg" viewBox="0 0 70 190">
             <defs>
-              <!-- Degradado cromado metálico del tubo -->
               <linearGradient id="chromeTube" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="#555" />
                 <stop offset="30%" stop-color="#fff" />
@@ -906,7 +962,7 @@
             <!-- Pivote central -->
             <circle cx="0" cy="0" r="5" fill="#888" stroke="#222" stroke-width="1.5" />
 
-            <!-- Tubo cromado en forma de S auténtica -->
+            <!-- Tubo cromado en forma de S -->
             <path d="M 0,0 C 14,35 15,75 -6,120 L -10,135" 
                   fill="none" 
                   stroke="url(#chromeTube)" 
@@ -915,14 +971,10 @@
 
             <!-- Porta-cápsulas Technics (Headshell) -->
             <g transform="translate(-10, 135) rotate(-14)">
-              <!-- Cuerpo de la cápsula -->
               <rect x="-7" y="0" width="14" height="28" rx="2" fill="url(#cartridgeGrad)" stroke="#444" stroke-width="1" />
-              <!-- Ranuras de ventilación -->
               <line x1="-3" y1="6" x2="3" y2="6" stroke="#666" stroke-width="1" />
               <line x1="-3" y1="11" x2="3" y2="11" stroke="#666" stroke-width="1" />
-              <!-- Tirador lateral curvo para dedo (Finger Lift) -->
               <path d="M 7,8 Q 15,8 14,16" fill="none" stroke="#ddd" stroke-width="2" stroke-linecap="round" />
-              <!-- Aguja fonocaptora (Stylus Tip) -->
               <polygon points="-3,28 3,28 0,33" fill="#ffcc00" />
             </g>
           </svg>
@@ -992,6 +1044,8 @@
       const faderTrack = document.getElementById('fader-track');
       const visualizer = document.getElementById('visualizer');
       const sonicTitle = document.getElementById('sonic_title');
+      const sonicTitleDup = document.getElementById('sonic_title_dup');
+      const marqueeTrack = document.getElementById('vfd-marquee-track');
       const albumArtVisible = document.getElementById('album-art-visible');
       const sonicArtFull = document.getElementById('sonic_art_full');
       const platter = document.getElementById('platter');
@@ -1017,6 +1071,48 @@
         alert(`${message}\n\nPróximamente disponible en Castlebul Radio.`);
       }
       window.showAlert = showAlert;
+
+      // Actualizar marquesina fluida y sin saltos
+      function updateMarqueeTitle(title) {
+        if (!sonicTitle || !marqueeTrack) return;
+        sonicTitle.textContent = title;
+        
+        const container = document.querySelector('.vfd-title-container');
+        if (!container) return;
+
+        marqueeTrack.classList.remove('scrolling');
+        marqueeTrack.style.animationDuration = '0s';
+        if (sonicTitleDup) sonicTitleDup.textContent = '';
+
+        requestAnimationFrame(() => {
+          // Detectar si el texto sobrepasa el contenedor
+          if (sonicTitle.offsetWidth > container.clientWidth - 15) {
+            if (sonicTitleDup) sonicTitleDup.textContent = title;
+            marqueeTrack.classList.add('scrolling');
+            
+            // Velocidad constante y cómoda para lectura (35 px/segundo)
+            const distance = sonicTitle.offsetWidth + 50;
+            const duration = Math.max(8, distance / 35);
+            marqueeTrack.style.animationDuration = `${duration}s`;
+          } else {
+            marqueeTrack.classList.remove('scrolling');
+          }
+        });
+      }
+
+      // Observador automático por si SonicAPI modifica el texto directamente
+      let lastObservedTitle = '';
+      const titleObserver = new MutationObserver(() => {
+        const text = sonicTitle.textContent.trim();
+        if (text && text !== lastObservedTitle && text !== displayedTitle) {
+          lastObservedTitle = text;
+          displayedTitle = text;
+          updateMarqueeTitle(text);
+        }
+      });
+      if (sonicTitle) {
+        titleObserver.observe(sonicTitle, { childList: true, characterData: true, subtree: true });
+      }
 
       function initVisualizer() {
         visualizer.innerHTML = '';
@@ -1205,14 +1301,14 @@
           window.SonicAPI.on('track', function(data) {
             if (data && data.title && data.title !== displayedTitle) {
               displayedTitle = data.title;
-              sonicTitle.textContent = data.title;
+              updateMarqueeTitle(data.title);
             }
             setTimeout(updateAlbumArtBackground, 300);
           });
 
           window.SonicAPI.on('error', function() {
-            sonicTitle.textContent = 'Castlebul Radio';
             displayedTitle = 'Castlebul Radio';
+            updateMarqueeTitle('Castlebul Radio');
           });
         }
         artUpdateInterval = setInterval(updateAlbumArtBackground, 3000);
@@ -1222,6 +1318,7 @@
       updateFaderPosition(volume);
       audio.volume = volume;
       setupSonicAPI();
+      updateMarqueeTitle('Castlebul Radio');
 
       window.addEventListener('load', () => {
         updateAlbumArtBackground();
