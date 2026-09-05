@@ -94,7 +94,7 @@
       padding: 15px 10px;
     }
 
-    /* ===== CHASIS PIONEER PLX-1000 EQUILIBRADO ===== */
+    /* ===== CHASIS PIONEER PLX-1000 ===== */
     .turntable-wrapper {
       width: 720px;
       height: 540px;
@@ -149,20 +149,20 @@
       background: #111;
     }
 
-    /* ===== PANTALLA OLED / VFD CENTRADA ARRIBA ===== */
+    /* ===== PANTALLA OLED / VFD SUPERIOR ===== */
     .vfd-console {
       position: absolute;
-      top: 14px;
-      left: 78px;
-      width: 350px;
-      height: 58px;
+      top: 10px;
+      left: 80px;
+      width: 360px;
+      height: 52px;
       background: #020408;
       border-radius: 4px;
       border: 1.5px solid #142838;
       box-shadow: 
         inset 0 0 20px rgba(0, 168, 255, 0.12),
         inset 0 3px 6px rgba(0,0,0,0.9);
-      padding: 4px 10px;
+      padding: 3px 10px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -175,7 +175,7 @@
       justify-content: space-between;
       align-items: center;
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.52rem;
+      font-size: 0.5rem;
       letter-spacing: 1.5px;
       color: rgba(0, 168, 255, 0.7);
       border-bottom: 1px dashed rgba(0, 168, 255, 0.25);
@@ -224,7 +224,7 @@
     #sonic_title,
     .sonic-title-dup {
       font-family: 'VT323', monospace;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       color: var(--neon-cyan);
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -236,7 +236,7 @@
     .marquee-spacer {
       display: none;
       color: var(--pioneer-blue);
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       padding: 0 25px;
       flex-shrink: 0;
       text-shadow: 0 0 8px var(--pioneer-blue);
@@ -256,7 +256,7 @@
       align-items: flex-end;
       justify-content: space-between;
       gap: 2px;
-      height: 14px;
+      height: 12px;
       border-top: 1px solid rgba(0, 168, 255, 0.15);
       padding-top: 2px;
     }
@@ -279,7 +279,7 @@
     .pioneer-specs {
       position: absolute;
       top: 16px;
-      right: 28px;
+      right: 24px;
       text-align: right;
       font-size: 0.55rem;
       color: #72768a;
@@ -293,13 +293,13 @@
       font-weight: 800;
     }
 
-    /* ===== CUENCA DEL PLATO (CENTRADA HORIZONTAL Y VERTICALMENTE) ===== */
+    /* ===== CUENCA DEL PLATO (MÁS A LA DERECHA Y CENTRADA VERTICALMENTE 50/50) ===== */
     .platter-bay {
       position: absolute;
-      top: 85px;
-      left: 45px;
-      width: 370px;
-      height: 370px;
+      top: 70px; /* 70px arriba y 70px abajo = 100% centrado vertical */
+      left: 85px; /* Desplazado a la derecha */
+      width: 400px;
+      height: 400px;
       border-radius: 50%;
       background: radial-gradient(circle, #040507 68%, #14151c 100%);
       border: 1px solid #232530;
@@ -313,10 +313,10 @@
       z-index: 5;
     }
 
-    /* Plato de aluminio torneado con puntos estroboscópicos */
+    /* Plato de aluminio torneado grande (386px) */
     .platter {
-      width: 355px;
-      height: 355px;
+      width: 386px;
+      height: 386px;
       border-radius: 50%;
       background: 
         radial-gradient(circle, #1a1b24 87%, #2a2c38 89%, #12131a 91%),
@@ -342,7 +342,7 @@
       pointer-events: none;
     }
 
-    /* Reflejo LED azul rasante que baña SOLAMENTE el borde de los puntos (sin tocar el vinilo) */
+    /* Destello LED rasante azul exclusivamente sobre los puntos del borde */
     .platter-strobe-reflection {
       position: absolute;
       inset: 0;
@@ -360,10 +360,10 @@
       pointer-events: none;
     }
 
-    /* ===== VINILO CON PORTADA MÁS GRANDE (145px) ===== */
+    /* ===== VINILO AGRANDADO (366px) CON PORTADA DE 158px ===== */
     .vinyl {
-      width: 335px;
-      height: 335px;
+      width: 366px;
+      height: 366px;
       border-radius: 50%;
       position: absolute;
       background: 
@@ -396,10 +396,10 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Portada del álbum ligeramente agrandada para que destaque */
+    /* Portada del álbum ampliada */
     .album-art-visible {
-      width: 145px;
-      height: 145px;
+      width: 158px;
+      height: 158px;
       border-radius: 50%;
       background-size: cover;
       background-position: center;
@@ -424,7 +424,7 @@
       justify-content: center;
       background: radial-gradient(circle, #252836 0%, #0d0e14 100%);
       color: #fff;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       letter-spacing: 1px;
       font-family: 'Orbitron', sans-serif;
       text-align: center;
@@ -447,11 +447,11 @@
       display: none !important;
     }
 
-    /* ===== UNIDAD ESTROBOSCÓPICA & INTERRUPTOR DE ENCENDIDO (LIMPIO EN CHASIS) ===== */
+    /* ===== UNIDAD ESTROBOSCÓPICA & INTERRUPTOR (EN EL MARGEN IZQUIERDO) ===== */
     .plx-power-tower {
       position: absolute;
-      bottom: 110px;
-      left: 14px;
+      bottom: 120px;
+      left: 18px;
       width: 48px;
       height: 72px;
       display: flex;
@@ -460,7 +460,6 @@
       z-index: 30;
     }
 
-    /* Torreta estroboscópica con ventana prismática de LED azul */
     .strobe-aperture-box {
       width: 22px;
       height: 26px;
@@ -474,7 +473,6 @@
       position: relative;
     }
 
-    /* LEDs emisores de precisión */
     .strobe-blue-emitter {
       width: 8px;
       height: 14px;
@@ -486,7 +484,6 @@
         inset 0 0 2px #fff;
     }
 
-    /* Base rotativa estriada OFF / ON */
     .power-rotary-housing {
       width: 44px;
       height: 44px;
@@ -536,24 +533,23 @@
     .power-text-labels .lbl-on { position: absolute; top: 1px; right: 4px; color: var(--pioneer-blue); }
     .power-text-labels .lbl-pwr { position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); font-size: 0.38rem; }
 
-    /* ===== BRAZO ROBUSTO Y CARDÁN REORGANIZADOS ===== */
+    /* ===== BRAZO Y CARDÁN ARRIMADOS AL FADER DE VOLUMEN ===== */
     .tonearm-assembly {
       position: absolute;
-      top: 65px;
-      left: 440px;
-      width: 140px;
-      height: 380px;
+      top: 55px;
+      left: 490px; /* Pegado más al fader de volumen */
+      width: 120px;
+      height: 390px;
       pointer-events: none;
       z-index: 25;
     }
 
-    /* Base cardánica masiva con anillo de ajuste de altura (Height Adjust) */
     .gimbal-base {
       position: absolute;
       top: 10px;
       left: 10px;
-      width: 88px;
-      height: 88px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       background: radial-gradient(circle, #1f2029 45%, #0f1015 70%, #050507 100%);
       border: 2.5px solid #3c3f4e;
@@ -570,15 +566,15 @@
       content: 'HEIGHT ADJUST';
       position: absolute;
       bottom: 4px;
-      font-size: 0.35rem;
+      font-size: 0.32rem;
       font-family: 'Orbitron', sans-serif;
       color: #65697a;
       letter-spacing: 0.5px;
     }
 
     .gimbal-ring {
-      width: 54px;
-      height: 54px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       background: linear-gradient(135deg, #c5cad8, #3b3e4c);
       border: 1.5px solid #888d9e;
@@ -590,8 +586,8 @@
       position: absolute;
       top: 50%;
       left: -3px;
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
       background: radial-gradient(circle, #fff, #444);
       transform: translateY(-50%);
@@ -601,8 +597,8 @@
       position: absolute;
       top: 50%;
       right: -3px;
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
       background: radial-gradient(circle, #fff, #444);
       transform: translateY(-50%);
@@ -610,10 +606,10 @@
 
     .anti-skate-dial {
       position: absolute;
-      top: 24px;
-      right: 0px;
-      width: 16px;
-      height: 16px;
+      top: 20px;
+      right: 2px;
+      width: 14px;
+      height: 14px;
       border-radius: 50%;
       background: radial-gradient(circle, #333 40%, #111 100%);
       border: 1px solid #555;
@@ -626,41 +622,42 @@
       left: 50%;
       transform: translateX(-50%);
       width: 1px;
-      height: 3.5px;
+      height: 3px;
       background: #fff;
     }
 
-    /* Brazo en S */
+    /* Brazo con recorrido más corto */
     .tonearm {
       position: absolute;
-      top: 54px;
-      left: 54px;
+      top: 50px;
+      left: 50px;
       width: 80px;
-      height: 220px;
+      height: 230px;
       transform-origin: 0px 0px;
       transform: rotate(0deg);
-      transition: transform 1.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
       filter: drop-shadow(-5px 8px 10px rgba(0,0,0,0.9));
       overflow: visible;
     }
 
+    /* ✅ RECORRIDO CORTO (SOLO 23°), ATERRIZANDO EXACTAMENTE EN EL VINILO */
     .tonearm.playing {
-      transform: rotate(32deg);
+      transform: rotate(23deg);
     }
 
     .tonearm-svg {
       width: 90px;
-      height: 230px;
+      height: 240px;
       overflow: visible;
     }
 
-    /* ===== VOLUMEN / TEMPO FADER (A LA DERECHA, CON ESPACIO LIMPIO) ===== */
+    /* ===== VOLUMEN / TEMPO FADER ===== */
     .pitch-fader-assembly {
       position: absolute;
-      top: 125px;
-      right: 28px;
+      top: 105px;
+      right: 22px;
       width: 85px;
-      height: 330px;
+      height: 340px;
       background: linear-gradient(180deg, #14151b, #09090d);
       border-radius: 4px;
       border: 1px solid #232530;
@@ -700,7 +697,7 @@
     .volume-scale {
       position: absolute;
       left: 10px;
-      top: 45px;
+      top: 48px;
       bottom: 25px;
       width: 24px;
       display: flex;
@@ -740,9 +737,9 @@
     .fader-track {
       position: relative;
       margin-left: 20px;
-      margin-top: 30px;
+      margin-top: 32px;
       width: 6px;
-      height: 240px;
+      height: 245px;
       background: #050608;
       border-radius: 3px;
       box-shadow: inset 0 0 6px #000, 0 1px 1px rgba(255,255,255,0.08);
@@ -805,10 +802,10 @@
     /* ===== BOTÓN PLAY / STOP ===== */
     .start-stop-round-btn {
       position: absolute;
-      bottom: 22px;
-      left: 28px;
-      width: 60px;
-      height: 60px;
+      bottom: 20px;
+      left: 20px;
+      width: 62px;
+      height: 62px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #ffffff 0%, #b8bcc8 50%, #464955 100%);
       border: 2px solid #1c1d24;
@@ -850,7 +847,7 @@
 
     .start-stop-text {
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.52rem;
+      font-size: 0.55rem;
       font-weight: 900;
       letter-spacing: 0.5px;
       color: #1a1b22;
@@ -860,21 +857,21 @@
 
     .rpm-buttons {
       position: absolute;
-      bottom: 30px;
-      left: 104px;
+      bottom: 26px;
+      left: 95px;
       display: flex;
       gap: 5px;
       z-index: 20;
     }
 
     .rpm-btn {
-      width: 30px;
-      height: 20px;
+      width: 32px;
+      height: 22px;
       background: linear-gradient(180deg, #242630, #13141a);
       border: 1px solid #3c3f4e;
       color: #717588;
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.55rem;
+      font-size: 0.58rem;
       border-radius: 2px;
       display: flex;
       align-items: center;
@@ -891,7 +888,7 @@
     .plx-bottom-brand {
       position: absolute;
       bottom: 20px;
-      right: 135px;
+      right: 125px;
       font-size: 0.58rem;
       color: #6a6d7d;
       letter-spacing: 1px;
@@ -1038,10 +1035,10 @@
         <strong>Pioneer</strong><br>PROFESSIONAL TURNTABLE PLX-1000
       </div>
 
-      <!-- Cuenca centrada del plato -->
+      <!-- Cuenca centrada verticalmente y metida a la derecha -->
       <div class="platter-bay">
         <div class="platter" id="platter">
-          <!-- Reflejo azul que baña SOLAMENTE los puntos del borde de aluminio -->
+          <!-- Reflejo azul suave que baña exclusivamente los puntos del borde -->
           <div class="platter-strobe-reflection"></div>
 
           <div class="vinyl" id="vinyl">
@@ -1056,7 +1053,7 @@
         </div>
       </div>
 
-      <!-- UNIDAD ESTROBOSCÓPICA & INTERRUPTOR (EN EL CHASIS, SIN TOCAR EL PLATO) -->
+      <!-- UNIDAD ESTROBOSCÓPICA & INTERRUPTOR (EN EL MARGEN IZQUIERDO) -->
       <div class="plx-power-tower">
         <div class="strobe-aperture-box">
           <div class="strobe-blue-emitter"></div>
@@ -1072,7 +1069,7 @@
         </div>
       </div>
 
-      <!-- BRAZO METÁLICO EN 'S' Y CARDÁN -->
+      <!-- BRAZO METÁLICO EN 'S' Y CARDÁN ARRIMADOS AL FADER -->
       <div class="tonearm-assembly">
         <div class="gimbal-base">
           <div class="gimbal-ring"></div>
@@ -1081,7 +1078,7 @@
         <div class="anti-skate-dial"></div>
         
         <div class="tonearm" id="tonearm">
-          <svg class="tonearm-svg" viewBox="0 0 90 230">
+          <svg class="tonearm-svg" viewBox="0 0 90 240">
             <defs>
               <linearGradient id="chromeTube" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="#555" />
@@ -1113,14 +1110,14 @@
             <circle cx="0" cy="0" r="2.5" fill="#222" />
 
             <!-- Tubo cromado en 'S' robusto -->
-            <path d="M 0,0 C 18,40 20,95 -8,155 L -14,175" 
+            <path d="M 0,0 C 16,40 18,100 -8,160 L -14,180" 
                   fill="none" 
                   stroke="url(#chromeTube)" 
                   stroke-width="6.5" 
                   stroke-linecap="round" />
 
             <!-- Portacápsulas con aguja -->
-            <g transform="translate(-14, 175) rotate(-16)">
+            <g transform="translate(-14, 180) rotate(-14)">
               <rect x="-5" y="-6" width="10" height="6" rx="1" fill="#bbb" stroke="#333" stroke-width="0.8" />
               <rect x="-8" y="0" width="16" height="34" rx="2" fill="url(#pioneerHeadshell)" stroke="#666" stroke-width="1" />
               <line x1="-4" y1="8" x2="4" y2="8" stroke="#999" stroke-width="1.2" />
