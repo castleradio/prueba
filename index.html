@@ -149,20 +149,20 @@
       background: #111;
     }
 
-    /* ===== PANTALLA OLED / VFD MÁS ALTA CON BARRAS AMPLIAS ===== */
+    /* ===== PANTALLA OLED / VFD MÁS ALTA Y CON LETRAS MÁS GRANDES ===== */
     .vfd-console {
       position: absolute;
-      top: 8px;
+      top: 10px;
       left: 78px;
-      width: 370px;
-      height: 68px; /* Altura aumentada para mayor espacio */
+      width: 375px;
+      height: 78px; /* Altura ampliada */
       background: #020408;
       border-radius: 4px;
       border: 1.5px solid #142838;
       box-shadow: 
         inset 0 0 20px rgba(0, 168, 255, 0.12),
         inset 0 3px 6px rgba(0,0,0,0.9);
-      padding: 5px 12px;
+      padding: 6px 12px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -170,26 +170,27 @@
       z-index: 25;
     }
 
+    /* Letras de BROADCAST ampliadas */
     .vfd-status-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.52rem;
+      font-size: 0.68rem; /* Aumentado a petición */
       letter-spacing: 1.5px;
-      color: rgba(0, 168, 255, 0.7);
-      border-bottom: 1px dashed rgba(0, 168, 255, 0.25);
+      color: rgba(0, 168, 255, 0.85);
+      border-bottom: 1px dashed rgba(0, 168, 255, 0.3);
       padding-bottom: 2px;
     }
 
     .vfd-dot {
       display: inline-block;
-      width: 5px;
-      height: 5px;
+      width: 6px;
+      height: 6px;
       background: var(--pioneer-blue);
       border-radius: 50%;
       box-shadow: 0 0 6px var(--pioneer-blue);
-      margin-right: 4px;
+      margin-right: 5px;
     }
 
     .vfd-title-container {
@@ -224,7 +225,7 @@
     #sonic_title,
     .sonic-title-dup {
       font-family: 'VT323', monospace;
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       color: var(--neon-cyan);
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -236,7 +237,7 @@
     .marquee-spacer {
       display: none;
       color: var(--pioneer-blue);
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       padding: 0 25px;
       flex-shrink: 0;
       text-shadow: 0 0 8px var(--pioneer-blue);
@@ -257,7 +258,7 @@
       align-items: flex-end;
       justify-content: space-between;
       gap: 2px;
-      height: 22px; /* Más alta para mayor dinámica */
+      height: 26px; /* Altura ampliada */
       border-top: 1px solid rgba(0, 168, 255, 0.15);
       padding-top: 2px;
     }
@@ -294,12 +295,12 @@
       font-weight: 800;
     }
 
-    /* ===== CUENCA DEL PLATO (MÁS GRANDE Y BAJADA) ===== */
+    /* ===== CUENCA DEL PLATO (CENTRADA VERTICALMENTE ENTRE PANTALLA Y BORDE INFERIOR) ===== */
     .platter-bay {
       position: absolute;
-      top: 82px; /* Posición más baja */
+      top: 109px; /* Calculado: 21px bajo la pantalla y 21px sobre el borde inferior */
       left: 88px;
-      width: 430px; /* Tamaño más grande para llenar el espacio */
+      width: 430px;
       height: 430px;
       border-radius: 50%;
       background: radial-gradient(circle, #040507 68%, #14151c 100%);
@@ -361,7 +362,7 @@
       pointer-events: none;
     }
 
-    /* ===== VINILO MÁS GRANDE (394px) CON PORTADA DE 170px ===== */
+    /* ===== VINILO (394px) CON PORTADA DE 170px ===== */
     .vinyl {
       width: 394px;
       height: 394px;
@@ -397,7 +398,6 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Portada de 170px para mayor presencia */
     .album-art-visible {
       width: 170px;
       height: 170px;
@@ -534,23 +534,24 @@
     .power-text-labels .lbl-on { position: absolute; top: 1px; right: 4px; color: var(--pioneer-blue); }
     .power-text-labels .lbl-pwr { position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); font-size: 0.38rem; }
 
-    /* ===== BRAZO Y CARDÁN REAJUSTADOS AL NUEVO TAMAÑO ===== */
+    /* ===== PIVOTE MÁS ANCHO Y SIN LETRAS ===== */
     .tonearm-assembly {
       position: absolute;
-      top: 68px;
-      left: 512px;
-      width: 120px;
-      height: 390px;
+      top: 75px;
+      left: 504px; /* Calibrado a la nueva posición */
+      width: 130px;
+      height: 410px;
       pointer-events: none;
       z-index: 25;
     }
 
+    /* Base cardánica más ancha (94px) y limpia sin texto */
     .gimbal-base {
       position: absolute;
-      top: 10px;
-      left: 8px;
-      width: 80px;
-      height: 80px;
+      top: 6px;
+      left: 6px;
+      width: 94px; /* Aumentado a petición */
+      height: 94px;
       border-radius: 50%;
       background: radial-gradient(circle, #1f2029 45%, #0f1015 70%, #050507 100%);
       border: 2.5px solid #3c3f4e;
@@ -563,19 +564,9 @@
       justify-content: center;
     }
 
-    .gimbal-base::after {
-      content: 'HEIGHT ADJUST';
-      position: absolute;
-      bottom: 4px;
-      font-size: 0.32rem;
-      font-family: 'Orbitron', sans-serif;
-      color: #65697a;
-      letter-spacing: 0.5px;
-    }
-
     .gimbal-ring {
-      width: 48px;
-      height: 48px;
+      width: 58px; /* Proporcional a la base */
+      height: 58px;
       border-radius: 50%;
       background: linear-gradient(135deg, #c5cad8, #3b3e4c);
       border: 1.5px solid #888d9e;
@@ -587,8 +578,8 @@
       position: absolute;
       top: 50%;
       left: -3px;
-      width: 5px;
-      height: 5px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       background: radial-gradient(circle, #fff, #444);
       transform: translateY(-50%);
@@ -598,8 +589,8 @@
       position: absolute;
       top: 50%;
       right: -3px;
-      width: 5px;
-      height: 5px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       background: radial-gradient(circle, #fff, #444);
       transform: translateY(-50%);
@@ -607,8 +598,8 @@
 
     .anti-skate-dial {
       position: absolute;
-      top: 20px;
-      right: 0px;
+      top: 22px;
+      right: 2px;
       width: 14px;
       height: 14px;
       border-radius: 50%;
@@ -629,10 +620,10 @@
 
     .tonearm {
       position: absolute;
-      top: 48px;
-      left: 48px;
+      top: 53px;
+      left: 53px;
       width: 80px;
-      height: 240px;
+      height: 250px;
       transform-origin: 0px 0px;
       transform: rotate(0deg);
       transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -640,18 +631,18 @@
       overflow: visible;
     }
 
-    /* Calibrado a 25° para posarse exactamente sobre el surco del disco grande */
+    /* Calibrado a 25° para caer en el surco en la posición centrada */
     .tonearm.playing {
       transform: rotate(25deg);
     }
 
     .tonearm-svg {
       width: 90px;
-      height: 250px;
+      height: 260px;
       overflow: visible;
     }
 
-    /* ===== VOLUMEN / TEMPO FADER ===== */
+    /* ===== VOLUMEN LIMPIO (SIN BOTONES NI NÚMEROS A LA DERECHA) ===== */
     .pitch-fader-assembly {
       position: absolute;
       top: 105px;
@@ -670,34 +661,10 @@
       z-index: 20;
     }
 
-    .tempo-range-buttons {
-      position: absolute;
-      top: 10px;
-      right: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-    .tempo-btn {
-      font-size: 0.42rem;
-      font-family: 'Orbitron', sans-serif;
-      padding: 2px 4px;
-      background: #181a22;
-      border: 1px solid #333644;
-      color: #6a6e82;
-      border-radius: 2px;
-      text-align: center;
-    }
-    .tempo-btn.active {
-      color: var(--pioneer-blue);
-      border-color: var(--pioneer-blue);
-      box-shadow: 0 0 6px var(--pioneer-blue);
-    }
-
     .volume-scale {
       position: absolute;
       left: 10px;
-      top: 50px;
+      top: 25px;
       bottom: 25px;
       width: 24px;
       display: flex;
@@ -737,9 +704,8 @@
     .fader-track {
       position: relative;
       margin-left: 20px;
-      margin-top: 34px;
       width: 6px;
-      height: 255px;
+      height: 290px;
       background: #050608;
       border-radius: 3px;
       box-shadow: inset 0 0 6px #000, 0 1px 1px rgba(255,255,255,0.08);
@@ -799,12 +765,12 @@
       font-weight: 700;
     }
 
-    /* ===== BOTÓN PLAY / STOP MÁS GRANDE (74px) ===== */
+    /* ===== BOTÓN PLAY / STOP ===== */
     .start-stop-round-btn {
       position: absolute;
       bottom: 16px;
       left: 18px;
-      width: 74px; /* Aumentado para mayor presencia */
+      width: 74px;
       height: 74px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #ffffff 0%, #b8bcc8 50%, #464955 100%);
@@ -847,7 +813,7 @@
 
     .start-stop-text {
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.65rem; /* Letra un poco más grande */
+      font-size: 0.65rem;
       font-weight: 900;
       letter-spacing: 0.5px;
       color: #1a1b22;
@@ -997,7 +963,7 @@
         <div class="rpm45-puck"></div>
       </div>
 
-      <!-- Pantalla OLED / VFD más alta con ecualizador de mayor altura -->
+      <!-- Pantalla OLED / VFD más alta con texto ampliado -->
       <div class="vfd-console">
         <div class="vfd-status-bar">
           <span><span class="vfd-dot"></span>LIVE BROADCAST</span>
@@ -1021,10 +987,10 @@
         <strong>Pioneer</strong><br>PROFESSIONAL TURNTABLE PLX-1000
       </div>
 
-      <!-- Cuenca grande y bajada que llena el espacio -->
+      <!-- Cuenca centrada exactamente entre la pantalla y el borde inferior -->
       <div class="platter-bay">
         <div class="platter" id="platter">
-          <!-- Reflejo azul suave que baña exclusivamente los puntos del borde -->
+          <!-- Reflejo azul suave sobre los puntos -->
           <div class="platter-strobe-reflection"></div>
 
           <div class="vinyl" id="vinyl">
@@ -1055,7 +1021,7 @@
         </div>
       </div>
 
-      <!-- BRAZO METÁLICO EN 'S' Y CARDÁN ARRIMADOS AL FADER -->
+      <!-- BRAZO METÁLICO EN 'S' CON PIVOTE MÁS ANCHO Y LIMPIO -->
       <div class="tonearm-assembly">
         <div class="gimbal-base">
           <div class="gimbal-ring"></div>
@@ -1064,7 +1030,7 @@
         <div class="anti-skate-dial"></div>
         
         <div class="tonearm" id="tonearm">
-          <svg class="tonearm-svg" viewBox="0 0 90 250">
+          <svg class="tonearm-svg" viewBox="0 0 90 260">
             <defs>
               <linearGradient id="chromeTube" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="#555" />
@@ -1115,14 +1081,8 @@
         </div>
       </div>
 
-      <!-- FADER DE VOLUMEN GRADUADO DE 0 A 10 CON ILUMINACIÓN -->
+      <!-- FADER DE VOLUMEN (LIMPIO, SIN BOTONES NI NÚMEROS A LA DERECHA) -->
       <div class="pitch-fader-assembly" id="fader-container">
-        <div class="tempo-range-buttons">
-          <div class="tempo-btn active">±8</div>
-          <div class="tempo-btn">±16</div>
-          <div class="tempo-btn">±50</div>
-        </div>
-
         <div class="volume-scale" id="volume-scale">
           <div class="scale-step" data-val="10"><span>10</span><i class="tick"></i></div>
           <div class="scale-step" data-val="8"><span>8</span><i class="tick"></i></div>
