@@ -113,7 +113,7 @@
       margin: 10px 0;
     }
 
-    /* ===== ADAPTADOR 45 RPM (ALUMINIO PULIDO 72px) ===== */
+    /* ===== ADAPTADOR 45 RPM (ALUMINIO PULIDO MACIZO 72px) ===== */
     .rpm45-well {
       position: absolute;
       top: 14px;
@@ -199,7 +199,7 @@
       z-index: 25;
     }
 
-    /* FILTRO CRT SUAVE (Scanlines y viñeta) */
+    /* FILTRO CRT SUAVE */
     .crt-overlay {
       position: absolute;
       inset: 0;
@@ -274,7 +274,7 @@
       100% { transform: scale(3.5); opacity: 0; }
     }
 
-    /* ✅ DJ EN VIVO: DEL MISMO TAMAÑO QUE EL TÍTULO (1.35rem) */
+    /* DJ EN VIVO: 1.35rem */
     .live-text {
       color: #ff3b5c;
       font-family: 'VT323', monospace;
@@ -291,7 +291,6 @@
       align-items: center;
     }
 
-    /* Nombre del DJ en naranja y tamaño del título */
     #dj_display {
       font-family: 'VT323', monospace;
       font-size: 1.35rem;
@@ -302,7 +301,7 @@
       letter-spacing: 1.5px;
     }
 
-    /* MARQUESINA CONTINUA */
+    /* MARQUESINA CONTINUA SUAVE */
     .vfd-title-container {
       width: 100%;
       overflow: hidden;
@@ -324,8 +323,12 @@
     }
 
     @keyframes vfd-infinite-scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
     }
 
     .marquee-text {
@@ -348,7 +351,7 @@
       display: inline-block;
     }
 
-    /* ECUALIZADOR MULTICOLOR SUAVE */
+    /* ECUALIZADOR DINÁMICO */
     .visualizer {
       display: flex;
       align-items: flex-end;
@@ -430,7 +433,7 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 10px 30px rgba(0,0,0,0.95), inset 0 0 20px rgba(0,0,0,0.9);
-      transition: box-shadow 0.12s ease, border-color 0.12s ease;
+      transition: box-shadow 0.1s ease, border-color 0.1s ease;
     }
 
     .platter::before {
@@ -445,7 +448,7 @@
       pointer-events: none;
     }
 
-    /* ✅ ILUMINACIÓN DEL BORDE: COMBINA AZUL, ROJO, NARANJA Y PLATEADO */
+    /* Reflejo estroboscópico que cambia dinámicamente con los 4 colores */
     .platter-strobe-reflection {
       position: absolute;
       inset: 0;
@@ -453,16 +456,15 @@
       background: conic-gradient(
         from 185deg at 50% 50%,
         transparent 0deg,
-        rgba(0, 168, 255, 0.45) 12deg,
-        rgba(238, 241, 246, 0.5) 20deg,
-        rgba(255, 153, 0, 0.5) 30deg,
-        rgba(255, 42, 75, 0.45) 42deg,
+        rgba(0, 168, 255, 0.45) 15deg,
+        rgba(0, 243, 255, 0.7) 25deg,
+        rgba(0, 168, 255, 0.3) 38deg,
         transparent 55deg
       );
       mask: radial-gradient(circle, transparent 90%, black 91%);
       -webkit-mask: radial-gradient(circle, transparent 90%, black 91%);
       pointer-events: none;
-      transition: background 0.3s ease;
+      transition: background 0.15s ease;
     }
 
     .platter-strobe-reflection.dim-red {
@@ -473,7 +475,7 @@
         rgba(255, 71, 87, 0.35) 25deg,
         rgba(255, 71, 87, 0.15) 38deg,
         transparent 55deg
-      );
+      ) !important;
     }
 
     /* ===== VINILO (394px) ===== */
@@ -547,7 +549,7 @@
       display: none !important;
     }
 
-    /* ===== UNIDAD ESTROBOSCÓPICA & INTERRUPTOR (CUADRADA) ===== */
+    /* ===== UNIDAD ESTROBOSCÓPICA & INTERRUPTOR (CAJA CUADRADA) ===== */
     .plx-power-tower {
       position: absolute;
       bottom: 130px;
@@ -561,12 +563,11 @@
       transition: all 0.3s ease;
     }
 
-    /* ✅ CAJA DE LA LUZ ESTROBOSCÓPICA TOTALMENTE CUADRADA */
     .strobe-aperture-box {
       width: 22px;
       height: 22px;
       background: linear-gradient(135deg, #2b2d38, #121318);
-      border-radius: 0px; /* Completamente cuadrada */
+      border-radius: 0px;
       border: 1.5px solid #444856;
       box-shadow: 0 3px 6px rgba(0,0,0,0.9);
       display: flex;
@@ -575,11 +576,10 @@
       position: relative;
     }
 
-    /* Emisor LED cuadrado */
     .strobe-blue-emitter {
       width: 10px;
       height: 10px;
-      border-radius: 0px; /* Cuadrado */
+      border-radius: 0px;
       background: #ffffff;
       box-shadow: 0 0 8px var(--pioneer-blue), 0 0 16px var(--neon-cyan), inset 0 0 2px #fff;
       transition: all 0.3s ease;
@@ -1075,6 +1075,7 @@
       filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.9));
     }
 
+    /* DETENIDO: PLAY parpadea en azul neón / STOP iluminado fijo en rojo */
     .start-stop-round-btn:not(.playing) .play-word {
       color: #00f3ff;
       animation: blink-blue-text 1.2s infinite ease-in-out;
@@ -1098,6 +1099,7 @@
       }
     }
 
+    /* REPRODUCIENDO: PLAY azul fijo / STOP parpadea en rojo */
     .start-stop-round-btn.playing .play-word {
       color: #00f3ff;
       text-shadow: 0 0 8px #00f3ff;
@@ -1535,8 +1537,19 @@
       let volDownTimeout = null;
       let currentMarqueeText = '';
 
-      // Seguimiento de picos para rango dinámico del ecualizador
+      // Seguimiento dinámico de picos
       let maxObservedPeak = 180;
+
+      // Configuración de los 4 colores de ritmo
+      const RHYTHM_COLORS = [
+        { glow: 'rgba(0, 168, 255, ',   border: 'rgba(0, 243, 255, ' }, // Azul
+        { glow: 'rgba(255, 42, 75, ',    border: 'rgba(255, 71, 87, ' }, // Rojo
+        { glow: 'rgba(255, 153, 0, ',    border: 'rgba(255, 170, 0, ' }, // Naranja
+        { glow: 'rgba(238, 241, 246, ',  border: 'rgba(255, 255, 255, ' } // Plateado
+      ];
+      let rhythmColorIndex = 0;
+      let lastBassHit = 0;
+      let bassCooldown = 180;
 
       function showAlert(message) {
         alert(`${message}\n\nPróximamente disponible en Castlebul Radio.`);
@@ -1583,7 +1596,7 @@
       setInterval(fetchLiveDJ, 10000);
       fetchLiveDJ();
 
-      // ✅ MARQUESINA CONTINUA SUAVE
+      // ✅ MARQUESINA CONTINUA Y SUAVE (SIN CORTES)
       function updateMarqueeTitle(title) {
         if (!title) return;
         const cleanTitle = title.trim();
@@ -1630,7 +1643,7 @@
             audioContext = new (window.AudioContext || window.webkitAudioContext)();
             analyser = audioContext.createAnalyser();
             analyser.fftSize = 512;
-            analyser.smoothingTimeConstant = 0.62; // Más ágil y con mejor tiempo de caída
+            analyser.smoothingTimeConstant = 0.62;
             dataArray = new Uint8Array(analyser.frequencyBinCount);
 
             const source = audioContext.createMediaElementSource(audio);
@@ -1647,23 +1660,41 @@
         }
       }
 
-      // ✅ ILUMINACIÓN DEL BORDE: COMBINA AZUL, ROJO, NARANJA Y PLATEADO
-      function updatePlatterLight(bassLevel) {
-        const intensity = Math.min(0.75, 0.20 + (bassLevel / 255) * 0.5);
-        const glow = 14 + (bassLevel / 255) * 26;
+      // ✅ ILUMINACIÓN DEL BORDE: CAMBIA DE COLOR EN 4 COLORES (AZUL, ROJO, NARANJA Y PLATEADO)
+      function updatePlatterLight(bassLevel, isBassHit) {
+        const now = Date.now();
+        if (isBassHit && (now - lastBassHit) > bassCooldown) {
+          lastBassHit = now;
+          // Avanzar cíclicamente entre los 4 colores
+          rhythmColorIndex = (rhythmColorIndex + 1) % RHYTHM_COLORS.length;
+        }
+
+        const activeCol = RHYTHM_COLORS[rhythmColorIndex];
+        const intensity = Math.min(0.85, 0.22 + (bassLevel / 255) * 0.55);
+        const glow = 14 + (bassLevel / 255) * 30;
+        const innerGlow = 6 + (bassLevel / 255) * 18;
 
         platter.style.boxShadow = `
           0 10px 30px rgba(0,0,0,0.95),
-          inset 0 0 15px rgba(0, 168, 255, ${intensity * 0.5}),
-          0 0 ${glow * 0.6}px rgba(238, 241, 246, ${intensity * 0.7}),
-          0 0 ${glow}px rgba(0, 168, 255, ${intensity}),
-          0 0 ${glow * 1.4}px rgba(255, 153, 0, ${intensity * 0.7}),
-          0 0 ${glow * 1.8}px rgba(255, 42, 75, ${intensity * 0.5})
+          inset 0 0 ${innerGlow}px ${activeCol.glow}${intensity * 0.75}),
+          0 0 ${glow}px ${activeCol.glow}${intensity}),
+          0 0 ${glow * 1.5}px ${activeCol.glow}${intensity * 0.4})
         `;
-        platter.style.borderColor = `rgba(238, 241, 246, ${0.4 + intensity * 0.5})`;
+        platter.style.borderColor = `${activeCol.border}${0.4 + intensity * 0.55})`;
+
+        if (platterReflection && !platterReflection.classList.contains('dim-red')) {
+          platterReflection.style.background = `conic-gradient(
+            from 185deg at 50% 50%,
+            transparent 0deg,
+            ${activeCol.glow}0.4) 15deg,
+            ${activeCol.border}0.7) 25deg,
+            ${activeCol.glow}0.3) 38deg,
+            transparent 55deg
+          )`;
+        }
       }
 
-      // ✅ ECUALIZADOR CON MOVIMIENTO DINÁMICO QUE NO SE QUEDA PEGADO ARRIBA
+      // ✅ ECUALIZADOR DINÁMICO MULTICOLOR
       function renderVisualizer() {
         if (!analyser || !dataArray) return;
 
@@ -1672,12 +1703,11 @@
         const barCount = bars.length;
         const bufferLength = dataArray.length;
 
-        // Detección del bombo
         const kickBins = dataArray.slice(0, 4);
         const kickLevel = kickBins.reduce((a, b) => a + b, 0) / kickBins.length;
         const isBassHit = kickLevel > 165;
 
-        // Seguimiento dinámico de picos para no saturar al 100% en clímax
+        // Seguimiento dinámico de picos
         let framePeak = 0;
         for (let j = 0; j < 60; j++) {
           if (dataArray[j] > framePeak) framePeak = dataArray[j];
@@ -1688,7 +1718,7 @@
           maxObservedPeak = Math.max(160, maxObservedPeak * 0.992);
         }
 
-        updatePlatterLight(kickLevel);
+        updatePlatterLight(kickLevel, isBassHit);
 
         bars.forEach((bar, i) => {
           const percent = i / barCount;
@@ -1698,14 +1728,11 @@
           );
 
           let val = dataArray[binIndex] || 0;
-          // Compensación progresiva por bandas
           val = val * (0.85 + Math.sin(percent * Math.PI) * 0.4 + percent * 0.5);
 
-          // Normalización dinámica con curva exponencial (más rango entre golpes y valles)
           let ratio = Math.max(0, (val - 25) / Math.max(120, maxObservedPeak - 25));
           ratio = Math.pow(ratio, 1.35);
 
-          // Altura calibrada entre 8% y 90% para evitar que se pegue al 100%
           const heightPercent = Math.max(8, Math.min(90, ratio * 90));
           bar.style.height = `${heightPercent}%`;
 
@@ -1730,6 +1757,10 @@
           tonearm.classList.remove('playing');
           playBtn.classList.remove('playing');
           isPlaying = false;
+
+          // Apagar luz rítmica y activar luz tenue roja de reposo
+          platter.style.boxShadow = '0 10px 30px rgba(0,0,0,0.95), inset 0 0 20px rgba(0,0,0,0.9)';
+          platter.style.borderColor = '#8c90a2';
 
           if (powerTower) {
             powerTower.classList.remove('power-state-on');
