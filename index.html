@@ -98,10 +98,8 @@
     /* ===== CHASIS PIONEER PLX-1000 ===== */
     .turntable-wrapper {
       width: 730px;
-      height: 550px;
-      background: 
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 3px),
-        linear-gradient(180deg, #1c1d24 0%, #0e0f13 40%, #050608 100%);
+      height: 560px;
+      background: linear-gradient(180deg, #1b1c23 0%, #0d0e12 40%, #050608 100%);
       border-radius: 6px;
       position: relative;
       border: 1px solid #282a35;
@@ -115,13 +113,13 @@
       margin: 10px 0;
     }
 
-    /* ===== ADAPTADOR 45 RPM (ALUMINIO PULIDO 70px / 58px) ===== */
+    /* ===== ADAPTADOR 45 RPM (ALUMINIO PULIDO 72px) ===== */
     .rpm45-well {
       position: absolute;
       top: 14px;
       left: 14px;
-      width: 70px;
-      height: 70px;
+      width: 72px;
+      height: 72px;
       border-radius: 50%;
       background: radial-gradient(circle, #08090d 50%, #1a1b24 100%);
       border: 2px solid #2a2c38;
@@ -133,8 +131,8 @@
     }
 
     .rpm45-puck {
-      width: 58px;
-      height: 58px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       background: 
         conic-gradient(
@@ -151,7 +149,7 @@
         );
       border: 1.5px solid #aeb4c6;
       box-shadow: 
-        0 4px 12px rgba(0,0,0,0.9),
+        0 5px 15px rgba(0,0,0,0.9),
         inset 0 1px 2px rgba(255,255,255,0.95),
         inset 0 -2px 4px rgba(0,0,0,0.6);
       position: relative;
@@ -160,7 +158,7 @@
     .rpm45-puck::before {
       content: '';
       position: absolute;
-      inset: 7px;
+      inset: 8px;
       border-radius: 50%;
       border: 1px solid rgba(255,255,255,0.35);
       background: repeating-radial-gradient(circle, transparent 0, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 3px);
@@ -180,20 +178,20 @@
       box-shadow: inset 0 2px 4px rgba(0,0,0,0.9);
     }
 
-    /* ===== PANTALLA OLED / VFD LIMPIA Y EQUILIBRADA ===== */
+    /* ===== PANTALLA OLED / VFD CON FILTRO CRT SUAVE ===== */
     .vfd-console {
       position: absolute;
-      top: 14px;
-      left: 98px;
-      width: 384px;
-      height: 72px;
+      top: 10px;
+      left: 106px;
+      width: 394px;
+      height: 86px;
       background: #020408;
       border-radius: 4px;
-      border: 1.5px solid #162c3e;
+      border: 1.5px solid #142838;
       box-shadow: 
-        inset 0 0 20px rgba(0, 168, 255, 0.12),
+        inset 0 0 25px rgba(0, 168, 255, 0.15),
         inset 0 3px 6px rgba(0,0,0,0.9);
-      padding: 5px 12px;
+      padding: 6px 14px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -201,23 +199,38 @@
       z-index: 25;
     }
 
-    .vfd-glass-glare {
+    .crt-overlay {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 45%;
-      background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 100%);
+      inset: 0;
       pointer-events: none;
-      z-index: 26;
+      z-index: 30;
+      background: 
+        repeating-linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.28) 0px,
+          rgba(0, 0, 0, 0.28) 1px,
+          transparent 1px,
+          transparent 2px
+        ),
+        radial-gradient(
+          circle at center,
+          transparent 65%,
+          rgba(0, 0, 0, 0.35) 100%
+        ),
+        linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.05) 0%,
+          transparent 50%
+        );
+      opacity: 0.85;
     }
 
-    /* BARRA SUPERIOR: DJ EN VIVO + NOMBRE DEL DJ */
+    /* BARRA SUPERIOR: DJ EN VIVO (1.35rem) + NOMBRE DEL DJ EN NARANJA (1.35rem) */
     .vfd-status-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px dashed rgba(0, 168, 255, 0.25);
+      border-bottom: 1px dashed rgba(0, 168, 255, 0.3);
       padding-bottom: 2px;
     }
 
@@ -229,26 +242,26 @@
 
     .live-radar {
       position: relative;
-      width: 9px;
-      height: 9px;
+      width: 10px;
+      height: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .radar-core {
-      width: 5px;
-      height: 5px;
+      width: 6px;
+      height: 6px;
       background: #ff2a4b;
       border-radius: 50%;
-      box-shadow: 0 0 6px #ff2a4b;
+      box-shadow: 0 0 8px #ff2a4b, 0 0 14px #ff0055;
       z-index: 2;
     }
 
     .radar-wave {
       position: absolute;
-      width: 5px;
-      height: 5px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       border: 1.5px solid #ff2a4b;
       animation: radar-ping 1.5s infinite cubic-bezier(0, 0.2, 0.8, 1);
@@ -257,38 +270,33 @@
 
     @keyframes radar-ping {
       0% { transform: scale(1); opacity: 1; }
-      100% { transform: scale(3.2); opacity: 0; }
+      100% { transform: scale(3.5); opacity: 0; }
     }
 
     .live-text {
       color: #ff3b5c;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.58rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-shadow: 0 0 6px rgba(255, 59, 92, 0.8);
+      font-family: 'VT323', monospace;
+      font-size: 1.35rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1;
+      text-transform: uppercase;
+      text-shadow: 0 0 8px rgba(255, 59, 92, 0.8);
     }
 
     .dj-live-widget {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-    }
-
-    .dj-tag {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.52rem;
-      color: #6d7286;
-      letter-spacing: 1px;
     }
 
     #dj_display {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.62rem;
-      font-weight: 800;
+      font-family: 'VT323', monospace;
+      font-size: 1.35rem;
       color: var(--neon-orange);
-      text-shadow: 0 0 8px rgba(255, 153, 0, 0.8);
-      letter-spacing: 1px;
+      text-shadow: 0 0 8px rgba(255, 153, 0, 0.8), 0 0 16px rgba(255, 119, 0, 0.5);
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
     }
 
     /* MARQUESINA CONTINUA SUAVE */
@@ -313,8 +321,12 @@
     }
 
     @keyframes vfd-infinite-scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
     }
 
     .marquee-text {
@@ -329,7 +341,7 @@
     }
 
     .marquee-divider {
-      padding: 0 35px;
+      padding: 0 40px;
       color: var(--pioneer-blue);
       font-size: 0.9rem;
       text-shadow: 0 0 8px var(--pioneer-blue);
@@ -337,30 +349,36 @@
       display: inline-block;
     }
 
-    /* ECUALIZADOR DINÁMICO ELEGANTE */
+    /* ECUALIZADOR DINÁMICO DE ESTUDIO (28 BARRAS CON REBOTE) */
     .visualizer {
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
       gap: 2px;
-      height: 20px;
+      height: 26px;
       border-top: 1px solid rgba(0, 168, 255, 0.15);
       padding-top: 2px;
     }
 
     .eq-bar {
       flex: 1;
-      background: linear-gradient(to top, #0055ff 0%, #00a8ff 55%, #00f3ff 100%);
+      background: linear-gradient(
+        to top,
+        #0055ff 0%,
+        var(--neon-cyan) 30%,
+        var(--neon-orange) 70%,
+        var(--neon-red) 100%
+      );
       border-radius: 1px 1px 0 0;
       height: 10%;
-      box-shadow: 0 0 5px rgba(0, 168, 255, 0.4);
+      box-shadow: 0 0 4px rgba(0, 243, 255, 0.35);
       transition: height 0.04s ease-out;
       opacity: 0.95;
     }
 
     .eq-bar.bass-hit {
       filter: brightness(1.35);
-      box-shadow: 0 0 8px #00f3ff;
+      box-shadow: 0 0 8px var(--neon-cyan);
     }
 
     .pioneer-specs {
@@ -380,13 +398,13 @@
       font-weight: 800;
     }
 
-    /* ===== CUENCA DEL PLATO (CENTRADA VERTICALMENTE 50/50: 27px ARRIBA / 27px ABAJO) ===== */
+    /* ===== CUENCA DEL PLATO (CENTRADA 50/50 VERTICALMENTE) ===== */
     .platter-bay {
       position: absolute;
-      top: 105px;
-      left: 85px;
-      width: 410px;
-      height: 410px;
+      top: 113px;
+      left: 88px;
+      width: 430px;
+      height: 430px;
       border-radius: 50%;
       background: radial-gradient(circle, #040507 68%, #14151c 100%);
       border: 1px solid #232530;
@@ -401,8 +419,8 @@
     }
 
     .platter {
-      width: 396px;
-      height: 396px;
+      width: 416px;
+      height: 416px;
       border-radius: 50%;
       background: 
         radial-gradient(circle, #1a1b24 87%, #2a2c38 89%, #12131a 91%),
@@ -458,41 +476,45 @@
       ) !important;
     }
 
-    /* ===== VINILO HIPERREALISTA CON PISTAS Y CERA MUERTA ===== */
+    /* ===== VINILO HIPERREALISTA DE 12" (394px) ===== */
     .vinyl {
-      width: 376px;
-      height: 376px;
+      width: 394px;
+      height: 394px;
       border-radius: 50%;
       position: absolute;
+      /* Textura física de PVC de alta fidelidad con pistas de audio diferenciadas */
       background: 
-        /* Cortes de canciones, pistas y cera muerta (Run-out groove) */
+        /* Bandas de canciones, cortes de pista y cera muerta (Run-out groove) */
         radial-gradient(
           circle at center,
           transparent 0,
-          transparent 77px,
-          #08090d 78px,
-          #0d0e13 88px,
-          #050507 89px,
-          /* Pista 3 */
-          #12131b 90px,
-          #090a0e 122px,
-          /* Separación de canciones 2-3 */
-          #040406 123px,
-          #050608 125px,
-          /* Pista 2 */
-          #14151f 126px,
-          #090a0e 154px,
-          /* Separación de canciones 1-2 */
-          #040406 155px,
-          #050608 157px,
-          /* Pista 1 */
-          #141621 158px,
-          #090a0d 178px,
-          /* Surco de entrada (Lead-in) */
-          #050507 179px,
-          #121319 184px,
-          #000000 188px
+          transparent 85px,
+          /* Cera muerta interior (Run-out) */
+          #08090d 85px,
+          #0e0f14 96px,
+          #060608 97px,
+          /* Pista 3 (Interior) */
+          #13141c 98px,
+          #0a0b0f 130px,
+          /* Separación de canciones 2-3 (Gap Band) */
+          #050507 131px,
+          #06070a 133px,
+          /* Pista 2 (Media) */
+          #151620 134px,
+          #0a0b0f 162px,
+          /* Separación de canciones 1-2 (Gap Band) */
+          #050507 163px,
+          #06070a 165px,
+          /* Pista 1 (Exterior) */
+          #151722 166px,
+          #0a0b0e 186px,
+          /* Surco de entrada (Lead-in) y reborde de protección */
+          #060608 187px,
+          #13141b 193px,
+          #040406 194px,
+          #000000 197px
         ),
+        /* Micro-surcos de audio grabados */
         repeating-radial-gradient(
           circle at center,
           rgba(15, 16, 22, 0.9) 0px,
@@ -520,32 +542,47 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Reflejo anisótropo óptico en mariposa que contra-rota */
+    /* ✅ REFLEJO ANISÓTROPO ÓPTICO EN MARIPOSA (BOWTIE SHEEN) */
     .vinyl-gloss-sheen {
       position: absolute;
       inset: 0;
       border-radius: 50%;
       pointer-events: none;
       z-index: 6;
+      /* Destello de luz ambiental que brilla perpendicular a los surcos */
       background: 
         conic-gradient(
           from 35deg at 50% 50%,
           transparent 0deg,
           rgba(255, 255, 255, 0.05) 15deg,
-          rgba(255, 255, 255, 0.20) 38deg,
+          rgba(255, 255, 255, 0.22) 38deg,
           rgba(255, 255, 255, 0.04) 60deg,
           transparent 90deg,
           transparent 180deg,
           rgba(255, 255, 255, 0.05) 195deg,
-          rgba(255, 255, 255, 0.20) 218deg,
+          rgba(255, 255, 255, 0.22) 218deg,
           rgba(255, 255, 255, 0.04) 240deg,
           transparent 270deg,
           transparent 360deg
+        ),
+        conic-gradient(
+          from 125deg at 50% 50%,
+          transparent 0deg,
+          rgba(255, 255, 255, 0.03) 25deg,
+          rgba(255, 255, 255, 0.10) 45deg,
+          transparent 65deg,
+          transparent 180deg,
+          rgba(255, 255, 255, 0.03) 205deg,
+          rgba(255, 255, 255, 0.10) 225deg,
+          transparent 245deg,
+          transparent 360deg
         );
-      mask: radial-gradient(circle, transparent 77px, black 78px, black 185px, transparent 186px);
-      -webkit-mask: radial-gradient(circle, transparent 77px, black 78px, black 185px, transparent 186px);
+      /* La máscara evita que el brillo manche la carátula central */
+      mask: radial-gradient(circle, transparent 84px, black 85px, black 193px, transparent 194px);
+      -webkit-mask: radial-gradient(circle, transparent 84px, black 85px, black 193px, transparent 194px);
     }
 
+    /* Contra-rotación: la luz del techo permanece en su sitio mientras el vinilo gira debajo */
     .vinyl.spinning .vinyl-gloss-sheen {
       animation: counter-sheen 1.8s linear infinite;
     }
@@ -555,10 +592,10 @@
       to { transform: rotate(-360deg); }
     }
 
-    /* Galleta central con anillos de prensado de fábrica */
+    /* Galleta central con anillos concéntricos prensados de fábrica */
     .album-art-visible {
-      width: 155px;
-      height: 155px;
+      width: 170px;
+      height: 170px;
       border-radius: 50%;
       background-size: cover;
       background-position: center;
@@ -569,9 +606,11 @@
         0 0 0 2px #040405,
         0 0 0 3.5px rgba(255, 255, 255, 0.12),
         inset 0 0 0 1px rgba(255, 255, 255, 0.15),
-        inset 0 0 0 22px rgba(0, 0, 0, 0.12),
-        inset 0 0 0 23px rgba(255, 255, 255, 0.08),
-        inset 0 0 15px rgba(0, 0, 0, 0.75);
+        inset 0 0 0 24px rgba(0, 0, 0, 0.12),
+        inset 0 0 0 25px rgba(255, 255, 255, 0.08),
+        inset 0 0 0 45px rgba(0, 0, 0, 0.15),
+        inset 0 0 0 46px rgba(255, 255, 255, 0.06),
+        inset 0 0 18px rgba(0, 0, 0, 0.7);
       z-index: 5;
       display: flex;
       align-items: center;
@@ -579,10 +618,11 @@
       position: relative;
     }
 
+    /* Eje central de acero torneado con arandela de corte */
     .center-spindle {
       position: absolute;
-      width: 15px;
-      height: 15px;
+      width: 16px;
+      height: 16px;
       border-radius: 50%;
       background: radial-gradient(circle at 32% 30%, #ffffff 0%, #d5d9e2 40%, #767a87 75%, #181920 100%);
       box-shadow: 
@@ -598,10 +638,10 @@
       display: none !important;
     }
 
-    /* ===== UNIDAD ESTROBOSCÓPICA & INTERRUPTOR (CUADRADA) ===== */
+    /* ===== UNIDAD ESTROBOSCÓPICA & INTERRUPTOR (CAJA TOTALMENTE CUADRADA) ===== */
     .plx-power-tower {
       position: absolute;
-      bottom: 125px;
+      bottom: 130px;
       left: 18px;
       width: 48px;
       height: 72px;
@@ -613,8 +653,8 @@
     }
 
     .strobe-aperture-box {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       background: linear-gradient(135deg, #2b2d38, #121318);
       border-radius: 0px;
       border: 1.5px solid #444856;
@@ -626,8 +666,8 @@
     }
 
     .strobe-blue-emitter {
-      width: 9px;
-      height: 9px;
+      width: 10px;
+      height: 10px;
       border-radius: 0px;
       background: #ffffff;
       box-shadow: 0 0 8px var(--pioneer-blue), 0 0 16px var(--neon-cyan), inset 0 0 2px #fff;
@@ -717,10 +757,10 @@
     /* ===== BRAZO METÁLICO EN 'S' (94px) ===== */
     .tonearm-assembly {
       position: absolute;
-      top: 70px;
-      left: 498px;
+      top: 75px;
+      left: 504px;
       width: 130px;
-      height: 400px;
+      height: 410px;
       pointer-events: none;
       z-index: 25;
     }
@@ -798,13 +838,13 @@
       overflow: visible;
     }
 
-    /* ===== CÍRCULO CON PUNTO NARANJA (CENTRADO HORIZONTALMENTE: left: 535px) ===== */
+    /* ===== CÍRCULO CON PUNTO NARANJA CENTRADO HORIZONTALMENTE ===== */
     .target-lamp-unit {
       position: absolute;
-      top: 310px;
-      left: 535px;
-      width: 38px;
-      height: 38px;
+      top: 325px;
+      left: 543px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       background: 
         conic-gradient(
@@ -830,8 +870,8 @@
     }
 
     .target-lamp-core {
-      width: 24px;
-      height: 24px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       background: radial-gradient(circle, #20222c 30%, #0d0e13 90%);
       border: 1.5px solid #3c4052;
@@ -842,25 +882,25 @@
     }
 
     .orange-led-dot {
-      width: 9px;
-      height: 9px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #ffffff 0%, var(--neon-orange) 45%, #d95500 100%);
       box-shadow: 
         0 0 8px var(--neon-orange),
-        0 0 14px rgba(255, 119, 0, 0.8),
+        0 0 16px rgba(255, 119, 0, 0.8),
         inset 0 0 2px #fff;
       animation: pulse-orange-led 2s infinite ease-in-out;
     }
 
     @keyframes pulse-orange-led {
       0%, 100% {
-        box-shadow: 0 0 8px var(--neon-orange), 0 0 12px rgba(255, 119, 0, 0.7);
+        box-shadow: 0 0 8px var(--neon-orange), 0 0 14px rgba(255, 119, 0, 0.7);
         filter: brightness(1);
       }
       50% {
-        box-shadow: 0 0 12px #ff9426, 0 0 20px rgba(255, 148, 38, 0.95);
-        filter: brightness(1.2);
+        box-shadow: 0 0 12px #ff9426, 0 0 22px rgba(255, 148, 38, 0.95);
+        filter: brightness(1.25);
       }
     }
 
@@ -1069,13 +1109,13 @@
       100% { opacity: 1; filter: drop-shadow(0 0 14px #ff0055) drop-shadow(0 0 20px #fff); }
     }
 
-    /* ===== BOTÓN PLAY / STOP (ALUMINIO PULIDO Y TEXTO NÍTIDO) ===== */
+    /* ===== BOTÓN PLAY / STOP (BORDE DIRECTO EN LAS LETRAS) ===== */
     .start-stop-round-btn {
       position: absolute;
       bottom: 16px;
       left: 18px;
-      width: 72px;
-      height: 72px;
+      width: 74px;
+      height: 74px;
       border-radius: 50%;
       background: 
         conic-gradient(
@@ -1098,7 +1138,7 @@
       justify-content: center;
       gap: 3px;
       box-shadow: 
-        0 0 0 2px rgba(0, 168, 255, 0.4),
+        0 0 0 2.5px rgba(0, 168, 255, 0.4),
         0 8px 20px rgba(0,0,0,0.9),
         inset 0 1px 2px rgba(255,255,255,0.95),
         inset 0 -2px 4px rgba(0,0,0,0.6);
@@ -1113,16 +1153,18 @@
 
     .btn-word {
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.68rem;
+      font-size: 0.74rem;
       font-weight: 900;
       letter-spacing: 2px;
-      line-height: 1.1;
+      line-height: 1.15;
       text-align: center;
       transition: all 0.2s ease;
+      -webkit-text-stroke: 1px #05060a;
+      paint-order: stroke fill;
       filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.9));
     }
 
-    /* DETENIDO: PLAY parpadea en azul neón / STOP fijo en rojo */
+    /* DETENIDO: PLAY parpadea en azul neón / STOP iluminado fijo en rojo */
     .start-stop-round-btn:not(.playing) .play-word {
       color: #00f3ff;
       animation: blink-blue-text 1.2s infinite ease-in-out;
@@ -1175,13 +1217,13 @@
     }
 
     @keyframes pulse-btn-halo {
-      0% { box-shadow: 0 0 0 2px rgba(0, 168, 255, 0.3), 0 8px 20px rgba(0,0,0,0.9); }
-      100% { box-shadow: 0 0 0 3.5px rgba(0, 168, 255, 0.9), 0 0 18px rgba(0, 168, 255, 0.7), 0 8px 20px rgba(0,0,0,0.9); }
+      0% { box-shadow: 0 0 0 2.5px rgba(0, 168, 255, 0.3), 0 8px 20px rgba(0,0,0,0.9); }
+      100% { box-shadow: 0 0 0 4px rgba(0, 168, 255, 0.95), 0 0 20px rgba(0, 168, 255, 0.75), 0 8px 20px rgba(0,0,0,0.9); }
     }
 
     .start-stop-round-btn.playing {
       border-color: var(--pioneer-blue);
-      box-shadow: 0 0 0 3.5px var(--pioneer-blue), 0 0 22px rgba(0, 168, 255, 0.85), 0 8px 20px rgba(0,0,0,0.9);
+      box-shadow: 0 0 0 4px var(--pioneer-blue), 0 0 24px rgba(0, 168, 255, 0.85), 0 8px 20px rgba(0,0,0,0.9);
       animation: none;
     }
 
@@ -1327,14 +1369,14 @@
   <div class="main-content">
     <div class="turntable-wrapper">
       
-      <!-- Adaptador 45 RPM grande de aluminio pulido (70px / 58px) -->
+      <!-- Adaptador 45 RPM grande de aluminio pulido (72px / 60px) -->
       <div class="rpm45-well" title="Adaptador 45 RPM">
         <div class="rpm45-puck"></div>
       </div>
 
-      <!-- Pantalla OLED / VFD limpia con marquesina continua y ecualizador -->
+      <!-- Pantalla OLED / VFD con filtro CRT suave -->
       <div class="vfd-console">
-        <div class="vfd-glass-glare"></div>
+        <div class="crt-overlay"></div>
 
         <div class="vfd-status-bar">
           <div class="live-badge">
@@ -1345,16 +1387,15 @@
             <span class="live-text">DJ EN VIVO</span>
           </div>
 
-          <!-- Nombre del DJ en naranja ámbar elegante -->
+          <!-- NOMBRE DEL DJ EN NARANJA Y TAMAÑO DEL TÍTULO -->
           <div class="dj-live-widget">
-            <span class="dj-tag">ON AIR:</span>
             <span id="dj_display">Auto Dj</span>
             <span id="sonic_dj" style="display:none !important;"></span>
             <span id="sonic_djonair" style="display:none !important;"></span>
           </div>
         </div>
         
-        <!-- Marquesina continua con bucle infinito sin saltos -->
+        <!-- Marquesina continua con bucle infinito y suave -->
         <div class="vfd-title-container">
           <div class="vfd-marquee-track" id="vfd-marquee-track">
             <span class="marquee-text" id="sonic_title">Castlebul Radio</span>
@@ -1364,7 +1405,7 @@
           </div>
         </div>
 
-        <!-- Ecualizador dinámico Pioneer Blue a Cyan con caída suave -->
+        <!-- Ecualizador dinámico multicolor y con amplio rebote -->
         <div class="visualizer" id="visualizer"></div>
       </div>
 
@@ -1380,6 +1421,7 @@
 
           <!-- VINILO HIPERREALISTA -->
           <div class="vinyl" id="vinyl">
+            <!-- Capa óptica de destello anisótropo que contra-rota -->
             <div class="vinyl-gloss-sheen"></div>
             <div class="album-art-visible" id="album-art-visible"></div>
             <div class="center-spindle"></div>
@@ -1510,7 +1552,7 @@
         </button>
       </div>
 
-      <!-- BOTÓN PLAY / STOP CON ACABADO DE ALUMINIO PULIDO -->
+      <!-- BOTÓN PLAY / STOP (BORDE DIRECTO EN LAS LETRAS) -->
       <div class="start-stop-round-btn" id="play-btn">
         <span class="btn-word play-word">PLAY</span>
         <span class="btn-word stop-word">STOP</span>
@@ -1586,7 +1628,7 @@
       let volDownTimeout = null;
       let currentMarqueeText = '';
 
-      // Array de alturas de barras para caída suave con gravedad
+      // Array de alturas de barras para caída gravitatoria suave
       const barHeights = new Float32Array(28);
 
       // Paleta rítmica de 4 colores: Azul, Rojo, Naranja y Plateado
@@ -1598,14 +1640,14 @@
       ];
       let rhythmColorIndex = 0;
       let lastBassHit = 0;
-      const bassCooldown = 230; // 230ms de separación entre golpes para no saturar
+      const bassCooldown = 220; // 220ms de separación entre golpes para evitar parpadeos caóticos
 
       function showAlert(message) {
         alert(`${message}\n\nPróximamente disponible en Castlebul Radio.`);
       }
       window.showAlert = showAlert;
 
-      // FILTRO DE DJ: SI DICE "No Dj", MOSTRAR "Auto Dj"
+      // ✅ FILTRO DE DJ: SI DICE "No Dj", MOSTRAR "Auto Dj"
       function parseDJName(name) {
         if (!name) return 'Auto Dj';
         const clean = name.trim();
@@ -1645,7 +1687,7 @@
       setInterval(fetchLiveDJ, 10000);
       fetchLiveDJ();
 
-      // MARQUESINA CONTINUA Y SUAVE (SIN CORTES)
+      // ✅ MARQUESINA CONTINUA Y SUAVE (SIN CORTES)
       function updateMarqueeTitle(title) {
         if (!title) return;
         const cleanTitle = title.trim();
@@ -1693,7 +1735,7 @@
             analyser = audioContext.createAnalyser();
             analyser.fftSize = 512;
             
-            // Rango dinámico calibrado de estudio (-75dB a -8dB)
+            // ✅ Rango dinámico calibrado de estudio (-75dB a -8dB)
             analyser.minDecibels = -75;
             analyser.maxDecibels = -8;
             analyser.smoothingTimeConstant = 0.55;
@@ -1713,7 +1755,7 @@
         }
       }
 
-      // ILUMINACIÓN DEL BORDE: SUAVE Y REACTIVA A GRAVES Y BOMBO POTENTE
+      // ✅ ILUMINACIÓN DEL BORDE: SUAVE Y REACTIVA A GRAVES Y BOMBO POTENTE
       function updatePlatterLight(bassLevel, isBassHit) {
         const now = Date.now();
         if (isBassHit && (now - lastBassHit) > bassCooldown) {
@@ -1723,9 +1765,9 @@
 
         const activeCol = RHYTHM_COLORS[rhythmColorIndex];
 
-        const intensity = Math.min(0.70, 0.15 + (bassLevel / 255) * 0.45);
-        const glow = 14 + (bassLevel / 255) * 24;
-        const innerGlow = 6 + (bassLevel / 255) * 15;
+        const intensity = Math.min(0.72, 0.16 + (bassLevel / 255) * 0.48);
+        const glow = 14 + (bassLevel / 255) * 26;
+        const innerGlow = 6 + (bassLevel / 255) * 16;
 
         platter.style.boxShadow = `
           0 10px 30px rgba(0,0,0,0.95),
@@ -1748,7 +1790,7 @@
         }
       }
 
-      // ECUALIZADOR DINÁMICO: REBOTE EN TODO EL ESPECTRO SIN PEGARSE AL 100%
+      // ✅ ECUALIZADOR DINÁMICO DE ESTUDIO CON REBOTE GRAVITATORIO FLUIDO
       function renderVisualizer() {
         if (!analyser || !dataArray) return;
 
@@ -1760,11 +1802,12 @@
         // Frecuencias subgraves y bombos (35Hz a 160Hz)
         const kickBins = dataArray.slice(0, 4);
         const bassLevel = kickBins.reduce((a, b) => a + b, 0) / kickBins.length;
-        const isBassHit = bassLevel > 180;
+        const isBassHit = bassLevel > 182;
 
         updatePlatterLight(bassLevel, isBassHit);
 
         bars.forEach((bar, i) => {
+          // Bandas de frecuencia distribuidas logarítmicamente (35Hz a 16.000Hz)
           const f1 = 35 * Math.pow(16000 / 35, i / barCount);
           const f2 = 35 * Math.pow(16000 / 35, (i + 1) / barCount);
 
@@ -1779,6 +1822,7 @@
           }
           const rawAvg = count > 0 ? (sum / count) : 0;
 
+          // Compensación natural de caída de agudos
           const tilt = 1.0 + (i / barCount) * 0.45;
           let val = rawAvg * tilt;
 
@@ -1787,6 +1831,7 @@
 
           const targetH = Math.max(10, Math.min(92, norm * 92));
 
+          // Física de rebote rápido y caída gravitatoria suave
           if (targetH > barHeights[i]) {
             barHeights[i] = targetH;
           } else {
@@ -1817,6 +1862,7 @@
           playBtn.classList.remove('playing');
           isPlaying = false;
 
+          // Apagar luz rítmica y activar luz tenue roja de reposo
           platter.style.boxShadow = '0 10px 30px rgba(0,0,0,0.95), inset 0 0 20px rgba(0,0,0,0.9)';
           platter.style.borderColor = '#8c90a2';
 
@@ -1962,6 +2008,7 @@
         }, 2000);
       });
 
+      // Sincronización del giro con 33 y 45 RPM
       rpm33Btn.addEventListener('click', () => {
         rpm33Btn.classList.add('active');
         rpm45Btn.classList.remove('active');
