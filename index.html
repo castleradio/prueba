@@ -8,7 +8,7 @@
   <!-- SonicAPI Widget -->
   <script id='sonic_js' data-port='8422' src='https://mars.streamerr.co/cp/widgets.js?r=479'></script>
   
-  <!-- Fuentes técnicas y digitales -->
+  <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=VT323&display=swap" rel="stylesheet">
@@ -26,10 +26,7 @@
       --neon-cyan: #00f3ff;
       --neon-green: #00ff88;
       --neon-red: #ff2a4b;
-      --chassis-dark: #121318;
       --metal-rim: #63677a;
-      --chrome-hi: #f4f6fa;
-      --chrome-lo: #484b57;
     }
 
     body {
@@ -49,7 +46,7 @@
       width: 100%;
       padding: 12px 20px;
       text-align: center;
-      background: rgba(15, 16, 23, 0.9);
+      background: rgba(15, 16, 23, 0.95);
       border-bottom: 1px solid rgba(0, 243, 255, 0.2);
       box-shadow: 0 4px 20px rgba(0,0,0,0.8);
       z-index: 50;
@@ -91,10 +88,10 @@
       justify-content: center;
       flex: 1;
       width: 100%;
-      padding: 20px 10px;
+      padding: 15px 10px;
     }
 
-    /* ===== CHASIS REALISTA (MEDIDAS EXACTAS TECHNICS 1200) ===== */
+    /* ===== CHASIS TECHNICS SL-1200 ===== */
     .turntable-wrapper {
       width: 680px;
       height: 530px;
@@ -115,7 +112,7 @@
       margin: 10px 0;
     }
 
-    /* Tornillos Allen en las esquinas */
+    /* Tornillos en las esquinas */
     .screw {
       position: absolute;
       width: 10px;
@@ -131,10 +128,10 @@
     .screw.bl { bottom: 12px; left: 12px; }
     .screw.br { bottom: 12px; right: 12px; }
 
-    /* Adaptador de discos 45 RPM (Top-Left) */
+    /* Adaptador 45 RPM (Top-Left) */
     .rpm45-well {
       position: absolute;
-      top: 25px;
+      top: 24px;
       left: 28px;
       width: 44px;
       height: 44px;
@@ -168,13 +165,13 @@
       border: 1px solid #666;
     }
 
-    /* ===== PANTALLA DIGITAL VFD (INTEGRADA EN EL CHASIS) ===== */
+    /* ===== PANTALLA DIGITAL VFD EMPOTRADA ===== */
     .vfd-console {
       position: absolute;
-      top: 20px;
-      left: 88px;
+      top: 18px;
+      left: 90px;
       width: 350px;
-      height: 76px;
+      height: 78px;
       background: #020509;
       border-radius: 6px;
       border: 2px solid #1c2738;
@@ -190,7 +187,6 @@
       z-index: 10;
     }
 
-    /* Rejilla de fósforo y reflejo de cristal */
     .vfd-console::before {
       content: '';
       position: absolute;
@@ -237,7 +233,6 @@
       margin: 1px 0;
     }
 
-    /* Barras de espectro integradas en pantalla */
     .visualizer {
       display: flex;
       align-items: flex-end;
@@ -262,10 +257,10 @@
       box-shadow: 0 0 8px var(--neon-green);
     }
 
-    /* ===== CUENCA DEL PLATO (PLATTER RECESS) ===== */
+    /* ===== CUENCA Y PLATO GIRATORIO ===== */
     .platter-bay {
       position: absolute;
-      top: 110px;
+      top: 112px;
       left: 36px;
       width: 345px;
       height: 345px;
@@ -281,13 +276,13 @@
       justify-content: center;
     }
 
-    /* Torreta de luz estroboscópica roja (Strobe Tower) */
+    /* Torreta de luz estroboscópica roja Technics */
     .strobe-tower {
       position: absolute;
-      top: -6px;
-      left: -6px;
-      width: 32px;
-      height: 48px;
+      top: -4px;
+      left: -4px;
+      width: 30px;
+      height: 46px;
       background: linear-gradient(135deg, #3a3c48, #181920);
       border-radius: 5px;
       border: 1px solid #555;
@@ -300,13 +295,13 @@
     }
     .strobe-prism {
       width: 14px;
-      height: 18px;
+      height: 16px;
       background: #ff1f3d;
       border-radius: 2px;
       box-shadow: 0 0 14px #ff1f3d, inset 0 0 4px #fff;
     }
 
-    /* Plato de aluminio con puntos estroboscópicos */
+    /* Plato de aluminio torneado */
     .platter {
       width: 330px;
       height: 330px;
@@ -323,7 +318,6 @@
       transition: box-shadow 0.15s ease, border-color 0.15s ease;
     }
 
-    /* Puntos estroboscópicos de Technics */
     .platter::before {
       content: '';
       position: absolute;
@@ -372,7 +366,6 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Galleta central de 12" */
     .album-art-visible {
       width: 110px;
       height: 110px;
@@ -407,7 +400,6 @@
       line-height: 1.2;
     }
 
-    /* Eje central de acero cromado */
     .center-spindle {
       position: absolute;
       width: 12px;
@@ -424,49 +416,47 @@
       display: none !important;
     }
 
-    /* ===== ENSAMBLE DEL BRAZO (POSICIONADO AL LADO DEL PLATO) ===== */
+    /* ===== ENSAMBLE DEL BRAZO (CORREGIDO GEOMÉTRICAMENTE) ===== */
     .tonearm-assembly {
       position: absolute;
-      top: 60px;
-      left: 450px;
-      width: 120px;
-      height: 380px;
+      top: 75px;
+      left: 395px; /* Pegado inmediatamente al borde del plato (36 + 345 = 381px) */
+      width: 130px;
+      height: 330px;
       pointer-events: none;
       z-index: 25;
     }
 
-    /* Base circular VTA (Cardán y ajuste de altura) */
+    /* Base circular cardánica (Gimbal collar) */
     .gimbal-base {
       position: absolute;
-      top: 15px;
-      left: 20px;
-      width: 80px;
-      height: 80px;
+      top: 25px;
+      left: 15px;
+      width: 72px;
+      height: 72px;
       border-radius: 50%;
       background: radial-gradient(circle, #2a2c3a 40%, #161720 70%, #0c0d12 100%);
       border: 2px solid #5a5e72;
-      box-shadow: 
-        0 8px 18px rgba(0,0,0,0.8),
-        inset 0 1px 2px rgba(255,255,255,0.4);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.8), inset 0 1px 2px rgba(255,255,255,0.4);
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .gimbal-ring {
-      width: 50px;
-      height: 50px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       background: linear-gradient(135deg, #7c8296, #2d303b);
       border: 1px solid #999;
       box-shadow: inset 0 2px 4px rgba(255,255,255,0.4);
     }
 
-    /* Contrapeso cilíndrico graduado */
+    /* Contrapeso trasero graduado */
     .counterweight {
       position: absolute;
-      top: -20px;
-      left: 46px;
+      top: -8px;
+      left: 37px;
       width: 28px;
       height: 24px;
       background: linear-gradient(90deg, #181920, #5a5e70, #181920);
@@ -485,13 +475,13 @@
       opacity: 0.6;
     }
 
-    /* Soporte de descanso del brazo con clip (Arm Rest) */
+    /* Soporte de descanso (Arm Rest con clip) */
     .arm-rest {
       position: absolute;
-      top: 155px;
-      left: 42px;
+      top: 145px;
+      left: 36px;
       width: 14px;
-      height: 25px;
+      height: 26px;
       background: #111;
       border-radius: 3px;
       border: 1px solid #444;
@@ -508,79 +498,37 @@
       border-radius: 2px;
     }
 
-    /* Brazo en 'S' cromado con pivote real */
+    /* ===== BRAZO CORTO EN 'S' DE LONGITUD REAL ===== */
     .tonearm {
       position: absolute;
-      top: 55px;
-      left: 58px;
-      width: 30px;
-      height: 225px;
-      transform-origin: 2px 0px;
-      transform: rotate(2deg);
+      top: 61px;
+      left: 51px; /* Eje exacto de rotación del pivote */
+      width: 60px;
+      height: 180px;
+      transform-origin: 0px 0px;
+      transform: rotate(0deg); /* En reposo sobre el soporte */
       transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      filter: drop-shadow(-4px 6px 8px rgba(0,0,0,0.8));
     }
 
-    /* Al reproducir, el brazo aterriza en el surco del disco */
+    /* Posición exacta sobre el vinilo en reproducción */
     .tonearm.playing {
-      transform: rotate(27deg);
+      transform: rotate(-32deg); /* Gira hacia adentro y cae sobre los surcos */
     }
 
-    /* Tubo cromado curvado */
-    .s-tube {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 7px;
-      height: 195px;
-      background: linear-gradient(90deg, #777, #ffffff 50%, #444 95%);
-      border-radius: 4px;
-      box-shadow: -4px 6px 12px rgba(0,0,0,0.7);
-      clip-path: polygon(0% 0%, 100% 0%, 75% 55%, 100% 100%, 0% 100%, 25% 55%);
+    .tonearm-svg {
+      width: 70px;
+      height: 190px;
+      overflow: visible;
     }
 
-    /* Cápsula fonocaptora y aguja (Headshell & Stylus) */
-    .headshell {
-      position: absolute;
-      bottom: 0;
-      left: -9px;
-      width: 18px;
-      height: 38px;
-      background: linear-gradient(180deg, #20222a, #0c0d12);
-      border-radius: 3px;
-      border: 1px solid #444;
-      box-shadow: -3px 4px 8px rgba(0,0,0,0.8);
-      transform: rotate(-12deg);
-    }
-
-    .finger-lift {
-      position: absolute;
-      right: -9px;
-      top: 8px;
-      width: 10px;
-      height: 3px;
-      background: #ccc;
-      border-radius: 0 3px 3px 0;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-    }
-
-    .stylus-tip {
-      position: absolute;
-      bottom: -3px;
-      left: 5px;
-      width: 8px;
-      height: 6px;
-      background: #ffcc00;
-      border-radius: 1px;
-      box-shadow: 0 0 6px rgba(255, 204, 0, 0.8);
-    }
-
-    /* ===== PITCH / VOLUME FADER (ESTILO TECHNICS) ===== */
+    /* ===== PITCH / VOLUME FADER (DERECHA) ===== */
     .pitch-fader-assembly {
       position: absolute;
-      top: 155px;
+      top: 145px;
       right: 25px;
-      width: 70px;
-      height: 290px;
+      width: 74px;
+      height: 300px;
       background: linear-gradient(180deg, #181922, #0d0e14);
       border-radius: 6px;
       border: 1px solid #2e3142;
@@ -593,7 +541,6 @@
       z-index: 20;
     }
 
-    /* Escala serigrafiada graduada */
     .pitch-scale {
       position: absolute;
       left: 7px;
@@ -610,7 +557,6 @@
       line-height: 1;
     }
 
-    /* LED verde de bloqueo en 0% */
     .quartz-lock-led {
       position: absolute;
       right: 10px;
@@ -626,7 +572,7 @@
     .fader-track {
       position: relative;
       width: 6px;
-      height: 230px;
+      height: 240px;
       background: #000;
       border-radius: 3px;
       box-shadow: inset 0 0 6px #000, 0 1px 1px rgba(255,255,255,0.1);
@@ -672,7 +618,7 @@
       text-transform: uppercase;
     }
 
-    /* ===== BOTONERA TECHNICS START/STOP & VELOCIDAD ===== */
+    /* ===== BOTONES TECHNICS START / STOP ===== */
     .start-stop-btn {
       position: absolute;
       bottom: 25px;
@@ -762,10 +708,9 @@
       box-shadow: 0 0 6px rgba(0, 243, 255, 0.4);
     }
 
-    /* Placa de especificaciones */
     .specs-badge {
       position: absolute;
-      top: 35px;
+      top: 25px;
       right: 35px;
       font-family: 'Orbitron', sans-serif;
       font-size: 0.55rem;
@@ -779,7 +724,7 @@
       font-size: 0.65rem;
     }
 
-    /* ===== FOOTER CON ACCESOS ===== */
+    /* ===== FOOTER ===== */
     footer {
       width: 100%;
       padding: 15px 10px;
@@ -843,7 +788,7 @@
       color: #fff;
     }
 
-    /* ===== RESPONSIVE PROPORCIONAL ===== */
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 710px) {
       .turntable-wrapper {
         transform: scale(0.82);
@@ -893,12 +838,12 @@
       <div class="screw bl"></div>
       <div class="screw br"></div>
 
-      <!-- Adaptador 45 RPM (Top-Left) -->
+      <!-- Adaptador 45 RPM -->
       <div class="rpm45-well" title="Adaptador 45 RPM">
         <div class="rpm45-puck"></div>
       </div>
 
-      <!-- Pantalla Digital VFD (Integrada en la parte superior del chasis) -->
+      <!-- Pantalla VFD con visualizador -->
       <div class="vfd-console">
         <div class="vfd-status-bar">
           <span><span class="vfd-dot"></span>LIVE BROADCAST</span>
@@ -908,12 +853,12 @@
         <div class="visualizer" id="visualizer"></div>
       </div>
 
-      <!-- Especificaciones de modelo (Top-Right) -->
+      <!-- Placa de especificaciones -->
       <div class="specs-badge">
         <strong>CASTLEBUL</strong><br>QUARTZ SYNTHESIZER
       </div>
 
-      <!-- Cuenca del plato con torre estroboscópica -->
+      <!-- Cuenca del plato con luz estroboscópica -->
       <div class="platter-bay">
         <div class="strobe-tower">
           <div class="strobe-prism"></div>
@@ -933,7 +878,7 @@
         </div>
       </div>
 
-      <!-- Ensamble mecánico del brazo (Posicionado correctamente al lado del plato) -->
+      <!-- Ensamble mecánico del brazo (Acoplado al borde del plato) -->
       <div class="tonearm-assembly">
         <div class="arm-rest"></div>
         <div class="counterweight"></div>
@@ -941,12 +886,46 @@
           <div class="gimbal-ring"></div>
         </div>
         
+        <!-- Brazo en S SVG de longitud física real -->
         <div class="tonearm" id="tonearm">
-          <div class="s-tube"></div>
-          <div class="headshell">
-            <div class="finger-lift"></div>
-            <div class="stylus-tip"></div>
-          </div>
+          <svg class="tonearm-svg" viewBox="0 0 70 190">
+            <defs>
+              <!-- Degradado cromado metálico del tubo -->
+              <linearGradient id="chromeTube" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#555" />
+                <stop offset="30%" stop-color="#fff" />
+                <stop offset="60%" stop-color="#bbb" />
+                <stop offset="100%" stop-color="#333" />
+              </linearGradient>
+              <linearGradient id="cartridgeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#2a2c36" />
+                <stop offset="100%" stop-color="#111217" />
+              </linearGradient>
+            </defs>
+
+            <!-- Pivote central -->
+            <circle cx="0" cy="0" r="5" fill="#888" stroke="#222" stroke-width="1.5" />
+
+            <!-- Tubo cromado en forma de S auténtica -->
+            <path d="M 0,0 C 14,35 15,75 -6,120 L -10,135" 
+                  fill="none" 
+                  stroke="url(#chromeTube)" 
+                  stroke-width="5" 
+                  stroke-linecap="round" />
+
+            <!-- Porta-cápsulas Technics (Headshell) -->
+            <g transform="translate(-10, 135) rotate(-14)">
+              <!-- Cuerpo de la cápsula -->
+              <rect x="-7" y="0" width="14" height="28" rx="2" fill="url(#cartridgeGrad)" stroke="#444" stroke-width="1" />
+              <!-- Ranuras de ventilación -->
+              <line x1="-3" y1="6" x2="3" y2="6" stroke="#666" stroke-width="1" />
+              <line x1="-3" y1="11" x2="3" y2="11" stroke="#666" stroke-width="1" />
+              <!-- Tirador lateral curvo para dedo (Finger Lift) -->
+              <path d="M 7,8 Q 15,8 14,16" fill="none" stroke="#ddd" stroke-width="2" stroke-linecap="round" />
+              <!-- Aguja fonocaptora (Stylus Tip) -->
+              <polygon points="-3,28 3,28 0,33" fill="#ffcc00" />
+            </g>
+          </svg>
         </div>
       </div>
 
@@ -1039,7 +1018,6 @@
       }
       window.showAlert = showAlert;
 
-      // Inicialización de barras LED del espectro
       function initVisualizer() {
         visualizer.innerHTML = '';
         const barCount = 28;
@@ -1073,7 +1051,6 @@
         }
       }
 
-      // Reacción de luz del plato al bombo
       function updatePlatterLight(bassLevel) {
         const now = Date.now();
         if (bassLevel > bassThreshold && (now - lastBassHit) > bassCooldown) {
@@ -1147,7 +1124,6 @@
         }
       }
 
-      // Fader de volumen
       function updateFaderPosition(vol) {
         const minPos = 5;
         const maxPos = 95;
@@ -1204,7 +1180,6 @@
       playBtn.addEventListener('click', togglePlay);
       vinyl.addEventListener('click', togglePlay);
 
-      // Carátulas automáticas SonicAPI
       function updateAlbumArtBackground() {
         if (!sonicArtFull || !albumArtVisible) return;
         const img = sonicArtFull.querySelector('img');
@@ -1243,7 +1218,6 @@
         artUpdateInterval = setInterval(updateAlbumArtBackground, 3000);
       }
 
-      // Inicialización
       initVisualizer();
       updateFaderPosition(volume);
       audio.volume = volume;
