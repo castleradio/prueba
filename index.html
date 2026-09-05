@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Castle | Cyberpunk Retro Radio</title>
+  <title>Castle</title>
   
   <!-- SonicAPI Widget -->
   <script id='sonic_js' data-port='8422' src='https://mars.streamerr.co/cp/widgets.js?r=479'></script>
@@ -11,7 +11,7 @@
   <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=VT323&family=Montserrat:wght@400;600;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;900&family=VT323&family=Montserrat:wght@400;600;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   
   <style>
     * {
@@ -28,236 +28,123 @@
       --neon-green: #00ff88;
       --neon-orange: #ff9900;
       --neon-red: #ff2a4b;
-      --neon-pink: #ff007f;
       --metal-silver: #eef1f6;
-      --bg-dark: #05060b;
-      --panel-bg: rgba(14, 16, 24, 0.85);
-      --border-cyber: rgba(0, 243, 255, 0.25);
+      --scale: 1;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-color: #040508;
     }
 
     body {
       font-family: 'Montserrat', sans-serif;
-      background-color: var(--bg-dark);
-      background-image: 
-        radial-gradient(circle at 50% 15%, rgba(0, 168, 255, 0.12) 0%, transparent 65%),
-        radial-gradient(circle at 10% 80%, rgba(255, 42, 75, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 90% 80%, rgba(0, 243, 255, 0.08) 0%, transparent 50%),
-        linear-gradient(180deg, #07090f 0%, #030407 100%);
       color: #e5e9f0;
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      overflow-x: hidden;
-      overflow-y: auto;
+      justify-content: flex-start;
       position: relative;
+      background: 
+        radial-gradient(circle at 50% 20%, rgba(0, 168, 255, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 15% 85%, rgba(255, 42, 75, 0.09) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(0, 243, 255, 0.09) 0%, transparent 45%),
+        linear-gradient(180deg, #07080f 0%, #030407 100%);
+      padding-bottom: 30px;
     }
 
-    /* Cuadrícula Synthwave 80s de fondo */
+    /* Malla Synthwave 80s/90s en perspectiva */
     .cyber-grid-floor {
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 280px;
+      height: 250px;
       background: 
-        linear-gradient(180deg, transparent 0%, rgba(5, 6, 11, 0.8) 50%, var(--bg-dark) 100%),
-        repeating-linear-gradient(90deg, rgba(0, 243, 255, 0.06) 0px, rgba(0, 243, 255, 0.06) 2px, transparent 2px, transparent 60px),
-        repeating-linear-gradient(0deg, rgba(0, 243, 255, 0.06) 0px, rgba(0, 243, 255, 0.06) 2px, transparent 2px, transparent 30px);
-      transform: perspective(350px) rotateX(55deg);
+        linear-gradient(180deg, transparent 0%, rgba(4, 5, 8, 0.85) 60%, #040508 100%),
+        repeating-linear-gradient(90deg, rgba(0, 243, 255, 0.08) 0px, rgba(0, 243, 255, 0.08) 1.5px, transparent 1.5px, transparent 45px),
+        repeating-linear-gradient(0deg, rgba(0, 243, 255, 0.08) 0px, rgba(0, 243, 255, 0.08) 1.5px, transparent 1.5px, transparent 25px);
+      transform: perspective(300px) rotateX(60deg);
       transform-origin: bottom center;
       pointer-events: none;
       z-index: 1;
-      opacity: 0.65;
     }
 
-    /* Ambient scanlines de TV Retro */
-    .screen-crt-scanlines {
+    /* Líneas de escaneo CRT analógicas */
+    .crt-scanlines {
       position: fixed;
       inset: 0;
       pointer-events: none;
-      background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0px, rgba(0, 0, 0, 0.15) 1px, transparent 1px, transparent 3px);
+      background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.18) 0px, rgba(0, 0, 0, 0.18) 1px, transparent 1px, transparent 3px);
       z-index: 999;
-      opacity: 0.45;
+      opacity: 0.4;
     }
 
-    /* ===== NAVBAR CYBERPUNK ===== */
-    .cyber-nav {
+    /* ===== CABECERA CYBERPUNK "CASTLE" ===== */
+    header.castle-header {
       width: 100%;
-      background: rgba(8, 10, 16, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-cyber);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8), 0 1px 15px rgba(0, 243, 255, 0.12);
-      padding: 14px 25px;
+      padding: 24px 15px 12px;
+      text-align: center;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      justify-content: center;
+      z-index: 10;
+      position: relative;
     }
 
-    .brand-group {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .castle-logo {
+    .castle-title {
       font-family: 'Orbitron', sans-serif;
-      font-size: 2rem;
+      font-size: clamp(2.4rem, 7vw, 4rem);
       font-weight: 900;
-      letter-spacing: 5px;
+      letter-spacing: 10px;
       text-transform: uppercase;
       color: #ffffff;
       text-shadow: 
-        0 0 10px rgba(0, 243, 255, 0.8),
-        0 0 25px rgba(0, 168, 255, 0.6),
-        0 0 40px rgba(0, 168, 255, 0.4);
-      position: relative;
-    }
-
-    .castle-logo span {
-      color: var(--neon-cyan);
-    }
-
-    .castle-badge {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 2px;
-      color: var(--neon-cyan);
-      background: rgba(0, 243, 255, 0.08);
-      border: 1px solid rgba(0, 243, 255, 0.4);
-      padding: 4px 10px;
-      border-radius: 3px;
-      box-shadow: inset 0 0 8px rgba(0, 243, 255, 0.2);
-    }
-
-    .nav-telemetry {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.8rem;
-    }
-
-    .nav-indicator {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #9ba1b4;
-    }
-
-    .status-beacon {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--neon-green);
-      box-shadow: 0 0 10px var(--neon-green), 0 0 18px var(--neon-green);
-      animation: beacon-blink 1.8s infinite ease-in-out;
-    }
-
-    @keyframes beacon-blink {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
-    }
-
-    /* ===== CONTENEDOR PRINCIPAL ===== */
-    .page-wrapper {
-      width: 100%;
-      max-width: 1300px;
-      padding: 25px 20px 60px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 35px;
-      z-index: 10;
-    }
-
-    /* HERO HUD BANNER */
-    .cyber-hero-banner {
-      width: 100%;
-      max-width: 1080px;
-      text-align: center;
-      position: relative;
-      padding: 10px 0 5px;
-    }
-
-    .cyber-title-main {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(2rem, 5vw, 3.4rem);
-      font-weight: 900;
-      letter-spacing: 8px;
-      text-transform: uppercase;
-      background: linear-gradient(180deg, #ffffff 30%, #a0dcff 70%, var(--pioneer-blue) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 20px rgba(0, 168, 255, 0.55));
+        0 0 10px rgba(0, 243, 255, 0.9),
+        0 0 25px rgba(0, 168, 255, 0.7),
+        0 0 50px rgba(0, 168, 255, 0.4);
+      line-height: 1;
       margin-bottom: 6px;
     }
 
-    .cyber-sub-title {
+    .castle-subtitle {
       font-family: 'Share Tech Mono', monospace;
-      font-size: clamp(0.75rem, 2vw, 0.95rem);
-      color: #8fa0be;
-      letter-spacing: 3px;
+      font-size: clamp(0.7rem, 2.2vw, 0.88rem);
+      letter-spacing: 4px;
+      color: #7b8ba6;
       text-transform: uppercase;
     }
 
-    .cyber-sub-title strong {
-      color: var(--neon-orange);
-      text-shadow: 0 0 8px rgba(255, 153, 0, 0.6);
+    .castle-subtitle span {
+      color: var(--neon-cyan);
     }
 
-    /* ===== MARCO RESPONSIVO Y ESCALADOR INTELIGENTE DEL REPRODUCTOR ===== */
-    .player-deck-container {
+    /* ===== CONTENEDOR RESPONSIVO DE ALTA PRECISIÓN ===== */
+    .player-outer-bounds {
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-    }
-
-    /* Decoraciones de esquina HUD Cyberpunk */
-    .deck-frame-outer {
-      position: relative;
-      padding: 12px;
-      border: 1px solid rgba(0, 168, 255, 0.25);
-      background: rgba(10, 12, 18, 0.7);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      box-shadow: 
-        0 20px 60px rgba(0, 0, 0, 0.9),
-        0 0 40px rgba(0, 168, 255, 0.12),
-        inset 0 0 30px rgba(0, 243, 255, 0.05);
-      border-radius: 8px;
-      overflow: hidden;
+      max-width: 760px;
+      padding: 0 10px;
       display: flex;
       justify-content: center;
       align-items: center;
+      margin: 10px auto;
+      z-index: 10;
+      position: relative;
     }
 
-    .deck-corner {
-      position: absolute;
-      width: 16px;
-      height: 16px;
-      border-color: var(--neon-cyan);
-      border-style: solid;
-      pointer-events: none;
-      z-index: 60;
-    }
-    .deck-corner.tl { top: 4px; left: 4px; border-width: 2.5px 0 0 2.5px; }
-    .deck-corner.tr { top: 4px; right: 4px; border-width: 2.5px 2.5px 0 0; }
-    .deck-corner.bl { bottom: 4px; left: 4px; border-width: 0 0 2.5px 2.5px; }
-    .deck-corner.br { bottom: 4px; right: 4px; border-width: 0 2.5px 2.5px 0; }
-
-    /* Contenedor que calcula la escala dinámicamente */
-    .turntable-scale-stage {
-      width: 730px;
+    /* El contenedor mide exactamente lo que ocupa el tocadiscos escalado */
+    .turntable-viewport {
+      width: 100%;
+      max-width: 730px;
       height: 560px;
-      transform-origin: center center;
-      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      transform-origin: top center;
     }
 
     /* ===== CHASIS PIONEER PLX-1000 ===== */
@@ -266,16 +153,32 @@
       height: 560px;
       background: linear-gradient(180deg, #1b1c23 0%, #0d0e12 40%, #050608 100%);
       border-radius: 6px;
-      position: relative;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform-origin: top center;
+      transform: translateX(-50%) scale(var(--scale, 1));
       border: 1px solid #282a35;
       box-shadow: 
-        0 45px 100px rgba(0, 0, 0, 0.98),
-        0 15px 35px rgba(0, 0, 0, 0.85),
+        0 35px 80px rgba(0, 0, 0, 0.98),
+        0 10px 25px rgba(0, 0, 0, 0.85),
         inset 0 1px 1px rgba(255, 255, 255, 0.2),
         inset 0 -2px 6px rgba(0, 0, 0, 0.95),
-        0 0 35px rgba(0, 168, 255, 0.08);
+        0 0 35px rgba(0, 168, 255, 0.12);
       margin: 0;
     }
+
+    /* Medias queries preventivas mientras carga JS */
+    @media (max-width: 750px) { :root { --scale: 0.94; } .turntable-viewport { height: calc(560px * 0.94); } }
+    @media (max-width: 700px) { :root { --scale: 0.88; } .turntable-viewport { height: calc(560px * 0.88); } }
+    @media (max-width: 650px) { :root { --scale: 0.82; } .turntable-viewport { height: calc(560px * 0.82); } }
+    @media (max-width: 600px) { :root { --scale: 0.75; } .turntable-viewport { height: calc(560px * 0.75); } }
+    @media (max-width: 550px) { :root { --scale: 0.69; } .turntable-viewport { height: calc(560px * 0.69); } }
+    @media (max-width: 500px) { :root { --scale: 0.62; } .turntable-viewport { height: calc(560px * 0.62); } }
+    @media (max-width: 450px) { :root { --scale: 0.55; } .turntable-viewport { height: calc(560px * 0.55); } }
+    @media (max-width: 400px) { :root { --scale: 0.49; } .turntable-viewport { height: calc(560px * 0.49); } }
+    @media (max-width: 360px) { :root { --scale: 0.44; } .turntable-viewport { height: calc(560px * 0.44); } }
+    @media (max-width: 330px) { :root { --scale: 0.39; } .turntable-viewport { height: calc(560px * 0.39); } }
 
     /* ===== ADAPTADOR 45 RPM (ALUMINIO PULIDO MACIZO 72px) ===== */
     .rpm45-well {
@@ -637,7 +540,7 @@
       ) !important;
     }
 
-    /* ===== VINILO DE ALTA FIDELIDAD Y MÁXIMO DETALLE (394px) ===== */
+    /* ===== VINILO DE ALTA FIDELIDAD Y MÁXIMO DETALLE ===== */
     .vinyl {
       width: 394px;
       height: 394px;
@@ -1453,507 +1356,220 @@
       border-color: var(--pioneer-blue);
       box-shadow: 0 0 6px rgba(0, 168, 255, 0.5);
     }
-
-    /* ===== SECCIÓN DE TELEMETRÍA Y PANELES RETRO FUTURISTAS ===== */
-    .cyber-info-grid {
-      width: 100%;
-      max-width: 1080px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      margin-top: 15px;
-    }
-
-    .cyber-card {
-      background: var(--panel-bg);
-      border: 1px solid var(--border-cyber);
-      border-radius: 6px;
-      padding: 20px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(0, 243, 255, 0.03);
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .cyber-card:hover {
-      border-color: var(--neon-cyan);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 243, 255, 0.25);
-      transform: translateY(-3px);
-    }
-
-    .cyber-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 40px;
-      height: 2px;
-      background: var(--neon-cyan);
-      box-shadow: 0 0 8px var(--neon-cyan);
-    }
-
-    .card-header-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-      border-bottom: 1px dashed rgba(0, 243, 255, 0.2);
-      padding-bottom: 8px;
-    }
-
-    .card-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .card-tag {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--neon-orange);
-      letter-spacing: 1px;
-    }
-
-    .card-content-list {
-      list-style: none;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.8rem;
-      color: #9da6be;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .card-content-list li {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-      padding-bottom: 5px;
-    }
-
-    .card-content-list li span:last-child {
-      color: var(--neon-cyan);
-      font-weight: bold;
-    }
-
-    /* BARRA DE ACCIÓN RAPIDA / FOOTER DECORATIVO */
-    .cyber-action-deck {
-      display: flex;
-      justify-content: center;
-      gap: 28px;
-      margin-top: 15px;
-      flex-wrap: wrap;
-    }
-
-    .footer-btn {
-      position: relative;
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, 0.15);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .footer-btn::after {
-      content: '';
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: #08090d;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-
-    .footer-btn.chat {
-      background: radial-gradient(circle at 35% 35%, #00a8ff, #004488);
-      box-shadow: 0 0 18px rgba(0, 168, 255, 0.45);
-    }
-    .footer-btn.playlist {
-      background: radial-gradient(circle at 35% 35%, #00ffaa, #005533);
-      box-shadow: 0 0 18px rgba(0, 255, 170, 0.45);
-    }
-    .footer-btn.donate {
-      background: radial-gradient(circle at 35% 35%, #ffaa00, #664400);
-      box-shadow: 0 0 18px rgba(255, 170, 0, 0.45);
-    }
-
-    .footer-btn .btn-label {
-      position: absolute;
-      bottom: -24px;
-      font-size: 0.95rem;
-      letter-spacing: 2px;
-      color: #98a2bc;
-      text-transform: uppercase;
-      white-space: nowrap;
-      font-family: 'VT323', monospace;
-    }
-
-    .footer-btn:hover {
-      transform: scale(1.15);
-    }
-    .footer-btn:hover .btn-label {
-      color: #fff;
-      text-shadow: 0 0 8px var(--neon-cyan);
-    }
-
-    /* FOOTER PRINCIPAL TERMINAL HUD */
-    footer.cyber-footer {
-      width: 100%;
-      margin-top: 40px;
-      padding: 20px 25px;
-      background: rgba(5, 7, 12, 0.95);
-      border-top: 1px solid var(--border-cyber);
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.75rem;
-      color: #6a748c;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 15px;
-      z-index: 10;
-    }
-
-    .footer-terminal-text span {
-      color: var(--neon-cyan);
-    }
-
-    /* ===== RESPONSIVE FIXES ===== */
-    @media (max-width: 650px) {
-      .cyber-nav {
-        padding: 10px 15px;
-        flex-direction: column;
-        gap: 10px;
-      }
-      .nav-telemetry {
-        font-size: 0.7rem;
-        gap: 12px;
-      }
-      .castle-logo {
-        font-size: 1.6rem;
-      }
-      footer.cyber-footer {
-        flex-direction: column;
-        text-align: center;
-        justify-content: center;
-      }
-    }
   </style>
 </head>
 <body>
 
-  <div class="screen-crt-scanlines"></div>
+  <div class="crt-scanlines"></div>
   <div class="cyber-grid-floor"></div>
 
-  <!-- NAVEGACIÓN RETRO-CYBERPUNK -->
-  <nav class="cyber-nav">
-    <div class="brand-group">
-      <div class="castle-logo">CASTLE<span>.</span></div>
-      <span class="castle-badge">FREQ 108.4 MHz</span>
-    </div>
-    <div class="nav-telemetry">
-      <div class="nav-indicator">
-        <span class="status-beacon"></span>
-        <span>BROADCAST MATRIX: ACTIVE</span>
-      </div>
-      <div class="nav-indicator">
-        <span>AUDIO HQ: 320 KBPS</span>
-      </div>
-    </div>
-  </nav>
+  <!-- TÍTULO RETRO-FUTURISTA -->
+  <header class="castle-header">
+    <h1 class="castle-title">CASTLE</h1>
+    <div class="castle-subtitle">RADIO ONLINE <span>//</span> PIONEER PLX-1000 PRO</div>
+  </header>
 
-  <div class="page-wrapper">
+  <!-- REPRODUCTOR RESPONSIVO INTEGRAL -->
+  <div class="player-outer-bounds" id="player-bounds">
+    <div class="turntable-viewport" id="turntable-viewport">
+      
+      <div class="turntable-wrapper" id="turntable-wrapper">
+        
+        <!-- Adaptador 45 RPM grande de aluminio pulido (72px / 60px) -->
+        <div class="rpm45-well" title="Adaptador 45 RPM">
+          <div class="rpm45-puck"></div>
+        </div>
 
-    <!-- CABECERA PRINCIPAL -->
-    <header class="cyber-hero-banner">
-      <h1 class="cyber-title-main">CASTLE RADIO</h1>
-      <p class="cyber-sub-title">ON-AIR <strong>LIVE CYBERPUNK SYNTHWAVE & RETRO ELECTRONIC</strong> STREAM</p>
-    </header>
+        <!-- Pantalla OLED / VFD con filtro CRT suave -->
+        <div class="vfd-console">
+          <div class="crt-overlay"></div>
 
-    <!-- ÁREA DEL REPRODUCTOR CON MARCO HUD Y ESCALADOR INTELIGENTE -->
-    <div class="player-deck-container">
-      <div class="deck-frame-outer" id="deck-frame-outer">
-        <div class="deck-corner tl"></div>
-        <div class="deck-corner tr"></div>
-        <div class="deck-corner bl"></div>
-        <div class="deck-corner br"></div>
+          <div class="vfd-status-bar">
+            <div class="live-badge">
+              <span class="live-radar">
+                <span class="radar-core"></span>
+                <span class="radar-wave"></span>
+              </span>
+              <span class="live-text">DJ EN VIVO</span>
+            </div>
 
-        <!-- ESCENARIO DINÁMICO QUE SE AUTO-AJUSTA A CUALQUIER ANCHO DE PANTALLA -->
-        <div class="turntable-scale-stage" id="turntable-stage">
+            <!-- NOMBRE DEL DJ EN NARANJA Y TAMAÑO DEL TÍTULO -->
+            <div class="dj-live-widget">
+              <span id="dj_display">Auto Dj</span>
+              <span id="sonic_dj" style="display:none !important;"></span>
+              <span id="sonic_djonair" style="display:none !important;"></span>
+            </div>
+          </div>
           
-          <div class="turntable-wrapper">
-            
-            <!-- Adaptador 45 RPM grande de aluminio pulido (72px / 60px) -->
-            <div class="rpm45-well" title="Adaptador 45 RPM">
-              <div class="rpm45-puck"></div>
+          <!-- Marquesina continua con bucle infinito y suave -->
+          <div class="vfd-title-container">
+            <div class="vfd-marquee-track" id="vfd-marquee-track">
+              <span class="marquee-text" id="sonic_title">Castlebul Radio</span>
+              <span class="marquee-divider">✦</span>
+              <span class="marquee-text" id="sonic_title_dup">Castlebul Radio</span>
+              <span class="marquee-divider">✦</span>
             </div>
+          </div>
 
-            <!-- Pantalla OLED / VFD con filtro CRT suave -->
-            <div class="vfd-console">
-              <div class="crt-overlay"></div>
+          <!-- Ecualizador dinámico multicolor y con amplio rebote -->
+          <div class="visualizer" id="visualizer"></div>
+        </div>
 
-              <div class="vfd-status-bar">
-                <div class="live-badge">
-                  <span class="live-radar">
-                    <span class="radar-core"></span>
-                    <span class="radar-wave"></span>
-                  </span>
-                  <span class="live-text">DJ EN VIVO</span>
-                </div>
+        <!-- Placa de especificaciones Pioneer PLX-1000 (Top-Right) -->
+        <div class="pioneer-specs">
+          <strong>Pioneer</strong><br>PROFESSIONAL TURNTABLE PLX-1000
+        </div>
 
-                <!-- NOMBRE DEL DJ EN NARANJA Y TAMAÑO DEL TÍTULO -->
-                <div class="dj-live-widget">
-                  <span id="dj_display">Auto Dj</span>
-                  <span id="sonic_dj" style="display:none !important;"></span>
-                  <span id="sonic_djonair" style="display:none !important;"></span>
-                </div>
-              </div>
-              
-              <!-- Marquesina continua con bucle infinito y suave -->
-              <div class="vfd-title-container">
-                <div class="vfd-marquee-track" id="vfd-marquee-track">
-                  <span class="marquee-text" id="sonic_title">Castlebul Radio</span>
-                  <span class="marquee-divider">✦</span>
-                  <span class="marquee-text" id="sonic_title_dup">Castlebul Radio</span>
-                  <span class="marquee-divider">✦</span>
-                </div>
-              </div>
+        <!-- Cuenca centrada verticalmente 50/50 -->
+        <div class="platter-bay">
+          <div class="platter" id="platter">
+            <div class="platter-strobe-reflection dim-red" id="platter-strobe-reflection"></div>
 
-              <!-- Ecualizador dinámico multicolor y con amplio rebote -->
-              <div class="visualizer" id="visualizer"></div>
+            <div class="vinyl" id="vinyl">
+              <div class="album-art-visible" id="album-art-visible"></div>
+              <div class="center-spindle"></div>
+              <div id="sonic_art_full" style="display:none !important;"></div>
             </div>
-
-            <!-- Placa de especificaciones Pioneer PLX-1000 (Top-Right) -->
-            <div class="pioneer-specs">
-              <strong>Pioneer</strong><br>PROFESSIONAL TURNTABLE PLX-1000
-            </div>
-
-            <!-- Cuenca centrada verticalmente 50/50 -->
-            <div class="platter-bay">
-              <div class="platter" id="platter">
-                <div class="platter-strobe-reflection dim-red" id="platter-strobe-reflection"></div>
-
-                <div class="vinyl" id="vinyl">
-                  <div class="album-art-visible" id="album-art-visible"></div>
-                  <div class="center-spindle"></div>
-                  <div id="sonic_art_full" style="display:none !important;"></div>
-                </div>
-              </div>
-            </div>
-
-            <!-- UNIDAD ESTROBOSCÓPICA & INTERRUPTOR (CAJA TOTALMENTE CUADRADA) -->
-            <div class="plx-power-tower power-state-off" id="power-tower">
-              <div class="strobe-aperture-box">
-                <div class="strobe-blue-emitter"></div>
-              </div>
-              
-              <div class="power-rotary-housing">
-                <div class="power-ribbed-knob"></div>
-                <div class="power-text-labels">
-                  <span class="lbl-off">OFF</span>
-                  <span class="lbl-on">ON</span>
-                  <span class="lbl-pwr">POWER</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- BRAZO METÁLICO EN 'S' MÁS GRUESO Y AGUJA COLOR DIAMANTE -->
-            <div class="tonearm-assembly">
-              <div class="gimbal-base">
-                <div class="gimbal-ring"></div>
-              </div>
-              
-              <div class="tonearm" id="tonearm">
-                <svg class="tonearm-svg" viewBox="0 0 100 270">
-                  <defs>
-                    <linearGradient id="chromeTubeThick" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stop-color="#3a3a3a" />
-                      <stop offset="20%" stop-color="#999999" />
-                      <stop offset="40%" stop-color="#ffffff" />
-                      <stop offset="65%" stop-color="#d0d0d0" />
-                      <stop offset="85%" stop-color="#777777" />
-                      <stop offset="100%" stop-color="#222222" />
-                    </linearGradient>
-                    
-                    <linearGradient id="pioneerHeadshellThick" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stop-color="#3c3f4d" />
-                      <stop offset="100%" stop-color="#121318" />
-                    </linearGradient>
-                    
-                    <linearGradient id="diamondTipGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="#ffffff" />
-                      <stop offset="35%" stop-color="#bbf2f6" />
-                      <stop offset="70%" stop-color="#70d6ff" />
-                      <stop offset="100%" stop-color="#ffffff" />
-                    </linearGradient>
-                    
-                    <linearGradient id="counterweightGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stop-color="#222" />
-                      <stop offset="35%" stop-color="#e6e6e6" />
-                      <stop offset="70%" stop-color="#888" />
-                      <stop offset="100%" stop-color="#111" />
-                    </linearGradient>
-                  </defs>
-
-                  <rect x="-15" y="-30" width="30" height="24" rx="2" fill="url(#counterweightGrad)" stroke="#444" stroke-width="1" />
-                  <rect x="-15" y="-12" width="30" height="6" fill="#111" />
-                  <line x1="-8" y1="-12" x2="-8" y2="-6" stroke="#fff" stroke-width="1" />
-                  <line x1="0" y1="-12" x2="0" y2="-6" stroke="#fff" stroke-width="1" />
-                  <line x1="8" y1="-12" x2="8" y2="-6" stroke="#fff" stroke-width="1" />
-
-                  <circle cx="0" cy="0" r="8" fill="#c8cddc" stroke="#222" stroke-width="2" />
-                  <circle cx="0" cy="0" r="3" fill="#222" />
-
-                  <path d="M 0,0 C 18,45 22,110 -8,175 L -14,195" 
-                        fill="none" 
-                        stroke="url(#chromeTubeThick)" 
-                        stroke-width="8.5" 
-                        stroke-linecap="round" />
-
-                  <g transform="translate(-14, 195) rotate(-14)">
-                    <rect x="-6" y="-7" width="12" height="7" rx="1" fill="#c2c7d6" stroke="#222" stroke-width="1" />
-                    <rect x="-10" y="0" width="20" height="40" rx="3" fill="url(#pioneerHeadshellThick)" stroke="#555" stroke-width="1.2" />
-                    <line x1="-5" y1="9" x2="5" y2="9" stroke="#888" stroke-width="1.5" />
-                    <line x1="-5" y1="16" x2="5" y2="16" stroke="#888" stroke-width="1.5" />
-                    <path d="M 10,12 Q 22,12 19,24" fill="none" stroke="#eee" stroke-width="2.8" stroke-linecap="round" />
-                    <polygon points="-4,40 4,40 0,49" fill="url(#diamondTipGrad)" stroke="#bbf2f6" stroke-width="0.8" style="filter: drop-shadow(0 0 5px rgba(0, 243, 255, 0.9));" />
-                    <polygon points="-2,40 2,40 0,47" fill="#ffffff" opacity="0.9" />
-                  </g>
-                </svg>
-              </div>
-            </div>
-
-            <!-- CÍRCULO CON PUNTO NARANJA CENTRADO HORIZONTALMENTE -->
-            <div class="target-lamp-unit" id="target-lamp" title="Stylus Target Lamp">
-              <div class="target-lamp-core">
-                <div class="orange-led-dot"></div>
-              </div>
-            </div>
-
-            <!-- FADER DE VOLUMEN CON ESCALA CALIBRADA -->
-            <div class="pitch-fader-assembly" id="fader-container">
-              <div class="volume-scale" id="volume-scale">
-                <div class="scale-step" data-val="10"><span>10</span><i class="tick"></i></div>
-                <div class="scale-step" data-val="8"><span>8</span><i class="tick"></i></div>
-                <div class="scale-step" data-val="6"><span>6</span><i class="tick"></i></div>
-                <div class="scale-step" data-val="4"><span>4</span><i class="tick"></i></div>
-                <div class="scale-step" data-val="2"><span>2</span><i class="tick"></i></div>
-                <div class="scale-step" data-val="0"><span>0</span><i class="tick"></i></div>
-              </div>
-
-              <div class="fader-track" id="fader-track">
-                <div class="fader-fill" id="fader-fill"></div>
-                <div class="fader-knob" id="fader-knob"></div>
-              </div>
-
-              <div class="fader-label">VOLUME</div>
-            </div>
-
-            <!-- BOTONES DE VOLUMEN RÁPIDO (+20% y -20%) -->
-            <div class="fader-step-controls">
-              <button class="vol-btn vol-up-btn" id="vol-up-btn" title="Aumentar volumen (+20%)">
-                <svg viewBox="0 0 24 24" class="vol-arrow-svg">
-                  <path d="M15 19l-7-7 7-7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
-              <button class="vol-btn vol-down-btn" id="vol-down-btn" title="Bajar volumen (-20%)">
-                <svg viewBox="0 0 24 24" class="vol-arrow-svg">
-                  <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
-            </div>
-
-            <!-- BOTÓN PLAY / STOP -->
-            <div class="start-stop-round-btn" id="play-btn">
-              <span class="btn-word play-word">PLAY</span>
-              <span class="btn-word stop-word">STOP</span>
-            </div>
-
-            <!-- BOTONES 33 Y 45 RPM -->
-            <div class="rpm-buttons">
-              <button class="rpm-btn active" id="rpm-33-btn">33</button>
-              <button class="rpm-btn" id="rpm-45-btn">45</button>
-            </div>
-
           </div>
         </div>
+
+        <!-- UNIDAD ESTROBOSCÓPICA & INTERRUPTOR (CAJA TOTALMENTE CUADRADA) -->
+        <div class="plx-power-tower power-state-off" id="power-tower">
+          <div class="strobe-aperture-box">
+            <div class="strobe-blue-emitter"></div>
+          </div>
+          
+          <div class="power-rotary-housing">
+            <div class="power-ribbed-knob"></div>
+            <div class="power-text-labels">
+              <span class="lbl-off">OFF</span>
+              <span class="lbl-on">ON</span>
+              <span class="lbl-pwr">POWER</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BRAZO METÁLICO EN 'S' MÁS GRUESO Y AGUJA COLOR DIAMANTE -->
+        <div class="tonearm-assembly">
+          <div class="gimbal-base">
+            <div class="gimbal-ring"></div>
+          </div>
+          
+          <div class="tonearm" id="tonearm">
+            <svg class="tonearm-svg" viewBox="0 0 100 270">
+              <defs>
+                <linearGradient id="chromeTubeThick" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#3a3a3a" />
+                  <stop offset="20%" stop-color="#999999" />
+                  <stop offset="40%" stop-color="#ffffff" />
+                  <stop offset="65%" stop-color="#d0d0d0" />
+                  <stop offset="85%" stop-color="#777777" />
+                  <stop offset="100%" stop-color="#222222" />
+                </linearGradient>
+                
+                <linearGradient id="pioneerHeadshellThick" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#3c3f4d" />
+                  <stop offset="100%" stop-color="#121318" />
+                </linearGradient>
+                
+                <linearGradient id="diamondTipGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ffffff" />
+                  <stop offset="35%" stop-color="#bbf2f6" />
+                  <stop offset="70%" stop-color="#70d6ff" />
+                  <stop offset="100%" stop-color="#ffffff" />
+                </linearGradient>
+                
+                <linearGradient id="counterweightGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#222" />
+                  <stop offset="35%" stop-color="#e6e6e6" />
+                  <stop offset="70%" stop-color="#888" />
+                  <stop offset="100%" stop-color="#111" />
+                </linearGradient>
+              </defs>
+
+              <rect x="-15" y="-30" width="30" height="24" rx="2" fill="url(#counterweightGrad)" stroke="#444" stroke-width="1" />
+              <rect x="-15" y="-12" width="30" height="6" fill="#111" />
+              <line x1="-8" y1="-12" x2="-8" y2="-6" stroke="#fff" stroke-width="1" />
+              <line x1="0" y1="-12" x2="0" y2="-6" stroke="#fff" stroke-width="1" />
+              <line x1="8" y1="-12" x2="8" y2="-6" stroke="#fff" stroke-width="1" />
+
+              <circle cx="0" cy="0" r="8" fill="#c8cddc" stroke="#222" stroke-width="2" />
+              <circle cx="0" cy="0" r="3" fill="#222" />
+
+              <path d="M 0,0 C 18,45 22,110 -8,175 L -14,195" 
+                    fill="none" 
+                    stroke="url(#chromeTubeThick)" 
+                    stroke-width="8.5" 
+                    stroke-linecap="round" />
+
+              <g transform="translate(-14, 195) rotate(-14)">
+                <rect x="-6" y="-7" width="12" height="7" rx="1" fill="#c2c7d6" stroke="#222" stroke-width="1" />
+                <rect x="-10" y="0" width="20" height="40" rx="3" fill="url(#pioneerHeadshellThick)" stroke="#555" stroke-width="1.2" />
+                <line x1="-5" y1="9" x2="5" y2="9" stroke="#888" stroke-width="1.5" />
+                <line x1="-5" y1="16" x2="5" y2="16" stroke="#888" stroke-width="1.5" />
+                <path d="M 10,12 Q 22,12 19,24" fill="none" stroke="#eee" stroke-width="2.8" stroke-linecap="round" />
+                <polygon points="-4,40 4,40 0,49" fill="url(#diamondTipGrad)" stroke="#bbf2f6" stroke-width="0.8" style="filter: drop-shadow(0 0 5px rgba(0, 243, 255, 0.9));" />
+                <polygon points="-2,40 2,40 0,47" fill="#ffffff" opacity="0.9" />
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <!-- CÍRCULO CON PUNTO NARANJA CENTRADO HORIZONTALMENTE -->
+        <div class="target-lamp-unit" id="target-lamp" title="Stylus Target Lamp">
+          <div class="target-lamp-core">
+            <div class="orange-led-dot"></div>
+          </div>
+        </div>
+
+        <!-- FADER DE VOLUMEN CON ESCALA CALIBRADA -->
+        <div class="pitch-fader-assembly" id="fader-container">
+          <div class="volume-scale" id="volume-scale">
+            <div class="scale-step" data-val="10"><span>10</span><i class="tick"></i></div>
+            <div class="scale-step" data-val="8"><span>8</span><i class="tick"></i></div>
+            <div class="scale-step" data-val="6"><span>6</span><i class="tick"></i></div>
+            <div class="scale-step" data-val="4"><span>4</span><i class="tick"></i></div>
+            <div class="scale-step" data-val="2"><span>2</span><i class="tick"></i></div>
+            <div class="scale-step" data-val="0"><span>0</span><i class="tick"></i></div>
+          </div>
+
+          <div class="fader-track" id="fader-track">
+            <div class="fader-fill" id="fader-fill"></div>
+            <div class="fader-knob" id="fader-knob"></div>
+          </div>
+
+          <div class="fader-label">VOLUME</div>
+        </div>
+
+        <!-- BOTONES DE VOLUMEN RÁPIDO (+20% y -20%) -->
+        <div class="fader-step-controls">
+          <button class="vol-btn vol-up-btn" id="vol-up-btn" title="Aumentar volumen (+20%)">
+            <svg viewBox="0 0 24 24" class="vol-arrow-svg">
+              <path d="M15 19l-7-7 7-7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="vol-btn vol-down-btn" id="vol-down-btn" title="Bajar volumen (-20%)">
+            <svg viewBox="0 0 24 24" class="vol-arrow-svg">
+              <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- BOTÓN PLAY / STOP -->
+        <div class="start-stop-round-btn" id="play-btn">
+          <span class="btn-word play-word">PLAY</span>
+          <span class="btn-word stop-word">STOP</span>
+        </div>
+
+        <!-- BOTONES 33 Y 45 RPM -->
+        <div class="rpm-buttons">
+          <button class="rpm-btn active" id="rpm-33-btn">33</button>
+          <button class="rpm-btn" id="rpm-45-btn">45</button>
+        </div>
+
       </div>
     </div>
-
-    <!-- BOTONES DE ACCIÓN RÁPIDA / ENLACES DIRECTOS -->
-    <div class="cyber-action-deck">
-      <button class="footer-btn chat" onclick="showAlert('Chat interactivo Castle')">
-        <span class="btn-label">Chat</span>
-      </button>
-      <button class="footer-btn playlist" onclick="showAlert('Historial de transmisiones')">
-        <span class="btn-label">Playlist</span>
-      </button>
-      <button class="footer-btn donate" onclick="showAlert('Patrocinios y donaciones')">
-        <span class="btn-label">Donar</span>
-      </button>
-    </div>
-
-    <!-- PANELES DE TELEMETRÍA CYBERPUNK (80s/90s) -->
-    <div class="cyber-info-grid">
-      <div class="cyber-card">
-        <div class="card-header-bar">
-          <span class="card-title">STATUS // CANAL</span>
-          <span class="card-tag">ONLINE</span>
-        </div>
-        <ul class="card-content-list">
-          <li><span>Servidor de Audio</span><span>Mars Stream HQ</span></li>
-          <li><span>Codificación</span><span>MP3 / 44.1 kHz</span></li>
-          <li><span>Estabilidad Enlace</span><span>99.98% OK</span></li>
-          <li><span>Algoritmo Bass-Drive</span><span>Dynamic Active</span></li>
-        </ul>
-      </div>
-
-      <div class="cyber-card">
-        <div class="card-header-bar">
-          <span class="card-title">FRECUENCIAS NOCTURNAS</span>
-          <span class="card-tag">PROGRAMA</span>
-        </div>
-        <ul class="card-content-list">
-          <li><span>00:00 - 04:00</span><span>Cyber Synth Sessions</span></li>
-          <li><span>04:00 - 08:00</span><span>Chillwave Neon Drive</span></li>
-          <li><span>08:00 - 14:00</span><span>90s Club Classics</span></li>
-          <li><span>14:00 - 20:00</span><span>Retro Electro Wave</span></li>
-        </ul>
-      </div>
-
-      <div class="cyber-card">
-        <div class="card-header-bar">
-          <span class="card-title">TERMINAL INFO</span>
-          <span class="card-tag">SYSTEM</span>
-        </div>
-        <ul class="card-content-list">
-          <li><span>Estación</span><span>Castle Radio Pro</span></li>
-          <li><span>Deck Motor</span><span>Direct Drive Quartz</span></li>
-          <li><span>Ecualizador</span><span>VFD Realtime 28-Band</span></li>
-          <li><span>Núcleo DSP</span><span>Pioneer PLX-1000</span></li>
-        </ul>
-      </div>
-    </div>
-
   </div>
-
-  <!-- FOOTER CYBERPUNK -->
-  <footer class="cyber-footer">
-    <div class="footer-terminal-text">
-      SYSTEM: <span>CASTLE-OS v4.2</span> // STREAM PORT <span>8422</span> // ALL RIGHTS RESERVED
-    </div>
-    <div class="footer-terminal-text">
-      RETRO-FUTURISTIC AUDIO BROADCAST NETWORK &copy; 2026
-    </div>
-  </footer>
 
   <audio id="audio-player" crossorigin="anonymous">
     <source src="https://mars.streamerr.co/8422/stream" type="audio/mpeg">
@@ -1988,9 +1604,8 @@
       const sonicDj = document.getElementById('sonic_dj');
       const sonicDjOnAir = document.getElementById('sonic_djonair');
 
-      // Elementos de auto-escala
-      const turntableStage = document.getElementById('turntable-stage');
-      const deckFrameOuter = document.getElementById('deck-frame-outer');
+      const playerBounds = document.getElementById('player-bounds');
+      const turntableViewport = document.getElementById('turntable-viewport');
 
       const STREAM_URL = 'https://mars.streamerr.co/8422/stream';
 
@@ -2019,34 +1634,26 @@
       let lastBassHit = 0;
       const bassCooldown = 220;
 
-      // ✅ ADAPTACIÓN RESPONSIVA DINÁMICA A CUALQUIER RESOLUCIÓN
-      function resizeTurntable() {
-        if (!turntableStage || !deckFrameOuter) return;
+      // ✅ CÁLCULO DE ESCALA MILIMÉTRICA PARA MÓVILES (0 DESBORDES)
+      function fitTurntableToScreen() {
+        if (!playerBounds || !turntableViewport) return;
         
-        // Medir ancho disponible real dentro del marco
-        const availableWidth = deckFrameOuter.clientWidth - 24; // 24px de padding interno
-        const baseWidth = 730;
-        const baseHeight = 560;
+        const availableWidth = playerBounds.clientWidth;
+        const nativeWidth = 730;
+        const nativeHeight = 560;
 
-        let scale = availableWidth / baseWidth;
-        if (scale > 1) scale = 1; // Nunca exceder su tamaño nativo de alta resolución
-        
-        // Aplicar escala suave
-        turntableStage.style.transform = `scale(${scale})`;
-        
-        // Ajustar la altura del contenedor exterior para que no queden márgenes vacíos
-        const scaledHeight = baseHeight * scale;
-        deckFrameOuter.style.height = `${scaledHeight + 24}px`;
+        // Escala proporcional exacta según el ancho disponible
+        let scale = availableWidth / nativeWidth;
+        if (scale > 1) scale = 1;
+
+        // Inyectar escala a la variable CSS y adaptar la altura del contenedor
+        document.documentElement.style.setProperty('--scale', scale);
+        turntableViewport.style.height = `${nativeHeight * scale}px`;
       }
 
-      window.addEventListener('resize', resizeTurntable);
-      window.addEventListener('orientationchange', resizeTurntable);
-      setTimeout(resizeTurntable, 100);
-
-      function showAlert(message) {
-        alert(`${message}\n\nConexión establecida con la estación Castle Radio.`);
-      }
-      window.showAlert = showAlert;
+      window.addEventListener('resize', fitTurntableToScreen);
+      window.addEventListener('orientationchange', fitTurntableToScreen);
+      fitTurntableToScreen();
 
       // FILTRO DE DJ
       function parseDJName(name) {
@@ -2081,9 +1688,7 @@
               djDisplay.textContent = parseDJName(djName);
             }
           }
-        } catch (e) {
-          // Ignorar fallos de red
-        }
+        } catch (e) {}
       }
       setInterval(fetchLiveDJ, 10000);
       fetchLiveDJ();
@@ -2324,10 +1929,13 @@
         updateFaderPosition(volume);
       }
 
+      // Soporte exacto para arrastre de fader con escala activa
       function setVolumeFromPosition(clientY) {
         const trackRect = faderTrack.getBoundingClientRect();
-        const knobHeight = faderKnob.clientHeight || 22;
+        const knobRect = faderKnob.getBoundingClientRect();
+        const knobHeight = knobRect.height;
         const maxTravel = trackRect.height - knobHeight;
+        if (maxTravel <= 0) return;
 
         let relativeY = clientY - trackRect.top - (knobHeight / 2);
         let newVol = 1 - (relativeY / maxTravel);
@@ -2429,8 +2037,8 @@
           });
 
           window.SonicAPI.on('error', function() {
-            displayedTitle = 'Castle Radio';
-            updateMarqueeTitle('Castle Radio');
+            displayedTitle = 'Castlebul Radio';
+            updateMarqueeTitle('Castlebul Radio');
           });
         }
         artUpdateInterval = setInterval(updateAlbumArtBackground, 3000);
@@ -2439,12 +2047,12 @@
       initVisualizer();
       audio.volume = volume;
       setupSonicAPI();
-      updateMarqueeTitle('Castle Radio');
+      updateMarqueeTitle('Castlebul Radio');
 
       window.addEventListener('load', () => {
         updateFaderPosition(volume);
         updateAlbumArtBackground();
-        resizeTurntable();
+        fitTurntableToScreen();
         setTimeout(updateAlbumArtBackground, 1000);
       });
 
