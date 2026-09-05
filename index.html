@@ -112,12 +112,12 @@
       margin: 10px 0;
     }
 
-    /* ===== ADAPTADOR 45 RPM (MÁS GRANDE Y DE ALUMINIO PULIDO MACIZO) ===== */
+    /* ===== ADAPTADOR 45 RPM (MÁS GRANDE: 72px / PUCK 60px DE ALUMINIO PULIDO) ===== */
     .rpm45-well {
       position: absolute;
       top: 14px;
       left: 14px;
-      width: 72px; /* Aumentado a petición */
+      width: 72px;
       height: 72px;
       border-radius: 50%;
       background: radial-gradient(circle, #08090d 50%, #1a1b24 100%);
@@ -130,7 +130,7 @@
     }
 
     .rpm45-puck {
-      width: 60px; /* Aumentado */
+      width: 60px;
       height: 60px;
       border-radius: 50%;
       background: 
@@ -177,12 +177,12 @@
       box-shadow: inset 0 2px 4px rgba(0,0,0,0.9);
     }
 
-    /* ===== PANTALLA OLED / VFD (MISMO ANCHO QUE EL VINILO: 394px) ===== */
+    /* ===== PANTALLA OLED / VFD (ANCHO EXACTO DEL VINILO: 394px) ===== */
     .vfd-console {
       position: absolute;
       top: 12px;
-      left: 106px; /* Mismo alineamiento que el vinilo */
-      width: 394px; /* Mismo ancho que el vinilo */
+      left: 106px;
+      width: 394px;
       height: 78px;
       background: #020408;
       border-radius: 4px;
@@ -321,7 +321,7 @@
       font-weight: 800;
     }
 
-    /* ===== CUENCA DEL PLATO (CENTRADA 50/50: 20px ARRIBA Y 20px ABAJO) ===== */
+    /* ===== CUENCA DEL PLATO (CENTRADA 50/50 VERTICALMENTE) ===== */
     .platter-bay {
       position: absolute;
       top: 110px;
@@ -369,6 +369,7 @@
       pointer-events: none;
     }
 
+    /* Reflejo dinámico que cambia de Azul brillante (ON) a Rojo tenue (OFF) */
     .platter-strobe-reflection {
       position: absolute;
       inset: 0;
@@ -384,9 +385,21 @@
       mask: radial-gradient(circle, transparent 90%, black 91%);
       -webkit-mask: radial-gradient(circle, transparent 90%, black 91%);
       pointer-events: none;
+      transition: background 0.3s ease;
     }
 
-    /* ===== VINILO (394px) ===== */
+    .platter-strobe-reflection.dim-red {
+      background: conic-gradient(
+        from 185deg at 50% 50%,
+        transparent 0deg,
+        rgba(255, 71, 87, 0.2) 15deg,
+        rgba(255, 71, 87, 0.35) 25deg,
+        rgba(255, 71, 87, 0.15) 38deg,
+        transparent 55deg
+      );
+    }
+
+    /* ===== VINILO (394px) SIN RECUADRO TEXTUAL ===== */
     .vinyl {
       width: 394px;
       height: 394px;
@@ -422,6 +435,7 @@
       to { transform: rotate(360deg); }
     }
 
+    /* Galleta central sin texto emergente en blanco */
     .album-art-visible {
       width: 170px;
       height: 170px;
@@ -429,31 +443,16 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      background-color: #0b0c10;
+      background-color: #101116;
+      background-image: radial-gradient(circle, #22242e 0%, #0d0e13 70%, #060709 100%);
       box-shadow: 
         0 0 0 2px #050505,
         0 0 0 4px rgba(255, 255, 255, 0.2),
-        inset 0 0 12px rgba(0,0,0,0.7);
+        inset 0 0 15px rgba(0,0,0,0.8);
       z-index: 5;
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .album-art-visible .fallback {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle, #252836 0%, #0d0e14 100%);
-      color: #fff;
-      font-size: 0.95rem;
-      letter-spacing: 1px;
-      font-family: 'Orbitron', sans-serif;
-      text-align: center;
-      line-height: 1.2;
     }
 
     .center-spindle {
@@ -472,7 +471,7 @@
       display: none !important;
     }
 
-    /* ===== UNIDAD ESTROBOSCÓPICA & INTERRUPTOR ===== */
+    /* ===== UNIDAD ESTROBOSCÓPICA & INTERRUPTOR (SINCRONIZADA ON/OFF) ===== */
     .plx-power-tower {
       position: absolute;
       bottom: 130px;
@@ -483,6 +482,7 @@
       flex-direction: column;
       align-items: center;
       z-index: 30;
+      transition: all 0.3s ease;
     }
 
     .strobe-aperture-box {
@@ -503,10 +503,15 @@
       height: 14px;
       background: #ffffff;
       border-radius: 1.5px;
-      box-shadow: 
-        0 0 8px var(--pioneer-blue),
-        0 0 16px var(--neon-cyan),
-        inset 0 0 2px #fff;
+      box-shadow: 0 0 8px var(--pioneer-blue), 0 0 16px var(--neon-cyan), inset 0 0 2px #fff;
+      transition: all 0.3s ease;
+    }
+
+    /* Estado OFF de la torreta: luz roja tenue */
+    .plx-power-tower.power-state-off .strobe-blue-emitter {
+      background: #ff4757;
+      box-shadow: 0 0 8px rgba(255, 71, 87, 0.7);
+      opacity: 0.55;
     }
 
     .power-rotary-housing {
@@ -531,6 +536,7 @@
       border: 1px solid #444;
       box-shadow: inset 0 0 4px #000;
       position: relative;
+      transition: transform 0.3s ease;
     }
     .power-ribbed-knob::after {
       content: '';
@@ -554,11 +560,37 @@
       color: #787c8e;
       pointer-events: none;
     }
-    .power-text-labels .lbl-off { position: absolute; top: 1px; left: 4px; }
-    .power-text-labels .lbl-on { position: absolute; top: 1px; right: 4px; color: var(--pioneer-blue); }
+    .power-text-labels .lbl-off { position: absolute; top: 1px; left: 4px; transition: color 0.3s; }
+    .power-text-labels .lbl-on { position: absolute; top: 1px; right: 4px; color: var(--pioneer-blue); transition: color 0.3s; }
     .power-text-labels .lbl-pwr { position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); font-size: 0.38rem; }
 
-    /* ===== BRAZO METÁLICO EN 'S' Y PIVOTE (94px) ===== */
+    /* Estado visual de la perilla rotativa en OFF */
+    .plx-power-tower.power-state-off .power-ribbed-knob {
+      transform: rotate(-30deg);
+    }
+    .plx-power-tower.power-state-off .lbl-off {
+      color: #ff4757;
+      text-shadow: 0 0 6px rgba(255, 71, 87, 0.7);
+    }
+    .plx-power-tower.power-state-off .lbl-on {
+      color: #4a4d5a;
+      text-shadow: none;
+    }
+
+    /* Estado visual de la perilla rotativa en ON */
+    .plx-power-tower.power-state-on .power-ribbed-knob {
+      transform: rotate(30deg);
+    }
+    .plx-power-tower.power-state-on .lbl-on {
+      color: var(--pioneer-blue);
+      text-shadow: 0 0 6px var(--pioneer-blue);
+    }
+    .plx-power-tower.power-state-on .lbl-off {
+      color: #4a4d5a;
+      text-shadow: none;
+    }
+
+    /* ===== BRAZO METÁLICO EN 'S' (94px) ===== */
     .tonearm-assembly {
       position: absolute;
       top: 75px;
@@ -664,7 +696,7 @@
       overflow: visible;
     }
 
-    /* ===== VOLUMEN CALIBRADO CON ESCALA SINCRONIZADA ===== */
+    /* ===== VOLUMEN CALIBRADO VERTICALMENTE ===== */
     .pitch-fader-assembly {
       position: absolute;
       top: 105px;
@@ -683,7 +715,6 @@
       z-index: 20;
     }
 
-    /* Escala y pista comparten exactamente las cotas top: 30px y bottom: 30px */
     .volume-scale {
       position: absolute;
       left: 12px;
@@ -715,7 +746,6 @@
       transition: background 0.12s ease, box-shadow 0.12s ease;
     }
 
-    /* AZUL al estar activo o subir */
     .scale-step.lit-blue {
       color: var(--pioneer-blue);
       text-shadow: 0 0 8px var(--pioneer-blue), 0 0 14px rgba(0, 168, 255, 0.8);
@@ -726,7 +756,6 @@
       box-shadow: 0 0 6px var(--pioneer-blue);
     }
 
-    /* ROJO al bajar o cuando el volumen cae por debajo del nivel */
     .scale-step.lit-red {
       color: var(--neon-red);
       text-shadow: 0 0 8px var(--neon-red), 0 0 14px rgba(255, 42, 75, 0.8);
@@ -802,7 +831,7 @@
       font-weight: 700;
     }
 
-    /* ===== BOTONES DE VOLUMEN RÁPIDO (+20% y -20%) DEBAJO DEL FADER ===== */
+    /* ===== BOTONES DE VOLUMEN RÁPIDO (SOLO PARPADEA LA FLECHA INTERIOR) ===== */
     .fader-step-controls {
       position: absolute;
       bottom: 25px;
@@ -817,15 +846,15 @@
     .vol-btn {
       width: 38px;
       height: 38px;
-      border-radius: 6px; /* Cuadrado con bordes suaves */
+      border-radius: 6px;
       background: linear-gradient(145deg, #252834, #121318);
-      border: 1.5px solid #3c4052;
+      border: 1.5px solid #3c4052; /* Borde estático */
       box-shadow: 0 4px 10px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.15);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.15s ease;
+      transition: transform 0.15s ease;
     }
     .vol-btn:active {
       transform: scale(0.94);
@@ -835,64 +864,47 @@
       width: 18px;
       height: 18px;
       pointer-events: none;
+      transition: filter 0.2s, opacity 0.2s;
     }
 
-    /* Botón izquierdo: Aumenta volumen (+20%) y parpadea en azul */
-    .vol-up-btn {
+    /* Flecha izquierda: Parpadea en azul */
+    .vol-up-btn .vol-arrow-svg {
       color: var(--pioneer-blue);
-      animation: pulse-vol-blue 1.6s infinite ease-in-out;
+      animation: pulse-arrow-blue 1.6s infinite ease-in-out;
+    }
+    @keyframes pulse-arrow-blue {
+      0%, 100% { opacity: 0.35; filter: drop-shadow(0 0 1px rgba(0, 168, 255, 0.4)); }
+      50% { opacity: 1; filter: drop-shadow(0 0 8px var(--pioneer-blue)) drop-shadow(0 0 14px var(--neon-cyan)); }
     }
 
-    @keyframes pulse-vol-blue {
-      0%, 100% {
-        box-shadow: 0 2px 6px rgba(0,0,0,0.8), inset 0 0 4px rgba(0, 168, 255, 0.1);
-        border-color: rgba(0, 168, 255, 0.3);
-        color: rgba(0, 168, 255, 0.6);
-      }
-      50% {
-        box-shadow: 0 0 12px rgba(0, 168, 255, 0.7), inset 0 0 8px rgba(0, 168, 255, 0.4);
-        border-color: var(--pioneer-blue);
-        color: #ffffff;
-      }
-    }
-
-    /* Botón derecho: Disminuye volumen (-20%) y parpadea en rojo */
-    .vol-down-btn {
+    /* Flecha derecha: Parpadea en rojo */
+    .vol-down-btn .vol-arrow-svg {
       color: var(--neon-red);
-      animation: pulse-vol-red 1.6s infinite ease-in-out;
+      animation: pulse-arrow-red 1.6s infinite ease-in-out;
+    }
+    @keyframes pulse-arrow-red {
+      0%, 100% { opacity: 0.35; filter: drop-shadow(0 0 1px rgba(255, 42, 75, 0.4)); }
+      50% { opacity: 1; filter: drop-shadow(0 0 8px var(--neon-red)) drop-shadow(0 0 14px #ff0055); }
     }
 
-    @keyframes pulse-vol-red {
-      0%, 100% {
-        box-shadow: 0 2px 6px rgba(0,0,0,0.8), inset 0 0 4px rgba(255, 42, 75, 0.1);
-        border-color: rgba(255, 42, 75, 0.3);
-        color: rgba(255, 42, 75, 0.6);
-      }
-      50% {
-        box-shadow: 0 0 12px rgba(255, 42, 75, 0.7), inset 0 0 8px rgba(255, 42, 75, 0.4);
-        border-color: var(--neon-red);
-        color: #ffffff;
-      }
+    /* Parpadeos rápidos de la flecha al hacer clic */
+    .vol-up-btn.fast-blink-blue .vol-arrow-svg {
+      animation: rapid-arrow-blue 0.16s infinite alternate !important;
+    }
+    @keyframes rapid-arrow-blue {
+      0% { opacity: 0.2; filter: drop-shadow(0 0 2px var(--pioneer-blue)); }
+      100% { opacity: 1; filter: drop-shadow(0 0 14px #00f3ff) drop-shadow(0 0 20px #fff); }
     }
 
-    /* Parpadeos rápidos durante el clic */
-    .vol-up-btn.fast-blink-blue {
-      animation: rapid-blue 0.16s infinite alternate !important;
+    .vol-down-btn.fast-blink-red .vol-arrow-svg {
+      animation: rapid-arrow-red 0.16s infinite alternate !important;
     }
-    @keyframes rapid-blue {
-      0% { box-shadow: 0 0 4px var(--pioneer-blue); color: #00a8ff; border-color: #00a8ff; }
-      100% { box-shadow: 0 0 18px #00f3ff, inset 0 0 10px #00f3ff; color: #ffffff; border-color: #ffffff; }
-    }
-
-    .vol-down-btn.fast-blink-red {
-      animation: rapid-red 0.16s infinite alternate !important;
-    }
-    @keyframes rapid-red {
-      0% { box-shadow: 0 0 4px var(--neon-red); color: #ff2a4b; border-color: #ff2a4b; }
-      100% { box-shadow: 0 0 18px #ff0055, inset 0 0 10px #ff0055; color: #ffffff; border-color: #ffffff; }
+    @keyframes rapid-arrow-red {
+      0% { opacity: 0.2; filter: drop-shadow(0 0 2px var(--neon-red)); }
+      100% { opacity: 1; filter: drop-shadow(0 0 14px #ff0055) drop-shadow(0 0 20px #fff); }
     }
 
-    /* ===== BOTÓN PLAY / STOP ===== */
+    /* ===== BOTÓN PLAY / STOP CON ACABADO DE ALUMINIO PULIDO (IGUAL AL PUCK) ===== */
     .start-stop-round-btn {
       position: absolute;
       bottom: 16px;
@@ -900,8 +912,20 @@
       width: 74px;
       height: 74px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #ffffff 0%, #b8bcc8 50%, #464955 100%);
-      border: 2px solid #1c1d24;
+      background: 
+        conic-gradient(
+          from 45deg,
+          #ffffff 0deg,
+          #d8dbe2 30deg,
+          #6c707d 90deg,
+          #ffffff 135deg,
+          #d8dbe2 165deg,
+          #6c707d 225deg,
+          #ffffff 270deg,
+          #d8dbe2 300deg,
+          #6c707d 360deg
+        );
+      border: 1.5px solid #aeb4c6;
       cursor: pointer;
       display: flex;
       flex-direction: column;
@@ -910,8 +934,9 @@
       box-shadow: 
         0 0 0 2.5px rgba(0, 168, 255, 0.4),
         0 8px 20px rgba(0,0,0,0.9),
-        inset 0 1px 2px rgba(255,255,255,0.9);
-      transition: all 0.2s ease;
+        inset 0 1px 2px rgba(255,255,255,0.95),
+        inset 0 -2px 4px rgba(0,0,0,0.6);
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
       z-index: 20;
     }
 
@@ -930,7 +955,7 @@
       transition: all 0.2s ease;
     }
 
-    /* DETENIDO: PLAY parpadea en azul, STOP encendido fijo en rojo */
+    /* DETENIDO: PLAY parpadea en azul neón / STOP iluminado fijo en rojo */
     .start-stop-round-btn:not(.playing) .play-word {
       color: var(--pioneer-blue);
       animation: blink-blue-text 1.2s infinite ease-in-out;
@@ -944,17 +969,11 @@
     }
 
     @keyframes blink-blue-text {
-      0%, 100% {
-        opacity: 0.35;
-        text-shadow: none;
-      }
-      50% {
-        opacity: 1;
-        text-shadow: 0 0 10px var(--pioneer-blue), 0 0 18px var(--neon-cyan);
-      }
+      0%, 100% { opacity: 0.35; text-shadow: none; }
+      50% { opacity: 1; text-shadow: 0 0 10px var(--pioneer-blue), 0 0 18px var(--neon-cyan); }
     }
 
-    /* REPRODUCIENDO: PLAY azul fijo, STOP parpadea en rojo */
+    /* REPRODUCIENDO: PLAY azul fijo / STOP parpadea en rojo */
     .start-stop-round-btn.playing .play-word {
       color: var(--pioneer-blue);
       text-shadow: 0 0 8px var(--pioneer-blue);
@@ -968,14 +987,8 @@
     }
 
     @keyframes blink-red-text {
-      0%, 100% {
-        opacity: 0.35;
-        text-shadow: none;
-      }
-      50% {
-        opacity: 1;
-        text-shadow: 0 0 10px #ff2a4b, 0 0 18px #ff0055;
-      }
+      0%, 100% { opacity: 0.35; text-shadow: none; }
+      50% { opacity: 1; text-shadow: 0 0 10px #ff2a4b, 0 0 18px #ff0055; }
     }
 
     .start-stop-round-btn:not(.playing) {
@@ -989,13 +1002,11 @@
 
     .start-stop-round-btn.playing {
       border-color: var(--pioneer-blue);
-      box-shadow: 
-        0 0 0 4px var(--pioneer-blue),
-        0 0 24px rgba(0, 168, 255, 0.85),
-        0 8px 20px rgba(0,0,0,0.9);
+      box-shadow: 0 0 0 4px var(--pioneer-blue), 0 0 24px rgba(0, 168, 255, 0.85), 0 8px 20px rgba(0,0,0,0.9);
       animation: none;
     }
 
+    /* ===== BOTONES 33 Y 45 RPM PULSABLES ===== */
     .rpm-buttons {
       position: absolute;
       bottom: 24px;
@@ -1019,6 +1030,10 @@
       justify-content: center;
       cursor: pointer;
       box-shadow: 0 2px 4px rgba(0,0,0,0.6);
+      transition: all 0.15s ease;
+    }
+    .rpm-btn:active {
+      transform: translateY(1px);
     }
     .rpm-btn.active {
       color: var(--pioneer-blue);
@@ -1133,7 +1148,7 @@
   <div class="main-content">
     <div class="turntable-wrapper">
       
-      <!-- Adaptador 45 RPM grande de aluminio pulido mecanizado -->
+      <!-- Adaptador 45 RPM grande de aluminio pulido (72px / 60px) -->
       <div class="rpm45-well" title="Adaptador 45 RPM">
         <div class="rpm45-puck"></div>
       </div>
@@ -1162,25 +1177,22 @@
         <strong>Pioneer</strong><br>PROFESSIONAL TURNTABLE PLX-1000
       </div>
 
-      <!-- Cuenca centrada verticalmente 50/50 entre pantalla y borde inferior -->
+      <!-- Cuenca centrada verticalmente 50/50 -->
       <div class="platter-bay">
         <div class="platter" id="platter">
-          <div class="platter-strobe-reflection"></div>
+          <!-- Reflejo estroboscópico sincronizado con ON/OFF -->
+          <div class="platter-strobe-reflection dim-red" id="platter-strobe-reflection"></div>
 
           <div class="vinyl" id="vinyl">
-            <div class="album-art-visible" id="album-art-visible">
-              <div class="fallback">
-                CASTLEBUL<br>RADIO
-              </div>
-            </div>
+            <div class="album-art-visible" id="album-art-visible"></div>
             <div class="center-spindle"></div>
             <div id="sonic_art_full" style="display:none !important;"></div>
           </div>
         </div>
       </div>
 
-      <!-- UNIDAD ESTROBOSCÓPICA & INTERRUPTOR (EN EL MARGEN IZQUIERDO) -->
-      <div class="plx-power-tower">
+      <!-- UNIDAD ESTROBOSCÓPICA & INTERRUPTOR (SINCRONIZADA ON/OFF) -->
+      <div class="plx-power-tower power-state-off" id="power-tower">
         <div class="strobe-aperture-box">
           <div class="strobe-blue-emitter"></div>
         </div>
@@ -1242,7 +1254,7 @@
             <line x1="0" y1="-12" x2="0" y2="-6" stroke="#fff" stroke-width="1" />
             <line x1="8" y1="-12" x2="8" y2="-6" stroke="#fff" stroke-width="1" />
 
-            <!-- Pivote central -->
+            <!-- Pivote central reforzado -->
             <circle cx="0" cy="0" r="8" fill="#c8cddc" stroke="#222" stroke-width="2" />
             <circle cx="0" cy="0" r="3" fill="#222" />
 
@@ -1260,7 +1272,6 @@
               <line x1="-5" y1="9" x2="5" y2="9" stroke="#888" stroke-width="1.5" />
               <line x1="-5" y1="16" x2="5" y2="16" stroke="#888" stroke-width="1.5" />
               <path d="M 10,12 Q 22,12 19,24" fill="none" stroke="#eee" stroke-width="2.8" stroke-linecap="round" />
-              <!-- Aguja color diamante -->
               <polygon points="-4,40 4,40 0,49" fill="url(#diamondTipGrad)" stroke="#bbf2f6" stroke-width="0.8" style="filter: drop-shadow(0 0 5px rgba(0, 243, 255, 0.9));" />
               <polygon points="-2,40 2,40 0,47" fill="#ffffff" opacity="0.9" />
             </g>
@@ -1268,7 +1279,7 @@
         </div>
       </div>
 
-      <!-- FADER DE VOLUMEN CALIBRADO -->
+      <!-- FADER DE VOLUMEN CON ESCALA CALIBRADA -->
       <div class="pitch-fader-assembly" id="fader-container">
         <div class="volume-scale" id="volume-scale">
           <div class="scale-step" data-val="10"><span>10</span><i class="tick"></i></div>
@@ -1301,16 +1312,16 @@
         </button>
       </div>
 
-      <!-- BOTÓN PLAY / STOP -->
+      <!-- BOTÓN PLAY / STOP CON ACABADO DE ALUMINIO PULIDO -->
       <div class="start-stop-round-btn" id="play-btn">
         <span class="btn-word play-word">PLAY</span>
         <span class="btn-word stop-word">STOP</span>
       </div>
 
-      <!-- Botones 33 / 45 RPM -->
+      <!-- BOTONES 33 Y 45 RPM PULSABLES E INTERACTIVOS -->
       <div class="rpm-buttons">
-        <div class="rpm-btn active">33</div>
-        <div class="rpm-btn">45</div>
+        <button class="rpm-btn active" id="rpm-33-btn">33</button>
+        <button class="rpm-btn" id="rpm-45-btn">45</button>
       </div>
 
     </div>
@@ -1352,6 +1363,10 @@
       const scaleSteps = document.querySelectorAll('.scale-step');
       const volUpBtn = document.getElementById('vol-up-btn');
       const volDownBtn = document.getElementById('vol-down-btn');
+      const powerTower = document.getElementById('power-tower');
+      const platterReflection = document.getElementById('platter-strobe-reflection');
+      const rpm33Btn = document.getElementById('rpm-33-btn');
+      const rpm45Btn = document.getElementById('rpm-45-btn');
 
       const STREAM_URL = 'https://mars.streamerr.co/8422/stream';
 
@@ -1379,6 +1394,7 @@
       }
       window.showAlert = showAlert;
 
+      // Marquesina fluida
       function updateMarqueeTitle(title) {
         if (!sonicTitle || !marqueeTrack) return;
         sonicTitle.textContent = title;
@@ -1500,8 +1516,10 @@
         animationId = requestAnimationFrame(renderVisualizer);
       }
 
+      // ✅ DETENCIÓN REAL (STOP) Y SINCRONIZACIÓN CON POWER Y STROBE
       async function togglePlay() {
         if (isPlaying) {
+          // DETENER POR COMPLETO (Stop real)
           audio.pause();
           audio.src = '';
           audio.load();
@@ -1510,6 +1528,15 @@
           tonearm.classList.remove('playing');
           playBtn.classList.remove('playing');
           isPlaying = false;
+
+          // Power pasa a OFF y luz a rojo tenue
+          if (powerTower) {
+            powerTower.classList.remove('power-state-on');
+            powerTower.classList.add('power-state-off');
+          }
+          if (platterReflection) {
+            platterReflection.classList.add('dim-red');
+          }
         } else {
           await setupAudioContext();
           try {
@@ -1521,13 +1548,22 @@
             tonearm.classList.add('playing');
             playBtn.classList.add('playing');
             isPlaying = true;
+
+            // Power pasa a ON y luz a azul brillante
+            if (powerTower) {
+              powerTower.classList.remove('power-state-off');
+              powerTower.classList.add('power-state-on');
+            }
+            if (platterReflection) {
+              platterReflection.classList.remove('dim-red');
+            }
           } catch (e) {
             console.error("Error al iniciar audio:", e);
           }
         }
       }
 
-      // ✅ LÓGICA DE VOLUMEN EXACTA: ROJO AL BAJAR DE CADA NÚMERO / AZUL AL ESTAR ACTIVO / TODO ROJO EN 0
+      // ✅ LÓGICA DE VOLUMEN EXACTA (ROJO AL BAJAR DE CADA NÚMERO / AZUL AL ESTAR ACTIVO / TODO ROJO EN 0)
       function updateFaderPosition(vol) {
         const trackHeight = faderTrack.clientHeight;
         const knobHeight = faderKnob.clientHeight || 22;
@@ -1582,8 +1618,6 @@
 
         let relativeY = clientY - trackRect.top - (knobHeight / 2);
         let newVol = 1 - (relativeY / maxTravel);
-        newVol = Math.max(0, Math.min(1, newVol));
-
         setVolume(newVol);
       }
 
@@ -1621,7 +1655,7 @@
       window.addEventListener('touchmove', handleMove, { passive: false });
       window.addEventListener('touchend', handleEnd);
 
-      // Eventos Botones +20% y -20%
+      // Botones +20% y -20%
       volUpBtn.addEventListener('click', () => {
         let newVol = Math.min(1.0, Math.round((volume + 0.2) * 10) / 10);
         setVolume(newVol);
@@ -1644,6 +1678,19 @@
         }, 2000);
       });
 
+      // Botones 33 y 45 RPM pulsables
+      rpm33Btn.addEventListener('click', () => {
+        rpm33Btn.classList.add('active');
+        rpm45Btn.classList.remove('active');
+        vinyl.style.animationDuration = '1.8s'; // 33 RPM
+      });
+
+      rpm45Btn.addEventListener('click', () => {
+        rpm45Btn.classList.add('active');
+        rpm33Btn.classList.remove('active');
+        vinyl.style.animationDuration = '1.33s'; // 45 RPM más rápido
+      });
+
       playBtn.addEventListener('click', togglePlay);
       vinyl.addEventListener('click', togglePlay);
 
@@ -1656,12 +1703,6 @@
           const preloadImg = new Image();
           preloadImg.onload = function() {
             albumArtVisible.style.backgroundImage = `url('${img.src}')`;
-            const fallback = albumArtVisible.querySelector('.fallback');
-            if (fallback) fallback.style.display = 'none';
-          };
-          preloadImg.onerror = function() {
-            const fallback = albumArtVisible.querySelector('.fallback');
-            if (fallback) fallback.style.display = 'flex';
           };
           preloadImg.src = img.src;
         }
