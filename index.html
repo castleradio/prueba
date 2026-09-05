@@ -113,7 +113,7 @@
       margin: 10px 0;
     }
 
-    /* ===== ADAPTADOR 45 RPM (ALUMINIO PULIDO MACIZO 72px) ===== */
+    /* ===== ADAPTADOR 45 RPM (ALUMINIO PULIDO 72px) ===== */
     .rpm45-well {
       position: absolute;
       top: 14px;
@@ -199,7 +199,6 @@
       z-index: 25;
     }
 
-    /* FILTRO CRT SUAVE */
     .crt-overlay {
       position: absolute;
       inset: 0;
@@ -350,7 +349,7 @@
       display: inline-block;
     }
 
-    /* ECUALIZADOR DINÁMICO */
+    /* ECUALIZADOR DINÁMICO DE ESTUDIO (28 BARRAS CON REBOTE) */
     .visualizer {
       display: flex;
       align-items: flex-end;
@@ -373,7 +372,7 @@
       border-radius: 1px 1px 0 0;
       height: 10%;
       box-shadow: 0 0 4px rgba(0, 243, 255, 0.35);
-      transition: height 0.05s ease-out;
+      transition: height 0.04s ease-out;
       opacity: 0.95;
     }
 
@@ -477,31 +476,61 @@
       ) !important;
     }
 
-    /* ===== VINILO (394px) ===== */
+    /* ===== VINILO HIPERREALISTA DE 12" (394px) ===== */
     .vinyl {
       width: 394px;
       height: 394px;
       border-radius: 50%;
       position: absolute;
+      /* Textura física de PVC de alta fidelidad con pistas de audio diferenciadas */
       background: 
-        conic-gradient(
-          from 45deg,
-          rgba(255, 255, 255, 0.18) 0deg,
-          rgba(0, 0, 0, 0.96) 45deg,
-          rgba(255, 255, 255, 0.18) 90deg,
-          rgba(0, 0, 0, 0.96) 135deg,
-          rgba(255, 255, 255, 0.18) 180deg,
-          rgba(0, 0, 0, 0.96) 225deg,
-          rgba(255, 255, 255, 0.18) 270deg,
-          rgba(0, 0, 0, 0.96) 315deg,
-          rgba(255, 255, 255, 0.18) 360deg
+        /* Bandas de canciones, cortes de pista y cera muerta (Run-out groove) */
+        radial-gradient(
+          circle at center,
+          transparent 0,
+          transparent 85px,
+          /* Cera muerta interior (Run-out) */
+          #08090d 85px,
+          #0e0f14 96px,
+          #060608 97px,
+          /* Pista 3 (Interior) */
+          #13141c 98px,
+          #0a0b0f 130px,
+          /* Separación de canciones 2-3 (Gap Band) */
+          #050507 131px,
+          #06070a 133px,
+          /* Pista 2 (Media) */
+          #151620 134px,
+          #0a0b0f 162px,
+          /* Separación de canciones 1-2 (Gap Band) */
+          #050507 163px,
+          #06070a 165px,
+          /* Pista 1 (Exterior) */
+          #151722 166px,
+          #0a0b0e 186px,
+          /* Surco de entrada (Lead-in) y reborde de protección */
+          #060608 187px,
+          #13141b 193px,
+          #040406 194px,
+          #000000 197px
         ),
-        repeating-radial-gradient(circle at center, #09090c 0px, #09090c 2px, #16171e 3px, #09090c 4px);
-      box-shadow: 0 4px 18px rgba(0,0,0,0.9), inset 0 0 2px rgba(255,255,255,0.25);
+        /* Micro-surcos de audio grabados */
+        repeating-radial-gradient(
+          circle at center,
+          rgba(15, 16, 22, 0.9) 0px,
+          rgba(6, 6, 8, 0.95) 1px,
+          rgba(24, 26, 36, 0.8) 2px,
+          rgba(8, 8, 11, 0.95) 3px
+        );
+      box-shadow: 
+        0 8px 25px rgba(0,0,0,0.98),
+        inset 0 0 1px 1.5px rgba(255,255,255,0.22),
+        inset 0 0 6px rgba(0,0,0,0.95);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
 
     .vinyl.spinning {
@@ -513,6 +542,57 @@
       to { transform: rotate(360deg); }
     }
 
+    /* ✅ REFLEJO ANISÓTROPO ÓPTICO EN MARIPOSA (BOWTIE SHEEN) */
+    .vinyl-gloss-sheen {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 6;
+      /* Destello de luz ambiental que brilla perpendicular a los surcos */
+      background: 
+        conic-gradient(
+          from 35deg at 50% 50%,
+          transparent 0deg,
+          rgba(255, 255, 255, 0.05) 15deg,
+          rgba(255, 255, 255, 0.22) 38deg,
+          rgba(255, 255, 255, 0.04) 60deg,
+          transparent 90deg,
+          transparent 180deg,
+          rgba(255, 255, 255, 0.05) 195deg,
+          rgba(255, 255, 255, 0.22) 218deg,
+          rgba(255, 255, 255, 0.04) 240deg,
+          transparent 270deg,
+          transparent 360deg
+        ),
+        conic-gradient(
+          from 125deg at 50% 50%,
+          transparent 0deg,
+          rgba(255, 255, 255, 0.03) 25deg,
+          rgba(255, 255, 255, 0.10) 45deg,
+          transparent 65deg,
+          transparent 180deg,
+          rgba(255, 255, 255, 0.03) 205deg,
+          rgba(255, 255, 255, 0.10) 225deg,
+          transparent 245deg,
+          transparent 360deg
+        );
+      /* La máscara evita que el brillo manche la carátula central */
+      mask: radial-gradient(circle, transparent 84px, black 85px, black 193px, transparent 194px);
+      -webkit-mask: radial-gradient(circle, transparent 84px, black 85px, black 193px, transparent 194px);
+    }
+
+    /* Contra-rotación: la luz del techo permanece en su sitio mientras el vinilo gira debajo */
+    .vinyl.spinning .vinyl-gloss-sheen {
+      animation: counter-sheen 1.8s linear infinite;
+    }
+
+    @keyframes counter-sheen {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(-360deg); }
+    }
+
+    /* Galleta central con anillos concéntricos prensados de fábrica */
     .album-art-visible {
       width: 170px;
       height: 170px;
@@ -523,22 +603,32 @@
       background-color: #101116;
       background-image: radial-gradient(circle, #22242e 0%, #0d0e13 70%, #060709 100%);
       box-shadow: 
-        0 0 0 2px #050505,
-        0 0 0 4px rgba(255, 255, 255, 0.2),
-        inset 0 0 15px rgba(0,0,0,0.8);
+        0 0 0 2px #040405,
+        0 0 0 3.5px rgba(255, 255, 255, 0.12),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.15),
+        inset 0 0 0 24px rgba(0, 0, 0, 0.12),
+        inset 0 0 0 25px rgba(255, 255, 255, 0.08),
+        inset 0 0 0 45px rgba(0, 0, 0, 0.15),
+        inset 0 0 0 46px rgba(255, 255, 255, 0.06),
+        inset 0 0 18px rgba(0, 0, 0, 0.7);
       z-index: 5;
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
     }
 
+    /* Eje central de acero torneado con arandela de corte */
     .center-spindle {
       position: absolute;
-      width: 14px;
-      height: 14px;
+      width: 16px;
+      height: 16px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #ffffff 0%, #aeb4c2 50%, #20222a 100%);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.9), 0 0 1px #fff;
+      background: radial-gradient(circle at 32% 30%, #ffffff 0%, #d5d9e2 40%, #767a87 75%, #181920 100%);
+      box-shadow: 
+        0 3px 6px rgba(0,0,0,0.95), 
+        0 0 0 2px #050508, 
+        0 0 0 3px rgba(255,255,255,0.25);
       z-index: 10;
       border: 1px solid #111;
       pointer-events: none;
@@ -548,7 +638,7 @@
       display: none !important;
     }
 
-    /* ===== UNIDAD ESTROBOSCÓPICA & INTERRUPTOR (CAJA CUADRADA) ===== */
+    /* ===== UNIDAD ESTROBOSCÓPICA & INTERRUPTOR (CAJA TOTALMENTE CUADRADA) ===== */
     .plx-power-tower {
       position: absolute;
       bottom: 130px;
@@ -1329,7 +1419,10 @@
         <div class="platter" id="platter">
           <div class="platter-strobe-reflection dim-red" id="platter-strobe-reflection"></div>
 
+          <!-- VINILO HIPERREALISTA -->
           <div class="vinyl" id="vinyl">
+            <!-- Capa óptica de destello anisótropo que contra-rota -->
+            <div class="vinyl-gloss-sheen"></div>
             <div class="album-art-visible" id="album-art-visible"></div>
             <div class="center-spindle"></div>
             <div id="sonic_art_full" style="display:none !important;"></div>
@@ -1535,6 +1628,9 @@
       let volDownTimeout = null;
       let currentMarqueeText = '';
 
+      // Array de alturas de barras para caída gravitatoria suave
+      const barHeights = new Float32Array(28);
+
       // Paleta rítmica de 4 colores: Azul, Rojo, Naranja y Plateado
       const RHYTHM_COLORS = [
         { glow: 'rgba(0, 168, 255, ',   border: 'rgba(0, 243, 255, ' }, // 1. Azul
@@ -1544,7 +1640,7 @@
       ];
       let rhythmColorIndex = 0;
       let lastBassHit = 0;
-      const bassCooldown = 220; // Tiempo de separación natural entre bombos
+      const bassCooldown = 220; // 220ms de separación entre golpes para evitar parpadeos caóticos
 
       function showAlert(message) {
         alert(`${message}\n\nPróximamente disponible en Castlebul Radio.`);
@@ -1591,7 +1687,7 @@
       setInterval(fetchLiveDJ, 10000);
       fetchLiveDJ();
 
-      // ✅ MARQUESINA CONTINUA Y SUAVE
+      // ✅ MARQUESINA CONTINUA Y SUAVE (SIN CORTES)
       function updateMarqueeTitle(title) {
         if (!title) return;
         const cleanTitle = title.trim();
@@ -1639,10 +1735,10 @@
             analyser = audioContext.createAnalyser();
             analyser.fftSize = 512;
             
-            // ✅ Rango decibélico real para evitar que se pegue al 100% en clímax
+            // ✅ Rango dinámico calibrado de estudio (-75dB a -8dB)
             analyser.minDecibels = -75;
             analyser.maxDecibels = -8;
-            analyser.smoothingTimeConstant = 0.7; // Caída fluida y natural
+            analyser.smoothingTimeConstant = 0.55;
             dataArray = new Uint8Array(analyser.frequencyBinCount);
 
             const source = audioContext.createMediaElementSource(audio);
@@ -1669,7 +1765,6 @@
 
         const activeCol = RHYTHM_COLORS[rhythmColorIndex];
 
-        // Brillo suave y calibrado para acompañar la música
         const intensity = Math.min(0.72, 0.16 + (bassLevel / 255) * 0.48);
         const glow = 14 + (bassLevel / 255) * 26;
         const innerGlow = 6 + (bassLevel / 255) * 16;
@@ -1695,7 +1790,7 @@
         }
       }
 
-      // ✅ ECUALIZADOR DINÁMICO: REBOTE EN TODO EL ESPECTRO SIN PEGARSE AL 100%
+      // ✅ ECUALIZADOR DINÁMICO DE ESTUDIO CON REBOTE GRAVITATORIO FLUIDO
       function renderVisualizer() {
         if (!analyser || !dataArray) return;
 
@@ -1707,30 +1802,43 @@
         // Frecuencias subgraves y bombos (35Hz a 160Hz)
         const kickBins = dataArray.slice(0, 4);
         const bassLevel = kickBins.reduce((a, b) => a + b, 0) / kickBins.length;
-        // Detección consistente para bombos y bajos potentes
         const isBassHit = bassLevel > 182;
 
         updatePlatterLight(bassLevel, isBassHit);
 
         bars.forEach((bar, i) => {
-          const percent = i / barCount;
-          // Mapeo logarítmico para abarcar todo el rango de frecuencias
-          const binIndex = Math.min(
-            bufferLength - 1,
-            Math.floor(Math.pow(percent, 1.35) * (bufferLength * 0.6)) + 1
-          );
+          // Bandas de frecuencia distribuidas logarítmicamente (35Hz a 16.000Hz)
+          const f1 = 35 * Math.pow(16000 / 35, i / barCount);
+          const f2 = 35 * Math.pow(16000 / 35, (i + 1) / barCount);
 
-          // Compensación natural para altas frecuencias
-          const freqBoost = 1.0 + Math.sin(percent * Math.PI * 0.5) * 0.8 + percent * 0.9;
-          let val = (dataArray[binIndex] || 0) * freqBoost;
-          val = Math.min(255, val);
+          const bin1 = Math.max(0, Math.min(bufferLength - 1, Math.floor(f1 / 86.13)));
+          const bin2 = Math.max(bin1, Math.min(bufferLength - 1, Math.floor(f2 / 86.13)));
 
-          // Curva exponencial con amortiguación al 92% para evitar saturación plana
-          let ratio = val / 255;
-          ratio = Math.pow(ratio, 1.25);
+          let sum = 0;
+          let count = 0;
+          for (let b = bin1; b <= bin2; b++) {
+            sum += dataArray[b];
+            count++;
+          }
+          const rawAvg = count > 0 ? (sum / count) : 0;
 
-          const heightPercent = Math.max(10, Math.min(92, ratio * 92));
-          bar.style.height = `${heightPercent}%`;
+          // Compensación natural de caída de agudos
+          const tilt = 1.0 + (i / barCount) * 0.45;
+          let val = rawAvg * tilt;
+
+          let norm = Math.min(1.0, val / 255);
+          norm = Math.pow(norm, 1.35);
+
+          const targetH = Math.max(10, Math.min(92, norm * 92));
+
+          // Física de rebote rápido y caída gravitatoria suave
+          if (targetH > barHeights[i]) {
+            barHeights[i] = targetH;
+          } else {
+            barHeights[i] = Math.max(targetH, barHeights[i] - 3.8);
+          }
+
+          bar.style.height = `${barHeights[i]}%`;
 
           if (isBassHit) {
             bar.classList.add('bass-hit');
@@ -1900,16 +2008,21 @@
         }, 2000);
       });
 
+      // Sincronización del giro con 33 y 45 RPM
       rpm33Btn.addEventListener('click', () => {
         rpm33Btn.classList.add('active');
         rpm45Btn.classList.remove('active');
         vinyl.style.animationDuration = '1.8s';
+        const sheen = vinyl.querySelector('.vinyl-gloss-sheen');
+        if (sheen) sheen.style.animationDuration = '1.8s';
       });
 
       rpm45Btn.addEventListener('click', () => {
         rpm45Btn.classList.add('active');
         rpm33Btn.classList.remove('active');
         vinyl.style.animationDuration = '1.33s';
+        const sheen = vinyl.querySelector('.vinyl-gloss-sheen');
+        if (sheen) sheen.style.animationDuration = '1.33s';
       });
 
       playBtn.addEventListener('click', togglePlay);
