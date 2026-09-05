@@ -96,8 +96,8 @@
 
     /* ===== CHASIS PIONEER PLX-1000 ===== */
     .turntable-wrapper {
-      width: 720px;
-      height: 540px;
+      width: 730px;
+      height: 560px;
       background: linear-gradient(180deg, #1b1c23 0%, #0d0e12 40%, #050608 100%);
       border-radius: 6px;
       position: relative;
@@ -149,20 +149,20 @@
       background: #111;
     }
 
-    /* ===== PANTALLA OLED / VFD SUPERIOR ===== */
+    /* ===== PANTALLA OLED / VFD MÁS ALTA CON BARRAS AMPLIAS ===== */
     .vfd-console {
       position: absolute;
-      top: 10px;
-      left: 80px;
-      width: 360px;
-      height: 52px;
+      top: 8px;
+      left: 78px;
+      width: 370px;
+      height: 68px; /* Altura aumentada para mayor espacio */
       background: #020408;
       border-radius: 4px;
       border: 1.5px solid #142838;
       box-shadow: 
         inset 0 0 20px rgba(0, 168, 255, 0.12),
         inset 0 3px 6px rgba(0,0,0,0.9);
-      padding: 3px 10px;
+      padding: 5px 12px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -175,11 +175,11 @@
       justify-content: space-between;
       align-items: center;
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.5rem;
+      font-size: 0.52rem;
       letter-spacing: 1.5px;
       color: rgba(0, 168, 255, 0.7);
       border-bottom: 1px dashed rgba(0, 168, 255, 0.25);
-      padding-bottom: 1px;
+      padding-bottom: 2px;
     }
 
     .vfd-dot {
@@ -224,19 +224,19 @@
     #sonic_title,
     .sonic-title-dup {
       font-family: 'VT323', monospace;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       color: var(--neon-cyan);
       text-transform: uppercase;
       letter-spacing: 2px;
       text-shadow: 0 0 10px rgba(0, 243, 255, 0.7);
-      line-height: 1;
+      line-height: 1.1;
       flex-shrink: 0;
     }
 
     .marquee-spacer {
       display: none;
       color: var(--pioneer-blue);
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       padding: 0 25px;
       flex-shrink: 0;
       text-shadow: 0 0 8px var(--pioneer-blue);
@@ -251,12 +251,13 @@
       display: inline-block;
     }
 
+    /* Barras de ecualización más altas */
     .visualizer {
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
       gap: 2px;
-      height: 12px;
+      height: 22px; /* Más alta para mayor dinámica */
       border-top: 1px solid rgba(0, 168, 255, 0.15);
       padding-top: 2px;
     }
@@ -293,13 +294,13 @@
       font-weight: 800;
     }
 
-    /* ===== CUENCA DEL PLATO (MÁS A LA DERECHA Y CENTRADA VERTICALMENTE 50/50) ===== */
+    /* ===== CUENCA DEL PLATO (MÁS GRANDE Y BAJADA) ===== */
     .platter-bay {
       position: absolute;
-      top: 70px; /* 70px arriba y 70px abajo = 100% centrado vertical */
-      left: 85px; /* Desplazado a la derecha */
-      width: 400px;
-      height: 400px;
+      top: 82px; /* Posición más baja */
+      left: 88px;
+      width: 430px; /* Tamaño más grande para llenar el espacio */
+      height: 430px;
       border-radius: 50%;
       background: radial-gradient(circle, #040507 68%, #14151c 100%);
       border: 1px solid #232530;
@@ -313,10 +314,10 @@
       z-index: 5;
     }
 
-    /* Plato de aluminio torneado grande (386px) */
+    /* Plato de aluminio torneado grande (416px) */
     .platter {
-      width: 386px;
-      height: 386px;
+      width: 416px;
+      height: 416px;
       border-radius: 50%;
       background: 
         radial-gradient(circle, #1a1b24 87%, #2a2c38 89%, #12131a 91%),
@@ -342,7 +343,7 @@
       pointer-events: none;
     }
 
-    /* Destello LED rasante azul exclusivamente sobre los puntos del borde */
+    /* Destello rasante azul sobre los puntos estroboscópicos */
     .platter-strobe-reflection {
       position: absolute;
       inset: 0;
@@ -360,10 +361,10 @@
       pointer-events: none;
     }
 
-    /* ===== VINILO AGRANDADO (366px) CON PORTADA DE 158px ===== */
+    /* ===== VINILO MÁS GRANDE (394px) CON PORTADA DE 170px ===== */
     .vinyl {
-      width: 366px;
-      height: 366px;
+      width: 394px;
+      height: 394px;
       border-radius: 50%;
       position: absolute;
       background: 
@@ -396,10 +397,10 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Portada del álbum ampliada */
+    /* Portada de 170px para mayor presencia */
     .album-art-visible {
-      width: 158px;
-      height: 158px;
+      width: 170px;
+      height: 170px;
       border-radius: 50%;
       background-size: cover;
       background-position: center;
@@ -424,7 +425,7 @@
       justify-content: center;
       background: radial-gradient(circle, #252836 0%, #0d0e14 100%);
       color: #fff;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       letter-spacing: 1px;
       font-family: 'Orbitron', sans-serif;
       text-align: center;
@@ -433,8 +434,8 @@
 
     .center-spindle {
       position: absolute;
-      width: 13px;
-      height: 13px;
+      width: 14px;
+      height: 14px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #ffffff 0%, #aeb4c2 50%, #20222a 100%);
       box-shadow: 0 2px 5px rgba(0,0,0,0.9), 0 0 1px #fff;
@@ -447,10 +448,10 @@
       display: none !important;
     }
 
-    /* ===== UNIDAD ESTROBOSCÓPICA & INTERRUPTOR (EN EL MARGEN IZQUIERDO) ===== */
+    /* ===== UNIDAD ESTROBOSCÓPICA & INTERRUPTOR ===== */
     .plx-power-tower {
       position: absolute;
-      bottom: 120px;
+      bottom: 130px;
       left: 18px;
       width: 48px;
       height: 72px;
@@ -533,11 +534,11 @@
     .power-text-labels .lbl-on { position: absolute; top: 1px; right: 4px; color: var(--pioneer-blue); }
     .power-text-labels .lbl-pwr { position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); font-size: 0.38rem; }
 
-    /* ===== BRAZO Y CARDÁN ARRIMADOS AL FADER DE VOLUMEN ===== */
+    /* ===== BRAZO Y CARDÁN REAJUSTADOS AL NUEVO TAMAÑO ===== */
     .tonearm-assembly {
       position: absolute;
-      top: 55px;
-      left: 490px; /* Pegado más al fader de volumen */
+      top: 68px;
+      left: 512px;
       width: 120px;
       height: 390px;
       pointer-events: none;
@@ -547,7 +548,7 @@
     .gimbal-base {
       position: absolute;
       top: 10px;
-      left: 10px;
+      left: 8px;
       width: 80px;
       height: 80px;
       border-radius: 50%;
@@ -607,7 +608,7 @@
     .anti-skate-dial {
       position: absolute;
       top: 20px;
-      right: 2px;
+      right: 0px;
       width: 14px;
       height: 14px;
       border-radius: 50%;
@@ -626,13 +627,12 @@
       background: #fff;
     }
 
-    /* Brazo con recorrido más corto */
     .tonearm {
       position: absolute;
-      top: 50px;
-      left: 50px;
+      top: 48px;
+      left: 48px;
       width: 80px;
-      height: 230px;
+      height: 240px;
       transform-origin: 0px 0px;
       transform: rotate(0deg);
       transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -640,14 +640,14 @@
       overflow: visible;
     }
 
-    /* ✅ RECORRIDO CORTO (SOLO 23°), ATERRIZANDO EXACTAMENTE EN EL VINILO */
+    /* Calibrado a 25° para posarse exactamente sobre el surco del disco grande */
     .tonearm.playing {
-      transform: rotate(23deg);
+      transform: rotate(25deg);
     }
 
     .tonearm-svg {
       width: 90px;
-      height: 240px;
+      height: 250px;
       overflow: visible;
     }
 
@@ -655,9 +655,9 @@
     .pitch-fader-assembly {
       position: absolute;
       top: 105px;
-      right: 22px;
+      right: 18px;
       width: 85px;
-      height: 340px;
+      height: 350px;
       background: linear-gradient(180deg, #14151b, #09090d);
       border-radius: 4px;
       border: 1px solid #232530;
@@ -697,7 +697,7 @@
     .volume-scale {
       position: absolute;
       left: 10px;
-      top: 48px;
+      top: 50px;
       bottom: 25px;
       width: 24px;
       display: flex;
@@ -737,9 +737,9 @@
     .fader-track {
       position: relative;
       margin-left: 20px;
-      margin-top: 32px;
+      margin-top: 34px;
       width: 6px;
-      height: 245px;
+      height: 255px;
       background: #050608;
       border-radius: 3px;
       box-shadow: inset 0 0 6px #000, 0 1px 1px rgba(255,255,255,0.08);
@@ -799,13 +799,13 @@
       font-weight: 700;
     }
 
-    /* ===== BOTÓN PLAY / STOP ===== */
+    /* ===== BOTÓN PLAY / STOP MÁS GRANDE (74px) ===== */
     .start-stop-round-btn {
       position: absolute;
-      bottom: 20px;
-      left: 20px;
-      width: 62px;
-      height: 62px;
+      bottom: 16px;
+      left: 18px;
+      width: 74px; /* Aumentado para mayor presencia */
+      height: 74px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #ffffff 0%, #b8bcc8 50%, #464955 100%);
       border: 2px solid #1c1d24;
@@ -815,8 +815,8 @@
       align-items: center;
       justify-content: center;
       box-shadow: 
-        0 0 0 2px rgba(0, 168, 255, 0.4),
-        0 8px 18px rgba(0,0,0,0.85),
+        0 0 0 2.5px rgba(0, 168, 255, 0.4),
+        0 8px 20px rgba(0,0,0,0.9),
         inset 0 1px 2px rgba(255,255,255,0.9);
       transition: all 0.2s ease;
       z-index: 20;
@@ -832,33 +832,33 @@
     }
 
     @keyframes pulse-pioneer-blue {
-      0% { box-shadow: 0 0 0 2px rgba(0, 168, 255, 0.3), 0 8px 18px rgba(0,0,0,0.85); }
-      100% { box-shadow: 0 0 0 3.5px rgba(0, 168, 255, 0.95), 0 0 16px rgba(0, 168, 255, 0.7), 0 8px 18px rgba(0,0,0,0.85); }
+      0% { box-shadow: 0 0 0 2.5px rgba(0, 168, 255, 0.3), 0 8px 20px rgba(0,0,0,0.9); }
+      100% { box-shadow: 0 0 0 4px rgba(0, 168, 255, 0.95), 0 0 20px rgba(0, 168, 255, 0.75), 0 8px 20px rgba(0,0,0,0.9); }
     }
 
     .start-stop-round-btn.playing {
       border-color: var(--pioneer-blue);
       box-shadow: 
-        0 0 0 3.5px var(--pioneer-blue),
-        0 0 22px rgba(0, 168, 255, 0.85),
-        0 8px 18px rgba(0,0,0,0.85);
+        0 0 0 4px var(--pioneer-blue),
+        0 0 24px rgba(0, 168, 255, 0.85),
+        0 8px 20px rgba(0,0,0,0.9);
       animation: none;
     }
 
     .start-stop-text {
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.55rem;
+      font-size: 0.65rem; /* Letra un poco más grande */
       font-weight: 900;
       letter-spacing: 0.5px;
       color: #1a1b22;
-      line-height: 1.1;
+      line-height: 1.15;
       text-align: center;
     }
 
     .rpm-buttons {
       position: absolute;
-      bottom: 26px;
-      left: 95px;
+      bottom: 24px;
+      left: 104px;
       display: flex;
       gap: 5px;
       z-index: 20;
@@ -883,20 +883,6 @@
       color: var(--pioneer-blue);
       border-color: var(--pioneer-blue);
       box-shadow: 0 0 6px rgba(0, 168, 255, 0.5);
-    }
-
-    .plx-bottom-brand {
-      position: absolute;
-      bottom: 20px;
-      right: 125px;
-      font-size: 0.58rem;
-      color: #6a6d7d;
-      letter-spacing: 1px;
-    }
-    .plx-bottom-brand strong {
-      font-style: italic;
-      color: #ffffff;
-      font-size: 0.7rem;
     }
 
     /* ===== FOOTER ===== */
@@ -965,13 +951,13 @@
     }
 
     /* ===== RESPONSIVE ===== */
-    @media (max-width: 740px) {
+    @media (max-width: 750px) {
       .turntable-wrapper {
         transform: scale(0.82);
         margin: -40px 0;
       }
     }
-    @media (max-width: 590px) {
+    @media (max-width: 600px) {
       .turntable-wrapper {
         transform: scale(0.68);
         margin: -75px 0;
@@ -1011,7 +997,7 @@
         <div class="rpm45-puck"></div>
       </div>
 
-      <!-- Pantalla OLED / VFD con marquesina en bucle -->
+      <!-- Pantalla OLED / VFD más alta con ecualizador de mayor altura -->
       <div class="vfd-console">
         <div class="vfd-status-bar">
           <span><span class="vfd-dot"></span>LIVE BROADCAST</span>
@@ -1035,7 +1021,7 @@
         <strong>Pioneer</strong><br>PROFESSIONAL TURNTABLE PLX-1000
       </div>
 
-      <!-- Cuenca centrada verticalmente y metida a la derecha -->
+      <!-- Cuenca grande y bajada que llena el espacio -->
       <div class="platter-bay">
         <div class="platter" id="platter">
           <!-- Reflejo azul suave que baña exclusivamente los puntos del borde -->
@@ -1078,7 +1064,7 @@
         <div class="anti-skate-dial"></div>
         
         <div class="tonearm" id="tonearm">
-          <svg class="tonearm-svg" viewBox="0 0 90 240">
+          <svg class="tonearm-svg" viewBox="0 0 90 250">
             <defs>
               <linearGradient id="chromeTube" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="#555" />
@@ -1110,14 +1096,14 @@
             <circle cx="0" cy="0" r="2.5" fill="#222" />
 
             <!-- Tubo cromado en 'S' robusto -->
-            <path d="M 0,0 C 16,40 18,100 -8,160 L -14,180" 
+            <path d="M 0,0 C 18,45 22,110 -8,175 L -14,195" 
                   fill="none" 
                   stroke="url(#chromeTube)" 
                   stroke-width="6.5" 
                   stroke-linecap="round" />
 
             <!-- Portacápsulas con aguja -->
-            <g transform="translate(-14, 180) rotate(-14)">
+            <g transform="translate(-14, 195) rotate(-14)">
               <rect x="-5" y="-6" width="10" height="6" rx="1" fill="#bbb" stroke="#333" stroke-width="0.8" />
               <rect x="-8" y="0" width="16" height="34" rx="2" fill="url(#pioneerHeadshell)" stroke="#666" stroke-width="1" />
               <line x1="-4" y1="8" x2="4" y2="8" stroke="#999" stroke-width="1.2" />
@@ -1154,7 +1140,7 @@
         <div class="fader-label">VOLUME</div>
       </div>
 
-      <!-- BOTÓN PLAY / STOP CON HALO AZUL -->
+      <!-- BOTÓN PLAY / STOP MÁS GRANDE (74px) -->
       <div class="start-stop-round-btn" id="play-btn">
         <div class="start-stop-text">PLAY<br>STOP</div>
       </div>
@@ -1163,11 +1149,6 @@
       <div class="rpm-buttons">
         <div class="rpm-btn active">33</div>
         <div class="rpm-btn">45</div>
-      </div>
-
-      <!-- Serigrafía inferior derecha PLX-1000 -->
-      <div class="plx-bottom-brand">
-        <strong>Pioneer</strong> DIRECT DRIVE TURNTABLE PLX-1000
       </div>
 
     </div>
