@@ -199,6 +199,7 @@
       z-index: 25;
     }
 
+    /* FILTRO CRT SUAVE */
     .crt-overlay {
       position: absolute;
       inset: 0;
@@ -321,8 +322,12 @@
     }
 
     @keyframes vfd-infinite-scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
     }
 
     .marquee-text {
@@ -366,9 +371,9 @@
         var(--neon-red) 100%
       );
       border-radius: 1px 1px 0 0;
-      height: 15%;
+      height: 10%;
       box-shadow: 0 0 4px rgba(0, 243, 255, 0.35);
-      transition: height 0.04s ease-out;
+      transition: height 0.05s ease-out;
       opacity: 0.95;
     }
 
@@ -543,7 +548,7 @@
       display: none !important;
     }
 
-    /* ===== UNIDAD ESTROBOSCÓPICA & INTERRUPTOR (CAJA TOTALMENTE CUADRADA) ===== */
+    /* ===== UNIDAD ESTROBOSCÓPICA & INTERRUPTOR (CAJA CUADRADA) ===== */
     .plx-power-tower {
       position: absolute;
       bottom: 130px;
@@ -1289,7 +1294,6 @@
               <span class="radar-core"></span>
               <span class="radar-wave"></span>
             </span>
-            <!-- DJ EN VIVO: DEL MISMO TAMAÑO QUE EL TÍTULO (1.35rem) -->
             <span class="live-text">DJ EN VIVO</span>
           </div>
 
@@ -1540,7 +1544,7 @@
       ];
       let rhythmColorIndex = 0;
       let lastBassHit = 0;
-      const bassCooldown = 220; // 220ms de separación entre golpes para evitar parpadeos caóticos
+      const bassCooldown = 220; // Tiempo de separación natural entre bombos
 
       function showAlert(message) {
         alert(`${message}\n\nPróximamente disponible en Castlebul Radio.`);
@@ -1587,7 +1591,7 @@
       setInterval(fetchLiveDJ, 10000);
       fetchLiveDJ();
 
-      // ✅ MARQUESINA CONTINUA Y SUAVE (SIN CORTES)
+      // ✅ MARQUESINA CONTINUA Y SUAVE
       function updateMarqueeTitle(title) {
         if (!title) return;
         const cleanTitle = title.trim();
@@ -1634,7 +1638,11 @@
             audioContext = new (window.AudioContext || window.webkitAudioContext)();
             analyser = audioContext.createAnalyser();
             analyser.fftSize = 512;
-            analyser.smoothingTimeConstant = 0.7; // Caída fluida y amortiguada
+            
+            // ✅ Rango decibélico real para evitar que se pegue al 100% en clímax
+            analyser.minDecibels = -75;
+            analyser.maxDecibels = -8;
+            analyser.smoothingTimeConstant = 0.7; // Caída fluida y natural
             dataArray = new Uint8Array(analyser.frequencyBinCount);
 
             const source = audioContext.createMediaElementSource(audio);
@@ -1654,7 +1662,6 @@
       // ✅ ILUMINACIÓN DEL BORDE: SUAVE Y REACTIVA A GRAVES Y BOMBO POTENTE
       function updatePlatterLight(bassLevel, isBassHit) {
         const now = Date.now();
-        // Solo cambia de color ante un bombo/bajo potente real con cooldown suave
         if (isBassHit && (now - lastBassHit) > bassCooldown) {
           lastBassHit = now;
           rhythmColorIndex = (rhythmColorIndex + 1) % RHYTHM_COLORS.length;
@@ -1662,7 +1669,7 @@
 
         const activeCol = RHYTHM_COLORS[rhythmColorIndex];
 
-        // Intensidad y radio ajustados para un destello suave que acompaña el ritmo
+        // Brillo suave y calibrado para acompañar la música
         const intensity = Math.min(0.72, 0.16 + (bassLevel / 255) * 0.48);
         const glow = 14 + (bassLevel / 255) * 26;
         const innerGlow = 6 + (bassLevel / 255) * 16;
@@ -1700,7 +1707,7 @@
         // Frecuencias subgraves y bombos (35Hz a 160Hz)
         const kickBins = dataArray.slice(0, 4);
         const bassLevel = kickBins.reduce((a, b) => a + b, 0) / kickBins.length;
-        // Detección consistente de bombos y bajos potentes
+        // Detección consistente para bombos y bajos potentes
         const isBassHit = bassLevel > 182;
 
         updatePlatterLight(bassLevel, isBassHit);
