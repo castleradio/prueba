@@ -199,6 +199,7 @@
       z-index: 25;
     }
 
+    /* FILTRO CRT SUAVE */
     .crt-overlay {
       position: absolute;
       inset: 0;
@@ -225,7 +226,7 @@
       opacity: 0.85;
     }
 
-    /* BARRA SUPERIOR: DJ EN VIVO (1.35rem) + NOMBRE DEL DJ EN NARANJA (1.35rem) */
+    /* BARRA SUPERIOR: DJ EN VIVO (1.35rem) + NOMBRE DEL DJ (1.35rem) */
     .vfd-status-bar {
       display: flex;
       justify-content: space-between;
@@ -273,7 +274,6 @@
       100% { transform: scale(3.5); opacity: 0; }
     }
 
-    /* DJ EN VIVO: 1.35rem */
     .live-text {
       color: #ff3b5c;
       font-family: 'VT323', monospace;
@@ -428,7 +428,7 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 10px 30px rgba(0,0,0,0.95), inset 0 0 20px rgba(0,0,0,0.9);
-      transition: box-shadow 0.08s ease-out, border-color 0.08s ease-out;
+      transition: box-shadow 0.06s ease-out, border-color 0.06s ease-out;
     }
 
     .platter::before {
@@ -443,7 +443,7 @@
       pointer-events: none;
     }
 
-    /* Reflejo del haz estroboscópico sincronizado al golpe */
+    /* Reflejo del haz estroboscópico reactivo */
     .platter-strobe-reflection {
       position: absolute;
       inset: 0;
@@ -546,7 +546,7 @@
       display: none !important;
     }
 
-    /* ===== UNIDAD ESTROBOSCÓPICA & INTERRUPTOR (CAJA TOTALMENTE CUADRADA) ===== */
+    /* ===== UNIDAD ESTROBOSCÓPICA & INTERRUPTOR (CAJA CUADRADA) ===== */
     .plx-power-tower {
       position: absolute;
       bottom: 130px;
@@ -1086,8 +1086,14 @@
     }
 
     @keyframes blink-blue-text {
-      0%, 100% { opacity: 0.4; text-shadow: none; }
-      50% { opacity: 1; text-shadow: 0 0 12px #00f3ff, 0 0 20px #00a8ff; }
+      0%, 100% {
+        opacity: 0.4;
+        text-shadow: none;
+      }
+      50% {
+        opacity: 1;
+        text-shadow: 0 0 12px #00f3ff, 0 0 20px #00a8ff;
+      }
     }
 
     /* REPRODUCIENDO: PLAY azul fijo / STOP parpadea en rojo */
@@ -1104,8 +1110,14 @@
     }
 
     @keyframes blink-red-text {
-      0%, 100% { opacity: 0.35; text-shadow: none; }
-      50% { opacity: 1; text-shadow: 0 0 12px #ff1744, 0 0 20px #ff0055; }
+      0%, 100% {
+        opacity: 0.35;
+        text-shadow: none;
+      }
+      50% {
+        opacity: 1;
+        text-shadow: 0 0 12px #ff1744, 0 0 20px #ff0055;
+      }
     }
 
     .start-stop-round-btn:not(.playing) {
@@ -1280,6 +1292,7 @@
               <span class="radar-core"></span>
               <span class="radar-wave"></span>
             </span>
+            <!-- DJ EN VIVO: DEL MISMO TAMAÑO QUE EL TÍTULO (1.35rem) -->
             <span class="live-text">DJ EN VIVO</span>
           </div>
 
@@ -1301,7 +1314,7 @@
           </div>
         </div>
 
-        <!-- Ecualizador multicolor dinámico con mayor rebote -->
+        <!-- Ecualizador dinámico multicolor y con amplio rebote -->
         <div class="visualizer" id="visualizer"></div>
       </div>
 
@@ -1533,8 +1546,10 @@
       ];
       let rhythmColorIndex = 0;
       let currentGlowPower = 0;
-      let prevKickLevel = 0;
-      let avgKickLevel = 110;
+
+      // Variables del detector de transitorios adaptativo para Tech House y Pop
+      let kickThreshold = 140;
+      const minKickThreshold = 110;
       let lastKickTime = 0;
 
       function showAlert(message) {
@@ -1646,39 +1661,42 @@
         }
       }
 
-      // ✅ DETECTOR DE TRANSITORIOS DE BOMBO Y CAÍDA ANALÓGICA DE POTENCIA
+      // ✅ DETECTOR DE BOMBO ADAPTATIVO PARA TECH HOUSE Y POP POTENTE
       function processKickRhythm() {
-        // Rango de frecuencias subgraves (30Hz a 90Hz)
-        const subBass = (dataArray[0] + dataArray[1] + dataArray[2]) / 3;
-
-        // Promedio móvil adaptativo
-        avgKickLevel = avgKickLevel * 0.94 + subBass * 0.06;
-
         const now = performance.now();
-        const diff = subBass - prevKickLevel;
+        
+        // Puntos clave de frecuencia del bombo: subgrave (b0) y chasquido de pegada (b1 y b2)
+        const b0 = dataArray[0] || 0;
+        const b1 = dataArray[1] || 0;
+        const b2 = dataArray[2] || 0;
+        
+        // Energía combinada del golpe (frecuencias de 40Hz a 180Hz)
+        const kickEnergy = b0 * 0.55 + b1 * 0.35 + b2 * 0.10;
 
-        // Detección del golpe seco del bombo (Kick Onset)
-        const isKickHit = (diff > 18 || subBass > avgKickLevel * 1.32) && 
-                          subBass > 150 && 
-                          (now - lastKickTime > 230);
+        // Detección adaptativa: captura el impacto sin ser engañado por subgraves sostenidos
+        const isKickHit = (kickEnergy > kickThreshold) && (now - lastKickTime > 210);
 
         if (isKickHit) {
           lastKickTime = now;
-          // Avanzar al siguiente color exactamente en el golpe
+          // Avanza de forma limpia al siguiente color con el golpe
           rhythmColorIndex = (rhythmColorIndex + 1) % RHYTHM_COLORS.length;
 
-          // Potencia luminosa proporcional a la fuerza del golpe
-          const hitPower = Math.min(1.0, Math.max(0.35, (subBass - 130) / 115));
+          // Potencia luminosa en función del impacto real del bombo (0.4 a 1.0)
+          const hitPower = Math.min(1.0, Math.max(0.4, (kickEnergy - 70) / 185));
           currentGlowPower = hitPower;
+
+          // El umbral se eleva para evitar re-disparos durante la cola del bajo
+          kickThreshold = Math.max(minKickThreshold, kickEnergy * 0.88);
         } else {
-          // Caída analógica natural hacia la oscuridad entre golpes (sin luces navideñas constantes)
+          // Decaimiento exponencial del umbral para capturar el próximo bombo
+          kickThreshold = Math.max(minKickThreshold, kickThreshold * 0.975);
+
+          // Caída analógica natural de la luz hacia el reposo entre golpes
           currentGlowPower *= 0.88;
-          if (currentGlowPower < 0.015) currentGlowPower = 0;
+          if (currentGlowPower < 0.02) currentGlowPower = 0;
         }
 
-        prevKickLevel = subBass;
-
-        // Aplicar la iluminación reactiva según la potencia instantánea
+        // Aplicación del destello reactivo
         const activeCol = RHYTHM_COLORS[rhythmColorIndex];
 
         if (currentGlowPower > 0.03) {
@@ -1722,7 +1740,7 @@
         const barCount = bars.length;
         const bufferLength = dataArray.length;
 
-        // Procesar el ritmo del bombo y la iluminación del plato
+        // Procesar detección de bombo adaptativa
         processKickRhythm();
 
         // Seguimiento dinámico de picos
@@ -1893,6 +1911,7 @@
         }
       }
 
+      // Eventos Fader
       faderContainer.addEventListener('mousedown', handleStart);
       window.addEventListener('mousemove', handleMove);
       window.addEventListener('mouseup', handleEnd);
@@ -1901,6 +1920,7 @@
       window.addEventListener('touchmove', handleMove, { passive: false });
       window.addEventListener('touchend', handleEnd);
 
+      // Botones +20% y -20%
       volUpBtn.addEventListener('click', () => {
         let newVol = Math.min(1.0, Math.round((volume + 0.2) * 10) / 10);
         setVolume(newVol);
@@ -1923,6 +1943,7 @@
         }, 2000);
       });
 
+      // Botones 33 y 45 RPM
       rpm33Btn.addEventListener('click', () => {
         rpm33Btn.classList.add('active');
         rpm45Btn.classList.remove('active');
