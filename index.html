@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Castlebul Radio | Pro DJ Turntable Edition</title>
+  <title>Castlebul Radio | Pioneer PLX-1000 Edition</title>
   
   <!-- SonicAPI Widget -->
   <script id='sonic_js' data-port='8422' src='https://mars.streamerr.co/cp/widgets.js?r=479'></script>
@@ -11,7 +11,7 @@
   <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=VT323&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;900&family=VT323&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
   
   <style>
     * {
@@ -23,15 +23,18 @@
     }
 
     :root {
+      --pioneer-blue: #00a8ff;
       --neon-cyan: #00f3ff;
       --neon-green: #00ff88;
       --neon-red: #ff2a4b;
-      --metal-rim: #63677a;
+      --metal-chrome: #e6e9f0;
+      --deck-black: #0c0d11;
+      --deck-panel: #14151b;
     }
 
     body {
-      font-family: 'VT323', monospace;
-      background: radial-gradient(circle at 50% 30%, #151722 0%, #08090d 70%, #030305 100%);
+      font-family: 'Montserrat', sans-serif;
+      background: radial-gradient(circle at 50% 30%, #171822 0%, #08090d 70%, #020305 100%);
       color: #e5e9f0;
       min-height: 100vh;
       display: flex;
@@ -41,43 +44,46 @@
       overflow-y: auto;
     }
 
-    /* ===== CABECERA ===== */
+    /* ===== CABECERA PIONEER DJ ===== */
     header {
       width: 100%;
       padding: 12px 20px;
       text-align: center;
-      background: rgba(15, 16, 23, 0.95);
-      border-bottom: 1px solid rgba(0, 243, 255, 0.2);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+      background: rgba(10, 11, 15, 0.95);
+      border-bottom: 1px solid rgba(0, 168, 255, 0.25);
+      box-shadow: 0 4px 25px rgba(0,0,0,0.85);
       z-index: 50;
     }
 
     .header-box {
       display: inline-flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
     }
 
-    .model-tag {
+    .pioneer-brand {
+      font-family: 'Montserrat', sans-serif;
+      font-style: italic;
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #ffffff;
+      text-shadow: 0 0 15px rgba(255,255,255,0.4);
+    }
+    .pioneer-brand span {
+      color: var(--pioneer-blue);
+      font-style: normal;
+    }
+
+    .model-badge {
       font-family: 'Orbitron', sans-serif;
       font-size: 0.65rem;
       letter-spacing: 2px;
-      color: var(--neon-cyan);
-      border: 1px solid rgba(0, 243, 255, 0.4);
+      color: var(--pioneer-blue);
+      border: 1px solid rgba(0, 168, 255, 0.4);
       padding: 3px 8px;
-      border-radius: 4px;
-      text-shadow: 0 0 8px rgba(0, 243, 255, 0.5);
-    }
-
-    .logo {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2rem;
-      font-weight: 900;
-      letter-spacing: 8px;
-      background: linear-gradient(180deg, #ffffff 20%, #9baec4 70%, #465566 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 12px rgba(0, 243, 255, 0.3));
+      border-radius: 2px;
+      text-shadow: 0 0 8px rgba(0, 168, 255, 0.6);
     }
 
     /* ===== CONTENEDOR PRINCIPAL ===== */
@@ -91,44 +97,26 @@
       padding: 15px 10px;
     }
 
-    /* ===== CHASIS REALISTA TECHNICS SL-1200 ===== */
+    /* ===== CHASIS PIONEER PLX-1000 (FORMA CUADRADA / RECTANGULAR) ===== */
     .turntable-wrapper {
       width: 680px;
       height: 530px;
       background: 
-        radial-gradient(ellipse at 85% 15%, rgba(255, 255, 255, 0.04), transparent 40%),
-        repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.012) 0px, rgba(255, 255, 255, 0.012) 1px, transparent 1px, transparent 3px),
-        linear-gradient(145deg, #242632 0%, #15161f 50%, #0d0e14 100%);
-      border-radius: 16px;
+        linear-gradient(180deg, #1c1d24 0%, #0e0f13 40%, #07080a 100%);
+      border-radius: 6px; /* Forma cuadrada profesional */
       position: relative;
-      border: 1px solid #3d4154;
+      border: 1px solid #2e313d;
       box-shadow: 
-        0 35px 80px rgba(0, 0, 0, 0.95),
-        0 10px 30px rgba(0, 0, 0, 0.7),
-        inset 0 1px 1px rgba(255, 255, 255, 0.3),
-        inset 0 -2px 6px rgba(0, 0, 0, 0.8),
-        0 0 45px rgba(0, 243, 255, 0.08);
+        0 40px 90px rgba(0, 0, 0, 0.98),
+        0 12px 30px rgba(0, 0, 0, 0.8),
+        inset 0 1px 1px rgba(255, 255, 255, 0.15),
+        inset 0 -2px 5px rgba(0, 0, 0, 0.9),
+        0 0 35px rgba(0, 168, 255, 0.08);
       transform-origin: center top;
       margin: 10px 0;
     }
 
-    /* Tornillos en las esquinas */
-    .screw {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: radial-gradient(circle, #555 30%, #222 75%);
-      border-radius: 50%;
-      border: 1px solid #111;
-      box-shadow: inset 0 1px 2px rgba(255,255,255,0.4), 0 1px 3px rgba(0,0,0,0.8);
-      z-index: 5;
-    }
-    .screw.tl { top: 12px; left: 12px; }
-    .screw.tr { top: 12px; right: 12px; }
-    .screw.bl { bottom: 12px; left: 12px; }
-    .screw.br { bottom: 12px; right: 12px; }
-
-    /* Adaptador 45 RPM */
+    /* Adaptador 45 RPM estilo PLX plateado (Top-Left) */
     .rpm45-well {
       position: absolute;
       top: 24px;
@@ -136,20 +124,20 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      background: radial-gradient(circle, #08090d 50%, #1c1d29 100%);
-      border: 1px solid #282a3a;
-      box-shadow: inset 0 4px 8px rgba(0,0,0,0.95), 0 1px 1px rgba(255,255,255,0.1);
+      background: #08080c;
+      border: 1px solid #22242d;
+      box-shadow: inset 0 3px 6px rgba(0,0,0,0.9);
       display: flex;
       align-items: center;
       justify-content: center;
     }
     .rpm45-puck {
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #8c909e, #3a3d47 65%, #181920 100%);
+      background: radial-gradient(circle at 35% 35%, #ffffff, #8a8e9b 55%, #32343d 100%);
       border: 1px solid #555;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.8);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.9);
       position: relative;
     }
     .rpm45-puck::after {
@@ -162,23 +150,22 @@
       height: 8px;
       border-radius: 50%;
       background: #111;
-      border: 1px solid #666;
     }
 
-    /* ===== PANTALLA DIGITAL VFD (CON MARQUESINA EN BUCLE) ===== */
+    /* ===== PANTALLA OLED / VFD EMPOTRADA ===== */
     .vfd-console {
       position: absolute;
       top: 18px;
-      left: 90px;
-      width: 350px;
-      height: 78px;
-      background: #020509;
-      border-radius: 6px;
-      border: 2px solid #1c2738;
+      left: 92px;
+      width: 345px;
+      height: 76px;
+      background: #03060a;
+      border-radius: 4px;
+      border: 1.5px solid #142838;
       box-shadow: 
-        inset 0 0 20px rgba(0, 243, 255, 0.12),
+        inset 0 0 20px rgba(0, 168, 255, 0.12),
         inset 0 3px 6px rgba(0,0,0,0.9),
-        0 2px 5px rgba(255,255,255,0.06);
+        0 1px 3px rgba(255,255,255,0.05);
       padding: 6px 12px;
       overflow: hidden;
       display: flex;
@@ -192,8 +179,8 @@
       position: absolute;
       inset: 0;
       background: 
-        repeating-linear-gradient(0deg, rgba(0, 243, 255, 0.03) 0px, rgba(0, 243, 255, 0.03) 1px, transparent 1px, transparent 2px),
-        linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+        repeating-linear-gradient(0deg, rgba(0, 168, 255, 0.03) 0px, rgba(0, 168, 255, 0.03) 1px, transparent 1px, transparent 2px),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, transparent 60%);
       pointer-events: none;
     }
 
@@ -202,10 +189,10 @@
       justify-content: space-between;
       align-items: center;
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.58rem;
+      font-size: 0.55rem;
       letter-spacing: 1.5px;
-      color: rgba(0, 243, 255, 0.6);
-      border-bottom: 1px dashed rgba(0, 243, 255, 0.2);
+      color: rgba(0, 168, 255, 0.7);
+      border-bottom: 1px dashed rgba(0, 168, 255, 0.25);
       padding-bottom: 2px;
     }
 
@@ -213,9 +200,9 @@
       display: inline-block;
       width: 5px;
       height: 5px;
-      background: var(--neon-green);
+      background: var(--pioneer-blue);
       border-radius: 50%;
-      box-shadow: 0 0 6px var(--neon-green);
+      box-shadow: 0 0 6px var(--pioneer-blue);
       margin-right: 4px;
     }
 
@@ -244,32 +231,29 @@
     }
 
     @keyframes vfd-scroll-left {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
     #sonic_title,
     .sonic-title-dup {
-      font-size: 1.25rem;
+      font-family: 'VT323', monospace;
+      font-size: 1.35rem;
       color: var(--neon-cyan);
       text-transform: uppercase;
       letter-spacing: 2px;
       text-shadow: 0 0 10px rgba(0, 243, 255, 0.7);
-      line-height: 1.2;
+      line-height: 1.1;
       flex-shrink: 0;
     }
 
     .marquee-spacer {
       display: none;
-      color: var(--neon-green);
-      font-size: 1.25rem;
+      color: var(--pioneer-blue);
+      font-size: 1.35rem;
       padding: 0 25px;
       flex-shrink: 0;
-      text-shadow: 0 0 8px var(--neon-green);
+      text-shadow: 0 0 8px var(--pioneer-blue);
     }
 
     .sonic-title-dup {
@@ -286,23 +270,42 @@
       align-items: flex-end;
       justify-content: space-between;
       gap: 2px;
-      height: 20px;
-      border-top: 1px solid rgba(0, 243, 255, 0.15);
+      height: 18px;
+      border-top: 1px solid rgba(0, 168, 255, 0.15);
       padding-top: 2px;
     }
 
     .eq-bar {
       flex: 1;
-      background: linear-gradient(to top, var(--neon-cyan) 0%, var(--neon-green) 75%, var(--neon-red) 100%);
+      background: linear-gradient(to top, var(--pioneer-blue) 0%, var(--neon-cyan) 75%, var(--neon-red) 100%);
       border-radius: 1px 1px 0 0;
       height: 15%;
       transition: height 0.05s ease;
-      opacity: 0.85;
+      opacity: 0.9;
     }
 
     .eq-bar.bass-hit {
       filter: brightness(1.4);
-      box-shadow: 0 0 8px var(--neon-green);
+      box-shadow: 0 0 8px var(--pioneer-blue);
+    }
+
+    /* Placa de modelo estilo Pioneer (Top-Right) */
+    .pioneer-specs {
+      position: absolute;
+      top: 25px;
+      right: 32px;
+      text-align: right;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.58rem;
+      color: #7b7f91;
+      letter-spacing: 0.5px;
+      line-height: 1.3;
+    }
+    .pioneer-specs strong {
+      font-style: italic;
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 800;
     }
 
     /* ===== CUENCA Y PLATO GIRATORIO ===== */
@@ -313,49 +316,77 @@
       width: 345px;
       height: 345px;
       border-radius: 50%;
-      background: radial-gradient(circle, #08090d 68%, #1a1b25 100%);
-      border: 1px solid #2d3040;
+      background: radial-gradient(circle, #050608 68%, #16171e 100%);
+      border: 1px solid #282a36;
       box-shadow: 
         inset 0 10px 25px rgba(0,0,0,0.95),
-        inset 0 -3px 8px rgba(255,255,255,0.06),
+        inset 0 -3px 8px rgba(255,255,255,0.04),
         0 2px 6px rgba(0,0,0,0.8);
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .strobe-tower {
+    /* Interruptor rotativo de encendido Pioneer con prisma estroboscópico */
+    .power-switch-assembly {
       position: absolute;
-      top: -4px;
-      left: -4px;
-      width: 30px;
-      height: 46px;
-      background: linear-gradient(135deg, #3a3c48, #181920);
-      border-radius: 5px;
-      border: 1px solid #555;
-      box-shadow: 2px 4px 12px rgba(0,0,0,0.8);
-      z-index: 15;
+      bottom: 95px;
+      left: 20px;
+      width: 48px;
+      height: 48px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-    }
-    .strobe-prism {
-      width: 14px;
-      height: 16px;
-      background: #ff1f3d;
-      border-radius: 2px;
-      box-shadow: 0 0 14px #ff1f3d, inset 0 0 4px #fff;
+      z-index: 20;
     }
 
+    .strobe-prism-housing {
+      width: 20px;
+      height: 24px;
+      background: linear-gradient(135deg, #2c2e38, #111217);
+      border-radius: 3px 3px 0 0;
+      border: 1px solid #444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.8);
+    }
+    .strobe-red-light {
+      width: 10px;
+      height: 12px;
+      background: #ff1f3d;
+      border-radius: 1px;
+      box-shadow: 0 0 10px #ff1f3d, inset 0 0 3px #fff;
+    }
+
+    .power-rotary-dial {
+      width: 38px;
+      height: 20px;
+      background: radial-gradient(circle at 35% 35%, #555, #181920);
+      border-radius: 50%;
+      border: 1px solid #333;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.9);
+      position: relative;
+    }
+    .power-rotary-dial::after {
+      content: 'ON';
+      position: absolute;
+      top: -14px;
+      right: -10px;
+      font-size: 0.45rem;
+      font-family: 'Orbitron', sans-serif;
+      color: #888;
+    }
+
+    /* Plato de aluminio torneado con puntos estroboscópicos */
     .platter {
       width: 330px;
       height: 330px;
       border-radius: 50%;
       background: 
         radial-gradient(circle, #1c1d26 87%, #2a2c38 89%, #12131a 91%),
-        repeating-conic-gradient(#1c1e26 0deg 2deg, #303342 2deg 4deg);
-      border: 3px solid var(--metal-rim);
+        repeating-conic-gradient(#1a1b22 0deg 2deg, #2d2f3b 2deg 4deg);
+      border: 3px solid #858999;
       position: relative;
       display: flex;
       align-items: center;
@@ -371,12 +402,12 @@
       border-radius: 50%;
       background: 
         repeating-radial-gradient(circle, transparent 0, transparent 4px, rgba(0,0,0,0.4) 4px, rgba(0,0,0,0.4) 6px),
-        repeating-conic-gradient(from 0deg, #888e9f 0deg 1.5deg, #171820 1.5deg 3deg);
-      opacity: 0.55;
+        repeating-conic-gradient(from 0deg, #b0b5c4 0deg 1.5deg, #181922 1.5deg 3deg);
+      opacity: 0.65;
       pointer-events: none;
     }
 
-    /* ===== VINILO ===== */
+    /* ===== DISCO DE VINILO GIRATORIO ===== */
     .vinyl {
       width: 308px;
       height: 308px;
@@ -385,15 +416,15 @@
       background: 
         conic-gradient(
           from 45deg,
-          rgba(255, 255, 255, 0.17) 0deg,
+          rgba(255, 255, 255, 0.18) 0deg,
           rgba(0, 0, 0, 0.96) 45deg,
-          rgba(255, 255, 255, 0.17) 90deg,
+          rgba(255, 255, 255, 0.18) 90deg,
           rgba(0, 0, 0, 0.96) 135deg,
-          rgba(255, 255, 255, 0.17) 180deg,
+          rgba(255, 255, 255, 0.18) 180deg,
           rgba(0, 0, 0, 0.96) 225deg,
-          rgba(255, 255, 255, 0.17) 270deg,
+          rgba(255, 255, 255, 0.18) 270deg,
           rgba(0, 0, 0, 0.96) 315deg,
-          rgba(255, 255, 255, 0.17) 360deg
+          rgba(255, 255, 255, 0.18) 360deg
         ),
         repeating-radial-gradient(circle at center, #09090c 0px, #09090c 2px, #16171e 3px, #09090c 4px);
       box-shadow: 0 4px 15px rgba(0,0,0,0.9), inset 0 0 2px rgba(255,255,255,0.2);
@@ -419,10 +450,10 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      background-color: #d11e3b;
+      background-color: #0b0c10;
       box-shadow: 
         0 0 0 2px #050505,
-        0 0 0 4px rgba(255, 255, 255, 0.15),
+        0 0 0 4px rgba(255, 255, 255, 0.2),
         inset 0 0 12px rgba(0,0,0,0.7);
       z-index: 5;
       display: flex;
@@ -437,9 +468,9 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: radial-gradient(circle, #e62b45 0%, #7d0b1d 100%);
+      background: radial-gradient(circle, #252836 0%, #0d0e14 100%);
       color: #fff;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       letter-spacing: 1px;
       font-family: 'Orbitron', sans-serif;
       text-align: center;
@@ -451,7 +482,7 @@
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #ffffff 0%, #9ba0aa 50%, #20222a 100%);
+      background: radial-gradient(circle at 35% 35%, #ffffff 0%, #aeb4c2 50%, #20222a 100%);
       box-shadow: 0 2px 5px rgba(0,0,0,0.9), 0 0 1px #fff;
       z-index: 10;
       border: 1px solid #111;
@@ -462,7 +493,7 @@
       display: none !important;
     }
 
-    /* ===== ENSAMBLE DEL BRAZO (LIMPIO, SIN ELEMENTOS QUE SOBREN) ===== */
+    /* ===== BRAZO METÁLICO PIONEER EN 'S' ===== */
     .tonearm-assembly {
       position: absolute;
       top: 75px;
@@ -473,6 +504,7 @@
       z-index: 25;
     }
 
+    /* Base redonda cardánica con anillo metálico estilo PLX-1000 */
     .gimbal-base {
       position: absolute;
       top: 25px;
@@ -480,9 +512,9 @@
       width: 72px;
       height: 72px;
       border-radius: 50%;
-      background: radial-gradient(circle, #2a2c3a 40%, #161720 70%, #0c0d12 100%);
-      border: 2px solid #5a5e72;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.8), inset 0 1px 2px rgba(255,255,255,0.4);
+      background: radial-gradient(circle, #1b1c24 40%, #0d0e12 70%, #050608 100%);
+      border: 2px solid #454859;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.8), inset 0 1px 2px rgba(255,255,255,0.3);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -492,9 +524,9 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #7c8296, #2d303b);
-      border: 1px solid #999;
-      box-shadow: inset 0 2px 4px rgba(255,255,255,0.4);
+      background: linear-gradient(135deg, #a6acbe, #3a3d4a);
+      border: 1px solid #aaa;
+      box-shadow: inset 0 2px 4px rgba(255,255,255,0.5);
     }
 
     .tonearm {
@@ -506,7 +538,7 @@
       transform-origin: 0px 0px;
       transform: rotate(0deg);
       transition: transform 1.3s cubic-bezier(0.4, 0, 0.2, 1);
-      filter: drop-shadow(-4px 6px 8px rgba(0,0,0,0.8));
+      filter: drop-shadow(-4px 6px 8px rgba(0,0,0,0.85));
       overflow: visible;
     }
 
@@ -520,17 +552,17 @@
       overflow: visible;
     }
 
-    /* ===== FADER DE VOLUMEN CON ESCALA NUMERADA E ILUMINADA ===== */
+    /* ===== VOLUMEN / TEMPO SLIDER ILUMINADO ESTILO PIONEER ===== */
     .pitch-fader-assembly {
       position: absolute;
       top: 145px;
       right: 25px;
-      width: 82px;
+      width: 84px;
       height: 300px;
-      background: linear-gradient(180deg, #181922, #0d0e14);
-      border-radius: 8px;
-      border: 1px solid #2e3142;
-      box-shadow: inset 0 2px 8px rgba(0,0,0,0.9), 0 4px 10px rgba(0,0,0,0.6);
+      background: linear-gradient(180deg, #13141a, #0a0b0e);
+      border-radius: 4px;
+      border: 1px solid #232530;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.9), 0 4px 10px rgba(0,0,0,0.7);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -539,7 +571,7 @@
       z-index: 20;
     }
 
-    /* Escala de volumen graduada e iluminada */
+    /* Escala numerada del 0 al 10 */
     .volume-scale {
       position: absolute;
       left: 10px;
@@ -558,7 +590,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      color: #3f4255;
+      color: #383b4a;
       transition: color 0.15s ease, text-shadow 0.15s ease;
     }
 
@@ -566,31 +598,30 @@
       display: inline-block;
       width: 5px;
       height: 1.5px;
-      background: #2e3242;
+      background: #252835;
       transition: background 0.15s ease, box-shadow 0.15s ease;
     }
 
-    /* Estado iluminado */
     .scale-step.lit {
-      color: var(--neon-cyan);
-      text-shadow: 0 0 8px var(--neon-cyan), 0 0 14px rgba(0, 243, 255, 0.7);
+      color: var(--pioneer-blue);
+      text-shadow: 0 0 8px var(--pioneer-blue), 0 0 14px rgba(0, 168, 255, 0.8);
       font-weight: 800;
     }
 
     .scale-step.lit .tick {
-      background: var(--neon-cyan);
-      box-shadow: 0 0 6px var(--neon-cyan);
+      background: var(--pioneer-blue);
+      box-shadow: 0 0 6px var(--pioneer-blue);
     }
 
-    /* Pista y barra luminosa interior */
+    /* Canal iluminado */
     .fader-track {
       position: relative;
       margin-left: 20px;
       width: 6px;
       height: 240px;
-      background: #08090d;
+      background: #050608;
       border-radius: 3px;
-      box-shadow: inset 0 0 6px #000, 0 1px 1px rgba(255,255,255,0.1);
+      box-shadow: inset 0 0 6px #000, 0 1px 1px rgba(255,255,255,0.08);
     }
 
     .fader-fill {
@@ -599,12 +630,13 @@
       left: 0;
       width: 100%;
       border-radius: 3px;
-      background: linear-gradient(to top, var(--neon-cyan) 0%, var(--neon-green) 100%);
-      box-shadow: 0 0 8px var(--neon-cyan);
+      background: linear-gradient(to top, var(--pioneer-blue) 0%, var(--neon-cyan) 100%);
+      box-shadow: 0 0 8px var(--pioneer-blue);
       pointer-events: none;
       transition: height 0.08s ease-out;
     }
 
+    /* Mando plateado cepillado del fader Pioneer */
     .fader-knob {
       position: absolute;
       left: 50%;
@@ -612,11 +644,11 @@
       transform: translateX(-50%);
       width: 36px;
       height: 22px;
-      background: linear-gradient(180deg, #dcdfe6 0%, #8c909c 45%, #464850 50%, #9fa4b0 100%);
-      border-radius: 4px;
+      background: linear-gradient(180deg, #f5f6f8 0%, #a2a7b5 45%, #4e5058 50%, #b8bcc8 100%);
+      border-radius: 2px;
       cursor: grab;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.8), inset 0 1px 2px rgba(255,255,255,0.8);
-      border: 1px solid #333;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.85), inset 0 1px 2px rgba(255,255,255,0.9);
+      border: 1px solid #282a33;
       transition: bottom 0.08s ease-out;
       touch-action: none;
       z-index: 5;
@@ -633,7 +665,7 @@
       top: 50%;
       height: 2px;
       background: #ffffff;
-      box-shadow: 0 0 3px rgba(255,255,255,0.8);
+      box-shadow: 0 0 3px #fff;
     }
 
     .fader-label {
@@ -641,115 +673,113 @@
       bottom: 6px;
       font-family: 'Orbitron', sans-serif;
       font-size: 0.52rem;
-      color: #7b8196;
+      color: #72768a;
       letter-spacing: 2px;
       text-transform: uppercase;
       font-weight: 700;
     }
 
-    /* ===== BOTONES START / STOP & VELOCIDAD ===== */
-    .start-stop-btn {
+    /* ===== BOTÓN REDONDO START/STOP CON HALO PIONEER ===== */
+    .start-stop-round-btn {
       position: absolute;
       bottom: 25px;
       left: 36px;
-      width: 74px;
-      height: 48px;
-      background: linear-gradient(180deg, #373948 0%, #20212b 60%, #15161c 100%);
-      border-radius: 6px;
-      border: 1px solid #5a5d73;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.4);
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #ffffff 0%, #b2b6c4 50%, #444754 100%);
+      border: 2px solid #1c1d24;
       cursor: pointer;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: all 0.15s ease;
+      box-shadow: 
+        0 0 0 2px rgba(0, 168, 255, 0.4),
+        0 8px 18px rgba(0,0,0,0.85),
+        inset 0 1px 2px rgba(255,255,255,0.9);
+      transition: all 0.2s ease;
       z-index: 20;
     }
 
-    .start-stop-btn:active {
-      transform: translateY(2px);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.9);
+    .start-stop-round-btn:active {
+      transform: scale(0.96);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.9);
     }
 
-    .start-stop-led {
-      width: 14px;
-      height: 4px;
-      background: #333;
-      border-radius: 2px;
-      margin-bottom: 4px;
-      transition: all 0.2s ease;
+    /* Halo pulsante cuando está en pausa */
+    .start-stop-round-btn:not(.playing) {
+      animation: pulse-pioneer-blue 1.5s infinite alternate ease-in-out;
     }
 
-    .start-stop-btn:not(.playing) .start-stop-led {
-      animation: blink-led 1.2s infinite ease-in-out;
+    @keyframes pulse-pioneer-blue {
+      0% { box-shadow: 0 0 0 2px rgba(0, 168, 255, 0.3), 0 8px 18px rgba(0,0,0,0.85); }
+      100% { box-shadow: 0 0 0 3px rgba(0, 168, 255, 0.9), 0 0 15px rgba(0, 168, 255, 0.6), 0 8px 18px rgba(0,0,0,0.85); }
     }
 
-    @keyframes blink-led {
-      0%, 100% { background: #333; box-shadow: none; }
-      50% { background: var(--neon-green); box-shadow: 0 0 8px var(--neon-green); }
-    }
-
-    .start-stop-btn.playing {
-      border-color: var(--neon-green);
-    }
-    .start-stop-btn.playing .start-stop-led {
-      background: var(--neon-green);
-      box-shadow: 0 0 10px var(--neon-green);
+    .start-stop-round-btn.playing {
+      border-color: var(--pioneer-blue);
+      box-shadow: 
+        0 0 0 3px var(--pioneer-blue),
+        0 0 20px rgba(0, 168, 255, 0.8),
+        0 8px 18px rgba(0,0,0,0.85);
       animation: none;
     }
 
-    .start-stop-label {
+    .start-stop-text {
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      color: #a2a7b8;
+      font-size: 0.52rem;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      color: #1a1b22;
+      line-height: 1.1;
+      text-align: center;
     }
 
+    /* Botones 33 / 45 RPM Pioneer rectangulares */
     .rpm-buttons {
       position: absolute;
-      bottom: 30px;
-      left: 122px;
+      bottom: 35px;
+      left: 108px;
       display: flex;
-      gap: 6px;
+      gap: 5px;
       z-index: 20;
     }
 
     .rpm-btn {
-      width: 32px;
+      width: 30px;
       height: 20px;
-      background: linear-gradient(180deg, #2a2c38, #161720);
-      border: 1px solid #424657;
-      color: #72778a;
+      background: linear-gradient(180deg, #242630, #13141a);
+      border: 1px solid #3c3f4e;
+      color: #717588;
       font-family: 'Orbitron', sans-serif;
       font-size: 0.55rem;
-      border-radius: 3px;
+      border-radius: 2px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.6);
     }
     .rpm-btn.active {
-      color: var(--neon-cyan);
-      border-color: var(--neon-cyan);
-      box-shadow: 0 0 6px rgba(0, 243, 255, 0.4);
+      color: var(--pioneer-blue);
+      border-color: var(--pioneer-blue);
+      box-shadow: 0 0 6px rgba(0, 168, 255, 0.5);
     }
 
-    .specs-badge {
+    /* Serigrafía inferior derecha PLX-1000 */
+    .plx-bottom-brand {
       position: absolute;
-      top: 25px;
-      right: 35px;
-      font-family: 'Orbitron', sans-serif;
+      bottom: 22px;
+      right: 120px;
+      font-family: 'Montserrat', sans-serif;
       font-size: 0.55rem;
-      color: #65697d;
+      color: #717588;
       letter-spacing: 1px;
-      text-align: right;
-      line-height: 1.3;
     }
-    .specs-badge strong {
-      color: #aeb4c7;
+    .plx-bottom-brand strong {
+      font-style: italic;
+      color: #ffffff;
       font-size: 0.65rem;
     }
 
@@ -757,8 +787,8 @@
     footer {
       width: 100%;
       padding: 15px 10px;
-      background: rgba(10, 11, 16, 0.95);
-      border-top: 1px solid rgba(0, 243, 255, 0.2);
+      background: rgba(8, 9, 13, 0.95);
+      border-top: 1px solid rgba(0, 168, 255, 0.2);
       display: flex;
       justify-content: center;
       gap: 30px;
@@ -783,13 +813,13 @@
       width: 14px;
       height: 14px;
       border-radius: 50%;
-      background: #0a0b10;
+      background: #08090d;
       border: 1px solid rgba(255,255,255,0.3);
     }
 
     .footer-btn.chat {
-      background: radial-gradient(circle at 35% 35%, #0099ff, #003366);
-      box-shadow: 0 0 15px rgba(0, 153, 255, 0.4);
+      background: radial-gradient(circle at 35% 35%, #00a8ff, #004488);
+      box-shadow: 0 0 15px rgba(0, 168, 255, 0.4);
     }
     .footer-btn.playlist {
       background: radial-gradient(circle at 35% 35%, #00ffaa, #005533);
@@ -808,6 +838,7 @@
       color: #8890a6;
       text-transform: uppercase;
       white-space: nowrap;
+      font-family: 'VT323', monospace;
     }
 
     .footer-btn:hover {
@@ -817,7 +848,7 @@
       color: #fff;
     }
 
-    /* ===== RESPONSIVE ===== */
+    /* ===== RESPONSIVE PROPORCIONAL ===== */
     @media (max-width: 710px) {
       .turntable-wrapper {
         transform: scale(0.82);
@@ -829,9 +860,8 @@
         transform: scale(0.68);
         margin: -75px 0;
       }
-      .logo {
-        font-size: 1.7rem;
-        letter-spacing: 5px;
+      .pioneer-brand {
+        font-size: 1.5rem;
       }
     }
     @media (max-width: 460px) {
@@ -852,27 +882,20 @@
 
   <header>
     <div class="header-box">
-      <span class="model-tag">DIRECT DRIVE DJ</span>
-      <h1 class="logo">CASTLEBUL</h1>
-      <span class="model-tag">SL-8422 PRO</span>
+      <div class="pioneer-brand">Pioneer <span>DJ</span></div>
+      <span class="model-badge">CASTLEBUL PLX-1000 PRO</span>
     </div>
   </header>
 
   <div class="main-content">
     <div class="turntable-wrapper">
       
-      <!-- Tornillos de chasis -->
-      <div class="screw tl"></div>
-      <div class="screw tr"></div>
-      <div class="screw bl"></div>
-      <div class="screw br"></div>
-
-      <!-- Adaptador 45 RPM -->
+      <!-- Adaptador 45 RPM (Top-Left) -->
       <div class="rpm45-well" title="Adaptador 45 RPM">
         <div class="rpm45-puck"></div>
       </div>
 
-      <!-- Pantalla VFD con marquesina en bucle -->
+      <!-- Pantalla OLED / VFD con marquesina en bucle -->
       <div class="vfd-console">
         <div class="vfd-status-bar">
           <span><span class="vfd-dot"></span>LIVE BROADCAST</span>
@@ -891,17 +914,13 @@
         <div class="visualizer" id="visualizer"></div>
       </div>
 
-      <!-- Placa de especificaciones -->
-      <div class="specs-badge">
-        <strong>CASTLEBUL</strong><br>QUARTZ SYNTHESIZER
+      <!-- Placa de especificaciones Pioneer PLX-1000 (Top-Right) -->
+      <div class="pioneer-specs">
+        <strong>Pioneer</strong><br>PROFESSIONAL TURNTABLE PLX-1000
       </div>
 
-      <!-- Cuenca del plato con luz estroboscópica -->
+      <!-- Cuenca del plato -->
       <div class="platter-bay">
-        <div class="strobe-tower">
-          <div class="strobe-prism"></div>
-        </div>
-
         <!-- Plato y vinilo -->
         <div class="platter" id="platter">
           <div class="vinyl" id="vinyl">
@@ -916,7 +935,15 @@
         </div>
       </div>
 
-      <!-- Ensamble mecánico del brazo (Limpio y estilizado) -->
+      <!-- Interruptor rotativo de encendido Pioneer con prisma estroboscópico -->
+      <div class="power-switch-assembly">
+        <div class="strobe-prism-housing">
+          <div class="strobe-red-light"></div>
+        </div>
+        <div class="power-rotary-dial"></div>
+      </div>
+
+      <!-- Brazo cromado en 'S' Pioneer PLX-1000 -->
       <div class="tonearm-assembly">
         <div class="gimbal-base">
           <div class="gimbal-ring"></div>
@@ -926,32 +953,32 @@
           <svg class="tonearm-svg" viewBox="0 0 70 190">
             <defs>
               <linearGradient id="chromeTube" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#555" />
-                <stop offset="30%" stop-color="#fff" />
-                <stop offset="60%" stop-color="#bbb" />
-                <stop offset="100%" stop-color="#333" />
+                <stop offset="0%" stop-color="#777" />
+                <stop offset="30%" stop-color="#ffffff" />
+                <stop offset="60%" stop-color="#cccccc" />
+                <stop offset="100%" stop-color="#444" />
               </linearGradient>
-              <linearGradient id="cartridgeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#2a2c36" />
-                <stop offset="100%" stop-color="#111217" />
+              <linearGradient id="pioneerHeadshell" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#33353e" />
+                <stop offset="100%" stop-color="#14151a" />
               </linearGradient>
             </defs>
 
             <!-- Pivote central -->
-            <circle cx="0" cy="0" r="5" fill="#888" stroke="#222" stroke-width="1.5" />
+            <circle cx="0" cy="0" r="5" fill="#aaa" stroke="#222" stroke-width="1.5" />
 
-            <!-- Tubo cromado en S -->
+            <!-- Tubo cromado en S de longitud real -->
             <path d="M 0,0 C 14,35 15,75 -6,120 L -10,135" 
                   fill="none" 
                   stroke="url(#chromeTube)" 
                   stroke-width="5" 
                   stroke-linecap="round" />
 
-            <!-- Porta-cápsulas Technics (Headshell) -->
+            <!-- Cápsula y portacápsulas con aguja -->
             <g transform="translate(-10, 135) rotate(-14)">
-              <rect x="-7" y="0" width="14" height="28" rx="2" fill="url(#cartridgeGrad)" stroke="#444" stroke-width="1" />
-              <line x1="-3" y1="6" x2="3" y2="6" stroke="#666" stroke-width="1" />
-              <line x1="-3" y1="11" x2="3" y2="11" stroke="#666" stroke-width="1" />
+              <rect x="-7" y="0" width="14" height="28" rx="2" fill="url(#pioneerHeadshell)" stroke="#555" stroke-width="1" />
+              <line x1="-3" y1="6" x2="3" y2="6" stroke="#888" stroke-width="1" />
+              <line x1="-3" y1="11" x2="3" y2="11" stroke="#888" stroke-width="1" />
               <path d="M 7,8 Q 15,8 14,16" fill="none" stroke="#ddd" stroke-width="2" stroke-linecap="round" />
               <polygon points="-3,28 3,28 0,33" fill="#ffcc00" />
             </g>
@@ -959,7 +986,7 @@
         </div>
       </div>
 
-      <!-- Fader de control de Volumen numerado de 0 a 10 con iluminación -->
+      <!-- Fader de control de Volumen graduado de 0 a 10 con iluminación Pioneer -->
       <div class="pitch-fader-assembly" id="fader-container">
         <div class="volume-scale" id="volume-scale">
           <div class="scale-step" data-val="10"><span>10</span><i class="tick"></i></div>
@@ -978,16 +1005,20 @@
         <div class="fader-label">VOLUME</div>
       </div>
 
-      <!-- Botón START / STOP -->
-      <div class="start-stop-btn" id="play-btn">
-        <div class="start-stop-led"></div>
-        <div class="start-stop-label" id="start-stop-label">START</div>
+      <!-- Botón redondo Start/Stop plateado con anillo LED Pioneer -->
+      <div class="start-stop-round-btn" id="play-btn">
+        <div class="start-stop-text">START<br>STOP</div>
       </div>
 
       <!-- Botones 33 / 45 RPM -->
       <div class="rpm-buttons">
         <div class="rpm-btn active">33</div>
         <div class="rpm-btn">45</div>
+      </div>
+
+      <!-- Serigrafía inferior derecha PLX-1000 -->
+      <div class="plx-bottom-brand">
+        <strong>Pioneer</strong> DIRECT DRIVE TURNTABLE
       </div>
 
     </div>
@@ -1013,7 +1044,6 @@
     (function() {
       const audio = document.getElementById('audio-player');
       const playBtn = document.getElementById('play-btn');
-      const startStopLabel = document.getElementById('start-stop-label');
       const vinyl = document.getElementById('vinyl');
       const tonearm = document.getElementById('tonearm');
       const faderKnob = document.getElementById('fader-knob');
@@ -1040,8 +1070,8 @@
       let displayedTitle = null;
       let artUpdateInterval = null;
 
-      let currentHue = 185;
-      let targetHue = 185;
+      let currentHue = 195;
+      let targetHue = 195;
       let bassThreshold = 175;
       let lastBassHit = 0;
       let bassCooldown = 90;
@@ -1051,7 +1081,7 @@
       }
       window.showAlert = showAlert;
 
-      // Marquesina fluida
+      // Marquesina en bucle infinito
       function updateMarqueeTitle(title) {
         if (!sonicTitle || !marqueeTrack) return;
         sonicTitle.textContent = title;
@@ -1179,7 +1209,6 @@
           vinyl.classList.remove('spinning');
           tonearm.classList.remove('playing');
           playBtn.classList.remove('playing');
-          startStopLabel.textContent = 'START';
           isPlaying = false;
         } else {
           await setupAudioContext();
@@ -1188,7 +1217,6 @@
             vinyl.classList.add('spinning');
             tonearm.classList.add('playing');
             playBtn.classList.add('playing');
-            startStopLabel.textContent = 'STOP';
             isPlaying = true;
           } catch (e) {
             console.error("Error al iniciar audio:", e);
@@ -1196,7 +1224,7 @@
         }
       }
 
-      // Actualización de posición e iluminación de la escala y pista
+      // Actualización de escala iluminada y barra LED interior
       function updateFaderPosition(vol) {
         const minPos = 5;
         const maxPos = 95;
@@ -1207,7 +1235,6 @@
           faderFill.style.height = `${pos}%`;
         }
 
-        // Iluminar números según el valor actual (de 0 a 10)
         const currentScaleVal = vol * 10;
         scaleSteps.forEach(step => {
           const stepVal = parseFloat(step.getAttribute('data-val'));
