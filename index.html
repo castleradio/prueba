@@ -113,7 +113,7 @@
       margin: 10px 0;
     }
 
-    /* ===== ADAPTADOR 45 RPM (ALUMINIO PULIDO 72px / 60px) ===== */
+    /* ===== ADAPTADOR 45 RPM (ALUMINIO PULIDO MACIZO 72px) ===== */
     .rpm45-well {
       position: absolute;
       top: 14px;
@@ -199,7 +199,7 @@
       z-index: 25;
     }
 
-    /* RADAR EN VIVO */
+    /* BARRA SUPERIOR: EN VIVO + WIDGET DE DJ */
     .vfd-status-bar {
       display: flex;
       justify-content: space-between;
@@ -258,6 +258,23 @@
       text-shadow: 0 0 8px rgba(255, 59, 92, 0.8);
     }
 
+    /* WIDGET DJ EN VIVO */
+    .dj-live-widget {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 8px rgba(0, 243, 255, 0.6);
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .dj-icon-tag {
+      color: var(--pioneer-blue);
+    }
+
     /* ✅ MARQUESINA CONTINUA SUAVE SIN CORTES */
     .vfd-title-container {
       width: 100%;
@@ -275,7 +292,7 @@
       align-items: center;
       white-space: nowrap;
       width: max-content;
-      animation: vfd-infinite-scroll 18s linear infinite;
+      animation: vfd-infinite-scroll 16s linear infinite;
       will-change: transform;
     }
 
@@ -300,15 +317,15 @@
     }
 
     .marquee-divider {
-      padding: 0 35px;
-      color: var(--neon-green);
+      padding: 0 40px;
+      color: var(--pioneer-blue);
       font-size: 0.9rem;
-      text-shadow: 0 0 8px var(--neon-green);
+      text-shadow: 0 0 8px var(--pioneer-blue);
       flex-shrink: 0;
       display: inline-block;
     }
 
-    /* ✅ ECUALIZADOR COMBINADO CON TODOS LOS COLORES DE LA CABINA */
+    /* ✅ ECUALIZADOR ELEGANTE PIONEER BLUE A CYAN */
     .visualizer {
       display: flex;
       align-items: flex-end;
@@ -321,24 +338,16 @@
 
     .eq-bar {
       flex: 1;
-      /* Gradiente de espectro completo: Azul -> Cian -> Verde -> Naranja -> Rojo */
-      background: linear-gradient(
-        to top,
-        #0066ff 0%,
-        var(--neon-cyan) 25%,
-        var(--neon-green) 50%,
-        var(--neon-orange) 75%,
-        var(--neon-red) 100%
-      );
+      background: linear-gradient(to top, #0055ff 0%, #00a8ff 45%, var(--neon-cyan) 100%);
       border-radius: 1px 1px 0 0;
       height: 15%;
-      box-shadow: 0 0 5px rgba(0, 243, 255, 0.4);
+      box-shadow: 0 0 5px rgba(0, 168, 255, 0.4);
       transition: height 0.04s ease;
       opacity: 0.95;
     }
 
     .eq-bar.bass-hit {
-      filter: brightness(1.4);
+      filter: brightness(1.35);
       box-shadow: 0 0 10px var(--neon-cyan);
     }
 
@@ -707,11 +716,11 @@
       overflow: visible;
     }
 
-    /* ===== CÍRCULO CON PUNTO NARANJA (CENTRADO ENTRE VINILO Y VOLUMEN: left: 543px) ===== */
+    /* ===== CÍRCULO CON PUNTO NARANJA CENTRADO HORIZONTALMENTE ===== */
     .target-lamp-unit {
       position: absolute;
       top: 325px;
-      left: 543px; /* Calculado exactamente al centro del espacio */
+      left: 543px; /* Exactamente al centro entre el vinilo y el volumen */
       width: 42px;
       height: 42px;
       border-radius: 50%;
@@ -978,7 +987,7 @@
       100% { opacity: 1; filter: drop-shadow(0 0 14px #ff0055) drop-shadow(0 0 20px #fff); }
     }
 
-    /* ===== BOTÓN PLAY / STOP CON BORDES INDIVIDUALES DE ALTA VISIBILIDAD ===== */
+    /* ===== BOTÓN PLAY / STOP CON BORDE DIRECTO EN LAS LETRAS ===== */
     .start-stop-round-btn {
       position: absolute;
       bottom: 16px;
@@ -1002,8 +1011,10 @@
       border: 1.5px solid #aeb4c6;
       cursor: pointer;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      gap: 3px;
       box-shadow: 
         0 0 0 2px rgba(0, 168, 255, 0.4),
         0 8px 20px rgba(0,0,0,0.9),
@@ -1018,104 +1029,65 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.9);
     }
 
-    /* Marco con borde alrededor de cada texto */
-    .btn-words-frame {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-      z-index: 5;
-    }
-
-    .btn-badge {
-      padding: 1px 6px;
-      border-radius: 4px;
-      background: rgba(6, 8, 12, 0.88);
-      border: 1.5px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.9), inset 0 1px 1px rgba(255,255,255,0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 48px;
-      transition: all 0.25s ease;
-    }
-
+    /* Letras con borde fino directamente en su contorno */
     .btn-word {
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.65rem;
+      font-size: 0.74rem;
       font-weight: 900;
-      letter-spacing: 1.5px;
-      line-height: 1;
+      letter-spacing: 2px;
+      line-height: 1.15;
       text-align: center;
       transition: all 0.2s ease;
+      -webkit-text-stroke: 1px #05060a;
+      paint-order: stroke fill;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.9));
     }
 
-    /* DETENIDO: PLAY con marco azul parpadeante / STOP con marco rojo fijo */
-    .start-stop-round-btn:not(.playing) .play-badge {
-      border-color: #00f3ff;
-      box-shadow: 0 0 10px rgba(0, 243, 255, 0.6), inset 0 0 4px rgba(0, 243, 255, 0.3);
-      animation: blink-badge-blue 1.2s infinite ease-in-out;
-    }
-
+    /* DETENIDO: PLAY parpadea en azul neón / STOP iluminado fijo en rojo */
     .start-stop-round-btn:not(.playing) .play-word {
       color: #00f3ff;
-      text-shadow: 0 0 10px #00f3ff, 0 0 18px #00a8ff;
-    }
-
-    .start-stop-round-btn:not(.playing) .stop-badge {
-      border-color: #ff2a4b;
-      box-shadow: 0 0 8px rgba(255, 42, 75, 0.5), inset 0 0 4px rgba(255, 42, 75, 0.25);
+      animation: blink-blue-text 1.2s infinite ease-in-out;
     }
 
     .start-stop-round-btn:not(.playing) .stop-word {
       color: #ff2a4b;
-      text-shadow: 0 0 8px #ff2a4b;
+      text-shadow: 0 0 10px #ff2a4b;
+      opacity: 1;
+      animation: none;
     }
 
-    @keyframes blink-badge-blue {
+    @keyframes blink-blue-text {
       0%, 100% {
-        border-color: rgba(0, 243, 255, 0.4);
-        box-shadow: 0 0 4px rgba(0, 243, 255, 0.2);
-        opacity: 0.5;
+        opacity: 0.4;
+        text-shadow: none;
       }
       50% {
-        border-color: #00f3ff;
-        box-shadow: 0 0 12px #00f3ff, inset 0 0 6px #00f3ff;
         opacity: 1;
+        text-shadow: 0 0 12px #00f3ff, 0 0 20px #00a8ff;
       }
     }
 
-    /* REPRODUCIENDO: PLAY azul fijo / STOP marco y texto parpadeante en rojo */
-    .start-stop-round-btn.playing .play-badge {
-      border-color: #00f3ff;
-      box-shadow: 0 0 8px rgba(0, 243, 255, 0.5);
-    }
-
+    /* REPRODUCIENDO: PLAY azul fijo / STOP parpadea en rojo */
     .start-stop-round-btn.playing .play-word {
       color: #00f3ff;
       text-shadow: 0 0 8px #00f3ff;
-    }
-
-    .start-stop-round-btn.playing .stop-badge {
-      border-color: #ff1744;
-      animation: blink-badge-red 1.2s infinite ease-in-out;
+      opacity: 1;
+      animation: none;
     }
 
     .start-stop-round-btn.playing .stop-word {
       color: #ff1744;
-      text-shadow: 0 0 10px #ff1744, 0 0 16px #ff0055;
+      animation: blink-red-text 1.2s infinite ease-in-out;
     }
 
-    @keyframes blink-badge-red {
+    @keyframes blink-red-text {
       0%, 100% {
-        border-color: rgba(255, 23, 68, 0.4);
-        box-shadow: 0 0 4px rgba(255, 23, 68, 0.2);
-        opacity: 0.4;
+        opacity: 0.35;
+        text-shadow: none;
       }
       50% {
-        border-color: #ff1744;
-        box-shadow: 0 0 14px #ff1744, inset 0 0 6px #ff1744;
         opacity: 1;
+        text-shadow: 0 0 12px #ff1744, 0 0 20px #ff0055;
       }
     }
 
@@ -1291,7 +1263,15 @@
             </span>
             <span class="live-text">EN VIVO</span>
           </div>
-          <span>QUARTZ LOCK • 44.1 kHz</span>
+
+          <!-- WIDGET DJ EN VIVO (Reemplaza a QUARTZ LOCK) -->
+          <div class="dj-live-widget">
+            <span class="dj-icon-tag">🎧 DJ:</span>
+            <span id="dj_display">Auto Dj</span>
+            <!-- Elementos estándar de SonicPanel ocultos para inyección -->
+            <span id="sonic_dj" style="display:none !important;"></span>
+            <span id="sonic_djonair" style="display:none !important;"></span>
+          </div>
         </div>
         
         <!-- Marquesina continua con bucle infinito y suave -->
@@ -1304,7 +1284,7 @@
           </div>
         </div>
 
-        <!-- Ecualizador multicolor dinámico (28 barras) -->
+        <!-- Ecualizador elegante azul a cian -->
         <div class="visualizer" id="visualizer"></div>
       </div>
 
@@ -1408,14 +1388,14 @@
         </div>
       </div>
 
-      <!-- CÍRCULO CON PUNTO NARANJA CENTRADO EXACTAMENTE ENTRE VINILO Y VOLUMEN -->
+      <!-- CÍRCULO CON PUNTO NARANJA CENTRADO HORIZONTALMENTE -->
       <div class="target-lamp-unit" id="target-lamp" title="Stylus Target Lamp">
         <div class="target-lamp-core">
           <div class="orange-led-dot"></div>
         </div>
       </div>
 
-      <!-- FADER DE VOLUMEN CON ESCALA CALIBRADA -->
+      <!-- FADER DE VOLUMEN CALIBRADO -->
       <div class="pitch-fader-assembly" id="fader-container">
         <div class="volume-scale" id="volume-scale">
           <div class="scale-step" data-val="10"><span>10</span><i class="tick"></i></div>
@@ -1448,19 +1428,13 @@
         </button>
       </div>
 
-      <!-- BOTÓN PLAY / STOP CON BORDES RETROILUMINADOS DE MÁXIMA VISIBILIDAD -->
+      <!-- BOTÓN PLAY / STOP CON BORDE DIRECTO EN LAS LETRAS -->
       <div class="start-stop-round-btn" id="play-btn">
-        <div class="btn-words-frame">
-          <span class="btn-badge play-badge">
-            <span class="btn-word play-word">PLAY</span>
-          </span>
-          <span class="btn-badge stop-badge">
-            <span class="btn-word stop-word">STOP</span>
-          </span>
-        </div>
+        <span class="btn-word play-word">PLAY</span>
+        <span class="btn-word stop-word">STOP</span>
       </div>
 
-      <!-- BOTONES 33 Y 45 RPM PULSABLES -->
+      <!-- BOTONES 33 Y 45 RPM -->
       <div class="rpm-buttons">
         <button class="rpm-btn active" id="rpm-33-btn">33</button>
         <button class="rpm-btn" id="rpm-45-btn">45</button>
@@ -1510,6 +1484,11 @@
       const rpm33Btn = document.getElementById('rpm-33-btn');
       const rpm45Btn = document.getElementById('rpm-45-btn');
 
+      // Elementos del Widget de DJ
+      const djDisplay = document.getElementById('dj_display');
+      const sonicDj = document.getElementById('sonic_dj');
+      const sonicDjOnAir = document.getElementById('sonic_djonair');
+
       const STREAM_URL = 'https://mars.streamerr.co/8422/stream';
 
       let isPlaying = false;
@@ -1524,6 +1503,7 @@
       let artUpdateInterval = null;
       let volUpTimeout = null;
       let volDownTimeout = null;
+      let currentMarqueeText = '';
 
       let currentHue = 195;
       let targetHue = 195;
@@ -1536,18 +1516,61 @@
       }
       window.showAlert = showAlert;
 
-      // ✅ MARQUESINA CONTINUA SUAVE SIN CORTES (CARRUSEL INFINITO)
+      // ✅ FILTRO DE DJ: SI ES "No Dj" PONE "Auto Dj", SINO MUESTRA EL DJ REAL
+      function parseDJName(name) {
+        if (!name) return 'Auto Dj';
+        const clean = name.trim();
+        if (/^no\s*dj$/i.test(clean) || clean === '' || clean.toLowerCase() === 'nodj' || clean.toLowerCase() === 'no_dj') {
+          return 'Auto Dj';
+        }
+        return clean;
+      }
+
+      function checkDJElements() {
+        const rawName = (sonicDj && sonicDj.textContent) || (sonicDjOnAir && sonicDjOnAir.textContent) || '';
+        if (djDisplay && rawName) {
+          djDisplay.textContent = parseDJName(rawName);
+        }
+      }
+
+      const djObserver = new MutationObserver(() => {
+        checkDJElements();
+      });
+      if (sonicDj) djObserver.observe(sonicDj, { childList: true, characterData: true, subtree: true });
+      if (sonicDjOnAir) djObserver.observe(sonicDjOnAir, { childList: true, characterData: true, subtree: true });
+
+      // Consulta de respaldo directo al JSON de la radio
+      async function fetchLiveDJ() {
+        try {
+          const res = await fetch('https://mars.streamerr.co/cp/get_info.php?p=8422');
+          if (res.ok) {
+            const data = await res.json();
+            const djName = data.djusername || data.dj || data.dj_name || '';
+            if (djDisplay) {
+              djDisplay.textContent = parseDJName(djName);
+            }
+          }
+        } catch (e) {
+          // Ignorar fallos de red
+        }
+      }
+      setInterval(fetchLiveDJ, 10000);
+      fetchLiveDJ();
+
+      // ✅ MARQUESINA CONTINUA Y SUAVE (SIN CORTES)
       function updateMarqueeTitle(title) {
         if (!title) return;
         const cleanTitle = title.trim();
+        if (cleanTitle === currentMarqueeText) return;
+        currentMarqueeText = cleanTitle;
+
         if (sonicTitle) sonicTitle.textContent = cleanTitle;
         if (sonicTitleDup) sonicTitleDup.textContent = cleanTitle;
 
         requestAnimationFrame(() => {
           if (!sonicTitle || !marqueeTrack) return;
-          const singleWidth = sonicTitle.offsetWidth + 70;
-          // Velocidad de lectura constante (~32px por segundo)
-          const duration = Math.max(12, Math.round(singleWidth / 32));
+          const charCount = cleanTitle.length;
+          const duration = Math.max(14, Math.round(charCount * 0.45));
           marqueeTrack.style.animationDuration = `${duration}s`;
         });
       }
@@ -1599,7 +1622,7 @@
         }
       }
 
-      // ✅ ILUMINACIÓN DEL PLATO AL RITMO DE LA MÚSICA MUCHO MÁS NOTORIA
+      // ✅ ILUMINACIÓN DEL BORDE DEL VINILO REFINADA Y SUAVE
       function updatePlatterLight(bassLevel) {
         const now = Date.now();
         if (bassLevel > bassThreshold && (now - lastBassHit) > bassCooldown) {
@@ -1609,21 +1632,21 @@
 
         currentHue = currentHue + (targetHue - currentHue) * 0.15;
         
-        // Intensidad y radio de brillo aumentados sustancialmente
-        const intensity = Math.min(0.95, 0.35 + (bassLevel / 255) * 0.6);
-        const glow = 20 + (bassLevel / 255) * 45;
-        const innerGlow = 10 + (bassLevel / 255) * 25;
+        // Intensidad y radio ajustados para ser visibles pero no cegadores
+        const intensity = Math.min(0.65, 0.20 + (bassLevel / 255) * 0.45);
+        const glow = 14 + (bassLevel / 255) * 28;
+        const innerGlow = 6 + (bassLevel / 255) * 16;
 
         platter.style.boxShadow = `
           0 10px 30px rgba(0,0,0,0.95),
-          inset 0 0 ${innerGlow}px hsla(${currentHue}, 100%, 55%, ${intensity * 0.8}),
+          inset 0 0 ${innerGlow}px hsla(${currentHue}, 100%, 50%, ${intensity * 0.65}),
           0 0 ${glow}px hsla(${currentHue}, 100%, 50%, ${intensity}),
-          0 0 ${glow * 1.6}px hsla(${currentHue}, 100%, 55%, ${intensity * 0.5})
+          0 0 ${glow * 1.4}px hsla(${currentHue}, 100%, 50%, ${intensity * 0.35})
         `;
-        platter.style.borderColor = `hsla(${currentHue}, 100%, 65%, ${intensity * 0.95})`;
+        platter.style.borderColor = `hsla(${currentHue}, 100%, 60%, ${intensity * 0.8})`;
       }
 
-      // ✅ ECUALIZADOR DINÁMICO DONDE TODAS LAS 28 BARRAS SE ILUMINAN
+      // ✅ ECUALIZADOR PIONEER BLUE / CYAN LIMPIO
       function renderVisualizer() {
         if (!analyser || !dataArray) return;
 
@@ -1662,7 +1685,7 @@
         animationId = requestAnimationFrame(renderVisualizer);
       }
 
-      // ✅ DETENCIÓN REAL (STOP) Y SINCRONIZACIÓN CON POWER Y STROBE
+      // ✅ DETENCIÓN REAL (STOP) Y CONTROL DE ENERGÍA
       async function togglePlay() {
         if (isPlaying) {
           audio.pause();
@@ -1706,7 +1729,7 @@
         }
       }
 
-      // ✅ LÓGICA DE VOLUMEN CALIBRADA
+      // ✅ VOLUMEN CALIBRADO (ROJO AL BAJAR / AZUL AL ESTAR ACTIVO / TODO ROJO EN 0)
       function updateFaderPosition(vol) {
         const trackHeight = faderTrack.clientHeight;
         const knobHeight = faderKnob.clientHeight || 22;
@@ -1725,7 +1748,6 @@
 
         const currentScaleVal = Math.round(vol * 10 * 10) / 10;
 
-        // En 0: TODOS los números se iluminan en ROJO
         if (vol === 0) {
           scaleSteps.forEach(step => {
             step.classList.remove('lit-blue');
@@ -1734,7 +1756,6 @@
           return;
         }
 
-        // Si el nivel es inferior al número, en ROJO; si está activo o por encima, en AZUL
         scaleSteps.forEach(step => {
           const stepVal = parseFloat(step.getAttribute('data-val'));
 
