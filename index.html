@@ -149,13 +149,13 @@
       background: #111;
     }
 
-    /* ===== PANTALLA OLED / VFD MÁS ALTA Y CON LETRAS MÁS GRANDES ===== */
+    /* ===== PANTALLA OLED / VFD MÁS ALTA CON TEXTO BROADCAST AMPLIADO ===== */
     .vfd-console {
       position: absolute;
       top: 10px;
       left: 78px;
       width: 375px;
-      height: 78px; /* Altura ampliada */
+      height: 78px;
       background: #020408;
       border-radius: 4px;
       border: 1.5px solid #142838;
@@ -170,13 +170,12 @@
       z-index: 25;
     }
 
-    /* Letras de BROADCAST ampliadas */
     .vfd-status-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.68rem; /* Aumentado a petición */
+      font-size: 0.68rem;
       letter-spacing: 1.5px;
       color: rgba(0, 168, 255, 0.85);
       border-bottom: 1px dashed rgba(0, 168, 255, 0.3);
@@ -252,13 +251,12 @@
       display: inline-block;
     }
 
-    /* Barras de ecualización más altas */
     .visualizer {
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
       gap: 2px;
-      height: 26px; /* Altura ampliada */
+      height: 26px;
       border-top: 1px solid rgba(0, 168, 255, 0.15);
       padding-top: 2px;
     }
@@ -295,10 +293,10 @@
       font-weight: 800;
     }
 
-    /* ===== CUENCA DEL PLATO (CENTRADA VERTICALMENTE ENTRE PANTALLA Y BORDE INFERIOR) ===== */
+    /* ===== CUENCA DEL PLATO (CENTRADA VERTICALMENTE 50/50) ===== */
     .platter-bay {
       position: absolute;
-      top: 109px; /* Calculado: 21px bajo la pantalla y 21px sobre el borde inferior */
+      top: 109px;
       left: 88px;
       width: 430px;
       height: 430px;
@@ -315,7 +313,6 @@
       z-index: 5;
     }
 
-    /* Plato de aluminio torneado grande (416px) */
     .platter {
       width: 416px;
       height: 416px;
@@ -344,7 +341,6 @@
       pointer-events: none;
     }
 
-    /* Destello rasante azul sobre los puntos estroboscópicos */
     .platter-strobe-reflection {
       position: absolute;
       inset: 0;
@@ -534,11 +530,11 @@
     .power-text-labels .lbl-on { position: absolute; top: 1px; right: 4px; color: var(--pioneer-blue); }
     .power-text-labels .lbl-pwr { position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); font-size: 0.38rem; }
 
-    /* ===== PIVOTE MÁS ANCHO Y SIN LETRAS ===== */
+    /* ===== BRAZO METÁLICO MÁS ROBUSTO Y AGUJA COLOR DIAMANTE ===== */
     .tonearm-assembly {
       position: absolute;
       top: 75px;
-      left: 504px; /* Calibrado a la nueva posición */
+      left: 504px;
       width: 130px;
       height: 410px;
       pointer-events: none;
@@ -550,7 +546,7 @@
       position: absolute;
       top: 6px;
       left: 6px;
-      width: 94px; /* Aumentado a petición */
+      width: 94px;
       height: 94px;
       border-radius: 50%;
       background: radial-gradient(circle, #1f2029 45%, #0f1015 70%, #050507 100%);
@@ -565,7 +561,7 @@
     }
 
     .gimbal-ring {
-      width: 58px; /* Proporcional a la base */
+      width: 58px;
       height: 58px;
       border-radius: 50%;
       background: linear-gradient(135deg, #c5cad8, #3b3e4c);
@@ -622,27 +618,26 @@
       position: absolute;
       top: 53px;
       left: 53px;
-      width: 80px;
+      width: 85px;
       height: 250px;
       transform-origin: 0px 0px;
       transform: rotate(0deg);
       transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-      filter: drop-shadow(-5px 8px 10px rgba(0,0,0,0.9));
+      filter: drop-shadow(-6px 10px 12px rgba(0,0,0,0.92));
       overflow: visible;
     }
 
-    /* Calibrado a 25° para caer en el surco en la posición centrada */
     .tonearm.playing {
       transform: rotate(25deg);
     }
 
     .tonearm-svg {
-      width: 90px;
-      height: 260px;
+      width: 100px;
+      height: 270px;
       overflow: visible;
     }
 
-    /* ===== VOLUMEN LIMPIO (SIN BOTONES NI NÚMEROS A LA DERECHA) ===== */
+    /* ===== VOLUMEN LIMPIO (0 A 10) ===== */
     .pitch-fader-assembly {
       position: absolute;
       top: 105px;
@@ -765,7 +760,7 @@
       font-weight: 700;
     }
 
-    /* ===== BOTÓN PLAY / STOP ===== */
+    /* ===== BOTÓN PLAY / STOP CON ILUMINACIÓN Y PARPADEO INTERACTIVO ===== */
     .start-stop-round-btn {
       position: absolute;
       bottom: 16px;
@@ -793,11 +788,69 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.9);
     }
 
-    .start-stop-round-btn:not(.playing) {
-      animation: pulse-pioneer-blue 1.5s infinite alternate ease-in-out;
+    .btn-word {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.15;
+      text-align: center;
+      transition: all 0.2s ease;
     }
 
-    @keyframes pulse-pioneer-blue {
+    /* ESTADO DETENIDO: PLAY parpadea en azul, STOP apagado */
+    .start-stop-round-btn:not(.playing) .play-word {
+      color: var(--pioneer-blue);
+      animation: blink-blue-text 1.2s infinite ease-in-out;
+    }
+
+    .start-stop-round-btn:not(.playing) .stop-word {
+      color: #555866;
+      text-shadow: none;
+      animation: none;
+    }
+
+    @keyframes blink-blue-text {
+      0%, 100% {
+        opacity: 0.35;
+        text-shadow: none;
+      }
+      50% {
+        opacity: 1;
+        text-shadow: 0 0 10px var(--pioneer-blue), 0 0 18px var(--neon-cyan);
+      }
+    }
+
+    /* ESTADO REPRODUCIENDO: PLAY azul fijo, STOP parpadea en rojo */
+    .start-stop-round-btn.playing .play-word {
+      color: var(--pioneer-blue);
+      text-shadow: 0 0 8px var(--pioneer-blue);
+      opacity: 1;
+      animation: none;
+    }
+
+    .start-stop-round-btn.playing .stop-word {
+      color: #ff2a4b;
+      animation: blink-red-text 1.2s infinite ease-in-out;
+    }
+
+    @keyframes blink-red-text {
+      0%, 100% {
+        opacity: 0.35;
+        text-shadow: none;
+      }
+      50% {
+        opacity: 1;
+        text-shadow: 0 0 10px #ff2a4b, 0 0 18px #ff0055;
+      }
+    }
+
+    /* Halo exterior dinámico del botón */
+    .start-stop-round-btn:not(.playing) {
+      animation: pulse-btn-halo 1.5s infinite alternate ease-in-out;
+    }
+
+    @keyframes pulse-btn-halo {
       0% { box-shadow: 0 0 0 2.5px rgba(0, 168, 255, 0.3), 0 8px 20px rgba(0,0,0,0.9); }
       100% { box-shadow: 0 0 0 4px rgba(0, 168, 255, 0.95), 0 0 20px rgba(0, 168, 255, 0.75), 0 8px 20px rgba(0,0,0,0.9); }
     }
@@ -809,16 +862,6 @@
         0 0 24px rgba(0, 168, 255, 0.85),
         0 8px 20px rgba(0,0,0,0.9);
       animation: none;
-    }
-
-    .start-stop-text {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 900;
-      letter-spacing: 0.5px;
-      color: #1a1b22;
-      line-height: 1.15;
-      text-align: center;
     }
 
     .rpm-buttons {
@@ -963,7 +1006,7 @@
         <div class="rpm45-puck"></div>
       </div>
 
-      <!-- Pantalla OLED / VFD más alta con texto ampliado -->
+      <!-- Pantalla OLED / VFD con status ampliado -->
       <div class="vfd-console">
         <div class="vfd-status-bar">
           <span><span class="vfd-dot"></span>LIVE BROADCAST</span>
@@ -987,10 +1030,9 @@
         <strong>Pioneer</strong><br>PROFESSIONAL TURNTABLE PLX-1000
       </div>
 
-      <!-- Cuenca centrada exactamente entre la pantalla y el borde inferior -->
+      <!-- Cuenca centrada exactamente entre pantalla y borde inferior -->
       <div class="platter-bay">
         <div class="platter" id="platter">
-          <!-- Reflejo azul suave sobre los puntos -->
           <div class="platter-strobe-reflection"></div>
 
           <div class="vinyl" id="vinyl">
@@ -1021,7 +1063,7 @@
         </div>
       </div>
 
-      <!-- BRAZO METÁLICO EN 'S' CON PIVOTE MÁS ANCHO Y LIMPIO -->
+      <!-- BRAZO METÁLICO EN 'S' MÁS GRUESO Y AGUJA DIAMANTE -->
       <div class="tonearm-assembly">
         <div class="gimbal-base">
           <div class="gimbal-ring"></div>
@@ -1030,18 +1072,33 @@
         <div class="anti-skate-dial"></div>
         
         <div class="tonearm" id="tonearm">
-          <svg class="tonearm-svg" viewBox="0 0 90 260">
+          <svg class="tonearm-svg" viewBox="0 0 100 270">
             <defs>
-              <linearGradient id="chromeTube" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#555" />
-                <stop offset="25%" stop-color="#ffffff" />
-                <stop offset="60%" stop-color="#cccccc" />
-                <stop offset="100%" stop-color="#333" />
+              <!-- Tubo cromado cilíndrico de alto contraste -->
+              <linearGradient id="chromeTubeThick" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#3a3a3a" />
+                <stop offset="20%" stop-color="#999999" />
+                <stop offset="40%" stop-color="#ffffff" />
+                <stop offset="65%" stop-color="#d0d0d0" />
+                <stop offset="85%" stop-color="#777777" />
+                <stop offset="100%" stop-color="#222222" />
               </linearGradient>
-              <linearGradient id="pioneerHeadshell" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#3a3c48" />
-                <stop offset="100%" stop-color="#14151a" />
+              
+              <!-- Gradiente de la cápsula robusta -->
+              <linearGradient id="pioneerHeadshellThick" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#3c3f4d" />
+                <stop offset="100%" stop-color="#121318" />
               </linearGradient>
+              
+              <!-- Gradiente facetado estilo diamante cristalino -->
+              <linearGradient id="diamondTipGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="35%" stop-color="#bbf2f6" />
+                <stop offset="70%" stop-color="#70d6ff" />
+                <stop offset="100%" stop-color="#ffffff" />
+              </linearGradient>
+              
+              <!-- Contrapeso -->
               <linearGradient id="counterweightGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="#222" />
                 <stop offset="35%" stop-color="#e6e6e6" />
@@ -1051,37 +1108,42 @@
             </defs>
 
             <!-- Contrapeso cilíndrico trasero numerado -->
-            <rect x="-14" y="-30" width="28" height="24" rx="2" fill="url(#counterweightGrad)" stroke="#444" stroke-width="1" />
-            <rect x="-14" y="-12" width="28" height="6" fill="#111" />
+            <rect x="-15" y="-30" width="30" height="24" rx="2" fill="url(#counterweightGrad)" stroke="#444" stroke-width="1" />
+            <rect x="-15" y="-12" width="30" height="6" fill="#111" />
             <line x1="-8" y1="-12" x2="-8" y2="-6" stroke="#fff" stroke-width="1" />
             <line x1="0" y1="-12" x2="0" y2="-6" stroke="#fff" stroke-width="1" />
             <line x1="8" y1="-12" x2="8" y2="-6" stroke="#fff" stroke-width="1" />
 
-            <!-- Pivote central -->
-            <circle cx="0" cy="0" r="7" fill="#c2c7d6" stroke="#222" stroke-width="2" />
-            <circle cx="0" cy="0" r="2.5" fill="#222" />
+            <!-- Pivote central reforzado -->
+            <circle cx="0" cy="0" r="8" fill="#c8cddc" stroke="#222" stroke-width="2" />
+            <circle cx="0" cy="0" r="3" fill="#222" />
 
-            <!-- Tubo cromado en 'S' robusto -->
+            <!-- Tubo cromado en 'S' MÁS GRUESO (stroke-width: 8.5) -->
             <path d="M 0,0 C 18,45 22,110 -8,175 L -14,195" 
                   fill="none" 
-                  stroke="url(#chromeTube)" 
-                  stroke-width="6.5" 
+                  stroke="url(#chromeTubeThick)" 
+                  stroke-width="8.5" 
                   stroke-linecap="round" />
 
-            <!-- Portacápsulas con aguja -->
+            <!-- Portacápsulas más grande con AGUJA COLOR DIAMANTE -->
             <g transform="translate(-14, 195) rotate(-14)">
-              <rect x="-5" y="-6" width="10" height="6" rx="1" fill="#bbb" stroke="#333" stroke-width="0.8" />
-              <rect x="-8" y="0" width="16" height="34" rx="2" fill="url(#pioneerHeadshell)" stroke="#666" stroke-width="1" />
-              <line x1="-4" y1="8" x2="4" y2="8" stroke="#999" stroke-width="1.2" />
-              <line x1="-4" y1="14" x2="4" y2="14" stroke="#999" stroke-width="1.2" />
-              <path d="M 8,10 Q 18,10 16,20" fill="none" stroke="#eee" stroke-width="2.2" stroke-linecap="round" />
-              <polygon points="-3,34 3,34 0,40" fill="#ffcc00" />
+              <!-- Conector cromado reforzado -->
+              <rect x="-6" y="-7" width="12" height="7" rx="1" fill="#c2c7d6" stroke="#222" stroke-width="1" />
+              <!-- Cuerpo principal de la cápsula más ancho -->
+              <rect x="-10" y="0" width="20" height="40" rx="3" fill="url(#pioneerHeadshellThick)" stroke="#555" stroke-width="1.2" />
+              <line x1="-5" y1="9" x2="5" y2="9" stroke="#888" stroke-width="1.5" />
+              <line x1="-5" y1="16" x2="5" y2="16" stroke="#888" stroke-width="1.5" />
+              <!-- Tirador curvo reforzado para dedo (Finger Lift) -->
+              <path d="M 10,12 Q 22,12 19,24" fill="none" stroke="#eee" stroke-width="2.8" stroke-linecap="round" />
+              <!-- Aguja color diamante (facetada con destello y sombra azulada) -->
+              <polygon points="-4,40 4,40 0,49" fill="url(#diamondTipGrad)" stroke="#bbf2f6" stroke-width="0.8" style="filter: drop-shadow(0 0 5px rgba(0, 243, 255, 0.9));" />
+              <polygon points="-2,40 2,40 0,47" fill="#ffffff" opacity="0.9" />
             </g>
           </svg>
         </div>
       </div>
 
-      <!-- FADER DE VOLUMEN (LIMPIO, SIN BOTONES NI NÚMEROS A LA DERECHA) -->
+      <!-- FADER DE VOLUMEN (LIMPIO 0 A 10) -->
       <div class="pitch-fader-assembly" id="fader-container">
         <div class="volume-scale" id="volume-scale">
           <div class="scale-step" data-val="10"><span>10</span><i class="tick"></i></div>
@@ -1100,9 +1162,10 @@
         <div class="fader-label">VOLUME</div>
       </div>
 
-      <!-- BOTÓN PLAY / STOP MÁS GRANDE (74px) -->
+      <!-- BOTÓN PLAY / STOP CON PARPADEO AZUL (STOPPED) Y ROJO (PLAYING) -->
       <div class="start-stop-round-btn" id="play-btn">
-        <div class="start-stop-text">PLAY<br>STOP</div>
+        <span class="btn-word play-word">PLAY</span>
+        <span class="btn-word stop-word">STOP</span>
       </div>
 
       <!-- Botones 33 / 45 RPM -->
@@ -1148,6 +1211,8 @@
       const sonicArtFull = document.getElementById('sonic_art_full');
       const platter = document.getElementById('platter');
       const scaleSteps = document.querySelectorAll('.scale-step');
+
+      const STREAM_URL = 'https://mars.streamerr.co/8422/stream';
 
       let isPlaying = false;
       let volume = 1.0;
@@ -1292,9 +1357,14 @@
         animationId = requestAnimationFrame(renderVisualizer);
       }
 
+      // ✅ DETENCIÓN REAL (STOP) Y REPRODUCCIÓN EN DIRECTO
       async function togglePlay() {
         if (isPlaying) {
+          // DETENER POR COMPLETO (Stop real que descarga el stream)
           audio.pause();
+          audio.src = '';
+          audio.load();
+
           vinyl.classList.remove('spinning');
           tonearm.classList.remove('playing');
           playBtn.classList.remove('playing');
@@ -1302,7 +1372,11 @@
         } else {
           await setupAudioContext();
           try {
+            // Reconectar en vivo al stream sin retraso
+            audio.src = STREAM_URL;
+            audio.load();
             await audio.play();
+
             vinyl.classList.add('spinning');
             tonearm.classList.add('playing');
             playBtn.classList.add('playing');
