@@ -199,7 +199,6 @@
       z-index: 25;
     }
 
-    /* FILTRO CRT SUAVE */
     .crt-overlay {
       position: absolute;
       inset: 0;
@@ -226,7 +225,7 @@
       opacity: 0.85;
     }
 
-    /* BARRA SUPERIOR: DJ EN VIVO (1.35rem) + NOMBRE DEL DJ (1.35rem) */
+    /* BARRA SUPERIOR: DJ EN VIVO (1.35rem) + NOMBRE DEL DJ EN NARANJA (1.35rem) */
     .vfd-status-bar {
       display: flex;
       justify-content: space-between;
@@ -323,12 +322,8 @@
     }
 
     @keyframes vfd-infinite-scroll {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
     .marquee-text {
@@ -433,7 +428,7 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 10px 30px rgba(0,0,0,0.95), inset 0 0 20px rgba(0,0,0,0.9);
-      transition: box-shadow 0.1s ease, border-color 0.1s ease;
+      transition: box-shadow 0.08s ease-out, border-color 0.08s ease-out;
     }
 
     .platter::before {
@@ -448,7 +443,7 @@
       pointer-events: none;
     }
 
-    /* Reflejo estroboscópico que cambia dinámicamente con los 4 colores */
+    /* Reflejo del haz estroboscópico sincronizado al golpe */
     .platter-strobe-reflection {
       position: absolute;
       inset: 0;
@@ -464,10 +459,12 @@
       mask: radial-gradient(circle, transparent 90%, black 91%);
       -webkit-mask: radial-gradient(circle, transparent 90%, black 91%);
       pointer-events: none;
-      transition: background 0.15s ease;
+      opacity: 0;
+      transition: opacity 0.06s ease-out;
     }
 
     .platter-strobe-reflection.dim-red {
+      opacity: 1 !important;
       background: conic-gradient(
         from 185deg at 50% 50%,
         transparent 0deg,
@@ -549,7 +546,7 @@
       display: none !important;
     }
 
-    /* ===== UNIDAD ESTROBOSCÓPICA & INTERRUPTOR (CAJA CUADRADA) ===== */
+    /* ===== UNIDAD ESTROBOSCÓPICA & INTERRUPTOR (CAJA TOTALMENTE CUADRADA) ===== */
     .plx-power-tower {
       position: absolute;
       bottom: 130px;
@@ -1089,14 +1086,8 @@
     }
 
     @keyframes blink-blue-text {
-      0%, 100% {
-        opacity: 0.4;
-        text-shadow: none;
-      }
-      50% {
-        opacity: 1;
-        text-shadow: 0 0 12px #00f3ff, 0 0 20px #00a8ff;
-      }
+      0%, 100% { opacity: 0.4; text-shadow: none; }
+      50% { opacity: 1; text-shadow: 0 0 12px #00f3ff, 0 0 20px #00a8ff; }
     }
 
     /* REPRODUCIENDO: PLAY azul fijo / STOP parpadea en rojo */
@@ -1113,14 +1104,8 @@
     }
 
     @keyframes blink-red-text {
-      0%, 100% {
-        opacity: 0.35;
-        text-shadow: none;
-      }
-      50% {
-        opacity: 1;
-        text-shadow: 0 0 12px #ff1744, 0 0 20px #ff0055;
-      }
+      0%, 100% { opacity: 0.35; text-shadow: none; }
+      50% { opacity: 1; text-shadow: 0 0 12px #ff1744, 0 0 20px #ff0055; }
     }
 
     .start-stop-round-btn:not(.playing) {
@@ -1295,7 +1280,6 @@
               <span class="radar-core"></span>
               <span class="radar-wave"></span>
             </span>
-            <!-- DJ EN VIVO: DEL MISMO TAMAÑO QUE EL TÍTULO (1.35rem) -->
             <span class="live-text">DJ EN VIVO</span>
           </div>
 
@@ -1317,7 +1301,7 @@
           </div>
         </div>
 
-        <!-- Ecualizador dinámico multicolor y con amplio rebote -->
+        <!-- Ecualizador multicolor dinámico con mayor rebote -->
         <div class="visualizer" id="visualizer"></div>
       </div>
 
@@ -1540,16 +1524,18 @@
       // Seguimiento dinámico de picos
       let maxObservedPeak = 180;
 
-      // Configuración de los 4 colores de ritmo
+      // Paleta rítmica de 4 colores: Azul, Rojo, Naranja y Plateado
       const RHYTHM_COLORS = [
-        { glow: 'rgba(0, 168, 255, ',   border: 'rgba(0, 243, 255, ' }, // Azul
-        { glow: 'rgba(255, 42, 75, ',    border: 'rgba(255, 71, 87, ' }, // Rojo
-        { glow: 'rgba(255, 153, 0, ',    border: 'rgba(255, 170, 0, ' }, // Naranja
-        { glow: 'rgba(238, 241, 246, ',  border: 'rgba(255, 255, 255, ' } // Plateado
+        { glow: 'rgba(0, 168, 255, ',   border: 'rgba(0, 243, 255, ' }, // 1. Azul
+        { glow: 'rgba(255, 42, 75, ',    border: 'rgba(255, 71, 87, ' }, // 2. Rojo
+        { glow: 'rgba(255, 153, 0, ',    border: 'rgba(255, 170, 0, ' }, // 3. Naranja
+        { glow: 'rgba(238, 241, 246, ',  border: 'rgba(255, 255, 255, ' } // 4. Plateado
       ];
       let rhythmColorIndex = 0;
-      let lastBassHit = 0;
-      let bassCooldown = 180;
+      let currentGlowPower = 0;
+      let prevKickLevel = 0;
+      let avgKickLevel = 110;
+      let lastKickTime = 0;
 
       function showAlert(message) {
         alert(`${message}\n\nPróximamente disponible en Castlebul Radio.`);
@@ -1660,41 +1646,74 @@
         }
       }
 
-      // ✅ ILUMINACIÓN DEL BORDE: CAMBIA DE COLOR EN 4 COLORES (AZUL, ROJO, NARANJA Y PLATEADO)
-      function updatePlatterLight(bassLevel, isBassHit) {
-        const now = Date.now();
-        if (isBassHit && (now - lastBassHit) > bassCooldown) {
-          lastBassHit = now;
-          // Avanzar cíclicamente entre los 4 colores
+      // ✅ DETECTOR DE TRANSITORIOS DE BOMBO Y CAÍDA ANALÓGICA DE POTENCIA
+      function processKickRhythm() {
+        // Rango de frecuencias subgraves (30Hz a 90Hz)
+        const subBass = (dataArray[0] + dataArray[1] + dataArray[2]) / 3;
+
+        // Promedio móvil adaptativo
+        avgKickLevel = avgKickLevel * 0.94 + subBass * 0.06;
+
+        const now = performance.now();
+        const diff = subBass - prevKickLevel;
+
+        // Detección del golpe seco del bombo (Kick Onset)
+        const isKickHit = (diff > 18 || subBass > avgKickLevel * 1.32) && 
+                          subBass > 150 && 
+                          (now - lastKickTime > 230);
+
+        if (isKickHit) {
+          lastKickTime = now;
+          // Avanzar al siguiente color exactamente en el golpe
           rhythmColorIndex = (rhythmColorIndex + 1) % RHYTHM_COLORS.length;
+
+          // Potencia luminosa proporcional a la fuerza del golpe
+          const hitPower = Math.min(1.0, Math.max(0.35, (subBass - 130) / 115));
+          currentGlowPower = hitPower;
+        } else {
+          // Caída analógica natural hacia la oscuridad entre golpes (sin luces navideñas constantes)
+          currentGlowPower *= 0.88;
+          if (currentGlowPower < 0.015) currentGlowPower = 0;
         }
 
+        prevKickLevel = subBass;
+
+        // Aplicar la iluminación reactiva según la potencia instantánea
         const activeCol = RHYTHM_COLORS[rhythmColorIndex];
-        const intensity = Math.min(0.85, 0.22 + (bassLevel / 255) * 0.55);
-        const glow = 14 + (bassLevel / 255) * 30;
-        const innerGlow = 6 + (bassLevel / 255) * 18;
 
-        platter.style.boxShadow = `
-          0 10px 30px rgba(0,0,0,0.95),
-          inset 0 0 ${innerGlow}px ${activeCol.glow}${intensity * 0.75}),
-          0 0 ${glow}px ${activeCol.glow}${intensity}),
-          0 0 ${glow * 1.5}px ${activeCol.glow}${intensity * 0.4})
-        `;
-        platter.style.borderColor = `${activeCol.border}${0.4 + intensity * 0.55})`;
+        if (currentGlowPower > 0.03) {
+          const glowSize = 10 + currentGlowPower * 38;
+          const innerGlow = 4 + currentGlowPower * 20;
 
-        if (platterReflection && !platterReflection.classList.contains('dim-red')) {
-          platterReflection.style.background = `conic-gradient(
-            from 185deg at 50% 50%,
-            transparent 0deg,
-            ${activeCol.glow}0.4) 15deg,
-            ${activeCol.border}0.7) 25deg,
-            ${activeCol.glow}0.3) 38deg,
-            transparent 55deg
-          )`;
+          platter.style.boxShadow = `
+            0 10px 30px rgba(0,0,0,0.95),
+            inset 0 0 ${innerGlow}px ${activeCol.glow}${currentGlowPower * 0.65}),
+            0 0 ${glowSize}px ${activeCol.glow}${currentGlowPower * 0.85}),
+            0 0 ${glowSize * 1.5}px ${activeCol.glow}${currentGlowPower * 0.35})
+          `;
+          platter.style.borderColor = `${activeCol.border}${0.35 + currentGlowPower * 0.65})`;
+
+          if (platterReflection && !platterReflection.classList.contains('dim-red')) {
+            platterReflection.style.opacity = currentGlowPower;
+            platterReflection.style.background = `conic-gradient(
+              from 185deg at 50% 50%,
+              transparent 0deg,
+              ${activeCol.glow}0.4) 15deg,
+              ${activeCol.border}0.75) 25deg,
+              ${activeCol.glow}0.25) 38deg,
+              transparent 55deg
+            )`;
+          }
+        } else {
+          platter.style.boxShadow = '0 10px 30px rgba(0,0,0,0.95), inset 0 0 15px rgba(0,0,0,0.85)';
+          platter.style.borderColor = '#8c90a2';
+          if (platterReflection && !platterReflection.classList.contains('dim-red')) {
+            platterReflection.style.opacity = 0;
+          }
         }
       }
 
-      // ✅ ECUALIZADOR DINÁMICO MULTICOLOR
+      // ✅ ECUALIZADOR DINÁMICO CON MAYOR REBOTE (NO SE PEGA AL 100%)
       function renderVisualizer() {
         if (!analyser || !dataArray) return;
 
@@ -1703,9 +1722,8 @@
         const barCount = bars.length;
         const bufferLength = dataArray.length;
 
-        const kickBins = dataArray.slice(0, 4);
-        const kickLevel = kickBins.reduce((a, b) => a + b, 0) / kickBins.length;
-        const isBassHit = kickLevel > 165;
+        // Procesar el ritmo del bombo y la iluminación del plato
+        processKickRhythm();
 
         // Seguimiento dinámico de picos
         let framePeak = 0;
@@ -1718,7 +1736,7 @@
           maxObservedPeak = Math.max(160, maxObservedPeak * 0.992);
         }
 
-        updatePlatterLight(kickLevel, isBassHit);
+        const isBassHit = currentGlowPower > 0.4;
 
         bars.forEach((bar, i) => {
           const percent = i / barCount;
@@ -1761,6 +1779,7 @@
           // Apagar luz rítmica y activar luz tenue roja de reposo
           platter.style.boxShadow = '0 10px 30px rgba(0,0,0,0.95), inset 0 0 20px rgba(0,0,0,0.9)';
           platter.style.borderColor = '#8c90a2';
+          currentGlowPower = 0;
 
           if (powerTower) {
             powerTower.classList.remove('power-state-on');
