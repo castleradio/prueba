@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Castlebul Radio | Pioneer PLX-1000</title>
+  <title>Castlebul Radio | Pioneer PLX-1000 Edition</title>
   
   <!-- SonicAPI Widget -->
   <script id='sonic_js' data-port='8422' src='https://mars.streamerr.co/cp/widgets.js?r=479'></script>
@@ -112,7 +112,7 @@
       margin: 10px 0;
     }
 
-    /* ===== ADAPTADOR 45 RPM (MÁS GRANDE: 72px / PUCK 60px DE ALUMINIO PULIDO) ===== */
+    /* ===== ADAPTADOR 45 RPM (ALUMINIO PULIDO 72px) ===== */
     .rpm45-well {
       position: absolute;
       top: 14px;
@@ -177,7 +177,7 @@
       box-shadow: inset 0 2px 4px rgba(0,0,0,0.9);
     }
 
-    /* ===== PANTALLA OLED / VFD (ANCHO EXACTO DEL VINILO: 394px) ===== */
+    /* ===== PANTALLA OLED / VFD ===== */
     .vfd-console {
       position: absolute;
       top: 12px;
@@ -198,6 +198,7 @@
       z-index: 25;
     }
 
+    /* BARRA SUPERIOR: EFECTO RADAR EN VIVO */
     .vfd-status-bar {
       display: flex;
       justify-content: space-between;
@@ -207,19 +208,63 @@
       letter-spacing: 1.5px;
       color: rgba(0, 168, 255, 0.85);
       border-bottom: 1px dashed rgba(0, 168, 255, 0.3);
-      padding-bottom: 2px;
+      padding-bottom: 3px;
     }
 
-    .vfd-dot {
-      display: inline-block;
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Radar que expande ondas concéntricas */
+    .live-radar {
+      position: relative;
+      width: 10px;
+      height: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .radar-core {
       width: 6px;
       height: 6px;
-      background: var(--pioneer-blue);
+      background: #ff2a4b;
       border-radius: 50%;
-      box-shadow: 0 0 6px var(--pioneer-blue);
-      margin-right: 5px;
+      box-shadow: 0 0 8px #ff2a4b, 0 0 14px #ff0055;
+      z-index: 2;
     }
 
+    .radar-wave {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      border: 1.5px solid #ff2a4b;
+      animation: radar-ping 1.5s infinite cubic-bezier(0, 0.2, 0.8, 1);
+      z-index: 1;
+    }
+
+    @keyframes radar-ping {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(3.5);
+        opacity: 0;
+      }
+    }
+
+    .live-text {
+      color: #ff3b5c;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-shadow: 0 0 8px rgba(255, 59, 92, 0.8);
+    }
+
+    /* MARQUESINA CONTINUA Y SILKY SMOOTH */
     .vfd-title-container {
       width: 100%;
       overflow: hidden;
@@ -227,26 +272,35 @@
       position: relative;
       display: flex;
       align-items: center;
-      justify-content: center;
       mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
       -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
     }
 
     .vfd-marquee-track {
-      display: inline-flex;
+      display: flex;
+      width: max-content;
       align-items: center;
-      white-space: nowrap;
       will-change: transform;
     }
 
     .vfd-marquee-track.scrolling {
-      justify-content: flex-start;
-      animation: vfd-scroll-left linear infinite;
+      animation: vfd-scroll-left 14s linear infinite;
     }
 
     @keyframes vfd-scroll-left {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .marquee-part {
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+      white-space: nowrap;
     }
 
     #sonic_title,
@@ -258,27 +312,21 @@
       letter-spacing: 2px;
       text-shadow: 0 0 10px rgba(0, 243, 255, 0.7);
       line-height: 1.1;
-      flex-shrink: 0;
     }
 
-    .marquee-spacer {
-      display: none;
+    .marquee-divider {
+      padding: 0 35px;
       color: var(--pioneer-blue);
-      font-size: 1.35rem;
-      padding: 0 25px;
-      flex-shrink: 0;
+      font-size: 0.85rem;
       text-shadow: 0 0 8px var(--pioneer-blue);
-    }
-
-    .sonic-title-dup {
       display: none;
     }
 
-    .vfd-marquee-track.scrolling .marquee-spacer,
-    .vfd-marquee-track.scrolling .sonic-title-dup {
+    .vfd-marquee-track.scrolling .marquee-divider {
       display: inline-block;
     }
 
+    /* ECUALIZADOR DINÁMICO (TODAS LAS 28 BARRAS ILUMINADAS) */
     .visualizer {
       display: flex;
       align-items: flex-end;
@@ -291,16 +339,17 @@
 
     .eq-bar {
       flex: 1;
-      background: linear-gradient(to top, var(--pioneer-blue) 0%, var(--neon-cyan) 75%, var(--neon-red) 100%);
+      background: linear-gradient(to top, var(--pioneer-blue) 0%, var(--neon-cyan) 65%, var(--neon-red) 100%);
       border-radius: 1px 1px 0 0;
       height: 15%;
-      transition: height 0.05s ease;
-      opacity: 0.9;
+      box-shadow: 0 0 6px rgba(0, 168, 255, 0.45);
+      transition: height 0.04s ease;
+      opacity: 0.95;
     }
 
     .eq-bar.bass-hit {
       filter: brightness(1.4);
-      box-shadow: 0 0 8px var(--pioneer-blue);
+      box-shadow: 0 0 10px var(--neon-cyan);
     }
 
     /* Placa de modelo Pioneer (Top-Right) */
@@ -369,7 +418,6 @@
       pointer-events: none;
     }
 
-    /* Reflejo dinámico que cambia de Azul brillante (ON) a Rojo tenue (OFF) */
     .platter-strobe-reflection {
       position: absolute;
       inset: 0;
@@ -399,7 +447,7 @@
       );
     }
 
-    /* ===== VINILO (394px) SIN RECUADRO TEXTUAL ===== */
+    /* ===== VINILO LIMPIO (SIN TEXTO EMERGENTE) ===== */
     .vinyl {
       width: 394px;
       height: 394px;
@@ -435,7 +483,6 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Galleta central sin texto emergente en blanco */
     .album-art-visible {
       width: 170px;
       height: 170px;
@@ -507,7 +554,6 @@
       transition: all 0.3s ease;
     }
 
-    /* Estado OFF de la torreta: luz roja tenue */
     .plx-power-tower.power-state-off .strobe-blue-emitter {
       background: #ff4757;
       box-shadow: 0 0 8px rgba(255, 71, 87, 0.7);
@@ -564,7 +610,6 @@
     .power-text-labels .lbl-on { position: absolute; top: 1px; right: 4px; color: var(--pioneer-blue); transition: color 0.3s; }
     .power-text-labels .lbl-pwr { position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); font-size: 0.38rem; }
 
-    /* Estado visual de la perilla rotativa en OFF */
     .plx-power-tower.power-state-off .power-ribbed-knob {
       transform: rotate(-30deg);
     }
@@ -577,7 +622,6 @@
       text-shadow: none;
     }
 
-    /* Estado visual de la perilla rotativa en ON */
     .plx-power-tower.power-state-on .power-ribbed-knob {
       transform: rotate(30deg);
     }
@@ -831,7 +875,7 @@
       font-weight: 700;
     }
 
-    /* ===== BOTONES DE VOLUMEN RÁPIDO (SOLO PARPADEA LA FLECHA INTERIOR) ===== */
+    /* ===== BOTONES DE VOLUMEN RÁPIDO (SOLO PARPADEA LA FLECHA) ===== */
     .fader-step-controls {
       position: absolute;
       bottom: 25px;
@@ -848,7 +892,7 @@
       height: 38px;
       border-radius: 6px;
       background: linear-gradient(145deg, #252834, #121318);
-      border: 1.5px solid #3c4052; /* Borde estático */
+      border: 1.5px solid #3c4052;
       box-shadow: 0 4px 10px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.15);
       cursor: pointer;
       display: flex;
@@ -887,7 +931,6 @@
       50% { opacity: 1; filter: drop-shadow(0 0 8px var(--neon-red)) drop-shadow(0 0 14px #ff0055); }
     }
 
-    /* Parpadeos rápidos de la flecha al hacer clic */
     .vol-up-btn.fast-blink-blue .vol-arrow-svg {
       animation: rapid-arrow-blue 0.16s infinite alternate !important;
     }
@@ -904,7 +947,7 @@
       100% { opacity: 1; filter: drop-shadow(0 0 14px #ff0055) drop-shadow(0 0 20px #fff); }
     }
 
-    /* ===== BOTÓN PLAY / STOP CON ACABADO DE ALUMINIO PULIDO (IGUAL AL PUCK) ===== */
+    /* ===== BOTÓN PLAY / STOP CON LENTE INTERIOR DE ALTO CONTRASTE ===== */
     .start-stop-round-btn {
       position: absolute;
       bottom: 16px;
@@ -928,7 +971,6 @@
       border: 1.5px solid #aeb4c6;
       cursor: pointer;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       box-shadow: 
@@ -945,50 +987,78 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.9);
     }
 
+    /* Lente interior de cristal ahumado para máximo contraste de lectura */
+    .btn-lens {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #0e1017 60%, #050608 100%);
+      border: 1.5px solid #2d3040;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.9), 0 1px 1px rgba(255,255,255,0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      pointer-events: none;
+    }
+
     .btn-word {
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.65rem;
+      font-size: 0.72rem;
       font-weight: 900;
-      letter-spacing: 1px;
-      line-height: 1.15;
+      letter-spacing: 1.5px;
+      line-height: 1.1;
       text-align: center;
       transition: all 0.2s ease;
     }
 
-    /* DETENIDO: PLAY parpadea en azul neón / STOP iluminado fijo en rojo */
+    /* DETENIDO: PLAY parpadea en azul eléctrico, STOP encendido fijo en rojo láser */
     .start-stop-round-btn:not(.playing) .play-word {
-      color: var(--pioneer-blue);
+      color: #00f3ff;
       animation: blink-blue-text 1.2s infinite ease-in-out;
     }
 
     .start-stop-round-btn:not(.playing) .stop-word {
       color: #ff2a4b;
-      text-shadow: 0 0 8px #ff2a4b;
+      text-shadow: 0 0 10px #ff2a4b, 0 0 18px rgba(255, 42, 75, 0.8);
       opacity: 1;
       animation: none;
     }
 
     @keyframes blink-blue-text {
-      0%, 100% { opacity: 0.35; text-shadow: none; }
-      50% { opacity: 1; text-shadow: 0 0 10px var(--pioneer-blue), 0 0 18px var(--neon-cyan); }
+      0%, 100% {
+        opacity: 0.35;
+        text-shadow: none;
+      }
+      50% {
+        opacity: 1;
+        text-shadow: 0 0 12px #00f3ff, 0 0 20px #00a8ff;
+      }
     }
 
-    /* REPRODUCIENDO: PLAY azul fijo / STOP parpadea en rojo */
+    /* REPRODUCIENDO: PLAY azul fijo, STOP parpadea en rojo advertencia */
     .start-stop-round-btn.playing .play-word {
-      color: var(--pioneer-blue);
-      text-shadow: 0 0 8px var(--pioneer-blue);
+      color: #00f3ff;
+      text-shadow: 0 0 10px #00f3ff, 0 0 18px #00a8ff;
       opacity: 1;
       animation: none;
     }
 
     .start-stop-round-btn.playing .stop-word {
-      color: #ff2a4b;
+      color: #ff1744;
       animation: blink-red-text 1.2s infinite ease-in-out;
     }
 
     @keyframes blink-red-text {
-      0%, 100% { opacity: 0.35; text-shadow: none; }
-      50% { opacity: 1; text-shadow: 0 0 10px #ff2a4b, 0 0 18px #ff0055; }
+      0%, 100% {
+        opacity: 0.35;
+        text-shadow: none;
+      }
+      50% {
+        opacity: 1;
+        text-shadow: 0 0 12px #ff1744, 0 0 20px #ff0055;
+      }
     }
 
     .start-stop-round-btn:not(.playing) {
@@ -1006,7 +1076,7 @@
       animation: none;
     }
 
-    /* ===== BOTONES 33 Y 45 RPM PULSABLES ===== */
+    /* BOTONES 33 Y 45 RPM */
     .rpm-buttons {
       position: absolute;
       bottom: 24px;
@@ -1156,19 +1226,32 @@
       <!-- Pantalla OLED / VFD del mismo ancho que el vinilo (394px) -->
       <div class="vfd-console">
         <div class="vfd-status-bar">
-          <span><span class="vfd-dot"></span>LIVE BROADCAST</span>
+          <!-- Indicador de transmisión con radar y texto EN VIVO -->
+          <div class="live-badge">
+            <span class="live-radar">
+              <span class="radar-core"></span>
+              <span class="radar-wave"></span>
+            </span>
+            <span class="live-text">EN VIVO</span>
+          </div>
           <span>QUARTZ LOCK • 44.1 kHz</span>
         </div>
         
+        <!-- Marquesina simétrica infinita sin saltos bruscos -->
         <div class="vfd-title-container">
           <div class="vfd-marquee-track" id="vfd-marquee-track">
-            <span id="sonic_title">Castlebul Radio</span>
-            <span class="marquee-spacer">•</span>
-            <span class="sonic-title-dup" id="sonic_title_dup"></span>
-            <span class="marquee-spacer">•</span>
+            <div class="marquee-part" id="marquee-part-1">
+              <span id="sonic_title">Castlebul Radio</span>
+              <span class="marquee-divider">✦</span>
+            </div>
+            <div class="marquee-part" id="marquee-part-2">
+              <span class="sonic-title-dup" id="sonic_title_dup"></span>
+              <span class="marquee-divider">✦</span>
+            </div>
           </div>
         </div>
 
+        <!-- Ecualizador dinámico donde todas las 28 barras reaccionan -->
         <div class="visualizer" id="visualizer"></div>
       </div>
 
@@ -1180,7 +1263,6 @@
       <!-- Cuenca centrada verticalmente 50/50 -->
       <div class="platter-bay">
         <div class="platter" id="platter">
-          <!-- Reflejo estroboscópico sincronizado con ON/OFF -->
           <div class="platter-strobe-reflection dim-red" id="platter-strobe-reflection"></div>
 
           <div class="vinyl" id="vinyl">
@@ -1279,7 +1361,7 @@
         </div>
       </div>
 
-      <!-- FADER DE VOLUMEN CON ESCALA CALIBRADA -->
+      <!-- FADER DE VOLUMEN CALIBRADO -->
       <div class="pitch-fader-assembly" id="fader-container">
         <div class="volume-scale" id="volume-scale">
           <div class="scale-step" data-val="10"><span>10</span><i class="tick"></i></div>
@@ -1312,13 +1394,15 @@
         </button>
       </div>
 
-      <!-- BOTÓN PLAY / STOP CON ACABADO DE ALUMINIO PULIDO -->
+      <!-- BOTÓN PLAY / STOP CON LENTE DE ALTO CONTRASTE -->
       <div class="start-stop-round-btn" id="play-btn">
-        <span class="btn-word play-word">PLAY</span>
-        <span class="btn-word stop-word">STOP</span>
+        <div class="btn-lens">
+          <span class="btn-word play-word">PLAY</span>
+          <span class="btn-word stop-word">STOP</span>
+        </div>
       </div>
 
-      <!-- BOTONES 33 Y 45 RPM PULSABLES E INTERACTIVOS -->
+      <!-- BOTONES 33 Y 45 RPM PULSABLES -->
       <div class="rpm-buttons">
         <button class="rpm-btn active" id="rpm-33-btn">33</button>
         <button class="rpm-btn" id="rpm-45-btn">45</button>
@@ -1394,28 +1478,33 @@
       }
       window.showAlert = showAlert;
 
-      // Marquesina fluida
+      // ✅ MARQUESINA FLUIDA Y SIMÉTRICA (CERO CORTES O REAPARICIONES BRUSCAS)
       function updateMarqueeTitle(title) {
         if (!sonicTitle || !marqueeTrack) return;
         sonicTitle.textContent = title;
-        
+        if (sonicTitleDup) sonicTitleDup.textContent = title;
+
         const container = document.querySelector('.vfd-title-container');
         if (!container) return;
 
         marqueeTrack.classList.remove('scrolling');
-        marqueeTrack.style.animationDuration = '0s';
-        if (sonicTitleDup) sonicTitleDup.textContent = '';
+        marqueeTrack.style.animation = 'none';
+
+        // Forzar cálculo del ancho real
+        void marqueeTrack.offsetWidth;
 
         requestAnimationFrame(() => {
-          if (sonicTitle.offsetWidth > container.clientWidth - 15) {
-            if (sonicTitleDup) sonicTitleDup.textContent = title;
+          const part1 = document.getElementById('marquee-part-1');
+          const partWidth = part1 ? part1.scrollWidth : sonicTitle.offsetWidth;
+
+          if (partWidth > container.clientWidth - 10) {
             marqueeTrack.classList.add('scrolling');
-            
-            const distance = sonicTitle.offsetWidth + 50;
-            const duration = Math.max(8, distance / 35);
-            marqueeTrack.style.animationDuration = `${duration}s`;
+            // Velocidad constante (~30px por segundo)
+            const duration = Math.max(10, partWidth / 30);
+            marqueeTrack.style.animation = `vfd-scroll-left ${duration}s linear infinite`;
           } else {
             marqueeTrack.classList.remove('scrolling');
+            marqueeTrack.style.animation = 'none';
           }
         });
       }
@@ -1433,6 +1522,7 @@
         titleObserver.observe(sonicTitle, { childList: true, characterData: true, subtree: true });
       }
 
+      // Inicializar las 28 barras del ecualizador
       function initVisualizer() {
         visualizer.innerHTML = '';
         const barCount = 28;
@@ -1484,6 +1574,7 @@
         `;
       }
 
+      // ✅ ECUALIZADOR DINÁMICO DONDE TODAS LAS 28 BARRAS SE ILUMINAN
       function renderVisualizer() {
         if (!analyser || !dataArray) return;
 
@@ -1499,14 +1590,24 @@
         updatePlatterLight(kickLevel);
 
         bars.forEach((bar, i) => {
+          // Escala logarítmica para distribuir todas las bandas musicales uniformemente
           const percent = i / barCount;
-          const binIndex = Math.floor(Math.pow(percent, 0.75) * (bufferLength * 0.7));
-          let value = dataArray[binIndex] || 0;
+          const binIndex = Math.min(
+            bufferLength - 1,
+            Math.floor(Math.pow(percent, 1.45) * (bufferLength * 0.55)) + 1
+          );
 
-          const heightPercent = Math.max(10, (value / 255) * 100);
+          // Compensación progresiva de frecuencias medias/altas (curva de ecualización activa)
+          const freqBoost = 1.0 + (i / barCount) * 1.8;
+          let value = (dataArray[binIndex] || 0) * freqBoost;
+
+          // Suavizado dinámico
+          value = Math.min(255, Math.max(15, value));
+
+          const heightPercent = Math.max(12, (value / 255) * 100);
           bar.style.height = `${heightPercent}%`;
 
-          if (isBassHit && i < 7) {
+          if (isBassHit) {
             bar.classList.add('bass-hit');
           } else {
             bar.classList.remove('bass-hit');
@@ -1516,10 +1617,9 @@
         animationId = requestAnimationFrame(renderVisualizer);
       }
 
-      // ✅ DETENCIÓN REAL (STOP) Y SINCRONIZACIÓN CON POWER Y STROBE
+      // ✅ DETENCIÓN REAL (STOP) Y CONTROL DE ENERGÍA Y LUZ ESTROBOSCÓPICA
       async function togglePlay() {
         if (isPlaying) {
-          // DETENER POR COMPLETO (Stop real)
           audio.pause();
           audio.src = '';
           audio.load();
@@ -1529,7 +1629,7 @@
           playBtn.classList.remove('playing');
           isPlaying = false;
 
-          // Power pasa a OFF y luz a rojo tenue
+          // Power a OFF y luz a rojo tenue
           if (powerTower) {
             powerTower.classList.remove('power-state-on');
             powerTower.classList.add('power-state-off');
@@ -1549,7 +1649,7 @@
             playBtn.classList.add('playing');
             isPlaying = true;
 
-            // Power pasa a ON y luz a azul brillante
+            // Power a ON y luz a azul brillante
             if (powerTower) {
               powerTower.classList.remove('power-state-off');
               powerTower.classList.add('power-state-on');
@@ -1563,7 +1663,7 @@
         }
       }
 
-      // ✅ LÓGICA DE VOLUMEN EXACTA (ROJO AL BAJAR DE CADA NÚMERO / AZUL AL ESTAR ACTIVO / TODO ROJO EN 0)
+      // ✅ VOLUMEN CALIBRADO (ROJO AL BAJAR DE CADA NÚMERO / AZUL AL ESTAR ACTIVO / TODO ROJO EN 0)
       function updateFaderPosition(vol) {
         const trackHeight = faderTrack.clientHeight;
         const knobHeight = faderKnob.clientHeight || 22;
@@ -1591,7 +1691,7 @@
           return;
         }
 
-        // Iluminación según regla: si el nivel es inferior al número, en ROJO; si está activo o por encima, en AZUL
+        // Si el volumen bajó por debajo del número: ROJO; si está activo o por encima: AZUL
         scaleSteps.forEach(step => {
           const stepVal = parseFloat(step.getAttribute('data-val'));
 
@@ -1678,17 +1778,17 @@
         }, 2000);
       });
 
-      // Botones 33 y 45 RPM pulsables
+      // Botones 33 y 45 RPM
       rpm33Btn.addEventListener('click', () => {
         rpm33Btn.classList.add('active');
         rpm45Btn.classList.remove('active');
-        vinyl.style.animationDuration = '1.8s'; // 33 RPM
+        vinyl.style.animationDuration = '1.8s';
       });
 
       rpm45Btn.addEventListener('click', () => {
         rpm45Btn.classList.add('active');
         rpm33Btn.classList.remove('active');
-        vinyl.style.animationDuration = '1.33s'; // 45 RPM más rápido
+        vinyl.style.animationDuration = '1.33s';
       });
 
       playBtn.addEventListener('click', togglePlay);
